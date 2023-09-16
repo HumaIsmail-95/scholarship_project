@@ -345,7 +345,7 @@
                         <!-- text-->
                         <div class="dropdown-divider"></div>
                         <!-- text-->
-                        <a href="pages-login.html" class="dropdown-item"><i class="fa fa-power-off"></i>
+                        <a href="{{ route('logout') }}" class="dropdown-item"><i class="fa fa-power-off"></i>
                             Logout</a>
                         <!-- text-->
                     </div>

@@ -1,20 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
-use App\Models\Role;
-use App\Models\Permission;
-use App\Services\RoleService;
-use App\Http\Requests\RoleRequest;
-use App\Services\PermissionService;
+use App\Http\Controllers\Controller;
+
+use App\Models\admin\Role;
+use App\Models\admin\Permission;
+use App\Services\admin\RoleService;
+use App\Services\admin\PermissionService;
 use App\Http\Requests\AttachPermissionRequest;
+use App\Http\Requests\admin\RoleRequest;
 
 class RoleController extends Controller
 {
     public function index()
     {
         $roles = RoleService::getRoles();
-        return view('admin.role.index', compact('roles'));
+        return view('admin.pages.roles.index', compact('roles'));
     }
 
     public function store(RoleRequest $request)

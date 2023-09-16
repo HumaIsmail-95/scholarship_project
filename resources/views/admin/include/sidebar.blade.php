@@ -19,14 +19,15 @@
                      </ul>
                  </li>
                  <li class="nav-small-cap">--- PERSONAL</li>
-                 <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
-                             class="fa fa-bars"></i><span class="hide-menu">Roles</span></a>
-                     <ul aria-expanded="false" class="collapse">
-                         <li><a href="university-courses.html">All Courses</a></li>
-                         <li><a href="university-add-course.html">Add Course</a></li>
-                         <li><a href="university-edit-course.html">Edit Course</a></li>
-                         <li><a href="university-course-info.html">Course Information</a></li>
-                     </ul>
+                 {{-- <li> <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.permissions.index') }}"
+                         aria-expanded="false"><i class="fa fa-bars"></i><span
+                             class="hide-menu">Permissions123</span></a>
+                 </li> --}}
+                 <li> <a class="waves-effect waves-dark" href="{{ route('admin.roles.index') }}"><i
+                             class="icon-speedometer"></i><span class="hide-menu">Roles</span></a>
+                 </li>
+                 <li> <a class="waves-effect waves-dark" href="{{ route('admin.permissions.index') }}"><i
+                             class="icon-speedometer"></i><span class="hide-menu">Permissions</span></a>
                  </li>
                  <li> <a class="waves-effect waves-dark" href="index.html"><i class="icon-speedometer"></i><span
                              class="hide-menu">Dashboard</span></a>

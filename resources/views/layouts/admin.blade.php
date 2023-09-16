@@ -24,6 +24,7 @@
     <link href="{{ asset('admin/dist/css/style.min.css') }}" rel="stylesheet">
     <!-- Dashboard 1 Page CSS -->
     <link href="{{ asset('admin/dist/css/pages/dashboard1.css') }}" rel="stylesheet">
+    @yield('links')
 </head>
 
 <body class="skin-blue fixed-layout">

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\admin;
 
-use App\Models\Role;
-use App\Http\Requests\RoleRequest;
+// use App\Models\Role;
+use App\Http\Requests\admin\RoleRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 use App\Http\Requests\AttachPermissionRequest;
-use Spatie\Permission\Models\Role as ModelsRole;
+use Spatie\Permission\Models\Role;
 
 class RoleService
 {
