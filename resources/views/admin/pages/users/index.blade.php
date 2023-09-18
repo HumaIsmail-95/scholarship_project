@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Roles')
+@section('title', 'Users')
 @section('links')
     {{-- <link href="{{ asset('admin/dist/css/pages/floating-label.css') }}" rel="stylesheet"> --}}
 @endsection
@@ -7,19 +7,17 @@
     <div class="container-fluid">
         <div class="row page-titles">
             <div class="col-md-5 align-self-center">
-                <h4 class="text-themecolor">Roles</h4>
+                <h4 class="text-themecolor">Users</h4>
             </div>
             <div class="col-md-7 align-self-center text-end">
                 <div class="d-flex justify-content-end align-items-center">
                     <ol class="breadcrumb justify-content-end">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                        <li class="breadcrumb-item active">Roles</li>
+                        <li class="breadcrumb-item active">Users</li>
                     </ol>
-                    @can('create-role')
-                        <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white" alt="default"
-                            data-bs-toggle="modal" data-bs-target="#addRoleModal"><i class="fa fa-plus-circle"></i> Create
-                            Role</button>
-                    @endcan
+                    <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white" alt="default"
+                        data-bs-toggle="modal" data-bs-target="#addUserModal"><i class="fa fa-plus-circle"></i> Create
+                        User</button>
                 </div>
             </div>
         </div>
@@ -27,7 +25,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Roles List</h4>
+                        <h4 class="card-title">Users List</h4>
                         {{-- <h6 class="card-subtitle mb-3">Simple table example</h6> --}}
                         <table data-bs-toggle="table" data-height="250" data-mobile-responsive="true"
                             class="table table-striped">
@@ -38,34 +36,27 @@
                                 </tr>
                             </thead>
                             <tbody id="table_id">
-                                @foreach ($roles as $role)
-                                    <tr id='row_{{ $role->id }}' class="tr-class-1">
-                                        <td id="td-id-1" class="td-class-1"> {{ $role->name }} </td>
+                                @foreach ($users as $user)
+                                    <tr id='row_{{ $user->id }}' class="tr-class-1">
+                                        <td id="td-id-1" class="td-class-1"> {{ $user->name }} </td>
                                         <td>
                                             <div class="btn-group">
-                                                @can('edit-role')
-                                                    <button class="btn btn-dark"
-                                                        onclick="openEditModal({{ json_encode($role) }})"> <i
-                                                            class=" fas fa-pencil-alt"></i>
-                                                        Edit</button>
-                                                @endcan
+                                                <button class="btn btn-dark"
+                                                    onclick="openEditModal({{ json_encode($user) }})"> <i
+                                                        class=" fas fa-pencil-alt"></i>
+                                                    Edit</button>
                                                 <button type="button"
                                                     class="btn btn-dark dropdown-toggle text-white dropdown-toggle-split"
                                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <span class="sr-only">Toggle Dropdown</span>
                                                 </button>
                                                 <div class="dropdown-menu">
-                                                    @can('delete-role')
-                                                        <a class="dropdown-item"
-                                                            href="javascript:openDeleteDialog({{ $role->id }})"> <i
-                                                                class="fas fa-trash"></i> Delete</a>
-                                                    @endcan
-                                                    @can('role-permissions')
-                                                        <a class="dropdown-item"
-                                                            href="{{ route('admin.role.permissions', $role->id) }}">
-                                                            <i class=" fas fa-key"></i> Role Permissions</a>
-                                                    @endcan
-
+                                                    <a class="dropdown-item"
+                                                        href="javascript:openDeleteDialog({{ $user->id }})"> <i
+                                                            class="fas fa-trash"></i> Delete</a>
+                                                    {{-- <a class="dropdown-item"
+                                                        href="{{ route('admin.user.permissions', $user->id) }}">
+                                                        <i class=" fas fa-key"></i> User Permissions</a> --}}
                                                 </div>
                                             </div>
                                         </td>
@@ -75,23 +66,23 @@
                         </table>
                     </div>
                     <div class="pagination justify-content-center">
-                        {{ $roles->links() }}
+                        {{ $users->links() }}
                     </div>
                 </div>
             </div>
         </div>
 
     </div>
-    <div id="addRoleModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    <div id="addUserModal" class="modal" tabindex="-1" user="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
         style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add Role</h4>
+                    <h4 class="modal-title">Add User</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
-                <form class="floating-labels m-t-40" id="role-form" method="post" action="javascript:;"
-                    onsubmit="submitRole()">
+                <form class="floating-labels m-t-40" id="user-form" method="post" action="javascript:;"
+                    onsubmit="submitUser()">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -121,47 +112,47 @@
                         <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal">Close</button>
                         <button type="submit" id="button-save"
                             class="btn btn-danger waves-effect waves-light text-white">Add
-                            Role</button>
+                            User</button>
                     </div>
                 </form>
 
             </div>
         </div>
     </div>
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    <div class="modal fade" id="deleteModal" tabindex="-1" user="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered" user="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <input type="hidden" value="-1" id="deleteID">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Delete Role
+                    <h5 class="modal-title" id="exampleModalLongTitle">Delete User
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
 
                 </div>
                 <div class="modal-body">
-                    Are you sure you want to delete this Role?
+                    Are you sure you want to delete this User?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal">Close</button>
                     <button type="button" id="button-delete" class="btn btn-danger waves-effect waves-light text-white"
-                        onclick="deleteRole()">Yes</button>
+                        onclick="deleteUser()">Yes</button>
                 </div>
             </div>
         </div>
     </div>
     {{-- edit --}}
-    <div class="modal fade" id="editModalRole">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal fade" id="editModalUser">
+        <div class="modal-dialog modal-dialog-centered" user="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Role</h5>
+                    <h5 class="modal-title">Edit User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="form-valide" id="edit-role-form" method="post" enctype="multipart/form-data">
+                    <form class="form-valide" id="edit-user-form" method="post" enctype="multipart/form-data">
                         @csrf
-                        <input type="hidden" value="-1" id="role_id">
+                        <input type="hidden" value="-1" id="user_id">
                         <input type="hidden" value="PUT" name="_method">
                         <div class="form-validation">
                             <div class="form-group row">
@@ -179,8 +170,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal">Close</button>
-                    <button type="button" id="button-update" onclick="editRole(this)" class="btn btn-primary">Edit
-                        Role</button>
+                    <button type="button" id="button-update" onclick="editUser(this)" class="btn btn-primary">Edit
+                        User</button>
                 </div>
                 </form>
             </div>
@@ -189,14 +180,14 @@
     </div>
     {{-- view --}}
     <div class="modal fade" id="viewModalUser">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered" user="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">View User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="form-valide" id="view-role-form" method="post" enctype="multipart/form-data">
+                    <form class="form-valide" id="view-user-form" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center p-2">
@@ -243,21 +234,21 @@
             });
         }
 
-        function submitRole() {
+        function submitUser() {
 
 
-            var form = $('#role-form')[0];
+            var form = $('#user-form')[0];
             console.log('form ', form);
             $("#button-save").text('Loading...');
 
 
             const myFormData = new FormData(form);
-            console.log(' roles', myFormData);
+            console.log(' users', myFormData);
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
                 },
-                url: "/admin/roles", // the endpoint
+                url: "/admin/users", // the endpoint
                 type: "POST", // http method
                 processData: false,
                 contentType: false,
@@ -272,16 +263,16 @@
 
 
                     $("#button-save").prop("disabled", false);
-                    $("#button-save").text("Add Role");
+                    $("#button-save").text("Add User");
                     showToaster('success', 'Success', data.message);
-                    document.getElementById("role-form").reset();
-                    const RLOE = JSON.stringify(data.role)
+                    document.getElementById("user-form").reset();
+                    const RLOE = JSON.stringify(data.user)
                     var string =
-                        `<tr id="row_${data.role.id}">
-                           <td id="td-id-1" class="td-class-1">${data.role.name} </td>
+                        `<tr id="row_${data.user.id}">
+                           <td id="td-id-1" class="td-class-1">${data.user.name} </td>
                             <td>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-dark"  id="btnGroupDrop${data.role.id}" onclick='openEditModal(${RLOE})'> <i
+                                    <button type="button" class="btn btn-dark"  id="btnGroupDrop${data.user.id}" onclick='openEditModal(${RLOE})'> <i
                                             class=" fas fa-pencil-alt"></i> Edit</button>
                                     <button type="button"
                                         class="btn btn-dark dropdown-toggle text-white dropdown-toggle-split"
@@ -289,16 +280,16 @@
                                         <span class="sr-only">Toggle Dropdown</span>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item"  href="javascript:openDeleteDialog(${data.role.id});"> <i
+                                        <a class="dropdown-item"  href="javascript:openDeleteDialog(${data.user.id});"> <i
                                                 class="fas fa-trash"></i> Delete</a>
-                                        <a class="dropdown-item" href="javascript:void(0)"  onclick="openViewModal(${data.role})"> <i
+                                        <a class="dropdown-item" href="javascript:void(0)"  onclick="openViewModal(${data.user})"> <i
                                                 class="fas fa-eye"></i> View</a>
                                     </div>
                                 </div>
                             </td>
                        </tr>`
                     $("#table_id").append(string);
-                    $('#addRoleModal').modal('hide');
+                    $('#addUserModal').modal('hide');
 
 
 
@@ -309,7 +300,7 @@
                 error: function(error) {
                     $(form)
                     $("#button-save").prop("disabled", false);
-                    $("#button-save").text("Add Role");
+                    $("#button-save").text("Add User");
                     var errorMessage = error.statusText;
                     if (error.status == 422) {
                         errorMessage = handleValidationErrors(error)
@@ -320,11 +311,11 @@
             });
         }
 
-        function editRole() {
-            var form = $('#edit-role-form')[0];
+        function editUser() {
+            var form = $('#edit-user-form')[0];
             $("#button-update").text('Loading...');
-            role_id = form.role_id.value;
-            console.log('role id ', role_id);
+            user_id = form.user_id.value;
+            console.log('user id ', user_id);
             const myFormData = new FormData(form);
             const formDataObj = {};
             myFormData.forEach((value, key) => (formDataObj[key] = value));
@@ -333,7 +324,7 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
                 },
-                url: "/admin/roles/" + role_id, // the endpoint
+                url: "/admin/users/" + user_id, // the endpoint
                 type: "POST", // http method
                 processData: false,
                 contentType: false,
@@ -346,7 +337,7 @@
                 },
                 success: function(data) {
                     $("#button-update").prop("disabled", false);
-                    $("#button-update").text("Edit Role");
+                    $("#button-update").text("Edit User");
 
                     $(form)
                         .find('[type="button"]')
@@ -357,11 +348,11 @@
                     $(form)
                         .find('[type="button"]')
                         .prop("disabled", false);
-                    const RLOE = JSON.stringify(data.role)
-                    $("#row_" + data.role.id).remove();
+                    const RLOE = JSON.stringify(data.user)
+                    $("#row_" + data.user.id).remove();
                     var string =
-                        `<tr id="row_${data.role.id}">
-                           <td id="td-id-1" class="td-class-1">${data.role.name} </td>
+                        `<tr id="row_${data.user.id}">
+                           <td id="td-id-1" class="td-class-1">${data.user.name} </td>
                                         <td>
                                             <div class="btn-group">
                                                 <button class="btn btn-dark"
@@ -375,7 +366,7 @@
                                                 </button>
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item"
-                                                    href="javascript:openDeleteDialog(${data.role.id});"> <i
+                                                    href="javascript:openDeleteDialog(${data.user.id});"> <i
                                                             class="fas fa-trash"></i> Delete</a>
                                                 </div>
                                             </div>
@@ -383,14 +374,14 @@
                        </tr>
                        `
                     $("#table_id").append(string);
-                    $('#editModalRole').modal('hide');
+                    $('#editModalUser').modal('hide');
 
 
                 },
                 error: function(error) {
                     $(form)
                     $("#button-update").prop("disabled", false);
-                    $("#button-update").text("Edit Role");
+                    $("#button-update").text("Edit User");
                     var errorMessage = error.statusText;
                     if (error.status == 422) {
                         errorMessage = handleValidationErrors(error, 'edit')
@@ -408,13 +399,13 @@
             $("#deleteModal").modal('show');
         }
 
-        function deleteRole() {
+        function deleteUser() {
             $("#button-delete").text('Loading...');
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
-                url: "/admin/roles/" + $("#deleteID").val(), // the endpoint
+                url: "/admin/users/" + $("#deleteID").val(), // the endpoint
                 type: "DELETE", // http method
                 processData: false,
                 contentType: false,
@@ -443,14 +434,14 @@
             });
         }
 
-        function openEditModal(role) {
-            console.log(' i m here', role);
-            document.getElementById('edit_name').value = role.name;
+        function openEditModal(user) {
+            console.log(' i m here', user);
+            document.getElementById('edit_name').value = user.name;
 
-            document.getElementById('role_id').value = role.id;
+            document.getElementById('user_id').value = user.id;
 
 
-            $("#editModalRole").modal('show')
+            $("#editModalUser").modal('show')
         }
 
         function handleValidationErrors(error, type = 'create') {

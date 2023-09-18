@@ -17,6 +17,7 @@ class CreateStudyModelsTable extends Migration
             $table->id();
             $table->string('name');
             $table->longText('description')->nullable()->default('text');
+            $table->boolean('status')->default(1);
             $table->foreignId('created_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('deleted_by')->nullable()->constrained('users')->cascadeOnDelete();

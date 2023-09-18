@@ -2,23 +2,20 @@
 
 namespace App\Services\admin;
 
-// use App\Models\Role;
-use App\Http\Requests\admin\RoleRequest;
+// use App\Models\User;
+use App\Http\Requests\admin\UserRequest;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-
-use App\Http\Requests\admin\AttachPermissionRequest;
-use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Session;
 use Spatie\Permission\Models\Permission;
+use App\Models\User;
 
-class RoleService
+class UserService
 {
-    public static function getRoles()
+    public static function getUsers()
     {
 
-        $roles = Role::whereNotIn('name', ['superAdmin'])->orderBy('id', 'DESC')->paginate(20);
-        return $roles;
+        $users = User::orderBy('id', 'DESC')->paginate(20);
+        return $users;
     }
 
     public  static function store($request)
@@ -27,36 +24,36 @@ class RoleService
         DB::beginTransaction();
         $data = $request->validated();
 
-        $role = Role::create($data);
+        $role = User::create($data);
         DB::commit();
-        $response = ['status' => true, 'message' => 'Role added successfully.', 'role' => $role];
+        $response = ['status' => true, 'message' => 'User added successfully.', 'role' => $role];
 
         return $response;
     }
 
 
-    public static function update(RoleRequest $request, Role $role)
+    public static function update(UserRequest $request, User $role)
     {
         DB::beginTransaction();
         $data = $request->validated();
 
         $role->update($data);
         DB::commit();
-        $response = ['status' => true, 'message' => ' Role updated successfully.', 'role' => $role];
+        $response = ['status' => true, 'message' => ' User updated successfully.', 'role' => $role];
         return $response;
     }
     public static function destroy($id)
     {
         DB::beginTransaction();
-        $role = Role::findorFail($id);
+        $role = User::findorFail($id);
         $role->delete();
         DB::commit();
-        $response = ['status' => true, 'message' => 'Role removed successfully.'];
+        $response = ['status' => true, 'message' => 'User removed successfully.'];
         return $response;
     }
 
 
-    public static function attachPermissions(AttachPermissionRequest $request, Role $role)
+    public static function attachPermissions(AttachPermissionRequest $request, User $role)
     {
         DB::beginTransaction();
         $data = $request->validated();
@@ -68,7 +65,7 @@ class RoleService
         $response = ['status' => true, 'message' => 'Permission attached succesfully.', 'role' => $role];
         return $response;
     }
-    public static function revokePermission(Role $role, Permission $permission)
+    public static function revokePermission(User $role, Permission $permission)
     {
         DB::beginTransaction();
         $role->revokePermissionTo($permission);

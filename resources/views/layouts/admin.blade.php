@@ -28,6 +28,7 @@
 </head>
 
 <body class="skin-blue fixed-layout">
+
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -41,6 +42,7 @@
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <div id="main-wrapper">
+
         @include('admin.include.header')
 
 
@@ -83,8 +85,29 @@
     <script src="{{ asset('admin/assets/node_modules/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
     <!-- Popup message jquery -->
     <script src="{{ asset('admin/assets/node_modules/toast-master/js/jquery.toast.js') }}"></script>
+    <script src="{{ asset('admin/dist/js/pages/toastr.js') }}"></script>
     <!-- Chart JS -->
     <script src="{{ asset('admin/dist/js/dashboard1.js') }}"></script>
+    <script>
+        function showToaster(icon, heading, text) {
+            $.toast({
+                heading: heading,
+                text: text,
+                position: 'top-right',
+                loaderBg: '#ff6849',
+                icon: icon,
+                hideAfter: 3500,
+                stack: 6
+            });
+        }
+    </script>
+    @if (Session::has('message'))
+        {{-- {{ dd(Session::all()) }} --}}
+
+        <script>
+            showToaster('{{ Session::get('icon') }}', ' {{ Session::get('heading') }}', '{{ Session::get('message') }}');
+        </script>
+    @endif
     @yield('scripts')
 </body>
 

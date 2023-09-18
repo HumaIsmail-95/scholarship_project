@@ -18,19 +18,37 @@
                          <li><a href="javascript:void(0)"><i class="fa fa-power-off"></i> Logout</a></li>
                      </ul>
                  </li>
-                 <li class="nav-small-cap">--- PERSONAL</li>
+                 {{-- <li class="nav-small-cap">--- PERSONAL</li> --}}
                  {{-- <li> <a class="has-arrow waves-effect waves-dark" href="{{ route('admin.permissions.index') }}"
                          aria-expanded="false"><i class="fa fa-bars"></i><span
                              class="hide-menu">Permissions123</span></a>
                  </li> --}}
-                 <li> <a class="waves-effect waves-dark" href="{{ route('admin.roles.index') }}"><i
-                             class="icon-speedometer"></i><span class="hide-menu">Roles</span></a>
+                 @can('list-role')
+                     <li> <a class="waves-effect waves-dark" href="{{ route('admin.roles.index') }}"><i
+                                 class="icon-speedometer"></i><span class="hide-menu">Roles</span></a>
+                     </li>
+                 @endcan
+                 @can('list-permission')
+                     <li> <a class="waves-effect waves-dark" href="{{ route('admin.permissions.index') }}"><i
+                                 class="icon-speedometer"></i><span class="hide-menu">Permissions</span></a>
+                     </li>
+                 @endcan
+                 @can('list-users')
+                     <li> <a class="waves-effect waves-dark" href="{{ route('admin.users.index') }}"><i
+                                 class="icon-speedometer"></i><span class="hide-menu">Users</span></a>
+                     </li>
+                 @endcan
+                 <li> <a class="waves-effect waves-dark" href="{{ route('admin.degrees.index') }}"><i
+                             class="icon-speedometer"></i><span class="hide-menu">Degrees</span></a>
                  </li>
-                 <li> <a class="waves-effect waves-dark" href="{{ route('admin.permissions.index') }}"><i
-                             class="icon-speedometer"></i><span class="hide-menu">Permissions</span></a>
+                 <li> <a class="waves-effect waves-dark" href="{{ route('admin.disciplines.index') }}"><i
+                             class="icon-speedometer"></i><span class="hide-menu">Disciplines</span></a>
                  </li>
-                 <li> <a class="waves-effect waves-dark" href="index.html"><i class="icon-speedometer"></i><span
-                             class="hide-menu">Dashboard</span></a>
+                 <li> <a class="waves-effect waves-dark" href="{{ route('admin.study-models.index') }}"><i
+                             class="icon-speedometer"></i><span class="hide-menu">Study Models</span></a>
+                 </li>
+                 <li> <a class="waves-effect waves-dark" href="{{ route('admin.users.index') }}"><i
+                             class="icon-speedometer"></i><span class="hide-menu">Dashboard</span></a>
                  </li>
                  <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
                              class="ti-layout-grid2"></i><span class="hide-menu">Apps</span></a>

@@ -4,7 +4,7 @@ namespace App\Http\Requests\admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PermissionRequest extends FormRequest
+class AttachRoleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +25,7 @@ class PermissionRequest extends FormRequest
     {
         return [
             //
-            'name' => ['required', 'max:255'],
-            'display_name' => ['required', 'max:255'],
-            'module_name' => ['required', 'max:255'],
-            'guard_name' => ['nullable'],
+            'role' => ['required', 'integer'],
 
         ];
     }

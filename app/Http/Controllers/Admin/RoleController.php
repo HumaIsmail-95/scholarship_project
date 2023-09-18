@@ -4,15 +4,26 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\admin\Role;
-use App\Models\admin\Permission;
 use App\Services\admin\RoleService;
 use App\Services\admin\PermissionService;
-use App\Http\Requests\AttachPermissionRequest;
 use App\Http\Requests\admin\RoleRequest;
+use App\Http\Requests\admin\AttachPermissionRequest;
+use Illuminate\Support\Facades\Session;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:list-role', ['only' => ['index']]);
+        $this->middleware('permission:create-role', ['only' => ['create', 'store']]);
+        $this->middleware('permission:edit-role', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete-role', ['only' => ['destroy']]);
+        // $this->middleware('permission:attach-permissions', ['only' => ['']]);
+        $this->middleware('permission:role-permissions|attach-permissions', ['only' => ['attachPermissions', 'rolePermissions']]);
+        $this->middleware('permission:revoke-permission', ['only' => ['revokePermission']]);
+    }
     public function index()
     {
         $roles = RoleService::getRoles();
@@ -47,26 +58,38 @@ class RoleController extends Controller
         }
     }
 
-    public function attachPermission($role)
+    public function rolePermissions($role)
     {
         try {
-            $role = Role::find($role);
-            $permissions = PermissionService::moduleWisePermissions();
-            $modules = PermissionService::moduleWisePermissions();
-
-
-            return view('admin.role.attachpermission', compact('role', 'permissions', 'modules'));
+            $role = Role::findorFail($role);
+            if ($role) {
+                $allPermissions = Permission::all();
+                $permissions = $allPermissions->diff($role->permissions);
+            }
+            return view('admin.pages.roles.rolePermission', compact('role', 'permissions'));
+        } catch (\Throwable $th) {
+            // return redirect()->back()->with('error', $th->getMessage());
+            return $th;
+        }
+    }
+    public function attachPermissions(AttachPermissionRequest $request, Role $role)
+    {
+        try {
+            $role_response = RoleService::attachPermissions($request, $role);
+            return redirect()->back();
         } catch (\Throwable $th) {
             return $th;
         }
     }
-    public function storeAttachPermissions(AttachPermissionRequest $request)
+    public function revokePermission(Role $role, Permission $permission)
     {
         try {
-            $role_response = RoleService::storeAttachPermissions($request);
-            return redirect(route('roles.index'))->with('success', 'Permission attached succesfully');
+            //code...
+            $role_response = RoleService::revokePermission($role, $permission);
+            return redirect()->back();
         } catch (\Throwable $th) {
-            return redirect(route('roles.index'))->with('error', $th->getMessage());
+            //throw $th;
+            return $th;
         }
     }
 }

@@ -3,12 +3,16 @@
 namespace App\Services\admin;
 
 // use App\Models\Permission;
+
+use App\Http\Requests\admin\AttachRoleRequest;
 use App\Http\Requests\admin\PermissionRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 use App\Http\Requests\AttachPermissionRequest;
+use Illuminate\Support\Facades\Session;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class PermissionService
 {
@@ -54,16 +58,27 @@ class PermissionService
     }
 
 
-    public static function storeAttachPermissions($request)
+    public static function attachRole(AttachRoleRequest $request, Permission $permission)
     {
         DB::beginTransaction();
         $data = $request->validated();
-        $permission = ModelsPermission::findOrFail($request->permission_id);
-
-        $permission->syncPermissions($request->permissions);
+        $permission->assignRole($request->role);
         DB::commit();
-        $response = ['status' => true, 'message' => 'Permission attached succesfully.', 'permission' => $permission];
-
+        Session::flash('icon', 'success');
+        Session::flash('heading', 'Success');
+        Session::flash('message', 'Role attached succesfully');
+        $response = ['status' => true, 'message' => 'Role attached succesfully.', 'permission' => $permission];
+        return $response;
+    }
+    public static function revokeRole(Permission $permission, Role $role)
+    {
+        DB::beginTransaction();
+        $permission->removeRole($role);
+        DB::commit();
+        Session::flash('icon', 'success');
+        Session::flash('heading', 'Success');
+        Session::flash('message', 'Role revoked succesfully');
+        $response = ['status' => true, 'message' => 'Role revoked succesfully.', 'role' => $role];
         return $response;
     }
 }
