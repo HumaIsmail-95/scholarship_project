@@ -15,9 +15,12 @@
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
                         <li class="breadcrumb-item active">Users</li>
                     </ol>
-                    <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white" alt="default"
-                        data-bs-toggle="modal" data-bs-target="#addUserModal"><i class="fa fa-plus-circle"></i> Create
-                        User</button>
+                    @can('create-user')
+                        <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white" alt="default"
+                            data-bs-toggle="modal" data-bs-target="#addUserModal"><i class="fa fa-plus-circle"></i> Create
+                            User</button>
+                    @endcan
+
                 </div>
             </div>
         </div>
@@ -41,22 +44,28 @@
                                         <td id="td-id-1" class="td-class-1"> {{ $user->name }} </td>
                                         <td>
                                             <div class="btn-group">
-                                                <button class="btn btn-dark"
-                                                    onclick="openEditModal({{ json_encode($user) }})"> <i
-                                                        class=" fas fa-pencil-alt"></i>
-                                                    Edit</button>
+                                                @can('edit-user')
+                                                    <button class="btn btn-dark"
+                                                        onclick="openEditModal({{ json_encode($user) }})"> <i
+                                                            class=" fas fa-pencil-alt"></i>
+                                                        Edit</button>
+                                                @endcan
                                                 <button type="button"
                                                     class="btn btn-dark dropdown-toggle text-white dropdown-toggle-split"
                                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <span class="sr-only">Toggle Dropdown</span>
                                                 </button>
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item"
-                                                        href="javascript:openDeleteDialog({{ $user->id }})"> <i
-                                                            class="fas fa-trash"></i> Delete</a>
-                                                    {{-- <a class="dropdown-item"
-                                                        href="{{ route('admin.user.permissions', $user->id) }}">
-                                                        <i class=" fas fa-key"></i> User Permissions</a> --}}
+                                                    @can('delete-user')
+                                                        <a class="dropdown-item"
+                                                            href="javascript:openDeleteDialog({{ $user->id }})"> <i
+                                                                class="fas fa-trash"></i> Delete</a>
+                                                    @endcan
+                                                    @can('user-role-permission')
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('admin.users.roles.permissions', $user->id) }}">
+                                                            <i class=" fas fa-key"></i> Attach role & permissions</a>
+                                                    @endcan
                                                 </div>
                                             </div>
                                         </td>
@@ -99,8 +108,45 @@
                                                         name="name" placeholder="Enter a name.." :value="old('name')">
                                                     <div id="name_text" class="text-danger errors"></div>
                                                 </div>
-
-
+                                                <div class="col-md-12">
+                                                    <label class="form-label" for="name">Email <span
+                                                            class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="text" class="name form-control" id="email"
+                                                        name="email" placeholder="Enter a email.." :value="old('email')">
+                                                    <div id="email_text" class="text-danger errors"></div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label class="form-label" for="name">Password <span
+                                                            class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="text" class="name form-control" id="password"
+                                                        name="password" placeholder="Enter a password.."
+                                                        :value="old('password')">
+                                                    <div id="password_text" class="text-danger errors"></div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label class="form-label" for="name">Confirm Password <span
+                                                            class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="text" class="name form-control" id="confirm_password"
+                                                        name="confirm_password" placeholder="Enter a confirm_password.."
+                                                        :value="old('confirm_password')">
+                                                    <div id="confirm_password_text" class="text-danger errors"></div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label class="form-label" for="name">Role <span
+                                                            class="text-danger">*</span>
+                                                    </label>
+                                                    <select name="role" id="role">
+                                                        <option value="">Select Role</option>
+                                                        @foreach ($roles as $role)
+                                                            <option value="{{ $role->name }}">{{ $role->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    <div id="role_text" class="text-danger errors"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -109,7 +155,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default waves-effect"
+                            data-bs-dismiss="modal">Close</button>
                         <button type="submit" id="button-save"
                             class="btn btn-danger waves-effect waves-light text-white">Add
                             User</button>
@@ -159,12 +206,45 @@
                                 <div class="col-md-12">
                                     <label class="form-label" for="name">Name <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control" id="edit_name" name="name"
-                                        placeholder="Enter a name.." value="">
-                                    <div id="edit_name_text" class="text-danger"></div>
+                                    <input type="text" class="name form-control" id="edit_name" name="edit_name"
+                                        placeholder="Enter a name.." :value="old('name')">
+                                    <div id="edit_name_text" class="text-danger errors"></div>
                                 </div>
-                                </label>
-
+                                <div class="col-md-12">
+                                    <label class="form-label" for="name">Email <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="name form-control" id="edit_email" name="edit_email"
+                                        placeholder="Enter a email.." :value="old('email')">
+                                    <div id="edit_email_text" class="text-danger errors"></div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label" for="name">Password <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="name form-control" id="password" name="password"
+                                        placeholder="Enter a password.." :value="old('password')">
+                                    <div id="password_text" class="text-danger errors"></div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label" for="name">Confirm Password <span
+                                            class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="name form-control" id="confirm_password"
+                                        name="confirm_password" placeholder="Enter a confirm_password.."
+                                        :value="old('confirm_password')">
+                                    <div id="confirm_password_text" class="text-danger errors"></div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label" for="name">Role <span class="text-danger">*</span>
+                                    </label>
+                                    <select name="edit_role" id="edit_role">
+                                        <option value="">Select Role</option>
+                                        @foreach ($roles as $role)
+                                            <option value="{{ $role->name }}">{{ $role->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <div id="edit_role_text" class="text-danger errors"></div>
+                                </div>
                             </div>
                         </div>
                 </div>
@@ -235,8 +315,6 @@
         }
 
         function submitUser() {
-
-
             var form = $('#user-form')[0];
             console.log('form ', form);
             $("#button-save").text('Loading...');
@@ -272,18 +350,25 @@
                            <td id="td-id-1" class="td-class-1">${data.user.name} </td>
                             <td>
                                 <div class="btn-group">
+                                    @can('edit-user')
                                     <button type="button" class="btn btn-dark"  id="btnGroupDrop${data.user.id}" onclick='openEditModal(${RLOE})'> <i
                                             class=" fas fa-pencil-alt"></i> Edit</button>
+                                    @endcan
+
                                     <button type="button"
                                         class="btn btn-dark dropdown-toggle text-white dropdown-toggle-split"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <span class="sr-only">Toggle Dropdown</span>
                                     </button>
                                     <div class="dropdown-menu">
+                                        @can('delete-user')
                                         <a class="dropdown-item"  href="javascript:openDeleteDialog(${data.user.id});"> <i
                                                 class="fas fa-trash"></i> Delete</a>
+                                        @endcan
+                                        @can('view-user')
                                         <a class="dropdown-item" href="javascript:void(0)"  onclick="openViewModal(${data.user})"> <i
                                                 class="fas fa-eye"></i> View</a>
+                                        @endcan
                                     </div>
                                 </div>
                             </td>
@@ -355,19 +440,23 @@
                            <td id="td-id-1" class="td-class-1">${data.user.name} </td>
                                         <td>
                                             <div class="btn-group">
+                                               @can('edit-user')
                                                 <button class="btn btn-dark"
-                                                onclick='openEditModal(${RLOE})'> <i
-                                                        class=" fas fa-pencil-alt"></i>
-                                                    Edit</button>
+                                                    onclick='openEditModal(${RLOE})'> <i
+                                                            class=" fas fa-pencil-alt"></i>
+                                                        Edit</button>
+                                               @endcan
                                                 <button type="button"
                                                     class="btn btn-dark dropdown-toggle text-white dropdown-toggle-split"
                                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <span class="sr-only">Toggle Dropdown</span>
                                                 </button>
                                                 <div class="dropdown-menu">
+                                                    @can('delete-user')
                                                     <a class="dropdown-item"
                                                     href="javascript:openDeleteDialog(${data.user.id});"> <i
                                                             class="fas fa-trash"></i> Delete</a>
+                                                    @endcan
                                                 </div>
                                             </div>
                                         </td>
@@ -435,9 +524,10 @@
         }
 
         function openEditModal(user) {
-            console.log(' i m here', user);
             document.getElementById('edit_name').value = user.name;
-
+            document.getElementById('edit_name').value = user.name;
+            document.getElementById('edit_name').value = user.name;
+            document.getElementById('edit_name').value = user.name;
             document.getElementById('user_id').value = user.id;
 
 

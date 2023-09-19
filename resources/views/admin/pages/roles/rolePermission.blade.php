@@ -16,6 +16,11 @@
                         <li class="breadcrumb-item"><a href="{{ route('admin.roles.index') }}">Roles</a></li>
                         <li class="breadcrumb-item active">Role Permissions</li>
                     </ol>
+                    @can('list-role')
+                        <a href="{{ route('admin.roles.index') }}" class="btn btn-info d-none d-lg-block m-l-15 text-white"><i
+                                class=" fas fa-clipboard-list"></i> list
+                            Role</a>
+                    @endcan
                     {{-- <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white" alt="default"
                         data-bs-toggle="modal" data-bs-target="#addRoleModal"><i class="fa fa-plus-circle"></i> Create
                         Role</button> --}}

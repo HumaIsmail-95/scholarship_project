@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             DisciplineSeeder::class,
             DegreeSeeder::class,
             StudyModelSeeder::class,
+            PermissionSeeder::class,
         ]);
     }
 }

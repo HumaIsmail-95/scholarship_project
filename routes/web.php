@@ -40,6 +40,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::delete('permission/{permission}/{role}', [PermissionController::class, 'revokeRole'])->name('permission.revoke.role');
     // users
     Route::resource('users', UserController::class);
+    Route::get('users/{user}/roles-permissions', [UserController::class, 'userRolesPermissions'])->name('users.roles.permissions');
+    Route::post('users/{user}/roles', [UserController::class, 'assignRole'])->name('users.assign.role');
+    Route::delete('users/{user}/roles/{role}', [UserController::class, 'userRevokeRole'])->name('users.revoke.role');
+    Route::post('users/{user}/permisisons', [UserController::class, 'givePermission'])->name('users.permissions');
+    Route::delete('users/{user}/permissions/{permission}', [UserController::class, 'userRevokePermission'])->name('users.revoke.permission');
 
     // degrees
     Route::resource('degrees', DegreeController::class);

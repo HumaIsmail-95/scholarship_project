@@ -31,10 +31,16 @@ class PermissionSeeder extends Seeder
         $permission = Permission::create(['name' => 'permission-roles', 'display_name' => 'Permission Role', 'module_name' => 'Permission']);
         $permission = Permission::create(['name' => 'revoke-role', 'display_name' => 'Revoke Role', 'module_name' => 'Permission']);
         // users
+        $permission = Permission::create(['name' => 'view-user', 'display_name' => 'View User', 'module_name' => 'User']);
         $permission = Permission::create(['name' => 'list-user', 'display_name' => 'list User', 'module_name' => 'User']);
         $permission = Permission::create(['name' => 'create-user', 'display_name' => 'Create User', 'module_name' => 'User']);
         $permission = Permission::create(['name' => 'update-user', 'display_name' => 'Edit User', 'module_name' => 'User']);
         $permission = Permission::create(['name' => 'delete-user', 'display_name' => 'Delete User', 'module_name' => 'User']);
+        $permission = Permission::create(['name' => 'user-role-permission', 'display_name' => 'User Role Permission List', 'module_name' => 'User']);
+        $permission = Permission::create(['name' => 'assign-role', 'display_name' => 'Assign Role', 'module_name' => 'User']);
+        $permission = Permission::create(['name' => 'revoke-role', 'display_name' => 'Revoke Role', 'module_name' => 'User']);
+        $permission = Permission::create(['name' => 'assign-permisison', 'display_name' => 'Assign Permission', 'module_name' => 'User']);
+        $permission = Permission::create(['name' => 'revoke-permisison', 'display_name' => 'REvoke Permission', 'module_name' => 'User']);
         // degrees
         $permission = Permission::create(['name' => 'list-degree', 'display_name' => 'list Degree', 'module_name' => 'Degree']);
         $permission = Permission::create(['name' => 'create-degree', 'display_name' => 'Create Degree', 'module_name' => 'Degree']);

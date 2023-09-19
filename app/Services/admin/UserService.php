@@ -3,21 +3,34 @@
 namespace App\Services\admin;
 
 // use App\Models\User;
+
+use App\Http\Requests\admin\RoleRequest;
+use App\Http\Requests\admin\UserPermissionRequest;
 use App\Http\Requests\admin\UserRequest;
+use App\Http\Requests\admin\UserRoleRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Spatie\Permission\Models\Permission;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserService
 {
+    public static function getRole()
+    {
+        return $roles = Role::all();
+    }
     public static function getUsers()
     {
 
         $users = User::orderBy('id', 'DESC')->paginate(20);
         return $users;
     }
+    // public static function editUser(User $user)
+    // {
 
+    // }
     public  static function store($request)
     {
 
@@ -52,29 +65,82 @@ class UserService
         return $response;
     }
 
-
-    public static function attachPermissions(AttachPermissionRequest $request, User $role)
+    public static function assignRole(User $user, UserRoleRequest $request)
     {
         DB::beginTransaction();
-        $data = $request->validated();
-        $role->givePermissionTo($request->permission);
+        $request->validated();
+        $icon = 'success';
+        $heading = 'Success';
+        $message = 'Role Assigned';
+        if ($user->hasRole($request->role)) {
+            $icon = 'error';
+            $heading = 'Error';
+            $message = 'Role Exists';
+        } else {
+            $user->assignRole($request->role);
+        }
         DB::commit();
-        Session::flash('icon', 'success');
-        Session::flash('heading', 'Success');
-        Session::flash('message', 'Permission attached succesfully');
-        $response = ['status' => true, 'message' => 'Permission attached succesfully.', 'role' => $role];
-        return $response;
+        Session::flash('icon', $icon);
+        Session::flash('heading', $heading);
+        Session::flash('message', $message);
+        return;
     }
-    public static function revokePermission(User $role, Permission $permission)
+    public static function revokeRole(User $user, Role $role)
     {
         DB::beginTransaction();
-        $role->revokePermissionTo($permission);
+        $icon = 'error';
+        $heading = 'Error';
+        $message = 'Role doesnot exists';
+        if ($user->hasRole($role)) {
+            $user->removeRole($role);
+            $icon = 'success';
+            $heading = 'Success';
+            $message = 'Role revoked successfully';
+        }
+        DB::commit();
+        Session::flash('icon', $icon);
+        Session::flash('heading', $heading);
+        Session::flash('message', $message);
+        return;
+    }
+
+    public static function givePermission(User $user, UserPermissionRequest $request)
+    {
+        DB::beginTransaction();
+        if ($user->hasPermissionTo($request->permission)) {
+            $icon = 'error';
+            $heading = 'Error';
+            $message = 'Permission exists';
+        } else {
+            $icon = 'success';
+            $heading = 'Success';
+            $message = 'Permission given successfully';
+            $user->givePermissionTo($request->permission);
+        }
+        DB::commit();
+        Session::flash('icon', $icon);
+        Session::flash('heading', $heading);
+        Session::flash('message', $message);
+        return;
+    }
+    public static function revokePermission(User $user, Permission $permission)
+    {
+        DB::beginTransaction();
+        $icon = 'error';
+        $heading = 'Error';
+        $message = 'Role doesnot exists';
+        if ($user->hasPermissionTo($permission)) {
+            $user->revokePermissionTo($permission);
+            $icon = 'success';
+            $heading = 'Success';
+            $message = 'Permission revoked successfully';
+        }
+        DB::commit();
+        Session::flash('icon', $icon);
+        Session::flash('heading', $heading);
+        Session::flash('message', $message);
 
         DB::commit();
-        Session::flash('icon', 'success');
-        Session::flash('heading', 'Success');
-        Session::flash('message', 'Permission revoked succesfully');
-        $response = ['status' => true, 'message' => 'Permission revoked succesfully.', 'role' => $role];
-        return $response;
+        return;
     }
 }

@@ -3,25 +3,35 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\RoleRequest;
+use App\Http\Requests\admin\UserPermissionRequest;
 use App\Http\Requests\admin\UserRequest;
+use App\Http\Requests\admin\UserRoleRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\admin\UserService;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
     function __construct()
     {
-        // $this->middleware('permission:list-permission', ['only' => ['index']]);
-        // $this->middleware('permission:create-permission', ['only' => ['create', 'store']]);
-        // $this->middleware('permission:edit-permission', ['only' => ['edit', 'update']]);
-        // $this->middleware('permission:delete-permission', ['only' => ['destroy']]);
-        // $this->middleware('permission:attach-role|permission-roles', ['only' => ['permissionRoles', 'attachRole']]);
-        // $this->middleware('permission:revoke-role', ['only' => ['revokeRole']]);
+        $this->middleware('permission:list-user', ['only' => ['index']]);
+        $this->middleware('permission:create-user', ['only' => ['create', 'store']]);
+        $this->middleware('permission:edit-user', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete-user', ['only' => ['destroy']]);
+        $this->middleware('permission:user-role-permission', ['only' => ['userRolesPermissions']]);
+        $this->middleware('permission:assign-role', ['only' => ['assignRole']]);
+        $this->middleware('permission:revoke-role', ['only' => ['userRevokeRole']]);
+        $this->middleware('permission:assign-permisison', ['only' => ['givePermission']]);
+        $this->middleware('permission:revoke-permisison', ['only' => ['userRevokePermission']]);
     }
     public function index()
     {
         $users = UserService::getUsers();
-        return view('admin.pages.users.index', compact('users'));
+        $roles  = Role::all();
+        return view('admin.pages.users.index', compact('users', 'roles'));
     }
 
     public function store(UserRequest $request)
@@ -33,6 +43,7 @@ class UserController extends Controller
             return $th;
         }
     }
+
     public function update(UserRequest $request, Role $role)
     {
         try {
@@ -48,6 +59,58 @@ class UserController extends Controller
             $role_response = UserService::destroy($id);
             return $role_response;
         } catch (\Throwable $th) {
+            return $th;
+        }
+    }
+    public function userRolesPermissions(User $user)
+    {
+        try {
+            $roles = Role::all();
+            $permissions = Permission::all();
+            return view('admin.pages.users.roles_permissions', compact('user', 'roles', 'permissions'));
+        } catch (\Throwable $th) {
+            return $th;
+        }
+    }
+    public function assignRole(User $user, UserRoleRequest $request)
+    {
+        try {
+            UserService::assignRole($user, $request);
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $th;
+        }
+    }
+    public function userRevokeRole(User $user, Role $role)
+    {
+        try {
+            UserService::revokeRole($user, $role);
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $th;
+        }
+    }
+    public function givePermission(User $user, UserPermissionRequest $request)
+    {
+        try {
+            //code...
+            UserService::givePermission($user, $request);
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $th;
+        }
+    }
+    public function userRevokePermission(User $user, Permission $permission)
+    {
+        try {
+            //code...
+            UserService::revokePermission($user, $permission);
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            //throw $th;
             return $th;
         }
     }

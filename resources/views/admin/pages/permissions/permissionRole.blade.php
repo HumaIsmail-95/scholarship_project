@@ -19,6 +19,11 @@
                     {{-- <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white" alt="default"
                         data-bs-toggle="modal" data-bs-target="#addRoleModal"><i class="fa fa-plus-circle"></i> Create
                         Role</button> --}}
+                    @can('list-permission')
+                        <a href="{{ route('admin.permissions.index') }}"
+                            class="btn btn-info d-none d-lg-block m-l-15 text-white"><i class=" fas fa-clipboard-list"></i> list
+                            Permissions</a>
+                    @endcan
                 </div>
             </div>
         </div>
