@@ -1,0 +1,7 @@
+.pagination.justify-content-center {
+    margin-bottom: 20px;
+}
+
+.pagination.justify-content-center svg.w-5.h-5 {
+    width: 20px !important;
+}

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class DegreeRequest extends FormRequest
 {
@@ -21,12 +22,14 @@ class DegreeRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
+        // dd($request->all());
         return [
             'name' => ['required'],
             'description' => ['nullable'],
-            'status' => ['required', 'boolean'],
+            'discipline_id' => ['required', 'integer'],
+            'status' => ['nullable',],
         ];
     }
 }

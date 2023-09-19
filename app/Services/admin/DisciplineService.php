@@ -24,7 +24,7 @@ class DisciplineService
 
         DB::beginTransaction();
         $data = $request->validated();
-
+        $data['status'] = isset($request->status) ? 1 : 0;
         $discipline = Discipline::create($data);
         DB::commit();
         $response = ['status' => true, 'message' => 'Discipline added successfully.', 'discipline' => $discipline];
@@ -37,7 +37,7 @@ class DisciplineService
     {
         DB::beginTransaction();
         $data = $request->validated();
-
+        $data['status'] = isset($request->status) ? 1 : 0;
         $discipline->update($data);
         DB::commit();
         $response = ['status' => true, 'message' => ' Discipline updated successfully.', 'discipline' => $discipline];

@@ -30,49 +30,54 @@
                     <div class="card-body">
                         <h4 class="card-title">Users List</h4>
                         {{-- <h6 class="card-subtitle mb-3">Simple table example</h6> --}}
-                        <table data-bs-toggle="table" data-height="250" data-mobile-responsive="true"
-                            class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="table_id">
-                                @foreach ($users as $user)
-                                    <tr id='row_{{ $user->id }}' class="tr-class-1">
-                                        <td id="td-id-1" class="td-class-1"> {{ $user->name }} </td>
-                                        <td>
-                                            <div class="btn-group">
-                                                @can('edit-user')
-                                                    <button class="btn btn-dark"
-                                                        onclick="openEditModal({{ json_encode($user) }})"> <i
-                                                            class=" fas fa-pencil-alt"></i>
-                                                        Edit</button>
-                                                @endcan
-                                                <button type="button"
-                                                    class="btn btn-dark dropdown-toggle text-white dropdown-toggle-split"
-                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <span class="sr-only">Toggle Dropdown</span>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    @can('delete-user')
-                                                        <a class="dropdown-item"
-                                                            href="javascript:openDeleteDialog({{ $user->id }})"> <i
-                                                                class="fas fa-trash"></i> Delete</a>
-                                                    @endcan
-                                                    @can('user-role-permission')
-                                                        <a class="dropdown-item"
-                                                            href="{{ route('admin.users.roles.permissions', $user->id) }}">
-                                                            <i class=" fas fa-key"></i> Attach role & permissions</a>
-                                                    @endcan
-                                                </div>
-                                            </div>
-                                        </td>
+                        <div class="table-responsive">
+                            <table data-bs-toggle="table" data-height="250" data-mobile-responsive="true"
+                                class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Actions</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody id="table_id">
+                                    @foreach ($users as $user)
+                                        <tr id='row_{{ $user->id }}' class="tr-class-1">
+                                            <td id="td-id-1" class="td-class-1"> {{ $user->name }} </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    @can('edit-user')
+                                                        <button class="btn btn-dark"
+                                                            onclick="openEditModal({{ json_encode($user) }})"> <i
+                                                                class=" fas fa-pencil-alt"></i>
+                                                            Edit</button>
+                                                    @endcan
+                                                    <button type="button"
+                                                        class="btn btn-dark dropdown-toggle text-white dropdown-toggle-split"
+                                                        data-bs-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                        <span class="sr-only">Toggle Dropdown</span>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        @can('delete-user')
+                                                            <a class="dropdown-item"
+                                                                href="javascript:openDeleteDialog({{ $user->id }})"> <i
+                                                                    class="fas fa-trash"></i> Delete</a>
+                                                        @endcan
+                                                        @can('user-role-permission')
+                                                            <a class="dropdown-item"
+                                                                href="{{ route('admin.users.roles.permissions', $user->id) }}">
+                                                                <i class=" fas fa-key"></i> Attach role & permissions</a>
+                                                        @endcan
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
+
                     </div>
                     <div class="pagination justify-content-center">
                         {{ $users->links() }}
@@ -90,66 +95,52 @@
                     <h4 class="modal-title">Add User</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
-                <form class="floating-labels m-t-40" id="user-form" method="post" action="javascript:;"
-                    onsubmit="submitUser()">
+                <form class="floating-labels" id="user-form" method="post" action="javascript:;" onsubmit="submitUser()">
                     @csrf
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="form-validation">
-                                            <div class="form-group row">
-                                                <div class="col-md-12">
-                                                    <label class="form-label" for="name">Name <span
-                                                            class="text-danger">*</span>
-                                                    </label>
-                                                    <input type="text" class="name form-control" id="name"
-                                                        name="name" placeholder="Enter a name.." :value="old('name')">
-                                                    <div id="name_text" class="text-danger errors"></div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <label class="form-label" for="name">Email <span
-                                                            class="text-danger">*</span>
-                                                    </label>
-                                                    <input type="text" class="name form-control" id="email"
-                                                        name="email" placeholder="Enter a email.." :value="old('email')">
-                                                    <div id="email_text" class="text-danger errors"></div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <label class="form-label" for="name">Password <span
-                                                            class="text-danger">*</span>
-                                                    </label>
-                                                    <input type="text" class="name form-control" id="password"
-                                                        name="password" placeholder="Enter a password.."
-                                                        :value="old('password')">
-                                                    <div id="password_text" class="text-danger errors"></div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <label class="form-label" for="name">Confirm Password <span
-                                                            class="text-danger">*</span>
-                                                    </label>
-                                                    <input type="text" class="name form-control" id="confirm_password"
-                                                        name="confirm_password" placeholder="Enter a confirm_password.."
-                                                        :value="old('confirm_password')">
-                                                    <div id="confirm_password_text" class="text-danger errors"></div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <label class="form-label" for="name">Role <span
-                                                            class="text-danger">*</span>
-                                                    </label>
-                                                    <select name="role" id="role">
-                                                        <option value="">Select Role</option>
-                                                        @foreach ($roles as $role)
-                                                            <option value="{{ $role->name }}">{{ $role->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    <div id="role_text" class="text-danger errors"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="form-validation">
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label class="form-label" for="name">Name <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="name form-control" id="name" name="name"
+                                        placeholder="Enter a name.." :value="old('name')">
+                                    <div id="name_text" class="text-danger errors"></div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label" for="name">Email <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="name form-control" id="email" name="email"
+                                        placeholder="Enter a email.." :value="old('email')">
+                                    <div id="email_text" class="text-danger errors"></div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label" for="name">Password <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="name form-control" id="password" name="password"
+                                        placeholder="Enter a password.." :value="old('password')">
+                                    <div id="password_text" class="text-danger errors"></div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label" for="name">Confirm Password <span
+                                            class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="name form-control" id="confirm_password"
+                                        name="confirm_password" placeholder="Enter a confirm_password.."
+                                        :value="old('confirm_password')">
+                                    <div id="confirm_password_text" class="text-danger errors"></div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label" for="name">Role <span class="text-danger">*</span>
+                                    </label>
+                                    <select class="form-select" name="role" id="role">
+                                        <option value="">Select Role</option>
+                                        @foreach ($roles as $role)
+                                            <option value="{{ $role->name }}">{{ $role->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <div id="role_text" class="text-danger errors"></div>
                                 </div>
                             </div>
                         </div>

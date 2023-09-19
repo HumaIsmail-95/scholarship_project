@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\DisciplineController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\admin\StudyModelController;
+use App\Http\Controllers\Admin\UniversityController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,6 +53,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::resource('disciplines', DisciplineController::class);
     // study-model
     Route::resource('study-models', StudyModelController::class);
+    //universities
+    Route::resource('universities', UniversityController::class);
 });
 require __DIR__ . '/auth.php';
 require __DIR__ . '/website.php';

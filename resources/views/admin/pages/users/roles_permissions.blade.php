@@ -43,57 +43,61 @@
                     <div class="card-body">
                         <h4 class="card-title">Role List </h4>
                         {{-- <h6 class="card-subtitle mb-3">Simple table example</h6> --}}
-                        <table data-bs-toggle="table" data-height="250" data-mobile-responsive="true"
-                            class="table table-striped">
-                            <tbody id="table_id">
-                                @if ($user->roles)
-                                    @foreach ($user->roles as $user_role)
-                                        <tr id='row_{{ $user_role->id }}' class="tr-class-1">
-                                            <td id="td-id-1" class="td-class-1"> {{ $user_role->name }} </td>
-                                            <td id="td-id-1" class="td-class-1">
-                                                @can('revoke-role')
-                                                    <button type="button"
-                                                        class="btn btn-danger d-none d-lg-block m-l-15 text-white"
-                                                        alt="default" data-bs-toggle="modal" data-bs-target="#deleteModal"><i
-                                                            class="fa fa-minus-circle"></i> Revoke Role</button>
-                                                @endcan
-                                            </td>
-                                        </tr>
-                                        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
-                                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <input type="hidden" value="-1" id="deleteID">
-                                                        <h5 class="modal-title" id="exampleModalLongTitle">Revoke Role
-                                                        </h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-hidden="true"></button>
+                        <div class="table-responsive">
+                            <table data-bs-toggle="table" data-height="250" data-mobile-responsive="true"
+                                class="table table-striped">
+                                <tbody id="table_id">
+                                    @if ($user->roles)
+                                        @foreach ($user->roles as $user_role)
+                                            <tr id='row_{{ $user_role->id }}' class="tr-class-1">
+                                                <td id="td-id-1" class="td-class-1"> {{ $user_role->name }} </td>
+                                                <td id="td-id-1" class="td-class-1">
+                                                    @can('revoke-role')
+                                                        <button type="button"
+                                                            class="btn btn-danger d-none d-lg-block m-l-15 text-white"
+                                                            alt="default" data-bs-toggle="modal"
+                                                            data-bs-target="#deleteModal"><i class="fa fa-minus-circle"></i>
+                                                            Revoke Role</button>
+                                                    @endcan
+                                                </td>
+                                            </tr>
+                                            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+                                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <input type="hidden" value="-1" id="deleteID">
+                                                            <h5 class="modal-title" id="exampleModalLongTitle">Revoke Role
+                                                            </h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-hidden="true"></button>
 
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Are you sure you want to Revoke this Role?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default waves-effect"
-                                                            data-bs-dismiss="modal">Close</button>
-                                                        <form
-                                                            action="{{ route('admin.users.revoke.role', [$user->id, $user_role->id]) }}"
-                                                            method="post">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit"
-                                                                class="btn btn-danger waves-effect waves-light text-white">Yes</button>
-                                                        </form>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Are you sure you want to Revoke this Role?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default waves-effect"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                            <form
+                                                                action="{{ route('admin.users.revoke.role', [$user->id, $user_role->id]) }}"
+                                                                method="post">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit"
+                                                                    class="btn btn-danger waves-effect waves-light text-white">Yes</button>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endforeach
-                                @endif
+                                        @endforeach
+                                    @endif
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
+
 
                     </div>
                 </div>
@@ -130,60 +134,64 @@
                     <div class="card-body">
                         <h4 class="card-title"> Permission Role List ({{ $user->name }})</h4>
                         {{-- <h6 class="card-subtitle mb-3">Simple table example</h6> --}}
-                        <table data-bs-toggle="table" data-height="250" data-mobile-responsive="true"
-                            class="table table-striped">
-                            <tbody id="table_id">
-                                @if ($user->permissions)
-                                    @foreach ($user->permissions as $user_permission)
-                                        <tr id='row_{{ $user_permission->id }}' class="tr-class-1">
-                                            <td id="td-id-1" class="td-class-1"> {{ $user_permission->display_name }}
-                                            </td>
-                                            <td id="td-id-1" class="td-class-1">
-                                                @can('revoke-permission')
-                                                    <button type="button"
-                                                        class="btn btn-danger d-none d-lg-block m-l-15 text-white"
-                                                        alt="default" data-bs-toggle="modal"
-                                                        data-bs-target="#deleteModal"><i class="fa fa-minus-circle"></i>
-                                                        Revoke Permission</button>
-                                                @endcan
-                                            </td>
-                                        </tr>
-                                        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
-                                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <input type="hidden" value="-1" id="deleteID">
-                                                        <h5 class="modal-title" id="exampleModalLongTitle">Revoke
-                                                            Permission
-                                                        </h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-hidden="true"></button>
+                        <div class="table-responsive">
+                            <table data-bs-toggle="table" data-height="250" data-mobile-responsive="true"
+                                class="table table-striped">
+                                <tbody id="table_id">
+                                    @if ($user->permissions)
+                                        @foreach ($user->permissions as $user_permission)
+                                            <tr id='row_{{ $user_permission->id }}' class="tr-class-1">
+                                                <td id="td-id-1" class="td-class-1">
+                                                    {{ $user_permission->display_name }}
+                                                </td>
+                                                <td id="td-id-1" class="td-class-1">
+                                                    @can('revoke-permission')
+                                                        <button type="button"
+                                                            class="btn btn-danger d-none d-lg-block m-l-15 text-white"
+                                                            alt="default" data-bs-toggle="modal"
+                                                            data-bs-target="#deleteModal"><i class="fa fa-minus-circle"></i>
+                                                            Revoke Permission</button>
+                                                    @endcan
+                                                </td>
+                                            </tr>
+                                            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+                                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <input type="hidden" value="-1" id="deleteID">
+                                                            <h5 class="modal-title" id="exampleModalLongTitle">Revoke
+                                                                Permission
+                                                            </h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-hidden="true"></button>
 
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Are you sure you want to REvoke this Permission?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default waves-effect"
-                                                            data-bs-dismiss="modal">Close</button>
-                                                        <form
-                                                            action="{{ route('admin.users.revoke.permission', [$user->id, $user_permission->id]) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit"
-                                                                class="btn btn-danger waves-effect waves-light text-white">Yes</button>
-                                                        </form>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Are you sure you want to REvoke this Permission?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default waves-effect"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                            <form
+                                                                action="{{ route('admin.users.revoke.permission', [$user->id, $user_permission->id]) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit"
+                                                                    class="btn btn-danger waves-effect waves-light text-white">Yes</button>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endforeach
-                                @endif
+                                        @endforeach
+                                    @endif
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
+
 
                     </div>
                 </div>

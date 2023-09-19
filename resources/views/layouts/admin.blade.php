@@ -24,6 +24,10 @@
     <link href="{{ asset('admin/dist/css/style.min.css') }}" rel="stylesheet">
     <!-- Dashboard 1 Page CSS -->
     <link href="{{ asset('admin/dist/css/pages/dashboard1.css') }}" rel="stylesheet">
+
+    {{-- my style sheet --}}
+    <link href="{{ asset('admin/css/custom_style.css') }}" rel="stylesheet">
+
     @yield('links')
 </head>
 
@@ -88,6 +92,7 @@
     <script src="{{ asset('admin/dist/js/pages/toastr.js') }}"></script>
     <!-- Chart JS -->
     <script src="{{ asset('admin/dist/js/dashboard1.js') }}"></script>
+
     <script>
         function showToaster(icon, heading, text) {
             $.toast({

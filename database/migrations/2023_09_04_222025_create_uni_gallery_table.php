@@ -15,7 +15,7 @@ class CreateUniGalleryTable extends Migration
     {
         Schema::create('uni_gallery', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('uni_id')->constrained('university_info')->cascadeOnDelete();
+            $table->foreignId('uni_id')->constrained('universities')->cascadeOnDelete();
             $table->string('type')->nullable()->comment('gallery, logo, banner');
             $table->string('image_name')->nullable();
             $table->string('folder_name')->nullable();

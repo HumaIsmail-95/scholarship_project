@@ -37,10 +37,10 @@ class PermissionSeeder extends Seeder
         $permission = Permission::create(['name' => 'update-user', 'display_name' => 'Edit User', 'module_name' => 'User']);
         $permission = Permission::create(['name' => 'delete-user', 'display_name' => 'Delete User', 'module_name' => 'User']);
         $permission = Permission::create(['name' => 'user-role-permission', 'display_name' => 'User Role Permission List', 'module_name' => 'User']);
-        $permission = Permission::create(['name' => 'assign-role', 'display_name' => 'Assign Role', 'module_name' => 'User']);
-        $permission = Permission::create(['name' => 'revoke-role', 'display_name' => 'Revoke Role', 'module_name' => 'User']);
-        $permission = Permission::create(['name' => 'assign-permisison', 'display_name' => 'Assign Permission', 'module_name' => 'User']);
-        $permission = Permission::create(['name' => 'revoke-permisison', 'display_name' => 'REvoke Permission', 'module_name' => 'User']);
+        $permission = Permission::create(['name' => 'assign-user-role', 'display_name' => 'Assign Role', 'module_name' => 'User']);
+        $permission = Permission::create(['name' => 'revoke-user-role', 'display_name' => 'Revoke Role', 'module_name' => 'User']);
+        $permission = Permission::create(['name' => 'assign-user-permisison', 'display_name' => 'Assign Permission', 'module_name' => 'User']);
+        $permission = Permission::create(['name' => 'revoke-user-permisison', 'display_name' => 'REvoke Permission', 'module_name' => 'User']);
         // degrees
         $permission = Permission::create(['name' => 'list-degree', 'display_name' => 'list Degree', 'module_name' => 'Degree']);
         $permission = Permission::create(['name' => 'create-degree', 'display_name' => 'Create Degree', 'module_name' => 'Degree']);
@@ -56,5 +56,10 @@ class PermissionSeeder extends Seeder
         $permission = Permission::create(['name' => 'create-study-model', 'display_name' => 'Create Study Model', 'module_name' => 'Study Model']);
         $permission = Permission::create(['name' => 'update-study-model', 'display_name' => 'Edit Study Model', 'module_name' => 'Study Model']);
         $permission = Permission::create(['name' => 'delete-study-model', 'display_name' => 'Delete Study Model', 'module_name' => 'Study Model']);
+        // univerisity
+        $permission = Permission::create(['name' => 'list-university', 'display_name' => 'list University', 'module_name' => 'University']);
+        $permission = Permission::create(['name' => 'create-university', 'display_name' => 'Create University', 'module_name' => 'University']);
+        $permission = Permission::create(['name' => 'update-university', 'display_name' => 'Edit University', 'module_name' => 'University']);
+        $permission = Permission::create(['name' => 'delete-university', 'display_name' => 'Delete University', 'module_name' => 'University']);
     }
 }

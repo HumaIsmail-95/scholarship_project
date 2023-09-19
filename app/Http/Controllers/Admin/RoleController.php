@@ -66,7 +66,8 @@ class RoleController extends Controller
                 $allPermissions = Permission::all();
                 $permissions = $allPermissions->diff($role->permissions);
             }
-            return view('admin.pages.roles.rolePermission', compact('role', 'permissions'));
+            $role_permissions = $role->permissions()->paginate(5);
+            return view('admin.pages.roles.rolePermission', compact('role', 'permissions', 'role_permissions'));
         } catch (\Throwable $th) {
             // return redirect()->back()->with('error', $th->getMessage());
             return $th;

@@ -24,6 +24,7 @@ class StudyModelService
 
         DB::beginTransaction();
         $data = $request->validated();
+        $data['status'] = isset($request->status) ? 1 : 0;
 
         $studyModel = StudyModel::create($data);
         DB::commit();
@@ -37,6 +38,7 @@ class StudyModelService
     {
         DB::beginTransaction();
         $data = $request->validated();
+        $data['status'] = isset($request->status) ? 1 : 0;
 
         $studyModel->update($data);
         DB::commit();

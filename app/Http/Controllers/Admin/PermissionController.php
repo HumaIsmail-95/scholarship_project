@@ -55,15 +55,12 @@ class PermissionController extends Controller
         }
     }
 
-    public function permissionRoles($permission)
+    public function permissionRoles(Permission $permission)
     {
         try {
-            $permission = Permission::findorFail($permission);
-            if ($permission) {
-                $allRoles = Role::all();
-                $roles = $allRoles->diff($permission->roles);
-            }
-            return view('admin.pages.permissions.permissionRole', compact('permission', 'roles'));
+            $roles = PermissionService::getRolePermission($permission);
+            $permission_roles  = $permission->roles()->paginate(5);
+            return view('admin.pages.permissions.permissionRole', compact('permission', 'roles', 'permission_roles'));
         } catch (\Throwable $th) {
             return $th;
         }

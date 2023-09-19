@@ -1,24 +1,26 @@
 @extends('layouts.admin')
-@section('title', 'Permissions')
+@section('title', 'Study Model')
 @section('links')
-    {{-- <link href="{{ asset('admin/dist/css/pages/floating-label.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('admin/assets/node_modules/bootstrap-switch/bootstrap-switch.min.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('admin/dist/css/pages/bootstrap-switch.css') }}" rel="stylesheet">
 @endsection
 @section('content')
     <div class="container-fluid">
         <div class="row page-titles">
             <div class="col-md-5 align-self-center">
-                <h4 class="text-themecolor">Permissions</h4>
+                <h4 class="text-themecolor">Study Model</h4>
             </div>
             <div class="col-md-7 align-self-center text-end">
                 <div class="d-flex justify-content-end align-items-center">
                     <ol class="breadcrumb justify-content-end">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                        <li class="breadcrumb-item active">Permissions</li>
+                        <li class="breadcrumb-item active">Study Model</li>
                     </ol>
-                    @can('create-permission')
+                    @can('create-study-modal')
                         <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white" alt="default"
-                            data-bs-toggle="modal" data-bs-target="#addPermissionModal"><i class="fa fa-plus-circle"></i> Create
-                            Permission</button>
+                            data-bs-toggle="modal" data-bs-target="#addStudyModelModal"><i class="fa fa-plus-circle"></i> Create
+                            StudyModel</button>
                     @endcan
                 </div>
             </div>
@@ -27,114 +29,106 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Permissions List</h4>
+                        <h4 class="card-title">Study Model List</h4>
                         {{-- <h6 class="card-subtitle mb-3">Simple table example</h6> --}}
-                        <table data-bs-toggle="table" data-height="250" data-mobile-responsive="true"
-                            class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Display Name</th>
-                                    <th>Module Name</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="table_id">
-                                @foreach ($permissions as $permission)
-                                    <tr id='row_{{ $permission->id }}' class="tr-class-1">
-                                        <td id="td-id-1" class="td-class-1"> {{ $permission->name }} </td>
-                                        <td id="td-id-1" class="td-class-1"> {{ $permission->display_name }} </td>
-                                        <td id="td-id-1" class="td-class-1"> {{ $permission->module_name }} </td>
-                                        <td>
-                                            <div class="btn-group">
-                                                @can('update-permission')
-                                                    <button class="btn btn-dark"
-                                                        onclick="openEditModal({{ json_encode($permission) }})"> <i
-                                                            class=" fas fa-pencil-alt"></i>
-                                                        Edit</button>
-                                                @endcan
-
-                                                <button type="button"
-                                                    class="btn btn-dark dropdown-toggle text-white dropdown-toggle-split"
-                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <span class="sr-only">Toggle Dropdown</span>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    @can('delete-permission')
-                                                        <a class="dropdown-item"
-                                                            href="javascript:openDeleteDialog({{ $permission->id }})"> <i
-                                                                class="fas fa-trash"></i> Delete</a>
-                                                    @endcan
-                                                    @can('permission-roles')
-                                                        <a class="dropdown-item"
-                                                            href="{{ route('admin.permission.roles', $permission->id) }}">
-                                                            <i class=" fas fa-key"></i> Permission Roles</a>
-                                                    @endcan
-
-
-                                                    {{-- <a class="dropdown-item" onclick="openViewModal({{ $permission }})">
-                                                        <i class="fas fa-eye"></i> View</a> --}}
-                                                </div>
-                                            </div>
-                                        </td>
+                        <div class="table-responsive">
+                            <table data-bs-toggle="table" data-height="250" data-mobile-responsive="true"
+                                class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>StudyModel</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody id="table_id">
+                                    @foreach ($studyModels as $studyModel)
+                                        <tr id='row_{{ $studyModel->id }}' class="tr-class-1">
+                                            <td id="td-id-1" class="td-class-1"> {{ $studyModel->name }} </td>
+                                            <td id="td-id-1" class="td-class-1"> {{ $studyModel->description }} </td>
+                                            <td id="td-id-1" class="td-class-1"> <span
+                                                    class="badge {{ $studyModel->status ? 'bg-success' : 'bg-danger' }}">{{ $studyModel->status ? 'active' : 'in-active' }}</span>
+                                            </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    @can('update-study-modal')
+                                                        <button class="btn btn-dark"
+                                                            onclick="openEditModal({{ json_encode($studyModel) }})"> <i
+                                                                class=" fas fa-pencil-alt"></i>
+                                                            Edit</button>
+                                                    @endcan
+
+                                                    <button type="button"
+                                                        class="btn btn-dark dropdown-toggle text-white dropdown-toggle-split"
+                                                        data-bs-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                        <span class="sr-only">Toggle Dropdown</span>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        @can('delete-study-modal')
+                                                            <a class="dropdown-item"
+                                                                href="javascript:openDeleteDialog({{ $studyModel->id }})"> <i
+                                                                    class="fas fa-trash"></i> Delete</a>
+                                                        @endcan
+                                                        {{-- @can('view-study-modal')
+                                                            <a class="dropdown-item"
+                                                                href="javascript:openViewDialog({{ json_encode($studyModel) }})">
+                                                                <i class="fas fa-eye"></i> View</a>
+                                                        @endcan --}}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                     <div class="pagination justify-content-center">
-                        {{ $permissions->links() }}
+                        {{ $studyModels->links() }}
                     </div>
                 </div>
             </div>
         </div>
 
     </div>
-    <div id="addPermissionModal" class="modal" tabindex="-1" permission="dialog" aria-labelledby="myModalLabel"
+    <div id="addStudyModelModal" class="modal" tabindex="-1" studyModel="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add Permission</h4>
+                    <h4 class="modal-title">Add StudyModel</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
-                <form class="floating-labels m-t-40" id="permission-form" method="post" action="javascript:;"
-                    onsubmit="submitPermission()">
+                <form class="floating-labels" id="studyModel-form" method="post" action="javascript:;"
+                    onsubmit="submitStudyModel()">
                     @csrf
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="form-validation">
-                                            <div class="form-group row">
-                                                <div class="col-md-12">
-                                                    <label class="form-label" for="name">Name <span
-                                                            class="text-danger">*</span>
-                                                    </label>
-                                                    <input type="text" class="name form-control" id="name"
-                                                        name="name" placeholder="Enter a name.." :value="old('name')">
-                                                    <div id="name_text" class="text-danger errors"></div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <label class="form-label" for="name">Display Name <span
-                                                            class="text-danger">*</span>
-                                                    </label>
-                                                    <input type="text" class="name form-control" id="display_name"
-                                                        name="display_name" placeholder="Enter a display  name.."
-                                                        :value="old('display_name')">
-                                                    <div id="display_name_text" class="text-danger errors"></div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <label class="form-label" for="name">Module Name <span
-                                                            class="text-danger">*</span>
-                                                    </label>
-                                                    <input type="text" class="name form-control" id="module_name"
-                                                        name="module_name" placeholder="Enter a display  name.."
-                                                        :value="old('module_name')">
-                                                    <div id="module_name_text" class="text-danger errors"></div>
-                                                </div>
-                                            </div>
+                        <div class="form-validation">
+                            <div class="form-group row mb-0">
+                                <div class="col-md-12 mb-2">
+                                    <label class="form-label" for="name">Name <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="name form-control" id="name" name="name"
+                                        placeholder="Enter a name.." :value="old('name')">
+                                    <div id="name_text" class="text-danger errors"></div>
+                                </div>
+                                <div class="col-md-12 mb-2">
+                                    <label class="form-label" for="name">Description<span class="text-danger">*</span>
+                                    </label>
+                                    <textarea name="description" class="form-control" id="description" cols="10" rows="4"
+                                        :value="old('description')"></textarea>
+                                    <div id="description_text" class="text-danger errors"></div>
+                                </div>
+                                <div class="col-md-12 mb-2">
+                                    <div class="bt-switch">
+                                        <div class="m-b-30">
+                                            <label class="form-label" for="name">Status
+                                            </label>
+                                            <input type="checkbox" name="status" checked data-on-color="success"
+                                                data-off-color="danger" data-on-text="Active" data-off-text="In-active">
                                         </div>
                                     </div>
                                 </div>
@@ -146,49 +140,50 @@
                             data-bs-dismiss="modal">Close</button>
                         <button type="submit" id="button-save"
                             class="btn btn-danger waves-effect waves-light text-white">Add
-                            Permission</button>
+                            StudyModel</button>
                     </div>
                 </form>
 
             </div>
         </div>
     </div>
-    <div class="modal fade" id="deleteModal" tabindex="-1" permission="dialog"
+    <div class="modal fade" id="deleteModal" tabindex="-1" studyModel="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" permission="document">
+        <div class="modal-dialog modal-dialog-centered" studyModel="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <input type="hidden" value="-1" id="deleteID">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Delete Permission
+                    <h5 class="modal-title" id="exampleModalLongTitle">Delete StudyModel
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
 
                 </div>
                 <div class="modal-body">
-                    Are you sure you want to delete this Permission?
+                    Are you sure you want to delete this StudyModel?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal">Close</button>
                     <button type="button" id="button-delete" class="btn btn-danger waves-effect waves-light text-white"
-                        onclick="deletePermission()">Yes</button>
+                        onclick="deleteStudyModel()">Yes</button>
                 </div>
             </div>
         </div>
     </div>
     {{-- edit --}}
-    <div class="modal fade" id="editModalPermission">
-        <div class="modal-dialog modal-dialog-centered" permission="document">
+    <div class="modal fade" id="editModalStudyModel">
+        <div class="modal-dialog modal-dialog-centered" studyModel="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Permission</h5>
+                    <h5 class="modal-title">Edit StudyModel</h5>
                     <button type="button" class="close" data-bs-dismiss="modal"
                         aria-hidden="true"><span>&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="form-valide" id="edit-permission-form" method="post" enctype="multipart/form-data">
+                    <form class="form-valide" id="edit-study-modal-form" method="post" enctype="multipart/form-data">
                         @csrf
-                        <input type="hidden" value="-1" id="permission_id">
+                        @method('PUT')
+                        <input type="hidden" value="-1" id="studyModel_id">
                         <input type="hidden" value="PUT" name="_method">
                         <div class="form-validation">
                             <div class="form-group row">
@@ -196,37 +191,36 @@
                                     <label class="form-label" for="name">Name <span class="text-danger">*</span>
                                     </label>
                                     <input type="text" class="form-control" id="edit_name" name="name"
-                                        placeholder="Enter a name.." value="" readonly>
+                                        placeholder="Enter a name.." value="">
                                     <div id="edit_name_text" class="text-danger"></div>
                                 </div>
-                                <div class="col-md-12 my-2">
-                                    <label class="form-label" for="name">Display Name <span
+                                <div class="col-md-12 mb-2">
+                                    <label class="form-label" for="name">Description<span
                                             class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="name form-control" id="edit_display_name"
-                                        name="edit_display_name" placeholder="Enter a display  name.."
-                                        :value="old('edit_display_name')">
-                                    <div id="edit_display_name_text" class="text-danger errors"></div>
+                                    <textarea name="description" class="form-control" id="edit_description" cols="10" rows="4"
+                                        :value="old('description')"></textarea>
+                                    <div id="edit_description_text" class="text-danger errors"></div>
                                 </div>
-                                <div class="col-md-12">
-                                    <label class="form-label" for="name">Module Name <span
-                                            class="text-danger">*</span>
-                                    </label>
-                                    <input type="text" class="name form-control" id="edit_module_name"
-                                        name="edit_module_name" placeholder="Enter a display  name.."
-                                        :value="old('edit_module_name')">
-                                    <div id="edit_module_name_text" class="text-danger errors"></div>
-                                </div>
+                                <div class="col-md-12 mb-2">
+                                    <div class="m-b-30">
+                                        <label class="form-label" for="name">Status
+                                        </label>
+                                        <input type="checkbox" value="1" name="status" id="edit_status"
+                                            data-on-color="success" data-off-color="danger" data-on-text="Active"
+                                            data-off-text="In-active">
 
+                                    </div>
+                                </div>
                             </div>
                         </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                         aria-hidden="true">Close</button>
-                    <button type="button" id="button-update" onclick="editPermission(this)"
+                    <button type="button" id="button-update" onclick="editStudyModel(this)"
                         class="btn btn-primary">Edit
-                        Permission</button>
+                        StudyModel</button>
                 </div>
                 </form>
             </div>
@@ -234,50 +228,77 @@
     </div>
     </div>
     {{-- view --}}
-    <div class="modal fade" id="viewModalUser">
-        <div class="modal-dialog modal-dialog-centered" permission="document">
+    <div class="modal fade" id="viewModalStudyModel">
+        <div class="modal-dialog modal-dialog-centered" studyModel="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">View User</h5>
+                    <h5 class="modal-title">View StudyModel</h5>
                     <button type="button" class="close" data-bs-dismiss="modal"
                         aria-hidden="true"><span>&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="form-valide" id="view-permission-form" method="post" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row">
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center p-2">
-                                <img id="view_image_preview" src="{{ url('images/profile/default_image.png') }}"
-                                    alt="" width="120" class="rounded-circle border border-dark" />
-                            </div>
-                        </div>
-                        <div class="form-validation">
-                            <div class="form-group row">
-                                <div class="col-12 text-center">
-                                    <label class=" col-form-label" id="view_name" for="">
-                                    </label>
+                    <table id="view_table_id">
+                        <tbody>
+                            <div class="form-validation">
+                                <div class="form-group row mb-0">
+                                    <div class="col-md-12 mb-2">
+                                        <label class="form-label" for="name">Name <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" class="name form-control" id="view_name" name="name"
+                                            placeholder="Enter a name.." readonly>
+                                    </div>
+                                    <div class="col-md-12 mb-2">
+                                        <label class="form-label" for="name">Description<span
+                                                class="text-danger">*</span>
+                                        </label>
+                                        <textarea name="description" class="form-control" id="view_description" cols="10" rows="4" readonly></textarea>
+                                    </div>
+                                    <div class="col-md-12 mb-2">
+                                        <label class="form-label" for="name">Status
+                                        </label>
+                                        <input type="text" class="name form-control" id="view_status"
+                                            name="view_status" placeholder="Enter a name.." readonly>
+                                        {{-- <input type="checkbox" id="view_status" name="view_status"> --}}
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <div class="col-12 text-center">
-                                    <label class="col-lg-4 col-form-label" id="view_guard_name" for="">
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                                aria-hidden="true">Close</button>
-                        </div>
-                    </form>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        aria-hidden="true">Close</button>
                 </div>
             </div>
         </div>
     </div>
 @endsection
 @section('scripts')
-    {{-- <script src="{{ asset('admin/dist/js/pages/jasny-bootstrap.js') }}"></script> --}}
+    <script src="{{ asset('admin/assets/node_modules/bootstrap-switch/bootstrap-switch.min.js') }}"></script>
+    <script type="text/javascript">
+        $(".bt-switch input[type='checkbox'], .bt-switch input[type='radio']").bootstrapSwitch();
+        var radioswitch = function() {
+            var bt = function() {
+                $(".radio-switch").on("switch-change", function() {
+                    $(".radio-switch").bootstrapSwitch("toggleRadioState")
+                }), $(".radio-switch").on("switch-change", function() {
+                    $(".radio-switch").bootstrapSwitch("toggleRadioStateAllowUncheck")
+                }), $(".radio-switch").on("switch-change", function() {
+                    $(".radio-switch").bootstrapSwitch("toggleRadioStateAllowUncheck", !1)
+                })
+            };
+            return {
+                init: function() {
+                    bt()
+                }
+            }
+        }();
+        $(document).ready(function() {
+            radioswitch.init()
+        });
+    </script>
     <script>
         function showToaster(icon, heading, text) {
             $.toast({
@@ -291,21 +312,21 @@
             });
         }
 
-        function submitPermission() {
+        function submitStudyModel() {
 
 
-            var form = $('#permission-form')[0];
+            var form = $('#studyModel-form')[0];
             console.log('form ', form);
             $("#button-save").text('Loading...');
 
 
             const myFormData = new FormData(form);
-            console.log(' permissions', myFormData);
+            console.log(' studyModels', myFormData);
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
                 },
-                url: "/admin/permissions", // the endpoint
+                url: "/admin/study-models", // the endpoint
                 type: "POST", // http method
                 processData: false,
                 contentType: false,
@@ -320,35 +341,38 @@
 
 
                     $("#button-save").prop("disabled", false);
-                    $("#button-save").text("Add Permission");
+                    $("#button-save").text("Add StudyModel");
                     showToaster('success', 'Success', data.message);
-                    document.getElementById("permission-form").reset();
-                    const RLOE = JSON.stringify(data.permission)
+                    document.getElementById("studyModel-form").reset();
+                    const RLOE = JSON.stringify(data.studyModel)
                     var string =
-                        `<tr id="row_${data.permission.id}">
-                           <td id="td-id-1" class="td-class-1">${data.permission.name} </td>
-                           <td id="td-id-1" class="td-class-1">${data.permission.display_name} </td>
-                           <td id="td-id-1" class="td-class-1">${data.permission.module_name} </td>
+                        `<tr id="row_${data.studyModel.id}">
+                           <td id="td-id-1" class="td-class-1">${data.studyModel.name} </td>
+                           <td id="td-id-1" class="td-class-1">${data.studyModel.description} </td>
+                           <td id="td-id-1" class="td-class-1"><span class="badge ${data.studyModel.status?'bg-success':'bg-danger'}">${data.studyModel.status?'active':'in-active'} </td>
                             <td>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-dark"  id="btnGroupDrop${data.permission.id}" onclick='openEditModal(${RLOE})'> <i
+                                    @can('edit-study-modal')
+                                    <button type="button" class="btn btn-dark"  id="btnGroupDrop${data.studyModel.id}" onclick='openEditModal(${RLOE})'> <i
                                             class=" fas fa-pencil-alt"></i> Edit</button>
+                                    @endcan
                                     <button type="button"
                                         class="btn btn-dark dropdown-toggle text-white dropdown-toggle-split"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <span class="sr-only">Toggle Dropdown</span>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item"  href="javascript:openDeleteDialog(${data.permission.id});"> <i
+                                        @can('delete-study-modal')
+                                        <a class="dropdown-item"  href="javascript:openDeleteDialog(${data.studyModel.id});"> <i
                                                 class="fas fa-trash"></i> Delete</a>
-                                        <a class="dropdown-item" href="javascript:void(0)"  onclick="openViewModal(${data.permission})"> <i
-                                                class="fas fa-eye"></i> View</a>
+                                        @endcan
+
                                     </div>
                                 </div>
                             </td>
                        </tr>`
                     $("#table_id").append(string);
-                    $('#addPermissionModal').modal('hide');
+                    $('#addStudyModelModal').modal('hide');
 
 
 
@@ -359,7 +383,7 @@
                 error: function(error) {
                     $(form)
                     $("#button-save").prop("disabled", false);
-                    $("#button-save").text("Add Permission");
+                    $("#button-save").text("Add StudyModel");
                     var errorMessage = error.statusText;
                     if (error.status == 422) {
                         errorMessage = handleValidationErrors(error)
@@ -370,11 +394,11 @@
             });
         }
 
-        function editPermission() {
-            var form = $('#edit-permission-form')[0];
+        function editStudyModel() {
+            var form = $('#edit-study-modal-form')[0];
             $("#button-update").text('Loading...');
-            permission_id = form.permission_id.value;
-            console.log('permission id ', permission_id);
+            var studyModel_id = form.studyModel_id.value;
+            console.log('studyModel id ', studyModel_id);
             const myFormData = new FormData(form);
             const formDataObj = {};
             myFormData.forEach((value, key) => (formDataObj[key] = value));
@@ -383,7 +407,7 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
                 },
-                url: "/admin/permissions/" + permission_id, // the endpoint
+                url: "/admin/study-models/" + studyModel_id, // the endpoint
                 type: "POST", // http method
                 processData: false,
                 contentType: false,
@@ -395,8 +419,9 @@
 
                 },
                 success: function(data) {
+                    console.log('data', data);
                     $("#button-update").prop("disabled", false);
-                    $("#button-update").text("Edit Permission");
+                    $("#button-update").text("Edit StudyModel");
 
                     $(form)
                         .find('[type="button"]')
@@ -407,42 +432,48 @@
                     $(form)
                         .find('[type="button"]')
                         .prop("disabled", false);
-                    const RLOE = JSON.stringify(data.permission)
-                    $("#row_" + data.permission.id).remove();
+                    const RLOE = JSON.stringify(data.studyModel)
+                    $("#row_" + data.studyModel.id).remove();
                     var string =
-                        `<tr id="row_${data.permission.id}">
-                           <td id="td-id-1" class="td-class-1">${data.permission.name} </td>
-                           <td id="td-id-1" class="td-class-1">${data.permission.display_name} </td>
-                           <td id="td-id-1" class="td-class-1">${data.permission.module_name} </td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <button class="btn btn-dark"
-                                                onclick='openEditModal(${RLOE})'> <i
-                                                        class=" fas fa-pencil-alt"></i>
-                                                    Edit</button>
-                                                <button type="button"
-                                                    class="btn btn-dark dropdown-toggle text-white dropdown-toggle-split"
-                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <span class="sr-only">Toggle Dropdown</span>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item"
-                                                    href="javascript:openDeleteDialog(${data.permission.id});"> <i
-                                                            class="fas fa-trash"></i> Delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
+                        `<tr id="row_${data.studyModel.id}">
+                           <td id="td-id-1" class="td-class-1">${data.studyModel.name} </td>
+                           <td id="td-id-1" class="td-class-1">${data.studyModel.description} </td>
+                           <td id="td-id-1" class="td-class-1"><span class="badge ${data.studyModel.status?'bg-success':'bg-danger'}">${data.studyModel.status?'active':'in-active'} </td>
+                            <td>
+                                <div class="btn-group">
+                                    @can('edit-study-modal')
+                                    <button class="btn btn-dark"
+                                        onclick='openEditModal(${RLOE})'> <i
+                                                class=" fas fa-pencil-alt"></i>
+                                            Edit</button>
+                                    @endcan
+                                    <button type="button"
+                                        class="btn btn-dark dropdown-toggle text-white dropdown-toggle-split"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                       @can('delete-study-modal')
+                                       <a class="dropdown-item"
+                                        href="javascript:openDeleteDialog(${data.studyModel.id});"> <i
+                                                class="fas fa-trash"></i> Delete</a>
+                                       @endcan
+
+                                    </div>
+
+                                </div>
+                            </td>
                        </tr>
                        `
                     $("#table_id").append(string);
-                    $('#editModalPermission').modal('hide');
-
+                    $('#editModalStudyModel').modal('hide');
+                    // location.reload()
 
                 },
                 error: function(error) {
                     $(form)
                     $("#button-update").prop("disabled", false);
-                    $("#button-update").text("Edit Permission");
+                    $("#button-update").text("Edit StudyModel");
                     var errorMessage = error.statusText;
                     if (error.status == 422) {
                         errorMessage = handleValidationErrors(error, 'edit')
@@ -460,13 +491,13 @@
             $("#deleteModal").modal('show');
         }
 
-        function deletePermission() {
+        function deleteStudyModel() {
             $("#button-delete").text('Loading...');
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
-                url: "/admin/permissions/" + $("#deleteID").val(), // the endpoint
+                url: "/admin/study-models/" + $("#deleteID").val(), // the endpoint
                 type: "DELETE", // http method
                 processData: false,
                 contentType: false,
@@ -495,16 +526,22 @@
             });
         }
 
-        function openEditModal(permission) {
-            console.log(' i m here', permission);
-            document.getElementById('edit_name').value = permission.name;
+        function openEditModal(studyModel) {
 
-            document.getElementById('permission_id').value = permission.id;
-            document.getElementById('edit_display_name').value = permission.display_name;
-            document.getElementById('edit_module_name').value = permission.module_name;
+            document.getElementById('studyModel_id').value = studyModel.id;
+            document.getElementById('edit_name').value = studyModel.name;
+            document.getElementById('edit_description').value = studyModel.description;
+            document.getElementById('edit_status').checked = studyModel.status == 1 ? true : false;
+            console.log('studyModel', studyModel, document.getElementById('edit_status').checked);
+            $("#editModalStudyModel").modal('show')
+        }
 
+        function openViewDialog(studyModel) {
+            document.getElementById('view_name').value = studyModel.name;
+            document.getElementById('view_description').value = studyModel.description;
+            document.getElementById('view_status').value = studyModel.status == 1 ? 'Active' : 'Inactive';
 
-            $("#editModalPermission").modal('show')
+            $("#viewModalStudyModel").modal('show')
         }
 
         function handleValidationErrors(error, type = 'create') {
@@ -531,4 +568,5 @@
             return errorMessage;
         }
     </script>
+
 @endsection

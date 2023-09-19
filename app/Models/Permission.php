@@ -16,4 +16,9 @@ class Permission extends Model
         'guard_name',
 
     ];
+
+    public function roles()
+    {
+        return $this->belongsTomany(Role::class, 'role_has_permissions');
+    }
 }

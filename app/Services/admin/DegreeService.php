@@ -13,7 +13,7 @@ class DegreeService
     public static function getDegrees()
     {
 
-        $degrees = Degree::orderBy('id', 'DESC')->paginate(20);
+        $degrees = Degree::with('discipline')->orderBy('id', 'DESC')->paginate(20);
         return $degrees;
     }
 
@@ -22,8 +22,9 @@ class DegreeService
 
         DB::beginTransaction();
         $data = $request->validated();
-
+        $data['status'] = isset($request->status) ? 1 : 0;
         $degree = Degree::create($data);
+        $degree->discipline;
         DB::commit();
         $response = ['status' => true, 'message' => 'Degree added successfully.', 'degree' => $degree];
 
@@ -35,8 +36,9 @@ class DegreeService
     {
         DB::beginTransaction();
         $data = $request->validated();
-
+        $data['status'] = isset($request->status) ? 1 : 0;
         $degree->update($data);
+        $degree->discipline;
         DB::commit();
         $response = ['status' => true, 'message' => ' Degree updated successfully.', 'degree' => $degree];
         return $response;

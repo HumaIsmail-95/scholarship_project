@@ -29,50 +29,54 @@
                     <div class="card-body">
                         <h4 class="card-title">Roles List</h4>
                         {{-- <h6 class="card-subtitle mb-3">Simple table example</h6> --}}
-                        <table data-bs-toggle="table" data-height="250" data-mobile-responsive="true"
-                            class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="table_id">
-                                @foreach ($roles as $role)
-                                    <tr id='row_{{ $role->id }}' class="tr-class-1">
-                                        <td id="td-id-1" class="td-class-1"> {{ $role->name }} </td>
-                                        <td>
-                                            <div class="btn-group">
-                                                @can('edit-role')
-                                                    <button class="btn btn-dark"
-                                                        onclick="openEditModal({{ json_encode($role) }})"> <i
-                                                            class=" fas fa-pencil-alt"></i>
-                                                        Edit</button>
-                                                @endcan
-                                                <button type="button"
-                                                    class="btn btn-dark dropdown-toggle text-white dropdown-toggle-split"
-                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <span class="sr-only">Toggle Dropdown</span>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    @can('delete-role')
-                                                        <a class="dropdown-item"
-                                                            href="javascript:openDeleteDialog({{ $role->id }})"> <i
-                                                                class="fas fa-trash"></i> Delete</a>
-                                                    @endcan
-                                                    @can('role-permissions')
-                                                        <a class="dropdown-item"
-                                                            href="{{ route('admin.role.permissions', $role->id) }}">
-                                                            <i class=" fas fa-key"></i> Role Permissions</a>
-                                                    @endcan
-
-                                                </div>
-                                            </div>
-                                        </td>
+                        <div class="table-responsive">
+                            <table data-bs-toggle="table" data-height="250" data-mobile-responsive="true"
+                                class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Actions</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody id="table_id">
+                                    @foreach ($roles as $role)
+                                        <tr id='row_{{ $role->id }}' class="tr-class-1">
+                                            <td id="td-id-1" class="td-class-1"> {{ $role->name }} </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    @can('edit-role')
+                                                        <button class="btn btn-dark"
+                                                            onclick="openEditModal({{ json_encode($role) }})"> <i
+                                                                class=" fas fa-pencil-alt"></i>
+                                                            Edit</button>
+                                                    @endcan
+                                                    <button type="button"
+                                                        class="btn btn-dark dropdown-toggle text-white dropdown-toggle-split"
+                                                        data-bs-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                        <span class="sr-only">Toggle Dropdown</span>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        @can('delete-role')
+                                                            <a class="dropdown-item"
+                                                                href="javascript:openDeleteDialog({{ $role->id }})"> <i
+                                                                    class="fas fa-trash"></i> Delete</a>
+                                                        @endcan
+                                                        @can('role-permissions')
+                                                            <a class="dropdown-item"
+                                                                href="{{ route('admin.role.permissions', $role->id) }}">
+                                                                <i class=" fas fa-key"></i> Role Permissions</a>
+                                                        @endcan
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                     <div class="pagination justify-content-center">
                         {{ $roles->links() }}
@@ -90,30 +94,20 @@
                     <h4 class="modal-title">Add Role</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
-                <form class="floating-labels m-t-40" id="role-form" method="post" action="javascript:;"
-                    onsubmit="submitRole()">
+                <form class="floating-labels" id="role-form" method="post" action="javascript:;" onsubmit="submitRole()">
                     @csrf
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="form-validation">
-                                            <div class="form-group row">
-                                                <div class="col-md-12">
-                                                    <label class="form-label" for="name">Name <span
-                                                            class="text-danger">*</span>
-                                                    </label>
-                                                    <input type="text" class="name form-control" id="name"
-                                                        name="name" placeholder="Enter a name.." :value="old('name')">
-                                                    <div id="name_text" class="text-danger errors"></div>
-                                                </div>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="form-validation">
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label class="form-label" for="name">Name <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="name form-control" id="name" name="name"
+                                        placeholder="Enter a name.." :value="old('name')">
+                                    <div id="name_text" class="text-danger errors"></div>
                                 </div>
+
+
                             </div>
                         </div>
                     </div>

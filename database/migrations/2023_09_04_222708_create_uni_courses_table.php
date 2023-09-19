@@ -15,7 +15,7 @@ class CreateUniCoursesTable extends Migration
     {
         Schema::create('uni_courses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('uni_id')->constrained('university_info')->cascadeOnDelete();
+            $table->foreignId('uni_id')->constrained('universities')->cascadeOnDelete();
             $table->string('country_id');
             $table->string('city_id');
             $table->integer('duration_id')->nullable();

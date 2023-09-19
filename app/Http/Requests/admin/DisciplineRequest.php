@@ -26,7 +26,7 @@ class DisciplineRequest extends FormRequest
         return [
             'name' => ['required'],
             'description' => ['nullable'],
-            'status' => ['required', 'boolean'],
+            'status' => ['nullable'],
 
         ];
     }

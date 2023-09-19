@@ -1,0 +1,6 @@
+@extends('layouts.admin')
+@yield('title', 'Dashboard')
+@section('content')
+@endsection
+@section('scripts')
+@endsection

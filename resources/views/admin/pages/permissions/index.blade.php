@@ -29,58 +29,62 @@
                     <div class="card-body">
                         <h4 class="card-title">Permissions List</h4>
                         {{-- <h6 class="card-subtitle mb-3">Simple table example</h6> --}}
-                        <table data-bs-toggle="table" data-height="250" data-mobile-responsive="true"
-                            class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Display Name</th>
-                                    <th>Module Name</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="table_id">
-                                @foreach ($permissions as $permission)
-                                    <tr id='row_{{ $permission->id }}' class="tr-class-1">
-                                        <td id="td-id-1" class="td-class-1"> {{ $permission->name }} </td>
-                                        <td id="td-id-1" class="td-class-1"> {{ $permission->display_name }} </td>
-                                        <td id="td-id-1" class="td-class-1"> {{ $permission->module_name }} </td>
-                                        <td>
-                                            <div class="btn-group">
-                                                @can('update-permission')
-                                                    <button class="btn btn-dark"
-                                                        onclick="openEditModal({{ json_encode($permission) }})"> <i
-                                                            class=" fas fa-pencil-alt"></i>
-                                                        Edit</button>
-                                                @endcan
-
-                                                <button type="button"
-                                                    class="btn btn-dark dropdown-toggle text-white dropdown-toggle-split"
-                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <span class="sr-only">Toggle Dropdown</span>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    @can('delete-permission')
-                                                        <a class="dropdown-item"
-                                                            href="javascript:openDeleteDialog({{ $permission->id }})"> <i
-                                                                class="fas fa-trash"></i> Delete</a>
-                                                    @endcan
-                                                    @can('permission-roles')
-                                                        <a class="dropdown-item"
-                                                            href="{{ route('admin.permission.roles', $permission->id) }}">
-                                                            <i class=" fas fa-key"></i> Permission Roles</a>
-                                                    @endcan
-
-
-                                                    {{-- <a class="dropdown-item" onclick="openViewModal({{ $permission }})">
-                                                        <i class="fas fa-eye"></i> View</a> --}}
-                                                </div>
-                                            </div>
-                                        </td>
+                        <div class="table-responsive">
+                            <table data-bs-toggle="table" data-height="250" data-mobile-responsive="true"
+                                class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Display Name</th>
+                                        <th>Module Name</th>
+                                        <th>Actions</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody id="table_id">
+                                    @foreach ($permissions as $permission)
+                                        <tr id='row_{{ $permission->id }}' class="tr-class-1">
+                                            <td id="td-id-1" class="td-class-1"> {{ $permission->name }} </td>
+                                            <td id="td-id-1" class="td-class-1"> {{ $permission->display_name }} </td>
+                                            <td id="td-id-1" class="td-class-1"> {{ $permission->module_name }} </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    @can('update-permission')
+                                                        <button class="btn btn-dark"
+                                                            onclick="openEditModal({{ json_encode($permission) }})"> <i
+                                                                class=" fas fa-pencil-alt"></i>
+                                                            Edit</button>
+                                                    @endcan
+
+                                                    <button type="button"
+                                                        class="btn btn-dark dropdown-toggle text-white dropdown-toggle-split"
+                                                        data-bs-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                        <span class="sr-only">Toggle Dropdown</span>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        @can('delete-permission')
+                                                            <a class="dropdown-item"
+                                                                href="javascript:openDeleteDialog({{ $permission->id }})"> <i
+                                                                    class="fas fa-trash"></i> Delete</a>
+                                                        @endcan
+                                                        @can('permission-roles')
+                                                            <a class="dropdown-item"
+                                                                href="{{ route('admin.permission.roles', $permission->id) }}">
+                                                                <i class=" fas fa-key"></i> Permission Roles</a>
+                                                        @endcan
+
+
+                                                        {{-- <a class="dropdown-item" onclick="openViewModal({{ $permission }})">
+                                                        <i class="fas fa-eye"></i> View</a> --}}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                     <div class="pagination justify-content-center">
                         {{ $permissions->links() }}
@@ -98,45 +102,33 @@
                     <h4 class="modal-title">Add Permission</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
-                <form class="floating-labels m-t-40" id="permission-form" method="post" action="javascript:;"
+                <form class="floating-labels" id="permission-form" method="post" action="javascript:;"
                     onsubmit="submitPermission()">
                     @csrf
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="form-validation">
-                                            <div class="form-group row">
-                                                <div class="col-md-12">
-                                                    <label class="form-label" for="name">Name <span
-                                                            class="text-danger">*</span>
-                                                    </label>
-                                                    <input type="text" class="name form-control" id="name"
-                                                        name="name" placeholder="Enter a name.." :value="old('name')">
-                                                    <div id="name_text" class="text-danger errors"></div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <label class="form-label" for="name">Display Name <span
-                                                            class="text-danger">*</span>
-                                                    </label>
-                                                    <input type="text" class="name form-control" id="display_name"
-                                                        name="display_name" placeholder="Enter a display  name.."
-                                                        :value="old('display_name')">
-                                                    <div id="display_name_text" class="text-danger errors"></div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <label class="form-label" for="name">Module Name <span
-                                                            class="text-danger">*</span>
-                                                    </label>
-                                                    <input type="text" class="name form-control" id="module_name"
-                                                        name="module_name" placeholder="Enter a display  name.."
-                                                        :value="old('module_name')">
-                                                    <div id="module_name_text" class="text-danger errors"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="form-validation">
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label class="form-label" for="name">Name <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="name form-control" id="name" name="name"
+                                        placeholder="Enter a name.." :value="old('name')">
+                                    <div id="name_text" class="text-danger errors"></div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label" for="name">Display Name <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="name form-control" id="display_name" name="display_name"
+                                        placeholder="Enter a display  name.." :value="old('display_name')">
+                                    <div id="display_name_text" class="text-danger errors"></div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label" for="name">Module Name <span
+                                            class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="name form-control" id="module_name" name="module_name"
+                                        placeholder="Enter a display  name.." :value="old('module_name')">
+                                    <div id="module_name_text" class="text-danger errors"></div>
                                 </div>
                             </div>
                         </div>

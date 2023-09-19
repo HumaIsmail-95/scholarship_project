@@ -22,7 +22,15 @@ class PermissionService
         $permissions = Permission::orderBy('id', 'DESC')->paginate(20);
         return $permissions;
     }
-
+    public static function getRolePermission($permission)
+    {
+        Permission::findorFail($permission->id);
+        if ($permission) {
+            $allRoles = Role::all();
+            $roles = $allRoles->diff($permission->roles);
+        }
+        return $roles;
+    }
     public  static function store($request)
     {
 
