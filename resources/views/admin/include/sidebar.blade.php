@@ -9,7 +9,7 @@
              <ul id="sidebarnav">
                  <li class="user-pro"> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)"
                          aria-expanded="false"><img src="{{ asset('admin/assets/images/users/1.jpg') }}" alt="user-img"
-                             class="img-circle"><span class="hide-menu">Prof. Mark</span></a>
+                             class="img-circle"><span class="hide-menu">{{ Auth::user()->name }}</span></a>
                      <ul aria-expanded="false" class="collapse">
                          <li><a href="javascript:void(0)"><i class="ti-user"></i> My Profile</a></li>
                          <li><a href="javascript:void(0)"><i class="ti-wallet"></i> My Balance</a></li>
@@ -53,17 +53,45 @@
                                  class="icon-speedometer"></i><span class="hide-menu">Study Models</span></a>
                      </li>
                  @endcan
-                 @can('list-users')
+                 {{-- @can('list-users')
                      <li> <a class="waves-effect waves-dark" href="{{ route('admin.users.index') }}"><i
                                  class="icon-speedometer"></i><span class="hide-menu">Dashboard</span></a>
                      </li>
-                 @endcan
+                 @endcan --}}
                  @can('list-university')
                      <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
                                  class="ti-layout-grid2"></i><span class="hide-menu">Univeristies</span></a>
                          <ul aria-expanded="false" class="collapse">
                              <li><a href="{{ route('admin.universities.index') }}">List</a></li>
                              <li><a href="{{ route('admin.universities.create') }}">Create</a></li>
+                         </ul>
+                     </li>
+                 @endcan
+                 @can('list-course')
+                     <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
+                                 class="ti-layout-grid2"></i><span class="hide-menu">Courses</span></a>
+                         <ul aria-expanded="false" class="collapse">
+                             <li><a href="{{ route('admin.courses.index') }}">List</a></li>
+                             <li><a href="{{ route('admin.courses.create') }}">Create</a></li>
+                         </ul>
+                     </li>
+                 @endcan
+                 @can('list-subscription')
+                     <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
+                                 class="ti-layout-grid2"></i><span class="hide-menu"> Packages</span></a>
+                         <ul aria-expanded="false" class="collapse">
+                             <li><a href="{{ route('admin.subscription-packages.index') }}">List</a></li>
+                             <li><a href="{{ route('admin.subscription-packages.create') }}">Create</a></li>
+                         </ul>
+                     </li>
+                 @endcan
+                 {{-- stripe --}}
+                 @can('list-subscription')
+                     <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
+                                 class="ti-layout-grid2"></i><span class="hide-menu"> Settings</span></a>
+                         <ul aria-expanded="false" class="collapse">
+                             <li><a href="{{ route('admin.stripe.setting.index') }}">Set Stripe Key</a></li>
+                             {{-- <li><a href="{{ route('admin.subscription-packages.create') }}">Create</a></li> --}}
                          </ul>
                      </li>
                  @endcan

@@ -61,5 +61,17 @@ class PermissionSeeder extends Seeder
         $permission = Permission::create(['name' => 'create-university', 'display_name' => 'Create University', 'module_name' => 'University']);
         $permission = Permission::create(['name' => 'update-university', 'display_name' => 'Edit University', 'module_name' => 'University']);
         $permission = Permission::create(['name' => 'delete-university', 'display_name' => 'Delete University', 'module_name' => 'University']);
+        // courses
+        $permission = Permission::create(['name' => 'view-course', 'display_name' => 'View Course', 'module_name' => 'Course']);
+        $permission = Permission::create(['name' => 'list-course', 'display_name' => 'list Course', 'module_name' => 'Course']);
+        $permission = Permission::create(['name' => 'create-course', 'display_name' => 'Create Course', 'module_name' => 'Course']);
+        $permission = Permission::create(['name' => 'update-course', 'display_name' => 'Edit Course', 'module_name' => 'Course']);
+        $permission = Permission::create(['name' => 'delete-course', 'display_name' => 'Delete Course', 'module_name' => 'Course']);
+        // subscription packages
+        $permission = Permission::create(['name' => 'view-subscription', 'display_name' => 'View Subscription Package', 'module_name' => 'Subscription Package']);
+        $permission = Permission::create(['name' => 'list-subscription', 'display_name' => 'list Subscription Package', 'module_name' => 'Subscription Package']);
+        $permission = Permission::create(['name' => 'create-subscription', 'display_name' => 'Create Subscription Package', 'module_name' => 'Subscription Package']);
+        $permission = Permission::create(['name' => 'update-subscription', 'display_name' => 'Edit Subscription Package', 'module_name' => 'Subscription Package']);
+        $permission = Permission::create(['name' => 'delete-subscription', 'display_name' => 'Delete Subscription Package', 'module_name' => 'Subscription Package']);
     }
 }

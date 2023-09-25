@@ -3,6 +3,8 @@
 namespace App\Http\Requests\admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class UserRequest extends FormRequest
 {
@@ -21,10 +23,32 @@ class UserRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
-        return [
-            //
+        // dd($request->all());
+        $route_id = $request->route('user');
+
+
+        if (empty($route_id) && $request->isMethod('put')) :
+            $route_id = auth()->user()->id;
+        endif;
+
+
+        $rules =  [
+            'name' => ['required', 'max:255'],
+            'email' => ['required', Rule::unique('users')->ignore($route_id)],
+            'type' => ['required'],
+            // 'password' => ['nullable', 'confirmed'],
+
         ];
+
+
+        if ((empty($request->route('user') || !$request->isMethod('put')))) :
+            dd(' i mhrer');
+            $rules['password'] = ['required', 'confirmed'];
+        endif;
+
+
+        return $rules;
     }
 }

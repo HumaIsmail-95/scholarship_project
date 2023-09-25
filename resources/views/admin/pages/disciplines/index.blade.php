@@ -219,7 +219,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                         aria-hidden="true">Close</button>
                     <button type="button" id="button-update" onclick="editDiscipline(this)"
-                        class="btn btn-primary">Edit
+                        class="btn btn-primary waves-effect waves-light text-white">Edit
                         Discipline</button>
                 </div>
                 </form>
@@ -376,7 +376,7 @@
                        </tr>`
                     $("#table_id").append(string);
                     $('#addDisciplineModal').modal('hide');
-
+                    location.reload();
 
 
 
@@ -474,7 +474,7 @@
                        `
                     $("#table_id").append(string);
                     $('#editModalDiscipline').modal('hide');
-                    // location.reload()
+                    location.reload()
 
                 },
                 error: function(error) {

@@ -28,20 +28,32 @@ class UniversityController extends Controller
     {
         $universities = UniversityService::getUniversities();
         // $groups = UniversityService::getUniversitys();
-        // dd($Universitys);
+        // dd($universities);
         return view('admin.pages.universities.index', compact('universities'));
     }
     public function create()
     {
-        return view('admin.pages.universities.create');
+        $countries = UniversityService::getCountries();
+        return view('admin.pages.universities.create', compact('countries'));
+    }
+    public function edit(University $university)
+    {
+        try {
+            $countries = UniversityService::getCountries();
+            $university = UniversityService::setImage($university);
+            return view('admin.pages.universities.edit', compact('university', 'countries'));
+        } catch (\Throwable $th) {
+            //throw $th;
+            return redirect()->back()->with(['status' => false, 'icon' => 'error', 'heading' => 'Error', 'message' => $th->getMessage()]);
+        }
     }
     public function store(UniversityRequest $request)
     {
         try {
             $university_response = UniversityService::store($request);
-            return $university_response;
+            return redirect()->back()->with($university_response);
         } catch (\Throwable $th) {
-            return $th;
+            return redirect()->back()->with(['status' => false, 'icon' => 'error', 'heading' => 'Error', 'message' => $th->getMessage()]);
         }
     }
 
@@ -56,9 +68,9 @@ class UniversityController extends Controller
     {
         try {
             $university_response = UniversityService::update($request, $university);
-            return $university_response;
+            return redirect()->back()->with($university_response);
         } catch (\Throwable $th) {
-            return $th;
+            return redirect()->back()->with(['status' => false, 'icon' => 'error', 'heading' => 'Error', 'message' => $th->getMessage()]);
         }
     }
     public function destroy($id)
@@ -67,7 +79,7 @@ class UniversityController extends Controller
             $university_response = UniversityService::destroy($id);
             return $university_response;
         } catch (\Throwable $th) {
-            return $th;
+            return redirect()->back()->with(['status' => false, 'icon' => 'error', 'heading' => 'Error', 'message' => $th->getMessage()]);
         }
     }
 }

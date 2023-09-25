@@ -2,12 +2,10 @@
 
 namespace App\Http\Requests\admin;
 
-use App\Rules\MaxImages;
-
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
-class UniversityRequest extends FormRequest
+class SubscriptionPackageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,13 +24,14 @@ class UniversityRequest extends FormRequest
      */
     public function rules(Request $request)
     {
+        // dd($request->all());
         return [
-            'name' => ['required', 'max:100'],
-            'country' => ['required', 'integer'],
-            'logo' => ['nullable', 'image', 'max:2048', 'mimes:jpg,bmp,png'],
-            'banner' => ['nullable', 'image', 'max:2048', 'mimes:jpg,bmp,png'],
-            'gallery' => ['nullable', 'max:2048', new MaxImages(3)],
-            'gallery.*' => ['image', 'mimes:jpeg,png,jpg', 'max:4072'],
+            'name' => ['required'],
+            'description' => ['nullable'],
+            'price' => ['required'],
+            'duration' => ['required'],
+            'type' => ['required'],
+            'status' => ['nullable'],
         ];
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEducationGalleryTable extends Migration
+class CreateUniGalleriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateEducationGalleryTable extends Migration
      */
     public function up()
     {
-        Schema::create('education_gallery', function (Blueprint $table) {
+        Schema::create('uni_galleries', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('education_id')->constrained('student_education')->cascadeOnDelete();
-            $table->string('type')->nullable()->comment('transcript, certificate');
+            $table->foreignId('uni_id')->constrained('universities')->cascadeOnDelete();
+            $table->string('type')->nullable()->comment('gallery, logo, banner');
             $table->string('image_name')->nullable();
             $table->string('folder_name')->nullable();
             $table->string('image_url')->nullable();
@@ -35,6 +35,6 @@ class CreateEducationGalleryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('education_gallery');
+        Schema::dropIfExists('uni_galleries');
     }
 }

@@ -1,13 +1,17 @@
 <?php
 
+use App\Http\Controllers\admin\CourseController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\admin\DegreeController;
 use App\Http\Controllers\admin\DisciplineController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\admin\StripeSettingController;
 use App\Http\Controllers\admin\StudyModelController;
+use App\Http\Controllers\admin\SubscriptionController;
 use App\Http\Controllers\Admin\UniversityController;
 use App\Http\Controllers\Admin\UserController;
+use App\Models\SubscriptionPackage;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,6 +59,17 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::resource('study-models', StudyModelController::class);
     //universities
     Route::resource('universities', UniversityController::class);
+    //courses
+    Route::resource('courses', CourseController::class)->except(['show']);
+    Route::get('courses/show/{course_id}', [CourseController::class, 'showCourse'])->name('courses.show');
+    Route::get('courses/get-city', [CourseController::class, 'getCity'])->name('courses.getCity');
+    Route::get('courses/get-university', [CourseController::class, 'getUniversity'])->name('courses.get-university');
+    //subscription
+    Route::resource('subscription-packages', SubscriptionController::class);
+    // settings
+    // stripe setting
+    Route::get('stripe/setting', [StripeSettingController::class, 'index'])->name('stripe.setting.index');
+    Route::put('stripe/setting', [StripeSettingController::class, 'update'])->name('stripe.setting.update');
 });
 require __DIR__ . '/auth.php';
 require __DIR__ . '/website.php';

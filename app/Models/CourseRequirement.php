@@ -5,25 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class University extends Model
+class CourseRequirement extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'name',
-        'country',
+        'course_id',
+        'test_name',
+        'min_score',
+        'min_score_level',
         'created_by',
         'updated_by',
         'deleted_by',
     ];
-
-    public function images()
+    public function course()
     {
-        return $this->hasMany(UniGallery::class, 'uni_id');
-    }
-
-    public function courses()
-    {
-        return $this->hasMany(Course::class,);
+        return $this->belongsTo(UniCourse::class, 'course_id');
     }
 }

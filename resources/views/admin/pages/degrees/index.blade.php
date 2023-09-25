@@ -243,7 +243,8 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                         aria-hidden="true">Close</button>
-                    <button type="button" id="button-update" onclick="editDegree(this)" class="btn btn-primary">Edit
+                    <button type="button" id="button-update" onclick="editDegree(this)"
+                        class="btn btn-primary waves-effect waves-light text-white">Edit
                         Degree</button>
                 </div>
                 </form>
@@ -407,12 +408,7 @@
                        </tr>`
                     $("#table_id").append(string);
                     $('#addDegreeModal').modal('hide');
-
-
-
-
-
-
+                    location.reload()
                 },
                 error: function(error) {
                     $(form)
@@ -467,46 +463,9 @@
                         .find('[type="button"]')
                         .prop("disabled", false);
                     const RLOE = JSON.stringify(data.degree)
-                    $("#row_" + data.degree.id).remove();
-                    var string =
-                        `<tr id="row_${data.degree.id}">
-                           <td id="td-id-1" class="td-class-1">${data.degree.name} </td>
-                           <td id="td-id-1" class="td-class-1">${data.degree.discipline.name} </td>
-                           <td id="td-id-1" class="td-class-1"><span class="badge ${data.degree.status?'bg-success':'bg-danger'}">${data.degree.status?'active':'in-active'} </td>
-                            <td>
-                                <div class="btn-group">
-                                    @can('edit-degree')
-                                    <button class="btn btn-dark"
-                                        onclick='openEditModal(${RLOE})'> <i
-                                                class=" fas fa-pencil-alt"></i>
-                                            Edit</button>
-                                    @endcan
-                                    <button type="button"
-                                        class="btn btn-dark dropdown-toggle text-white dropdown-toggle-split"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span class="sr-only">Toggle Dropdown</span>
-                                    </button>
-                                    @can('delete-degree')
-                                    <div class="dropdown-menu">
-                                       @can('delete-degree')
-                                       <a class="dropdown-item"
-                                        href="javascript:openDeleteDialog(${data.degree.id});"> <i
-                                                class="fas fa-trash"></i> Delete</a>
-                                       @endcan
-                                    </div>
-                                    @endcan
-                                    @can('view-degree')
-                                        <a class="dropdown-item"
-                                            href="javascript:openViewDialog(${data.degree})"> <i
-                                                class="fas fa-eye"></i> View</a>
-                                    @endcan
-                                </div>
-                            </td>
-                       </tr>
-                       `
-                    $("#table_id").append(string);
+
                     $('#editModalDegree').modal('hide');
-                    // location.reload()
+                    location.reload()
 
                 },
                 error: function(error) {
@@ -545,14 +504,15 @@
                     $("#button-delete").text("Yes");
                     $('.alert-success').html(data.success).fadeIn('slow');
                     document.getElementById("row_" + $("#deleteID").val()).remove();
-                    swal({
-                        title: "",
-                        text: data.message,
-                        icon: "success",
-                    });
+                    // swal({
+                    //     title: "",
+                    //     text: data.message,
+                    //     icon: "success",
+                    // });
                     showToaster('success', 'Success', data.message);
 
                     $('#deleteModal').modal('hide');
+
                 },
                 error: function(error) {
                     $("#button-delete").prop("disabled", false);

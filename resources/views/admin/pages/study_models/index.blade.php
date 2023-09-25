@@ -219,7 +219,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                         aria-hidden="true">Close</button>
                     <button type="button" id="button-update" onclick="editStudyModel(this)"
-                        class="btn btn-primary">Edit
+                        class="btn btn-danger waves-effect waves-light text-white">Edit
                         StudyModel</button>
                 </div>
                 </form>

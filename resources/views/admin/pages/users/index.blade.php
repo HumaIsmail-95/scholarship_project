@@ -46,10 +46,10 @@
                                             <td>
                                                 <div class="btn-group">
                                                     @can('edit-user')
-                                                        <button class="btn btn-dark"
-                                                            onclick="openEditModal({{ json_encode($user) }})"> <i
+                                                        <a class="btn btn-dark"
+                                                            href="{{ route('admin.users.edit', $user->id) }}"> <i
                                                                 class=" fas fa-pencil-alt"></i>
-                                                            Edit</button>
+                                                            Edit</a>
                                                     @endcan
                                                     <button type="button"
                                                         class="btn btn-dark dropdown-toggle text-white dropdown-toggle-split"
@@ -125,22 +125,31 @@
                                     <label class="form-label" for="name">Confirm Password <span
                                             class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="name form-control" id="confirm_password"
-                                        name="confirm_password" placeholder="Enter a confirm_password.."
-                                        :value="old('confirm_password')">
-                                    <div id="confirm_password_text" class="text-danger errors"></div>
+                                    <input type="text" class="name form-control" id="password_confirmation"
+                                        name="password_confirmation" placeholder="Enter a confirm_password.."
+                                        :value="old('password_confirmation')">
+                                    <div id="password_confirmation_text" class="text-danger errors"></div>
                                 </div>
                                 <div class="col-md-12">
-                                    <label class="form-label" for="name">Role <span class="text-danger">*</span>
+                                    <label class="form-label" for="name">Type <span class="text-danger">*</span>
                                     </label>
-                                    <select class="form-select" name="role" id="role">
-                                        <option value="">Select Role</option>
-                                        @foreach ($roles as $role)
-                                            <option value="{{ $role->name }}">{{ $role->name }}
-                                            </option>
-                                        @endforeach
+                                    <select class="form-select" name="type" id="type">
+                                        <option value="">Select Type</option>
+                                        <option value="admin">Admin</option>
+                                        <option value="student">Student</option>
                                     </select>
-                                    <div id="role_text" class="text-danger errors"></div>
+                                    <div id="type_text" class="text-danger errors"></div>
+                                </div>
+                                <div class="col-md-12">
+                                    @foreach ($roles as $role)
+                                        <div class="d-flex flex-col">
+                                            <label class="inline-flex items-center mt-3">
+                                                <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600"
+                                                    name="roles[]" value="{{ $role->id }}"><span
+                                                    class="ml-2 text-gray-700">{{ $role->name }}</span>
+                                            </label>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -179,75 +188,7 @@
             </div>
         </div>
     </div>
-    {{-- edit --}}
-    <div class="modal fade" id="editModalUser">
-        <div class="modal-dialog modal-dialog-centered" user="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Edit User</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="form-valide" id="edit-user-form" method="post" enctype="multipart/form-data">
-                        @csrf
-                        <input type="hidden" value="-1" id="user_id">
-                        <input type="hidden" value="PUT" name="_method">
-                        <div class="form-validation">
-                            <div class="form-group row">
-                                <div class="col-md-12">
-                                    <label class="form-label" for="name">Name <span class="text-danger">*</span>
-                                    </label>
-                                    <input type="text" class="name form-control" id="edit_name" name="edit_name"
-                                        placeholder="Enter a name.." :value="old('name')">
-                                    <div id="edit_name_text" class="text-danger errors"></div>
-                                </div>
-                                <div class="col-md-12">
-                                    <label class="form-label" for="name">Email <span class="text-danger">*</span>
-                                    </label>
-                                    <input type="text" class="name form-control" id="edit_email" name="edit_email"
-                                        placeholder="Enter a email.." :value="old('email')">
-                                    <div id="edit_email_text" class="text-danger errors"></div>
-                                </div>
-                                <div class="col-md-12">
-                                    <label class="form-label" for="name">Password <span class="text-danger">*</span>
-                                    </label>
-                                    <input type="text" class="name form-control" id="password" name="password"
-                                        placeholder="Enter a password.." :value="old('password')">
-                                    <div id="password_text" class="text-danger errors"></div>
-                                </div>
-                                <div class="col-md-12">
-                                    <label class="form-label" for="name">Confirm Password <span
-                                            class="text-danger">*</span>
-                                    </label>
-                                    <input type="text" class="name form-control" id="confirm_password"
-                                        name="confirm_password" placeholder="Enter a confirm_password.."
-                                        :value="old('confirm_password')">
-                                    <div id="confirm_password_text" class="text-danger errors"></div>
-                                </div>
-                                <div class="col-md-12">
-                                    <label class="form-label" for="name">Role <span class="text-danger">*</span>
-                                    </label>
-                                    <select name="edit_role" id="edit_role">
-                                        <option value="">Select Role</option>
-                                        @foreach ($roles as $role)
-                                            <option value="{{ $role->name }}">{{ $role->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <div id="edit_role_text" class="text-danger errors"></div>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal">Close</button>
-                    <button type="button" id="button-update" onclick="editUser(this)" class="btn btn-primary">Edit
-                        User</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
+
     </div>
     {{-- view --}}
     <div class="modal fade" id="viewModalUser">
@@ -387,91 +328,91 @@
             });
         }
 
-        function editUser() {
-            var form = $('#edit-user-form')[0];
-            $("#button-update").text('Loading...');
-            user_id = form.user_id.value;
-            console.log('user id ', user_id);
-            const myFormData = new FormData(form);
-            const formDataObj = {};
-            myFormData.forEach((value, key) => (formDataObj[key] = value));
-            console.log(formDataObj);
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
-                },
-                url: "/admin/users/" + user_id, // the endpoint
-                type: "POST", // http method
-                processData: false,
-                contentType: false,
-                data: myFormData,
-                beforeSend: function() {
-                    $(form)
-                    $('.backend-error-text').text('')
-                    $("#button-update").prop("disabled", true);
+        // function editUser() {
+        //     var form = $('#edit-user-form')[0];
+        //     $("#button-update").text('Loading...');
+        //     user_id = form.user_id.value;
+        //     console.log('user id ', user_id);
+        //     const myFormData = new FormData(form);
+        //     const formDataObj = {};
+        //     myFormData.forEach((value, key) => (formDataObj[key] = value));
+        //     console.log(formDataObj);
+        //     $.ajax({
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+        //         },
+        //         url: "/admin/users/" + user_id, // the endpoint
+        //         type: "POST", // http method
+        //         processData: false,
+        //         contentType: false,
+        //         data: myFormData,
+        //         beforeSend: function() {
+        //             $(form)
+        //             $('.backend-error-text').text('')
+        //             $("#button-update").prop("disabled", true);
 
-                },
-                success: function(data) {
-                    $("#button-update").prop("disabled", false);
-                    $("#button-update").text("Edit User");
+        //         },
+        //         success: function(data) {
+        //             $("#button-update").prop("disabled", false);
+        //             $("#button-update").text("Edit User");
 
-                    $(form)
-                        .find('[type="button"]')
-                        .prop("disabled", false);
+        //             $(form)
+        //                 .find('[type="button"]')
+        //                 .prop("disabled", false);
 
-                    showToaster('success', 'Success', data.message);
+        //             showToaster('success', 'Success', data.message);
 
-                    $(form)
-                        .find('[type="button"]')
-                        .prop("disabled", false);
-                    const RLOE = JSON.stringify(data.user)
-                    $("#row_" + data.user.id).remove();
-                    var string =
-                        `<tr id="row_${data.user.id}">
-                           <td id="td-id-1" class="td-class-1">${data.user.name} </td>
-                                        <td>
-                                            <div class="btn-group">
-                                               @can('edit-user')
-                                                <button class="btn btn-dark"
-                                                    onclick='openEditModal(${RLOE})'> <i
-                                                            class=" fas fa-pencil-alt"></i>
-                                                        Edit</button>
-                                               @endcan
-                                                <button type="button"
-                                                    class="btn btn-dark dropdown-toggle text-white dropdown-toggle-split"
-                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <span class="sr-only">Toggle Dropdown</span>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    @can('delete-user')
-                                                    <a class="dropdown-item"
-                                                    href="javascript:openDeleteDialog(${data.user.id});"> <i
-                                                            class="fas fa-trash"></i> Delete</a>
-                                                    @endcan
-                                                </div>
-                                            </div>
-                                        </td>
-                       </tr>
-                       `
-                    $("#table_id").append(string);
-                    $('#editModalUser').modal('hide');
+        //             $(form)
+        //                 .find('[type="button"]')
+        //                 .prop("disabled", false);
+        //             const RLOE = JSON.stringify(data.user)
+        //             $("#row_" + data.user.id).remove();
+        //             var string =
+        //                 `<tr id="row_${data.user.id}">
+    //                    <td id="td-id-1" class="td-class-1">${data.user.name} </td>
+    //                                 <td>
+    //                                     <div class="btn-group">
+    //                                        @can('edit-user')
+    //                                         <button class="btn btn-dark"
+    //                                             onclick='openEditModal(${RLOE})'> <i
+    //                                                     class=" fas fa-pencil-alt"></i>
+    //                                                 Edit</button>
+    //                                        @endcan
+    //                                         <button type="button"
+    //                                             class="btn btn-dark dropdown-toggle text-white dropdown-toggle-split"
+    //                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    //                                             <span class="sr-only">Toggle Dropdown</span>
+    //                                         </button>
+    //                                         <div class="dropdown-menu">
+    //                                             @can('delete-user')
+    //                                             <a class="dropdown-item"
+    //                                             href="javascript:openDeleteDialog(${data.user.id});"> <i
+    //                                                     class="fas fa-trash"></i> Delete</a>
+    //                                             @endcan
+    //                                         </div>
+    //                                     </div>
+    //                                 </td>
+    //                </tr>
+    //                `
+        //             $("#table_id").append(string);
+        //             $('#editModalUser').modal('hide');
 
 
-                },
-                error: function(error) {
-                    $(form)
-                    $("#button-update").prop("disabled", false);
-                    $("#button-update").text("Edit User");
-                    var errorMessage = error.statusText;
-                    if (error.status == 422) {
-                        errorMessage = handleValidationErrors(error, 'edit')
-                    }
+        //         },
+        //         error: function(error) {
+        //             $(form)
+        //             $("#button-update").prop("disabled", false);
+        //             $("#button-update").text("Edit User");
+        //             var errorMessage = error.statusText;
+        //             if (error.status == 422) {
+        //                 errorMessage = handleValidationErrors(error, 'edit')
+        //             }
 
-                    showToaster('error', 'Error', errorMessage);
+        //             showToaster('error', 'Error', errorMessage);
 
-                },
-            });
-        }
+        //         },
+        //     });
+        // }
 
 
         function openDeleteDialog(id) {
@@ -514,16 +455,16 @@
             });
         }
 
-        function openEditModal(user) {
-            document.getElementById('edit_name').value = user.name;
-            document.getElementById('edit_name').value = user.name;
-            document.getElementById('edit_name').value = user.name;
-            document.getElementById('edit_name').value = user.name;
-            document.getElementById('user_id').value = user.id;
+        // function openEditModal(user) {
+        //     document.getElementById('edit_name').value = user.name;
+        //     document.getElementById('edit_email').value = user.email;
+        //     document.getElementById('edit_password').value = user.passowrd;
+        //     document.getElementById('edit_type').value = user.type;
+        //     document.getElementById('user_id').value = user.id;
 
 
-            $("#editModalUser").modal('show')
-        }
+        //     $("#editModalUser").modal('show')
+        // }
 
         function handleValidationErrors(error, type = 'create') {
             let errors = error.responseJSON.errors;

@@ -43,12 +43,21 @@ class UserController extends Controller
             return $th;
         }
     }
-
-    public function update(UserRequest $request, Role $role)
+    public function edit(User $user)
     {
         try {
-            $role_response = UserService::update($request, $role);
-            return $role_response;
+            $roles  = Role::all();
+            return view('admin.pages.users.edit', compact('user', 'roles'));
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $th;
+        }
+    }
+    public function update(UserRequest $request, User $user)
+    {
+        try {
+            $role_response = UserService::update($request, $user);
+            return redirect()->back()->with($role_response);
         } catch (\Throwable $th) {
             return $th;
         }

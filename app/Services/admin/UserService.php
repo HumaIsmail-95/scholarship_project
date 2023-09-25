@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Session;
 use Spatie\Permission\Models\Permission;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
 class UserService
@@ -36,23 +37,27 @@ class UserService
 
         DB::beginTransaction();
         $data = $request->validated();
+        $data['created_by'] = Auth::user()->id;
+        $user = User::create($data);
+        $user->syncRoles($request->roles);
 
-        $role = User::create($data);
         DB::commit();
-        $response = ['status' => true, 'message' => 'User added successfully.', 'role' => $role];
+        $response = ['status' => true, 'message' => 'User added successfully.', 'user' => $user];
 
         return $response;
     }
 
 
-    public static function update(UserRequest $request, User $role)
+    public static function update(UserRequest $request, User $user)
     {
         DB::beginTransaction();
         $data = $request->validated();
-
-        $role->update($data);
+        $user->update($data);
+        if ($request->roles) :
+            $user->syncRoles($request->roles);
+        endif;
         DB::commit();
-        $response = ['status' => true, 'message' => ' User updated successfully.', 'role' => $role];
+        $response = ['status' => true, 'icon' => 'success', 'heading' => 'Success', 'message' => ' User updated successfully.', 'user' => $user];
         return $response;
     }
     public static function destroy($id)
