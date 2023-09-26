@@ -87,7 +87,7 @@
                                     In</button>
                             </div>
                         </div>
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
                                 <div class="social">
                                     <button class="btn  btn-facebook" data-bs-toggle="tooltip"
@@ -98,10 +98,11 @@
                                             class="fab fa-google-plus-g"></i> </button>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="form-group m-b-0">
                             <div class="col-sm-12 text-center">
-                                Don't have an account? <a href="pages-register.html" class="text-info m-l-5"><b>Sign
+                                Don't have an account? <a href="{{ route('register') }}"
+                                    class="text-info m-l-5"><b>Sign
                                         Up</b></a>
                             </div>
                         </div>

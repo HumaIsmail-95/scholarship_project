@@ -95,6 +95,19 @@
                          </ul>
                      </li>
                  @endcan
+                 {{-- dashboard --}}
+                 {{-- @can('list-dashboard-website') --}}
+                 <li> <a class="waves-effect waves-dark" href="{{ route('dashboard') }}"><i
+                             class="icon-speedometer"></i><span class="hide-menu">Home</span></a>
+                 </li>
+                 {{-- @endcan --}}
+
+                 {{-- my uni app --}}
+                 {{-- @can('my-uni-app-website') --}}
+                 <li> <a class="waves-effect waves-dark" href="{{ route('myUniApp') }}"><i
+                             class="icon-speedometer"></i><span class="hide-menu">My Uni App</span></a>
+                 </li>
+                 {{-- @endcan --}}
              </ul>
          </nav>
          <!-- End Sidebar navigation -->
