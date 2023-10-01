@@ -2,35 +2,59 @@
 @section('title', 'Home')
 @section('content')
     <!-- banner-section -->
-    <section class="banner-section centred"
-        style="background-image: url({{ asset('website/assets/images/banner/banner-1.jpg') }});">
-        <div class="auto-container">
+    <section class="banner-section centred py-0">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="{{ asset('admin/assets/images/background/weatherbg.jpg') }}" src="..."
+                        alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="{{ asset('admin/assets/images/background/weatherbg.jpg') }}"
+                        alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="{{ asset('admin/assets/images/background/weatherbg.jpg') }}"
+                        alt="Third slide">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <div class="auto-container carousel-data">
             <div class="row clearfix">
                 <div class="col-lg-10 col-md-12 col-sm-12 offset-lg-1 content-column">
                     <div class="content-box">
-                        <h1>Buy, Sell, Rent & Exchange <br />in one Click</h1>
-                        <p>Amet consectetur adipisicing elit sed do eiusmod.</p>
+                        <h1>Search your university <br />in one Click</h1>
+                        <p>best universities in china in .</p>
                         <div class="form-inner">
                             <form action="index.html" method="post">
                                 <div class="input-inner clearfix">
                                     <div class="form-group">
                                         <i class="icon-2"></i>
-                                        <input type="search" name="name" placeholder="Search Keyword..." required="">
+                                        <input type="search" name="name" placeholder="Search university name..."
+                                            required="">
                                     </div>
                                     <div class="form-group">
                                         <i class="icon-3"></i>
                                         <select class="wide">
-                                            <option data-display="Select Location">Select Location</option>
-                                            <option value="1">California</option>
-                                            <option value="2">New York</option>
-                                            <option value="3">Sun Francis</option>
-                                            <option value="4">Shicago</option>
+                                            <option data-display="Select Location">Select City</option>
+                                            @foreach ($cities as $city)
+                                                <option value="{{ $city->id }}">{{ $city->cityName }}</option>
+                                            @endforeach
+
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <i class="icon-4"></i>
                                         <select class="wide">
-                                            <option data-display="Select Category">Select Category</option>
+                                            <option data-display="Select Category">Select Scholarship</option>
                                             <option value="1">Education</option>
                                             <option value="2">Restaurant</option>
                                             <option value="3">Real Estate</option>
@@ -42,7 +66,7 @@
                                     </div>
                                 </div>
                             </form>
-                            <ul class="radio-select-box clearfix">
+                            {{-- <ul class="radio-select-box clearfix">
                                 <li>
                                     <div class="single-checkbox">
                                         <input type="radio" name="check-box" id="check1" checked="">
@@ -67,12 +91,14 @@
                                         <label for="check4"><span></span>Real Estate</label>
                                     </div>
                                 </li>
-                            </ul>
+                            </ul> --}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+
     </section>
     <!-- banner-section end -->
 
@@ -82,174 +108,24 @@
         <div class="auto-container">
             <div class="sec-title">
                 <span>Categories</span>
-                <h2>Explore by Category</h2>
+                <h2>Explore by Courses</h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing sed do eiusmod tempor incididunt labore
                     <br />dolore magna aliqua enim.
                 </p>
             </div>
             <div class="inner-content clearfix">
-                <div class="category-block-one wow fadeInDown animated animated" data-wow-delay="00ms"
-                    data-wow-duration="1500ms">
-                    <div class="inner-box">
-                        <div class="shape">
-                            <div class="shape-1"
-                                style="background-image: url({{ asset('website/assets/images/shape/shape-1.png') }});">
-                            </div>
-                            <div class="shape-2"
-                                style="background-image: url({{ asset('website/assets/images/shape/shape-2.png') }});">
-                            </div>
+                @foreach ($disciplines as $discipline)
+                    <div class="category-block-one wow fadeInDown animated animated" data-wow-delay="00ms"
+                        data-wow-duration="1500ms">
+                        <div class="inner-box">
+                            <div class="icon-box"><i class="icon-6"></i></div>
+                            <h5>{{ $discipline->name }}</h5>
+                            {{-- <span>52</span> --}}
                         </div>
-                        <div class="icon-box"><i class="icon-6"></i></div>
-                        <h5>Property</h5>
-                        <span>52</span>
                     </div>
-                </div>
-                <div class="category-block-one wow fadeInDown animated animated" data-wow-delay="100ms"
-                    data-wow-duration="1500ms">
-                    <div class="inner-box">
-                        <div class="shape">
-                            <div class="shape-1"
-                                style="background-image: url({{ asset('website/assets/images/shape/shape-1.png') }});">
-                            </div>
-                            <div class="shape-2"
-                                style="background-image: url({{ asset('website/assets/images/shape/shape-2.png') }});">
-                            </div>
-                        </div>
-                        <div class="icon-box"><i class="icon-7"></i></div>
-                        <h5>Home Appliances</h5>
-                        <span>20</span>
-                    </div>
-                </div>
-                <div class="category-block-one wow fadeInDown animated animated" data-wow-delay="200ms"
-                    data-wow-duration="1500ms">
-                    <div class="inner-box">
-                        <div class="shape">
-                            <div class="shape-1"
-                                style="background-image: url({{ asset('website/assets/images/shape/shape-1.png') }});">
-                            </div>
-                            <div class="shape-2"
-                                style="background-image: url({{ asset('website/assets/images/shape/shape-2.png') }});">
-                            </div>
-                        </div>
-                        <div class="icon-box"><i class="icon-8"></i></div>
-                        <h5>Electronics</h5>
-                        <span>35</span>
-                    </div>
-                </div>
-                <div class="category-block-one wow fadeInDown animated animated" data-wow-delay="300ms"
-                    data-wow-duration="1500ms">
-                    <div class="inner-box">
-                        <div class="shape">
-                            <div class="shape-1"
-                                style="background-image: url({{ asset('website/assets/images/shape/shape-1.png') }});">
-                            </div>
-                            <div class="shape-2"
-                                style="background-image: url({{ asset('website/assets/images/shape/shape-2.png') }});">
-                            </div>
-                        </div>
-                        <div class="icon-box"><i class="icon-9"></i></div>
-                        <h5>Health & Beauty</h5>
-                        <span>10</span>
-                    </div>
-                </div>
-                <div class="category-block-one wow fadeInDown animated animated" data-wow-delay="400ms"
-                    data-wow-duration="1500ms">
-                    <div class="inner-box">
-                        <div class="shape">
-                            <div class="shape-1"
-                                style="background-image: url({{ asset('website/assets/images/shape/shape-1.png') }});">
-                            </div>
-                            <div class="shape-2"
-                                style="background-image: url({{ asset('website/assets/images/shape/shape-2.png') }});">
-                            </div>
-                        </div>
-                        <div class="icon-box"><i class="icon-10"></i></div>
-                        <h5>Automotive</h5>
-                        <span>27</span>
-                    </div>
-                </div>
-                <div class="category-block-one wow fadeInUp animated animated" data-wow-delay="00ms"
-                    data-wow-duration="1500ms">
-                    <div class="inner-box">
-                        <div class="shape">
-                            <div class="shape-1"
-                                style="background-image: url({{ asset('website/assets/images/shape/shape-1.png') }});">
-                            </div>
-                            <div class="shape-2"
-                                style="background-image: url({{ asset('website/assets/images/shape/shape-2.png') }});">
-                            </div>
-                        </div>
-                        <div class="icon-box"><i class="icon-11"></i></div>
-                        <h5>Furnitures</h5>
-                        <span>52</span>
-                    </div>
-                </div>
-                <div class="category-block-one wow fadeInUp animated animated" data-wow-delay="100ms"
-                    data-wow-duration="1500ms">
-                    <div class="inner-box">
-                        <div class="shape">
-                            <div class="shape-1"
-                                style="background-image: url({{ asset('website/assets/images/shape/shape-1.png') }});">
-                            </div>
-                            <div class="shape-2"
-                                style="background-image: url({{ asset('website/assets/images/shape/shape-2.png') }});">
-                            </div>
-                        </div>
-                        <div class="icon-box"><i class="icon-12"></i></div>
-                        <h5>Real Estate</h5>
-                        <span>20</span>
-                    </div>
-                </div>
-                <div class="category-block-one wow fadeInUp animated animated" data-wow-delay="200ms"
-                    data-wow-duration="1500ms">
-                    <div class="inner-box">
-                        <div class="shape">
-                            <div class="shape-1"
-                                style="background-image: url({{ asset('website/assets/images/shape/shape-1.png') }});">
-                            </div>
-                            <div class="shape-2"
-                                style="background-image: url({{ asset('website/assets/images/shape/shape-2.png') }});">
-                            </div>
-                        </div>
-                        <div class="icon-box"><i class="icon-13"></i></div>
-                        <h5>Jobs</h5>
-                        <span>35</span>
-                    </div>
-                </div>
-                <div class="category-block-one wow fadeInUp animated animated" data-wow-delay="300ms"
-                    data-wow-duration="1500ms">
-                    <div class="inner-box">
-                        <div class="shape">
-                            <div class="shape-1"
-                                style="background-image: url({{ asset('website/assets/images/shape/shape-1.png') }});">
-                            </div>
-                            <div class="shape-2"
-                                style="background-image: url({{ asset('website/assets/images/shape/shape-2.png') }});">
-                            </div>
-                        </div>
-                        <div class="icon-box"><i class="icon-14"></i></div>
-                        <h5>Restaurants</h5>
-                        <span>10</span>
-                    </div>
-                </div>
-                <div class="category-block-one wow fadeInUp animated animated" data-wow-delay="400ms"
-                    data-wow-duration="1500ms">
-                    <div class="inner-box">
-                        <div class="shape">
-                            <div class="shape-1"
-                                style="background-image: url({{ asset('website/assets/images/shape/shape-1.png') }});">
-                            </div>
-                            <div class="shape-2"
-                                style="background-image: url({{ asset('website/assets/images/shape/shape-2.png') }});">
-                            </div>
-                        </div>
-                        <div class="icon-box"><i class="icon-15"></i></div>
-                        <h5>Others</h5>
-                        <span>27</span>
-                    </div>
-                </div>
+                @endforeach
             </div>
-            <div class="more-btn"><a href="index.html" class="theme-btn-one">All Categories</a></div>
+            <div class="more-btn"><a href="{{ route('allCourses') }}" class="theme-btn-one">All Categories</a></div>
         </div>
     </section>
     <!-- category-section end -->
@@ -257,8 +133,8 @@
 
     <!-- feature-section -->
     <section class="feature-section sec-pad">
-        <div class="pattern-layer"
-            style="background-image: url({{ asset('website/assets/images/shape/shape-3.png') }});"></div>
+        <div class="pattern-layer" style="background-image: url({{ asset('website/assets/images/shape/shape-3.png') }});">
+        </div>
         <div class="auto-container">
             <div class="sec-title centred">
                 <span>Popular</span>
@@ -1820,7 +1696,8 @@
                         <figure class="image image-1"><img src="assets/images/resource/laptop-1.png" alt="">
                         </figure>
                         <figure class="image image-2 rotate-me"><img
-                                src="{{ asset('website/assets/images/resource/ball-1.png') }}" alt=""></figure>
+                                src="{{ asset('website/assets/images/resource/ball-1.png') }}" alt="">
+                        </figure>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 content-column">
