@@ -16,7 +16,7 @@ class CreateDegreesTable extends Migration
         Schema::create('degrees', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->longText('description')->nullable()->default('text');
+            $table->longText('description')->nullable();
             $table->boolean('status')->default(1);
             $table->foreignId('discipline_id')->nullable()->constrained('disciplines')->cascadeOnDelete();
             $table->foreignId('created_by')->nullable()->constrained('users')->cascadeOnDelete();

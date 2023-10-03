@@ -16,7 +16,7 @@ class CreateStudyModelsTable extends Migration
         Schema::create('study_models', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->longText('description')->nullable()->default('text');
+            $table->longText('description')->nullable();
             $table->boolean('status')->default(1);
             $table->foreignId('created_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->cascadeOnDelete();

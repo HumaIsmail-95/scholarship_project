@@ -27,13 +27,13 @@ class CreateUniCoursesTable extends Migration
             $table->float('tuition_fee', 10, 2)->nullable()->comment('year=1,semster=2, month=3')->default(123.45);
             $table->string('tuition_fee_type')->nullable();
             $table->integer('study_model_id')->nullable();
-            $table->longText('description')->nullable()->default('text');
+            $table->longText('description')->nullable();
             $table->string('language')->nullable()->default('English');
             $table->integer('discipline_id')->nullable();
             $table->string('season')->nullable();
             $table->string('start_month')->nullable();
-            $table->longText('requirement_details')->nullable()->default('text');
-            $table->longText('other_requirements')->nullable()->default('text');
+            $table->longText('requirement_details')->nullable();
+            $table->longText('other_requirements')->nullable();
             $table->foreignId('created_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('deleted_by')->nullable()->constrained('users')->cascadeOnDelete();
