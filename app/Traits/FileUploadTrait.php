@@ -63,8 +63,8 @@ trait FileUploadTrait
             $data['name'] = $file_name;
             $data['size'] = $file->getSize();
 
-            $data['folder_name'] = 'products';
-            $data['url'] =  url('/storage/products/' . $file_name);;
+            $data['folder_name'] = $folder_name;
+            $data['url'] =  url('/storage/' . $folder_name . '/' . $file_name);;
             $data['extension'] = $type;
 
             $data['model_id'] = $model->id;

@@ -9,7 +9,7 @@ class Student extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title',
+        'title', 'user_id',
         'name',
         'sur_name',
         'email',
@@ -37,4 +37,9 @@ class Student extends Model
         'deleted_at',
         'deleted_by',
     ];
+
+    public function studentGalleries()
+    {
+        return $this->hasMany(StudentGallery::class, 'user_id', 'user_id');
+    }
 }

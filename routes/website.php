@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Website\DashboardController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\website\FrontendController;
+use App\Http\Controllers\Website\FrontendController;
 
 
 
@@ -14,4 +14,5 @@ Route::middleware(['auth', 'web'])->group(function () {
 
     Route::get('/my-uni-app', [DashboardController::class, 'myUniApp'])->name('myUniApp');
     Route::post('/personal-info/{user}', [DashboardController::class, 'personalInfo'])->name('personalInfo');
+    Route::post('/professional-exp/{user}', [DashboardController::class, 'professionalExp'])->name('professionalExp');
 });
