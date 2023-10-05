@@ -3,6 +3,7 @@
 namespace App\Http\Requests\admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class SettingRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class SettingRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,10 +22,18 @@ class SettingRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
+
         return [
-            //
+            'about_us' => ['nullable'],
+            'contact_us' => ['nullable'],
+            'privacy_policy' => ['nullable'],
+            'copy_right' => ['nullable'],
+            'mobile_1' => ['nullable'],
+            'mobile_2' => ['nullable'],
+            'address' => ['nullable'],
+
         ];
     }
 }

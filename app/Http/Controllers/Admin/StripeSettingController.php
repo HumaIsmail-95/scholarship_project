@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Config;
 class StripeSettingController extends Controller
 {
 
+    function __construct()
+    {
+        $this->middleware('permission:view-stripe', ['only' => ['index']]);
+        $this->middleware('permission:edit-stripe-key', ['only' => ['update']]);
+    }
     public function index()
     {
         try {

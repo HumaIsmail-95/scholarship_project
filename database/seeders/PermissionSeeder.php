@@ -78,6 +78,23 @@ class PermissionSeeder extends Seeder
         $permission = Permission::create(['name' => 'create-student', 'display_name' => 'Create Student', 'module_name' => 'Student']);
         $permission = Permission::create(['name' => 'update-student', 'display_name' => 'Edit Student', 'module_name' => 'Student']);
         $permission = Permission::create(['name' => 'delete-student', 'display_name' => 'Delete Student', 'module_name' => 'Student']);
+        //settings banner
+        $permission = Permission::create(['name' => 'list-banner', 'display_name' => 'list Banner', 'module_name' => 'Banner']);
+        $permission = Permission::create(['name' => 'create-banner', 'display_name' => 'Create Banner', 'module_name' => 'Banner']);
+        $permission = Permission::create(['name' => 'update-banner', 'display_name' => 'Edit Banner', 'module_name' => 'Banner']);
+        $permission = Permission::create(['name' => 'delete-banner', 'display_name' => 'Delete Banner', 'module_name' => 'Banner']);
+        // setting stripe
+        $permission = Permission::create(['name' => 'view-stripe', 'display_name' => 'View Stripe', 'module_name' => 'Stripe']);
+        $permission = Permission::create(['name' => 'edit-stripe-key', 'display_name' => 'Edit Stripe Key', 'module_name' => 'Stripe']);
+        // setting privacy detail
+        $permission = Permission::create(['name' => 'view-privacy-policy', 'display_name' => 'View Privacy Policy', 'module_name' => 'Privacy Policy']);
+        $permission = Permission::create(['name' => 'edit-privacy-policy', 'display_name' => 'Edit Privacy Policy', 'module_name' => 'Privacy Policy']);
+        // setting privacy detail
+        $permission = Permission::create(['name' => 'view-about-us', 'display_name' => 'View About Us', 'module_name' => 'About Us']);
+        $permission = Permission::create(['name' => 'edit-about-us', 'display_name' => 'Edit About Us', 'module_name' => 'About Us']);
+        // setting contact us
+        $permission = Permission::create(['name' => 'view-contact-us', 'display_name' => 'View Contact Us', 'module_name' => 'Contact Us']);
+        $permission = Permission::create(['name' => 'edit-contact-us', 'display_name' => 'Edit Contact Us', 'module_name' => 'Contact Us']);
 
 
         //website Dashboard

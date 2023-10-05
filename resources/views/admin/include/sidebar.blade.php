@@ -95,15 +95,23 @@
                      </li>
                  @endcan
                  {{-- stripe --}}
-                 @can('list-subscription')
-                     <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
-                                 class="ti-layout-grid2"></i><span class="hide-menu"> Settings</span></a>
-                         <ul aria-expanded="false" class="collapse">
+                 <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
+                             class="ti-layout-grid2"></i><span class="hide-menu"> Settings</span></a>
+                     <ul aria-expanded="false" class="collapse">
+                         @can('view-stripe')
                              <li><a href="{{ route('admin.stripe.setting.index') }}">Set Stripe Key</a></li>
-                             {{-- <li><a href="{{ route('admin.subscription-packages.create') }}">Create</a></li> --}}
-                         </ul>
-                     </li>
-                 @endcan
+                         @endcan
+                         @can('view-privacy-policy')
+                             <li><a href="{{ route('admin.settings.privacy') }}">Set Privacy Policy</a></li>
+                         @endcan
+                         @can('view-about-us')
+                             <li><a href="{{ route('admin.settings.abouUs') }}">Set About Us</a></li>
+                         @endcan
+                         @can('view-contact-us')
+                             <li><a href="{{ route('admin.settings.contact') }}">Set Contact Us</a></li>
+                         @endcan
+                     </ul>
+                 </li>
                  {{-- dashboard --}}
                  @can('website-dashboard')
                      <li> <a class="waves-effect waves-dark" href="{{ route('dashboard') }}"><i

@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\DegreeController;
 use App\Http\Controllers\admin\DisciplineController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\admin\StripeSettingController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\admin\StudyModelController;
@@ -70,7 +71,18 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     //student
     Route::resource('students', StudentController::class);
 
+
     // settings
+    //privacy policy
+    Route::get('settings/privacy-policy', [SettingController::class, 'privacyPolicy'])->name('settings.privacy');
+    Route::put('settings/privacy-policy/{setting}', [SettingController::class, 'updatePrivacy'])->name('settings.privacy.update');
+    //contact us
+    Route::get('settings/contact-us', [SettingController::class, 'contactUs'])->name('settings.contact');
+    Route::put('settings/contact-us/{setting}', [SettingController::class, 'updateContact'])->name('settings.contact.update');
+    //about us
+    Route::get('settings/about-us', [SettingController::class, 'aboutUs'])->name('settings.abouUs');
+    Route::put('settings/about-us/{setting}', [SettingController::class, 'updateAbout'])->name('settings.aboutUs.update');
+
     // stripe setting
     Route::get('stripe/setting', [StripeSettingController::class, 'index'])->name('stripe.setting.index');
     Route::put('stripe/setting', [StripeSettingController::class, 'update'])->name('stripe.setting.update');

@@ -17,10 +17,13 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PermissionSeeder::class,
             RoleSeeder::class,
+            CitySeeder::class,
+            CountrySeeder::class,
             DefaultUserSeeder::class,
             DisciplineSeeder::class,
             DegreeSeeder::class,
             StudyModelSeeder::class,
+            SettingsSeeder::class,
         ]);
     }
 }
