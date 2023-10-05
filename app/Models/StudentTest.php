@@ -5,16 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class StudentExperience extends Model
+class StudentTest extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'joining', 'user_id',
-        'ending',
-        'employer_name',
-        'location',
-        'title',
-        'duties',
+        'native_english', 'user_id',
+        'ielts_score',
+        'pearson_score',
+        'toelf_score',
         'created_by',
         'created_at',
         'updated_at',
@@ -23,8 +22,8 @@ class StudentExperience extends Model
         'deleted_by',
     ];
 
-    public function experienceGalleries()
+    public function testGalleries()
     {
-        return $this->hasMany(DocumentGallery::class, 'education_id', 'id');
+        return $this->hasMany(TestGallery::class,  'test_id');
     }
 }

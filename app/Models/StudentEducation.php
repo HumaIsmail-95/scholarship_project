@@ -32,6 +32,6 @@ class StudentEducation extends Model
 
     public function educationGalleries()
     {
-        return $this->hasMany(EducationGallery::class, 'user_id', 'user_id');
+        return $this->hasMany(EducationGallery::class,  'education_id', 'id');
     }
 }

@@ -129,7 +129,6 @@ class CourseController extends Controller
             $discipline_response = CourseService::update($request, $id);
             return redirect()->back()->with($discipline_response);
         } catch (\Throwable $th) {
-            dd($th);
             return redirect()->back()->with([
                 'status' => false, 'icon' => 'error', 'heading' => 'Error',
                 'message' => $th->getMessage()

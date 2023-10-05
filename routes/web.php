@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\DisciplineController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\admin\StripeSettingController;
+use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\admin\StudyModelController;
 use App\Http\Controllers\admin\SubscriptionController;
 use App\Http\Controllers\Admin\UniversityController;
@@ -66,6 +67,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::get('courses/get-university', [CourseController::class, 'getUniversity'])->name('courses.get-university');
     //subscription
     Route::resource('subscription-packages', SubscriptionController::class);
+    //student
+    Route::resource('students', StudentController::class);
+
     // settings
     // stripe setting
     Route::get('stripe/setting', [StripeSettingController::class, 'index'])->name('stripe.setting.index');

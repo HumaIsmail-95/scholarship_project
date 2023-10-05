@@ -44,7 +44,6 @@ class UserRequest extends FormRequest
 
 
         if ((empty($request->route('user') || !$request->isMethod('put')))) :
-            dd(' i mhrer');
             $rules['password'] = ['required', 'confirmed'];
         endif;
 

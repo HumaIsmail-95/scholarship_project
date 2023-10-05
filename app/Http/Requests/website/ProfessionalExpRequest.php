@@ -24,6 +24,7 @@ class ProfessionalExpRequest extends FormRequest
      */
     public function rules(Request $request)
     {
+
         if ($request->experience_check == 'on') {
             $rules['joining.*'] = ['nullable'];
             $rules['ending.*'] = ['nullable'];
@@ -39,18 +40,13 @@ class ProfessionalExpRequest extends FormRequest
             $rules['title.*'] = ['required'];
             $rules['duties.*'] = ['required'];
         }
-        $rules =  [
-            // 'user_id' => 'required',
-            'start.*' => ['required'],
-            'end.*' => ['required'],
-            'program_name.*' => ['required'],
-            'institute_name.*' => ['required'],
-            'grade.*' => ['required'],
-            'certificate.*' => ['required', 'max:2048', 'mimes:pdf'],
-            'transcript.*' => ['required', 'max:2048', 'mimes:pdf'],
-
-        ];
-        dd($rules);
+        $rules['start.*'] = ['required'];
+        $rules['end.*'] = ['required'];
+        $rules['program_name.*'] = ['required'];
+        $rules['institute_name.*'] = ['required'];
+        $rules['grade.*'] = ['required'];
+        $rules['certificate.*'] = ['file', 'required', 'max:2048', 'mimes:pdf'];
+        $rules['transcript.*'] = ['file', 'required', 'max:2048', 'mimes:pdf'];
         return $rules;
     }
 }

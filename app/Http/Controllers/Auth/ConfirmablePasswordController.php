@@ -44,7 +44,7 @@ class ConfirmablePasswordController extends Controller
             // return redirect(RouteServiceProvider::WEBSITE);
             return redirect()->intended(RouteServiceProvider::WEBSITE);
         } else {
-            dd(Auth::user()->type);
+            // dd(Auth::user()->type);
             // return redirect(RouteServiceProvider::HOME);
             return redirect()->intended(RouteServiceProvider::HOME);
         }

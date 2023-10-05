@@ -13,7 +13,7 @@ class CreateDocumentsGalleryTable extends Migration
      */
     public function up()
     {
-        Schema::create('documents_gallery', function (Blueprint $table) {
+        Schema::create('document_galleries', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('type')->nullable()->comment('resume, exp_letter, recommed_letter, other');

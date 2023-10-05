@@ -85,6 +85,15 @@
                          </ul>
                      </li>
                  @endcan
+                 @can('list-students')
+                     <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
+                                 class="ti-layout-grid2"></i><span class="hide-menu"> Students</span></a>
+                         <ul aria-expanded="false" class="collapse">
+                             <li><a href="{{ route('admin.students.index') }}">List</a></li>
+                             <li><a href="{{ route('admin.students.create') }}">Create</a></li>
+                         </ul>
+                     </li>
+                 @endcan
                  {{-- stripe --}}
                  @can('list-subscription')
                      <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
@@ -96,16 +105,22 @@
                      </li>
                  @endcan
                  {{-- dashboard --}}
-                 {{-- @can('list-dashboard-website') --}}
-                 <li> <a class="waves-effect waves-dark" href="{{ route('dashboard') }}"><i
-                             class="icon-speedometer"></i><span class="hide-menu">Home</span></a>
-                 </li>
-                 {{-- @endcan --}}
+                 @can('website-dashboard')
+                     <li> <a class="waves-effect waves-dark" href="{{ route('dashboard') }}"><i
+                                 class="icon-speedometer"></i><span class="hide-menu">Home</span></a>
+                     </li>
+                 @endcan
 
                  {{-- my uni app --}}
-                 {{-- @can('my-uni-app-website') --}}
-                 <li> <a class="waves-effect waves-dark" href="{{ route('myUniApp') }}"><i
-                             class="icon-speedometer"></i><span class="hide-menu">My Uni App</span></a>
+                 @can('my-uni-app')
+                     <li> <a class="waves-effect waves-dark" href="{{ route('myUniApp') }}"><i
+                                 class="icon-speedometer"></i><span class="hide-menu">My Uni App</span></a>
+                     </li>
+                 @endcan
+                 {{-- My Applicatoins --}}
+                 {{-- @can('my-applications') --}}
+                 <li> <a class="waves-effect waves-dark" href="{{ route('myApplications') }}"><i
+                             class="icon-speedometer"></i><span class="hide-menu">My Applications</span></a>
                  </li>
                  {{-- @endcan --}}
              </ul>

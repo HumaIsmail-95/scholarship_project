@@ -73,5 +73,23 @@ class PermissionSeeder extends Seeder
         $permission = Permission::create(['name' => 'create-subscription', 'display_name' => 'Create Subscription Package', 'module_name' => 'Subscription Package']);
         $permission = Permission::create(['name' => 'update-subscription', 'display_name' => 'Edit Subscription Package', 'module_name' => 'Subscription Package']);
         $permission = Permission::create(['name' => 'delete-subscription', 'display_name' => 'Delete Subscription Package', 'module_name' => 'Subscription Package']);
+        // student
+        $permission = Permission::create(['name' => 'list-student', 'display_name' => 'list Student', 'module_name' => 'Student']);
+        $permission = Permission::create(['name' => 'create-student', 'display_name' => 'Create Student', 'module_name' => 'Student']);
+        $permission = Permission::create(['name' => 'update-student', 'display_name' => 'Edit Student', 'module_name' => 'Student']);
+        $permission = Permission::create(['name' => 'delete-student', 'display_name' => 'Delete Student', 'module_name' => 'Student']);
+
+
+        //website Dashboard
+        $permission = Permission::create(['name' => 'website-dashboard', 'display_name' => 'Website Dashboard', 'module_name' => 'Website Dashbaord']);
+
+        //website uni profile
+        $permission = Permission::create(['name' => 'my-uni-app', 'display_name' => 'Profile View', 'module_name' => 'My Uni Profile']);
+        $permission = Permission::create(['name' => 'personal-info', 'display_name' => 'Personal Information', 'module_name' => 'My Uni Profile']);
+        $permission = Permission::create(['name' => 'professional-exp', 'display_name' => 'Professional Experience', 'module_name' => 'My Uni Profile']);
+        $permission = Permission::create(['name' => 'test-language', 'display_name' => 'Test Language', 'module_name' => 'My Uni Profile']);
+        $permission = Permission::create(['name' => 'store-documents', 'display_name' => 'Store Documents', 'module_name' => 'My Uni Profile']);
+        // website my appications
+        $permission = Permission::create(['name' => 'my-appications', 'display_name' => 'My Applications', 'module_name' => 'My Applications']);
     }
 }

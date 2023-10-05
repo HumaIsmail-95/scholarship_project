@@ -70,7 +70,6 @@ class UniversityService
 
     public static function edit(University $university)
     {
-        dd($university->images);
         // return $response;
     }
     public static function setImage(University $university)
@@ -110,7 +109,6 @@ class UniversityService
             $logoData['image_url'] = url('/storage/uni_logos/' . $image_name);
             if (isset($images->logo)) {
                 if (Storage::exists('uni_logos/' . $images->logo->image_name)) {
-                    dd(' i m here');
                     Storage::delete('uni_logos/' . $images->logo->image_name);
                 }
                 $oldLogo = UniGallery::findorFail($images->logo->id);

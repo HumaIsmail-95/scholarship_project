@@ -55,8 +55,8 @@
                 <div class="col-lg-12 col-md-12  col-sm-12">
                     {{-- <h4 class="card-title">Attach Document</h4> --}}
                     <label for="document" class="form-label">Transcript</label>
-                    <input type="file" id="transcript_0" name="transcript[]" class="dropify"
-                        :value="{{ old('transcript[]') }}" />
+                    <input type="file" id="transcript_0" name="transcript[]" class="dropify" value=""
+                        required />
                     @error('transcript[]')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
@@ -65,8 +65,8 @@
                 <div class="col-lg-12 col-md-12  col-sm-12">
                     {{-- <h4 class="card-title">Attach Document</h4> --}}
                     <label for="document" class="form-label">Certificate</label>
-                    <input type="file" id="certificate_0" name="certificate[]" class="dropify"
-                        :value="{{ old('certificate[]') }}" />
+                    <input type="file" id="certificate_0" name="certificate[]" class="dropify" value=""
+                        required />
                     @error('certificate[]')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror

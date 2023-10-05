@@ -124,7 +124,8 @@
                 @foreach ($student->studentGalleries as $gallery)
                     @if ($gallery->type == 'id_card')
                         <p class="mb-0 mt-2">Selected File</p>
-                        <p>{{ $gallery->image_name }}</p>
+                        <a href="{{ $gallery->image_url }}" download="newfilename">{{ $gallery->image_name }}</a>
+                        {{-- <p>{{ $gallery->image_name }}</p> --}}
                     @endif
                 @endforeach
                 @error('id_document')
@@ -244,7 +245,7 @@
                 @foreach ($student->studentGalleries as $gallery)
                     @if ($gallery->type == 'travel_proof')
                         <p class="mb-0 mt-2">Selected File</p>
-                        <p>{{ $gallery->image_name }}</p>
+                        <a href="{{ $gallery->image_url }}" download="newfilename">{{ $gallery->image_name }}</a>
                     @endif
                 @endforeach
                 @error('travel_document')

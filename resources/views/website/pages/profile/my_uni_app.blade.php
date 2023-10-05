@@ -3,6 +3,7 @@
     <link href="{{ asset('admin/assets/node_modules/bootstrap-switch/bootstrap-switch.min.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/dist/css/pages/bootstrap-switch.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('admin/assets/node_modules/dropify/dist/css/dropify.min.css') }}">
+    <link href="{{ asset('admin/dist/css/pages/widget-page.css') }}" rel="stylesheet">
 
 @endsection
 @section('title', 'My Uni App')
@@ -37,66 +38,93 @@
         <!-- ============================================================== -->
         <!-- .row -->
         <div class="row">
-            <div class="col-lg-3">
+            <!-- Column -->
+            <div class="col-lg-3 col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title text-uppercase">HTML Course</h5>
-                        <div class="text-end"> <span class="text-muted">Monthly Fees</span>
-                            <h2><sup><i class="ti-arrow-up text-success"></i></sup> $1200</h2>
-                        </div>
-                        <span class="text-success">20%</span>
-                        <div class="progress">
-                            <div class="progress-bar bg-success" style="width: 20%; height:6px;" role="progressbar"> <span
-                                    class="sr-only">60% Complete</span> </div>
+                        <div class="row p-t-10 p-b-10">
+                            <!-- Column -->
+                            <div class="col p-r-0">
+                                <h1 class="font-light">Step 1</h1>
+                                <h6 class="text-muted">Personal Information</h6>
+                            </div>
+                            <!-- Column -->
+                            <div class="col text-end align-self-center">
+                                <div data-label="20%" class="css-bar m-b-0 css-bar-primary css-bar-20">
+                                    <i class=" fas fa-user-circle"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <!-- Column -->
+            <!-- Column -->
+            <div class="col-lg-3 col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title text-uppercase">Web Development Course</h5>
-                        <div class="text-end"> <span class="text-muted">Monthly Fees</span>
-                            <h2><sup><i class="ti-arrow-down text-primary"></i></sup> $5000</h2>
-                        </div>
-                        <span class="text-primary">30%</span>
-                        <div class="progress">
-                            <div class="progress-bar bg-primary" style="width: 30%; height:6px;" role="progressbar"> <span
-                                    class="sr-only">60% Complete</span> </div>
+                        <div class="row p-t-10 p-b-10">
+                            <!-- Column -->
+                            <div class="col p-r-0">
+                                <h1 class="font-light">Step 2</h1>
+                                <h6 class="text-muted">Education & Profession
+                                </h6>
+                            </div>
+                            <!-- Column -->
+                            <div class="col text-end align-self-center">
+                                <div data-label="30%" class="css-bar m-b-0 css-bar-danger css-bar-20">
+                                    <i class=" fas fa-book"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <!-- Column -->
+            <!-- Column -->
+            <div class="col-lg-3 col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title text-uppercase">Web Designing Course</h5>
-                        <div class="text-end"> <span class="text-muted">Monthly Fees</span>
-                            <h2><sup><i class="ti-arrow-up text-info"></i></sup> $8000</h2>
-                        </div>
-                        <span class="text-info">60%</span>
-                        <div class="progress">
-                            <div class="progress-bar bg-info" style="width: 40%; height:6px;" role="progressbar"> <span
-                                    class="sr-only">60% Complete</span> </div>
+                        <div class="row p-t-10 p-b-10">
+                            <!-- Column -->
+                            <div class="col p-r-0">
+                                <h1 class="font-light">Step 3</h1>
+                                <h6 class="text-muted">Language & Tests
+                                </h6>
+                            </div>
+                            <!-- Column -->
+                            <div class="col text-end align-self-center">
+                                <div data-label="40%" class="css-bar m-b-0 css-bar-warning css-bar-40">
+                                    <i class="fas fa-language"></i>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <!-- Column -->
+            <!-- Column -->
+            <div class="col-lg-3 col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title text-uppercase">App Development Course</h5>
-                        <div class="text-end"> <span class="text-muted">Yearly Fees</span>
-                            <h2><sup><i class="ti-arrow-up text-inverse"></i></sup> $12000</h2>
-                        </div>
-                        <span class="text-inverse">80%</span>
-                        <div class="progress">
-                            <div class="progress-bar bg-inverse" style="width: 40%; height:6px;" role="progressbar"> <span
-                                    class="sr-only">60% Complete</span> </div>
+                        <div class="row p-t-10 p-b-10">
+                            <!-- Column -->
+                            <div class="col p-r-0">
+                                <h1 class="font-light">Step 4</h1>
+                                <h6 class="text-muted">Documents</h6>
+                            </div>
+                            <!-- Column -->
+                            <div class="col text-end align-self-center">
+                                <div data-label="60%" class="css-bar m-b-0 css-bar-info css-bar-60">
+                                    <i class=" fas fa-paperclip"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- Column -->
         </div>
         <div class="row">
             <div class="col-12">
@@ -109,20 +137,20 @@
                         <div class="vtabs customvtab">
                             <ul class="nav nav-tabs tabs-vertical" role="tablist">
                                 <li class="nav-item"> <a class="nav-link active" data-bs-toggle="tab" href="#personal_info"
-                                        role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span
-                                            class="hidden-xs-down">
+                                        role="tab"><span class="hidden-sm-up"><i class=" fas fa-user-circle"></i></span>
+                                        <span class="hidden-xs-down">
                                             Personal and Travel Information</span> </a> </li>
                                 <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#professional_exp"
-                                        role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span
+                                        role="tab"><span class="hidden-sm-up"><i class=" fas fa-book"></i></span> <span
                                             class="hidden-xs-down">
                                             Education and Professional Experience</span></a> </li>
                                 <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#language_test"
-                                        role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span
-                                            class="hidden-xs-down">
+                                        role="tab"><span class="hidden-sm-up"><i class="fas fa-language"></i>></span>
+                                        <span class="hidden-xs-down">
                                             Language and Test</span></a> </li>
                                 <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#documents"
-                                        role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span
-                                            class="hidden-xs-down">
+                                        role="tab"><span class="hidden-sm-up"><i
+                                                class=" fas fa-paperclip"></i></span> <span class="hidden-xs-down">
                                             Documents</span></a> </li>
                             </ul>
                             <!-- Tab panes -->
@@ -167,114 +195,17 @@
                                 </div>
                                 <div class="tab-pane p-20" id="language_test" role="tabpanel">
                                     <p>Please upload your Language Certificates</p>
-                                    <form action="">
-                                        @csrf
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="native_english">
-                                                    <label class="form-check-label" for="native_english">
-                                                        I am a Native English Speaker</label>
-                                                </div>
-                                            </div>
 
-                                        </div>
+                                    <form method="post" id="test-language-form" onsubmit="submitTestLanguage()"
+                                        enctype="multipart/form-data" action="javascript:;">
+                                        @csrf
+                                        @method('POST')
+                                        @if ($testLanguage == null)
+                                            @include('website.pages.profile.testCreate')
+                                        @else
+                                            @include('website.pages.profile.testEdit')
+                                        @endif
                                         <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="row border m-1">
-                                                    <h4 class="mb-0 mt-2">IELTS</h4>
-                                                    <div class="col-lg-12  col-md-12 col-sm-12 my-2">
-                                                        <label class="form-label" for="name">Score <span
-                                                                class="text-danger">*</span>
-                                                        </label>
-                                                        <input type="text" class="form-control" id="ielts_score"
-                                                            name="ielts_score" placeholder="Enter a ielts score.."
-                                                            :value="{{ old('ielts_score') }}">
-                                                        @error('ielts_score')
-                                                            <p class="text-danger">{{ $message }}</p>
-                                                        @enderror
-                                                        <div id="ielts_score_text" class="text-danger"></div>
-                                                    </div>
-                                                    <div class="col-lg-12 col-md-12  col-sm-12 my-2">
-                                                        {{-- <h4 class="card-title">Attach Document</h4> --}}
-                                                        <label for="document" class="form-label">Documents </label>
-                                                        <input type="file" id="ielts" name="ielts"
-                                                            class="dropify" :value="{{ old('ielts') }}" />
-                                                        @error('ielts')
-                                                            <p class="text-danger">{{ $message }}</p>
-                                                        @enderror
-                                                        <div id="ielts_text" class="text-danger"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="row border m-1">
-                                                    <h4 class="mb-0 mt-2">TOEFL</h4>
-                                                    <div class="col-lg-12  col-md-12 col-sm-12 my-2">
-                                                        <label class="form-label" for="name">Score <span
-                                                                class="text-danger">*</span>
-                                                        </label>
-                                                        <input type="text" class="form-control" id="toelf_score"
-                                                            name="toelf_score" placeholder="Enter a ielts score.."
-                                                            :value="{{ old('toelf_score') }}">
-                                                        @error('toelf_score')
-                                                            <p class="text-danger">{{ $message }}</p>
-                                                        @enderror
-                                                        <div id="toelf_score_text" class="text-danger"></div>
-                                                    </div>
-                                                    <div class="col-lg-12 col-md-12  col-sm-12 my-2">
-                                                        {{-- <h4 class="card-title">Attach Document</h4> --}}
-                                                        <label for="document" class="form-label">Documents </label>
-                                                        <input type="file" id="toelf" name="toelf"
-                                                            class="dropify" :value="{{ old('toelf') }}" />
-                                                        @error('toelf')
-                                                            <p class="text-danger">{{ $message }}</p>
-                                                        @enderror
-                                                        <div id="toelf_text" class="text-danger"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="row border m-1">
-                                                    <h4 class="mb-0 mt-2">Pearson (PTE)</h4>
-                                                    <div class="col-lg-12  col-md-12 col-sm-12 my-2">
-                                                        <label class="form-label" for="name">Score <span
-                                                                class="text-danger">*</span>
-                                                        </label>
-                                                        <input type="text" class="form-control"
-                                                            id="pearson_score_score" name="pearson_score_score"
-                                                            placeholder="Enter a pearson score.."
-                                                            :value="{{ old('pearson_score_score') }}">
-                                                        @error('pearson_score_score')
-                                                            <p class="text-danger">{{ $message }}</p>
-                                                        @enderror
-                                                        <div id="pearson_score_score_text" class="text-danger"></div>
-                                                    </div>
-                                                    <div class="col-lg-12 col-md-12  col-sm-12 my-2">
-                                                        <h4 class="card-title">Attach Document</h4>
-                                                        <label for="document" class="form-label">Documents </label>
-                                                        <input type="file" id="pearson_score" name="pearson_score"
-                                                            class="dropify" :value="{{ old('pearson_score') }}" />
-                                                        @error('pearson_score')
-                                                            <p class="text-danger">{{ $message }}</p>
-                                                        @enderror
-                                                        <div id="pearson_score_text" class="text-danger"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="row border m-1">
-                                                    <h4>Medium Of Instruction (MOI)</h4>
-                                                    <div class="col-lg-12 col-md-12  col-sm-12 my-2">
-                                                        <p>A medium of instruction is a language used in teaching at your
-                                                            University.</p>
-                                                        {{-- <h4 class="card-title">Attach Document</h4> --}}
-                                                        <label for="document" class="form-label">Documents </label>
-                                                        <input type="file" id="moi" name="moi"
-                                                            class="dropify" :value="{{ old('moi') }}" />
-                                                        @error('moi')
-                                                            <p class="text-danger">{{ $message }}</p>
-                                                        @enderror
-                                                        <div id="moi_text" class="text-danger"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <div class="col-12 text-right mt-2">
                                                 <button type="submit"
                                                     class="btn btn-info waves-effect waves-light text-white">Save &
@@ -285,85 +216,25 @@
 
                                 </div>
                                 <div class="tab-pane p-20" id="documents" role="tabpanel">
-                                    <div class="row">
-                                        <h4 class="card-title">Attach Document</h4>
-                                        <form action="">
-                                            @csrf
-                                            <div class="col-lg-4 col-md-6 col-sm-12 ">
-                                                <div class="border m-1">
-                                                    <label for="document" class="form-label mt-2">CV/Resume </label>
-                                                    <input type="file" id="resume" name="resume[]" class="dropify"
-                                                        :value="{{ old('resume') }}" />
-                                                    @error('resume')
-                                                        <p class="text-danger">{{ $message }}</p>
-                                                    @enderror
-                                                    <div id="resume_text" class="text-danger"></div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-md-6 col-sm-12 ">
-                                                <div class="border m-1">
-                                                    <label for="document" class="form-label mt-2">Experience Letter
-                                                    </label>
-                                                    <input type="file" id="exp_letter" name="exp_letter[]"
-                                                        class="dropify" :value="{{ old('exp_letter') }}" />
-                                                    @error('exp_letter')
-                                                        <p class="text-danger">{{ $message }}</p>
-                                                    @enderror
-                                                    <div id="exp_letter_text" class="text-danger"></div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-md-6 col-sm-12 ">
-                                                <div class="border m-1">
-                                                    <label for="document" class="form-label mt-2">Recommendation Letter
-                                                    </label>
-                                                    <input type="file" id="recomendation" name="recomendation[]"
-                                                        class="dropify" :value="{{ old('recomendation') }}" />
-                                                    @error('recomendation')
-                                                        <p class="text-danger">{{ $message }}</p>
-                                                    @enderror
-                                                    <div id="recomendation_text" class="text-danger"></div>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-lg-4 col-md-6 col-sm-12 ">
-                                                <div class="border m-1">
-                                                    <label for="document" class="form-label mt-2">Other Document </label>
-                                                    <input type="file" id="other" name="other[]" class="dropify"
-                                                        :value="{{ old('other') }}" />
-                                                    @error('other')
-                                                        <p class="text-danger">{{ $message }}</p>
-                                                    @enderror
-                                                    <div id="other_text" class="text-danger"></div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-md-6 col-sm-12">
-                                                <p class="mb-0 mt-2">
-                                                    In order to proceed, please now ensure you understand and accept all
-                                                    applicable terms and then check the boxes below:
-                                                </p>
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="declaration"
-                                                        checked>
-                                                    <label class="form-check-label" for="declaration">I declare that the
-                                                        information given in the application is true, complete and accurate
-                                                        and
-                                                        no data requested has been omitted.</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="accept"
-                                                        checked>
-                                                    <label class="form-check-label" for="accept"> I accept the terms of
-                                                        this Fair Processing Notice and the UniApp Privacy Notice which
-                                                        supplements it.</label>
-                                                </div>
-                                            </div>
+                                    <h4 class="card-title">Attach Document</h4>
+                                    <form method="post" id="document-form" onsubmit="submitDocuments()"
+                                        enctype="multipart/form-data" action="javascript:;">
+                                        @csrf
+                                        @method('POST')
+                                        @if ($documents == null)
+                                            @include('website.pages.profile.documentCreate')
+                                        @else
+                                            @include('website.pages.profile.documentEdit')
+                                        @endif
+                                        <div class="row">
                                             <div class="col-12 text-right mt-2">
                                                 <button type="submit"
                                                     class="btn btn-info waves-effect waves-light text-white">Save &
                                                     Continue</button>
                                             </div>
-                                        </form>
-                                    </div>
+                                        </div>
+                                    </form>
+
                                 </div>
                             </div>
                         </div>
@@ -830,6 +701,103 @@
                 },
             });
         }
+
+        function submitTestLanguage() {
+
+            var form = $('#test-language-form')[0];
+            console.log('form ', form);
+            $("#personal-button-save").text('Loading...');
+            var userID = document.getElementById('user_id').value;
+            console.log('userid', userID);
+            const myFormData = new FormData(form);
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "/test-lnguage/" + userID, // the endpoint
+                type: "POST", // http method
+                processData: false,
+                contentType: false,
+                data: myFormData,
+                beforeSend: function() {
+                    $(form)
+                    $('.backend-error-text').text('')
+                    $("#personal-button-save").prop("disabled", true);
+
+                },
+                success: function(data) {
+
+                    console.log('data', data);
+                    $("#personal-button-save").prop("disabled", false);
+                    $("#personal-button-save").text("Save & Continue");
+                    var successAlert = $("#success-alert");
+                    showToaster('success', 'Success', data.message);
+
+                },
+                error: function(error) {
+                    $(form)
+                    $("#personal-button-save").prop("disabled", false);
+                    $("#personal-button-save").text("Save & Continue");
+                    var errorMessage = error.statusText;
+                    console.log('error validation', error);
+                    if (error.status == 422) {
+                        errorMessage = handleValidationErrors(error)
+                    }
+                    showToaster('error', 'Error', errorMessage);
+
+                },
+            });
+        }
+
+        function submitDocuments() {
+
+            var form = $('#document-form')[0];
+            console.log('form ', form);
+            $("#personal-button-save").text('Loading...');
+            var userID = document.getElementById('user_id').value;
+            console.log('userid', userID);
+            const myFormData = new FormData(form);
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "/store-documents/" + userID, // the endpoint
+                type: "POST", // http method
+                processData: false,
+                contentType: false,
+                data: myFormData,
+                beforeSend: function() {
+                    $(form)
+                    $('.backend-error-text').text('')
+                    $("#personal-button-save").prop("disabled", true);
+
+                },
+                success: function(data) {
+
+                    console.log('data', data);
+                    $("#personal-button-save").prop("disabled", false);
+                    $("#personal-button-save").text("Save & Continue");
+                    var successAlert = $("#success-alert");
+                    showToaster('success', 'Success', data.message);
+
+                },
+                error: function(error) {
+                    $(form)
+                    $("#personal-button-save").prop("disabled", false);
+                    $("#personal-button-save").text("Save & Continue");
+                    var errorMessage = error.statusText;
+                    console.log('error validation', error);
+                    if (error.status == 422) {
+                        errorMessage = handleValidationErrors(error)
+                    }
+                    showToaster('error', 'Error', errorMessage);
+
+                },
+            });
+        }
+
 
         function experienceForm() {
             console.log(' i m herer');
