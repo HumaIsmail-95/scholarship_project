@@ -18,8 +18,8 @@ class CreateSubscriptionPackagesTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->decimal('price', 10, 2);
-            $table->integer('duration')->comment('2 days ,2 here is the duration');
-            $table->string('type', 100)->nullable()->comment('2 days, day here is the type');
+            $table->integer('coaching')->default(0);
+            $table->integer('program_no')->default(3);
             $table->boolean('status')->nullable()->default(1);
             $table->foreignId('created_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->cascadeOnDelete();

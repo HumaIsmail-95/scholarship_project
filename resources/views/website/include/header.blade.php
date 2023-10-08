@@ -47,7 +47,9 @@
                                          @endforeach
                                      </ul>
                                  </li>
-                                 <li class=""><a href="index.html">Subscription</a>
+                                 <li class=""><a href="{{ route('subscriptions') }}">Subscription</a>
+                                 </li>
+                                 <li class=""><a href="{{ route('programs') }}">Programs</a>
                                  </li>
                                  <li class=""><a href="index.html">About Us</a>
                                  </li>

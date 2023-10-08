@@ -35,7 +35,7 @@ class UniCourse extends Model
 
     public function university()
     {
-        return $this->belongsTo(University::class, 'uni_id');
+        return $this->belongsTo(University::class, 'uni_id', 'id');
     }
     public function country()
     {
@@ -59,7 +59,7 @@ class UniCourse extends Model
     }
     public function discipline()
     {
-        return $this->hasOne(Discipline::class, 'discipline_id');
+        return $this->belongsTo(Discipline::class, 'discipline_id');
     }
     public function requirements()
     {

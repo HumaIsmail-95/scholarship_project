@@ -42,30 +42,35 @@
                                     @enderror
                                 </div>
                                 <div class="col-lg-6  col-md-6 col-sm-12">
-                                    <label class="form-label" for="duration">Package Duration <span
-                                            class="text-danger">*</span>
+                                    <label class="form-label" for="duration">Coaching <span class="text-danger">*</span>
                                     </label>
                                     <div class="d-flex">
-                                        <input type="number" class="form-control" id="duration" name="duration"
-                                            placeholder="Enter a duration.." value="{{ $subscription_package->duration }}"
-                                            required>
-                                        <select name="type" class="form-select" id="type" required>
-                                            <option value="Day" @if ($subscription_package->type == 'Day') selected @endif>Day
+                                        <select name="coaching" class="form-select" id="coaching" required>
+                                            <option value=0 @if ($subscription_package->coaching == 0) selected @endif>No
                                             </option>
-                                            <option value="Month" @if ($subscription_package->type == 'Month') selected @endif>Month
-                                            </option>
-                                            <option value="Year" @if ($subscription_package->type == 'Year') selected @endif>Year
+                                            <option value=1 @if ($subscription_package->coaching == 1) selected @endif>Yes
                                             </option>
                                         </select>
                                     </div>
-                                    @error('duration')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                    @error('type')
+
+                                    @error('coaching')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
+                                <div class="col-lg-6  col-md-6 col-sm-12">
+                                    <label class="form-label" for="duration">Number of programs <span
+                                            class="text-danger">*</span>
+                                    </label>
+                                    <div class="d-flex">
+                                        <input type="number" class="form-control" id="program_no" name="program_no"
+                                            placeholder="Enter a program no.."
+                                            value="{{ $subscription_package->program_no }}" required>
+                                    </div>
 
+                                    @error('program_no')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
                                 <div class="col-lg-6  col-md-6 col-sm-12">
                                     <label class="form-label" for="duration">Amount Fee ($)<span
                                             class="text-danger">*</span>

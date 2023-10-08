@@ -1,16 +1,16 @@
 <?php
 
-use App\Http\Controllers\admin\CourseController;
+use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\admin\DegreeController;
-use App\Http\Controllers\admin\DisciplineController;
+use App\Http\Controllers\Admin\DegreeController;
+use App\Http\Controllers\Admin\DisciplineController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\admin\StripeSettingController;
+use App\Http\Controllers\Admin\StripeSettingController;
 use App\Http\Controllers\Admin\StudentController;
-use App\Http\Controllers\admin\StudyModelController;
-use App\Http\Controllers\admin\SubscriptionController;
+use App\Http\Controllers\Admin\StudyModelController;
+use App\Http\Controllers\Admin\SubscriptionController;
 use App\Http\Controllers\Admin\UniversityController;
 use App\Http\Controllers\Admin\UserController;
 use App\Models\SubscriptionPackage;

@@ -17,9 +17,9 @@
                         <li class="breadcrumb-item active">Course</li>
                     </ol>
                     @can('list-course')
-                        <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white"><i
-                                class="fa fa-list"></i>
-                            Course List</button>
+                        <a type="button" href="{{ route('admin.courses.index') }}"
+                            class="btn btn-info d-none d-lg-block m-l-15 text-white"><i class="fa fa-list"></i>
+                            Course List</a>
                     @endcan
                 </div>
             </div>
@@ -55,13 +55,15 @@
                                 <div class="col-lg-6  col-md-6  col-sm-12 my-2">
                                     <label class="form-label" for="name">Country<span class="text-danger">*</span>
                                     </label>
-                                    <select name="country_id" class="form-select" id=""
+                                    <input type="text" class="form-control" id="country_id" name="country_id"
+                                        placeholder="Enter a country.." value="China" readonly>
+                                    {{-- <select name="country_id" class="form-select" id=""
                                         :value="{{ old('country_id') }}" required>
                                         <option value="">Seelct Country</option>
                                         @foreach ($countries as $country)
                                             <option value="{{ $country->id }}">{{ $country->name }}</option>
                                         @endforeach
-                                    </select>
+                                    </select> --}}
                                     @error('country_id')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -74,7 +76,7 @@
 
                                     </select>
 
-                                    @error('country')
+                                    @error('city_id')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>

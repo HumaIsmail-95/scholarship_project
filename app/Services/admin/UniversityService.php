@@ -35,7 +35,7 @@ class UniversityService
         $data = $request->validated();
         $uniData = [
             'name' => $data['name'],
-            'country' => $data['country'],
+            'country' => 'China',
             'created_by' => Auth::user()->id,
         ];
         $university = University::create($uniData);
@@ -50,7 +50,7 @@ class UniversityService
         endif;
         UniGallery::create($logo);
         if ($request->hasFile('banner')) :
-            $image_name = FileUploadTrait::fileUpload($request->logo, 'uni_banners');
+            $image_name = FileUploadTrait::fileUpload($request->banner, 'uni_banners');
             $banner['type'] = 'banner';
             $banner['folder_name'] = 'uni_banners';
             $banner['image_name'] =  $image_name;
@@ -95,7 +95,7 @@ class UniversityService
         $data = $request->validated();
         $uniData = [
             'name' => $data['name'],
-            'country' => $data['country'],
+            'country' => 'China',
             'updated_by' => Auth::user()->id,
         ];
         $university->update($uniData);

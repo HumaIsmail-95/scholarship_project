@@ -27,7 +27,7 @@ class CourseRequest extends FormRequest
         return [
             'name' => ['required'],
             'uni_id' => ['required', 'integer'],
-            'country_id' => ['required', 'integer'],
+            'country_id' => ['required'],
             'city_id' => ['required', 'integer'],
             'duration' => ['required'],
             'degree_id' => ['required', 'integer'],

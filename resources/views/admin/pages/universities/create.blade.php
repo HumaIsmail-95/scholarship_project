@@ -19,9 +19,9 @@
                         <li class="breadcrumb-item active">University</li>
                     </ol>
                     @can('list-university')
-                        <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white"><i
-                                class="fa fa-list"></i>
-                            University List</button>
+                        <a type="button" href="{{ route('admin.universities.index') }}"
+                            class="btn btn-info d-none d-lg-block m-l-15 text-white"><i class="fa fa-list"></i>
+                            University List</a>
                     @endcan
                 </div>
             </div>
@@ -47,12 +47,14 @@
                                 <div class="col-lg-6  col-md-6  col-sm-12 mb-2">
                                     <label class="form-label" for="name">Country<span class="text-danger">*</span>
                                     </label>
-                                    <select name="country" class="form-select" id="" :value="{{ old('country') }}">
+                                    <input type="text" id="country" name="country" class="form-control" value="China"
+                                        readonly />
+                                    {{-- <select name="country" class="form-select" id="" :value="{{ old('country') }}">
                                         <option value="">Seelct Country</option>
                                         @foreach ($countries as $country)
                                             <option value="{{ $country->id }}">{{ $country->name }}</option>
                                         @endforeach
-                                    </select>
+                                    </select> --}}
                                     @error('country')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -76,7 +78,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-lg-6 col-md-6  col-sm-12">
-                                    <h4 class="card-title">Gallery images (multiple images) </h4>
+                                    <h4 class="card-title">Gallery images (multiple images) (3) </h4>
                                     <label for="gallery" class="form-label">Set gallery for this University</label>
                                     <input type="file" id="gallery" name="gallery[]" class="dropify" multiple
                                         :value="{{ old('gallery') }}" />

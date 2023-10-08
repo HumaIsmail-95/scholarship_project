@@ -30,7 +30,7 @@ class CourseService
         $courseData['created_by'] = Auth::user()->id;
         $courseData['name'] = $request->name;
         $courseData['uni_id'] = $request->uni_id;
-        $courseData['country_id'] = $request->country_id;
+        $courseData['country_id'] = 'China';
         $courseData['city_id'] = $request->city_id;
         $courseData['duration'] = $request->duration;
         $courseData['degree_id'] = $request->degree_id;
@@ -69,7 +69,7 @@ class CourseService
         $courseData['created_by'] = Auth::user()->id;
         $courseData['name'] = $request->name;
         $courseData['uni_id'] = $request->uni_id;
-        $courseData['country_id'] = $request->country_id;
+        $courseData['country_id'] = 'China';
         $courseData['city_id'] = $request->city_id;
         $courseData['duration'] = $request->duration;
         $courseData['degree_id'] = $request->degree_id;

@@ -29,8 +29,8 @@ class SubscriptionPackageRequest extends FormRequest
             'name' => ['required'],
             'description' => ['nullable'],
             'price' => ['required'],
-            'duration' => ['required'],
-            'type' => ['required'],
+            'coaching' => ['required'],
+            'program_no' => ['required'],
             'status' => ['nullable'],
         ];
     }

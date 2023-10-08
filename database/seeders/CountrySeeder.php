@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CountrySeeder extends Seeder
 {
@@ -263,5 +264,6 @@ class CountrySeeder extends Seeder
         (247, 'Zambia', 'ZM', 'ZMB', '260', 'ZMW', 'Zambian Kwacha'),
         (248, 'Zimbabwe', 'ZW', 'ZWE', '263', 'ZWL', 'Zimbabwe Dollar'),
         (249, 'Åland Islands', 'AX', 'ALA', '358', 'EUR', 'Euro');";
+        DB::statement($sql);
     }
 }

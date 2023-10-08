@@ -2828,9 +2828,8 @@ div#mCSB_1_container {
     z-index: 1;
 }
 
-.news-block-one .inner-box .lower-content .admin-thumb img {
-    width: 100%;
-    border-radius: 50%;
+.page-title-2 .info-box .left-column .image-box img {
+    height: 100%;
 }
 
 .news-block-one .inner-box .lower-content .category {

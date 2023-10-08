@@ -28,7 +28,7 @@ class UniversityRequest extends FormRequest
     {
         return [
             'name' => ['required', 'max:100'],
-            'country' => ['required', 'integer'],
+            'country' => ['required'],
             'logo' => ['nullable', 'image', 'max:2048', 'mimes:jpg,bmp,png'],
             'banner' => ['nullable', 'image', 'max:2048', 'mimes:jpg,bmp,png'],
             'gallery' => ['nullable', 'max:2048', new MaxImages(3)],

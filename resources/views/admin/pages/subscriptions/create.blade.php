@@ -41,28 +41,31 @@
                                     @enderror
                                 </div>
                                 <div class="col-lg-6  col-md-6 col-sm-12">
-                                    <label class="form-label" for="duration">Package Duration <span
-                                            class="text-danger">*</span>
+                                    <label class="form-label" for="duration">Coaching<span class="text-danger">*</span>
                                     </label>
                                     <div class="d-flex">
-                                        <input type="number" class="form-control" id="duration" name="duration"
-                                            placeholder="Enter a duration.." :value="{{ old('duration') }}" required>
-                                        <select name="type" class="form-select" id="type"
-                                            :value="{{ old('type') }}" required>
-                                            <option value="">Select Type</option>
-                                            <option value="Day">Day</option>
-                                            <option value="Month">Month</option>
-                                            <option value="Year">Year</option>
+                                        <select name="coaching" class="form-select" id="coaching"
+                                            :value="{{ old('coaching') }}" required>
+                                            <option value=0>No</option>
+                                            <option value=1>Yes</option>
                                         </select>
                                     </div>
-                                    @error('duration')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                    @error('type')
+                                    @error('coaching')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
-
+                                <div class="col-lg-6  col-md-6 col-sm-12">
+                                    <label class="form-label" for="duration">Number of programs<span
+                                            class="text-danger">*</span>
+                                    </label>
+                                    <div class="d-flex">
+                                        <input type="number" class="form-control" id="program_no" name="program_no"
+                                            placeholder="Enter a program_no.." :value="{{ old('program_no') }}" required>
+                                    </div>
+                                    @error('program_no')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
                                 <div class="col-lg-6  col-md-6 col-sm-12">
                                     <label class="form-label" for="duration">Amount Fee ($)<span
                                             class="text-danger">*</span>

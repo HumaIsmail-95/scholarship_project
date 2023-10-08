@@ -34,31 +34,28 @@
                         <h1>Search your university <br />in one Click</h1>
                         <p>best universities in china in .</p>
                         <div class="form-inner">
-                            <form action="index.html" method="post">
+                            <form action="{{ route('programs') }}" method="GET">
+                                @csrf
                                 <div class="input-inner clearfix">
                                     <div class="form-group">
                                         <i class="icon-2"></i>
-                                        <input type="search" name="name" placeholder="Search university name..."
-                                            required="">
+                                        {{-- <input type="search" name="name" placeholder="Search university name..."
+                                            required=""> --}}
+                                        <select class="wide form-select form-control" id="uni_id" name='uni_id'>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <i class="icon-3"></i>
-                                        <select class="wide">
-                                            <option data-display="Select Location">Select City</option>
-                                            @foreach ($cities as $city)
-                                                <option value="{{ $city->id }}">{{ $city->cityName }}</option>
-                                            @endforeach
-
+                                        <select class="wide form-select form-control" id="city_id" name='city_id'>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <i class="icon-4"></i>
-                                        <select class="wide">
-                                            <option data-display="Select Category">Select Scholarship</option>
-                                            <option value="1">Education</option>
-                                            <option value="2">Restaurant</option>
-                                            <option value="3">Real Estate</option>
-                                            <option value="4">Home Appliances</option>
+                                        <select class="wide" name="discipline_id" id="discipline_id">
+                                            @foreach ($disciplines as $discipline)
+                                                <option value="">Select Course</option>
+                                                <option value="{{ $discipline->id }}">{{ $discipline->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="btn-box">
@@ -118,9 +115,17 @@
                     <div class="category-block-one wow fadeInDown animated animated" data-wow-delay="00ms"
                         data-wow-duration="1500ms">
                         <div class="inner-box">
-                            <div class="icon-box"><i class="icon-6"></i></div>
+                            <div class="icon-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-bookmarks" viewBox="0 0 16 16">
+                                    <path
+                                        d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1H4z" />
+                                    <path
+                                        d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z" />
+                                </svg>
+                            </div>
                             <h5>{{ $discipline->name }}</h5>
-                            {{-- <span>52</span> --}}
+                            <span>{{ $discipline->courses_count }}</span>
                         </div>
                     </div>
                 @endforeach
@@ -138,7 +143,7 @@
         <div class="auto-container">
             <div class="sec-title centred">
                 <span>Popular</span>
-                <h2>Most popular Ads</h2>
+                <h2>Most popular Cities</h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing sed do eiusmod tempor incididunt labore
                     <br />dolore magna aliqua enim.
                 </p>
@@ -1512,60 +1517,31 @@
             <div class="inner-content border-bottom">
                 <div class="sec-title centred">
                     <span>Top Places</span>
-                    <h2>Most Popular Places</h2>
+                    <h2>Most Popular Cities</h2>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing sed do eiusmod tempor incididunt labore
                         <br />dolore magna aliqua enim.
                     </p>
                 </div>
-                <div class="row clearfix">
-                    <div class="col-lg-4 col-md-6 col-sm-12 place-block">
-                        <div class="place-block-one wow fadeInDown animated animated" data-wow-delay="00ms"
-                            data-wow-duration="1500ms">
-                            <div class="inner-box">
-                                <figure class="image-box"><img
-                                        src="{{ asset('website/assets/images/resource/place-1.jpg') }}" alt="">
-                                </figure>
-                                <div class="lower-content">
-                                    <div class="inner">
-                                        <h3><a href="index.html">Los Angeles</a></h3>
-                                        <span>10 Listing</span>
+                <div class="row clearfix d-flex justify-content-center">
+                    @foreach ($popular as $city)
+                        <div class="col-lg-4 col-md-6 col-sm-12 place-block">
+                            <div class="place-block-one wow fadeInDown animated animated" data-wow-delay="00ms"
+                                data-wow-duration="1500ms">
+                                <div class="inner-box">
+                                    <figure class="image-box"><img src="{{ $city['image'] }}" alt="">
+                                    </figure>
+                                    <div class="lower-content">
+                                        <div class="inner">
+                                            <h3><a href="index.html">{{ $city['name'] }}</a></h3>
+                                            <span>{{ $city['count'] }} Listing</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 place-block">
-                        <div class="place-block-one wow fadeInDown animated animated" data-wow-delay="200ms"
-                            data-wow-duration="1500ms">
-                            <div class="inner-box">
-                                <figure class="image-box"><img
-                                        src="{{ asset('website/assets/images/resource/place-2.jpg') }}" alt="">
-                                </figure>
-                                <div class="lower-content">
-                                    <div class="inner">
-                                        <h3><a href="index.html">San Francisco</a></h3>
-                                        <span>15 Listing</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 place-block">
-                        <div class="place-block-one wow fadeInDown animated animated" data-wow-delay="400ms"
-                            data-wow-duration="1500ms">
-                            <div class="inner-box">
-                                <figure class="image-box"><img
-                                        src="{{ asset('website/assets/images/resource/place-3.jpg') }}" alt="">
-                                </figure>
-                                <div class="lower-content">
-                                    <div class="inner">
-                                        <h3><a href="index.html">California City</a></h3>
-                                        <span>08 Listing</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+
+
                     <div class="col-lg-6 col-md-6 col-sm-12 place-block">
                         <div class="place-block-one wow fadeInUp animated animated" data-wow-delay="00ms"
                             data-wow-duration="1500ms">
@@ -1613,72 +1589,33 @@
                 <h2>No Any Hidden Charge Select <br />Your Pricing Plan</h2>
             </div>
             <div class="row clearfix">
-                <div class="col-lg-4 col-md-6 col-sm-12 pricing-block">
-                    <div class="pricing-block-one">
-                        <div class="pricing-table">
-                            <div class="teble-header">
-                                <p>Basic Pack</p>
-                                <h2>$30 <span>/ month</span></h2>
-                            </div>
-                            <div class="table-content">
-                                <ul class="list clearfix">
-                                    <li>5+ Listings</li>
-                                    <li>Contact With Agent</li>
-                                    <li>Contact With Agent</li>
-                                    <li class="light">7×24 Fully Support</li>
-                                    <li class="light">50GB Space</li>
-                                </ul>
-                            </div>
-                            <div class="table-footer">
-                                <a href="index.html">Register Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 pricing-block">
-                    <div class="pricing-block-one active">
-                        <div class="pricing-table">
-                            <div class="teble-header">
-                                <p>Standard Pack</p>
-                                <h2>$40 <span>/ month</span></h2>
-                            </div>
-                            <div class="table-content">
-                                <ul class="list clearfix">
-                                    <li>5+ Listings</li>
-                                    <li>Contact With Agent</li>
-                                    <li>Contact With Agent</li>
-                                    <li class="light">7×24 Fully Support</li>
-                                    <li class="light">50GB Space</li>
-                                </ul>
-                            </div>
-                            <div class="table-footer">
-                                <a href="index.html">Register Now</a>
+                @php
+                    $key = 0;
+                @endphp
+                @foreach ($packages as $package)
+                    @php
+                        $key += 1;
+                    @endphp
+                    <div class="col-lg-4 col-md-6 col-sm-12 pricing-block">
+                        <div class="pricing-block-one @if ($key / 2 == 1) active @endif">
+                            <div class="pricing-table">
+                                <div class="teble-header">
+                                    <p>{{ $package->name }}</p>
+                                    <h2>${{ $package->price }} <span>/ {{ $package->program_no }} prg</span></h2>
+                                </div>
+                                <div class="table-content">
+                                    <ul class="list clearfix">
+                                        <li>{{ $package->program_no }} Programs</li>
+                                        <li class="{{ $package->coaching ? '' : 'light' }}">Coaching</li>
+                                    </ul>
+                                </div>
+                                <div class="table-footer">
+                                    <a href="{{ Auth::user() ? route('dashboard') : route('login') }}">Register Now</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 pricing-block">
-                    <div class="pricing-block-one">
-                        <div class="pricing-table">
-                            <div class="teble-header">
-                                <p>Premium Pack</p>
-                                <h2>$60 <span>/ month</span></h2>
-                            </div>
-                            <div class="table-content">
-                                <ul class="list clearfix">
-                                    <li>5+ Listings</li>
-                                    <li>Contact With Agent</li>
-                                    <li>Contact With Agent</li>
-                                    <li class="light">7×24 Fully Support</li>
-                                    <li class="light">50GB Space</li>
-                                </ul>
-                            </div>
-                            <div class="table-footer">
-                                <a href="index.html">Register Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -1835,5 +1772,70 @@
     <!-- subscribe-section end -->
 @endsection
 @section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#uni_id').select2({
+                minimumInputLength: 3,
+                placeholder: "Search university",
+                ajax: {
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+                    },
+                    url: '/courses/get-university',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            search: params.term
+                        };
+                    },
+                    processResults: function(data) {
+                        return {
+                            results: $.map(data, function(item) {
+                                return {
+                                    id: item.id,
+                                    text: item.name
+                                };
+                            })
+                        };
+                    },
+                    error: function(error) {
+                        console.log(error);
 
+                    },
+                }
+            });
+            $('#city_id').select2({
+                minimumInputLength: 3,
+                placeholder: "Search city",
+                ajax: {
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+                    },
+                    delay: 250,
+                    url: '/courses/get-city',
+                    dataType: 'json',
+                    data: function(params) {
+                        return {
+                            search: params.term
+                        };
+                    },
+                    processResults: function(data) {
+                        return {
+                            results: $.map(data, function(item) {
+                                return {
+                                    id: item.id,
+                                    text: item.cityName
+                                };
+                            })
+                        };
+                    },
+                    error: function(error) {
+                        console.log(error);
+
+                    },
+                }
+            });
+        });
+    </script>
 @endsection

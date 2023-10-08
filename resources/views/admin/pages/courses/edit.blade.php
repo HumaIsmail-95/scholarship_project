@@ -58,7 +58,9 @@
                                 <div class="col-lg-6  col-md-6  col-sm-12 my-2">
                                     <label class="form-label" for="name">Country<span class="text-danger">*</span>
                                     </label>
-                                    <select name="country_id" class="form-select" id=""
+                                    <input type="text" class="form-control" id="country_id" name="country_id"
+                                        placeholder="Enter a name.." value="China" readonly>
+                                    {{-- <select name="country_id" class="form-select" id=""
                                         :value="{{ old('country_id') }}" required>
                                         <option value="">Seelct Country</option>
                                         @foreach ($countries as $country)
@@ -66,7 +68,7 @@
                                                 @if ($uni_course->country_id == $country->id) selected @endif>{{ $country->name }}
                                             </option>
                                         @endforeach
-                                    </select>
+                                    </select> --}}
                                     @error('country_id')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror

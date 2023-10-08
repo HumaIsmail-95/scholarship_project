@@ -49,14 +49,16 @@
                                 <div class="col-lg-6  col-md-6  col-sm-12 mb-2">
                                     <label class="form-label" for="name">Country<span class="text-danger">*</span>
                                     </label>
-                                    <select name="country" class="form-select" id="">
+                                    <input type="text" class="form-control" id="country" name="country"
+                                        placeholder="Enter a name.." value="China" readonly>
+                                    {{-- <select name="country" class="form-select" id="">
                                         <option value="">Seelct Country</option>
                                         @foreach ($countries as $country)
                                             <option value="{{ $country->id }}"
                                                 @if ($university->country == $country->id) selected @endif>{{ $country->name }}
                                             </option>
                                         @endforeach
-                                    </select>
+                                    </select> --}}
                                     @error('country')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror

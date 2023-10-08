@@ -33,7 +33,8 @@
     <link href="{{ asset('website/assets/css/chatBot.css') }}" rel="stylesheet">
     <link href="{{ asset('website/assets/css/custom.css') }}" rel="stylesheet">
     @yield('styles')
-
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
 
@@ -109,6 +110,8 @@
     <!-- main-js -->
     <script src="{{ asset('website/assets/js/script.js') }}"></script>
     <script src="{{ asset('website/assets/js/chatBot.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     @yield('scripts')
 </body><!-- End of .page_wrapper -->
 

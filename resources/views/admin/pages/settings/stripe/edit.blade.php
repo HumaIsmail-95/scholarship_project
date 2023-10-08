@@ -28,7 +28,7 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="col-lg-6  col-md-6 col-sm-12">
-                                    <label class="form-label" for="name">Strip Keys Name <span
+                                    <label class="form-label" for="name">Strip public Keys <span
                                             class="text-danger">*</span>
                                     </label>
                                     <input type="text" class="form-control" id="stripe_public_key"
@@ -39,7 +39,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-lg-6  col-md-6 col-sm-12">
-                                    <label class="form-label" for="name">Strip Keys Name <span
+                                    <label class="form-label" for="name">Strip secrete Keys <span
                                             class="text-danger">*</span>
                                     </label>
                                     <input type="text" class="form-control" id="stripe_secret_key"

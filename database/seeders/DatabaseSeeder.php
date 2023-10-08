@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             DegreeSeeder::class,
             StudyModelSeeder::class,
             SettingsSeeder::class,
+            SubscriptionSeeder::class,
         ]);
     }
 }

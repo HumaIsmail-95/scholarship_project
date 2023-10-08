@@ -22,4 +22,8 @@ class Discipline extends Model
     {
         return $this->hasMany(Degree::class);
     }
+    public function courses()
+    {
+        return $this->hasMany(UniCourse::class);
+    }
 }
