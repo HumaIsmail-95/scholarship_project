@@ -41,6 +41,10 @@ svg.w-5.h-5 {
     width: 15px;
 }
 
+svg.bi.bi-check-circle-fill {
+    color: #f85c70;
+}
+
 .feature-style-three .feature-block-one .inner-box .image-box .image img {
     width: 210px;
     height: 225px;

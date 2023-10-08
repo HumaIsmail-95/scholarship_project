@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Website;
 use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Discipline;
+use App\Models\Student;
 use App\Models\SubscriptionPackage;
 use App\Models\UniCourse;
 use App\Services\website\FrontEndService;
@@ -18,7 +19,6 @@ class FrontendController extends Controller
         $cities = City::where('countryID', 'LIKE', 'CHN')->get();
         $packages = SubscriptionPackage::where('status', 1)->get();
         $popular = FrontEndService::getPopular();
-
         return view('website.pages.home', compact('disciplines', 'cities', 'packages', 'popular'));
     }
     public function allCourses()

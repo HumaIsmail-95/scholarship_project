@@ -43,4 +43,18 @@ class SettingService
             'message' => 'Contact us updated successfully', 'data' => $response,
         ]);
     }
+
+    public static function updateAbout(Setting $setting, SettingRequest $request)
+    {
+        DB::beginTransaction();
+        $data = $request->validated();
+        $privacyData = ['about_us' => $data['about_us']];
+        $response = $setting->update($privacyData);
+        DB::commit();
+
+        return redirect()->back()->with([
+            'status' => true, 'icon' => 'success', 'heading' => 'Success',
+            'message' => 'Privacy Policy updated successfully', 'data' => $response,
+        ]);
+    }
 }

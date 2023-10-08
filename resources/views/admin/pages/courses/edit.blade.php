@@ -175,26 +175,43 @@
                                     @enderror
                                 </div>
                                 <div class="col-lg-6  col-md-6  col-sm-12 my-2">
-                                    <label class="form-label" for="name">Season<span class="text-danger">*</span>
+                                    <label class="form-label" for="name">Summer starts in<span
+                                            class="text-danger">*</span>
                                     </label>
                                     <select name="season" class="form-select" id="season"
                                         :value="{{ old('season') }}" required>
-                                        <option value="">Seelct season</option>
-                                        <option value="Spring" @if ($uni_course->season == 'Spring') selected @endif>Spring
+                                        <option value="">Seelct Start Month</option>
+                                        <option value="January" @if ($uni_course->season == 'January') selected @endif>January
                                         </option>
-                                        <option value="Summer" @if ($uni_course->season == 'Summer') selected @endif>Summer
+                                        <option value="Febuary" @if ($uni_course->season == 'Febuary') selected @endif>Febuary
                                         </option>
-                                        <option value="Autumn" @if ($uni_course->season == 'Autumn') selected @endif>Autumn
+                                        <option value="March" @if ($uni_course->season == 'March') selected @endif>March
                                         </option>
-                                        <option value="Winter" @if ($uni_course->season == 'Winter') selected @endif>Winter
+                                        <option value="April" @if ($uni_course->season == 'April') selected @endif>April
                                         </option>
+                                        <option value="May" @if ($uni_course->season == 'May') selected @endif>May
+                                        </option>
+                                        <option value="June" @if ($uni_course->season == 'June') selected @endif>June
+                                        </option>
+                                        <option value="July" @if ($uni_course->season == 'July') selected @endif>July
+                                        </option>
+                                        <option value="August" @if ($uni_course->season == 'August') selected @endif>August
+                                        </option>
+                                        <option value="September" @if ($uni_course->season == 'September') selected @endif>
+                                            September</option>
+                                        <option value="Octouber" @if ($uni_course->season == 'Octouber') selected @endif>
+                                            Octouber</option>
+                                        <option value="November" @if ($uni_course->season == 'November') selected @endif>
+                                            November</option>
+                                        <option value="December" @if ($uni_course->season == 'December') selected @endif>
+                                            December</option>
                                     </select>
                                     @error('season')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="col-lg-6  col-md-6  col-sm-12 my-2">
-                                    <label class="form-label" for="name">Start Month<span
+                                    <label class="form-label" for="name">Falls Start Month<span
                                             class="text-danger">*</span>
                                     </label>
                                     <select name="start_month" class="form-select" id="start_month"

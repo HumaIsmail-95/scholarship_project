@@ -110,6 +110,17 @@
                          @can('view-contact-us')
                              <li><a href="{{ route('admin.settings.contact') }}">Set Contact Us</a></li>
                          @endcan
+                         {{-- change permission --}}
+                         @can('view-contact-us')
+                             <li><a href="#">Footer Details</a></li>
+                         @endcan
+                     </ul>
+                 </li>
+                 {{-- Banners --}}
+                 <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
+                             class="ti-layout-grid2"></i><span class="hide-menu"> Banners and logo</span></a>
+                     <ul aria-expanded="false" class="collapse">
+                         <li><a href="#">comming soon</a></li>
                      </ul>
                  </li>
                  {{-- dashboard --}}

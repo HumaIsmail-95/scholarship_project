@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\SettingRequest;
 use App\Models\Setting;
+use App\Services\admin\SettingService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -49,7 +50,31 @@ class SettingController extends Controller
     public function updateContact(Setting $setting, SettingRequest $request)
     {
         try {
-            $res = Setting::updateContact($setting, $request);
+            $res = SettingService::updateContact($setting, $request);
+            return $res;
+        } catch (\Throwable $th) {
+            return redirect()->back()->with([
+                'status' => false, 'icon' => 'error', 'heading' => 'Error',
+                'message' => $th->getMessage()
+            ]);
+        }
+    }
+    public function aboutUs()
+    {
+        try {
+            $data = Setting::select('id', 'about_us')->first();
+            // dd($data//);
+            return view('admin.pages.settings.about.edit', compact('data'));
+            //code...
+        } catch (\Throwable $th) {
+            return $th;
+            //throw $th;
+        }
+    }
+    public function updateAbout(Setting $setting, SettingRequest $request)
+    {
+        try {
+            $res = SettingService::updateAbout($setting, $request);
             return $res;
         } catch (\Throwable $th) {
             return redirect()->back()->with([

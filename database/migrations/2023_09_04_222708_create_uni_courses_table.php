@@ -30,8 +30,8 @@ class CreateUniCoursesTable extends Migration
             $table->longText('description')->nullable();
             $table->string('language')->nullable()->default('English');
             $table->integer('discipline_id')->nullable();
-            $table->string('season')->nullable();
-            $table->string('start_month')->nullable();
+            $table->string('season')->nullable()->comment('summer starts in month');
+            $table->string('start_month')->nullable()->comment('Autumn starts in month');
             $table->longText('requirement_details')->nullable();
             $table->longText('other_requirements')->nullable();
             $table->foreignId('created_by')->nullable()->constrained('users')->cascadeOnDelete();

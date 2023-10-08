@@ -160,26 +160,35 @@
                                     @enderror
                                 </div>
                                 <div class="col-lg-6  col-md-6  col-sm-12 my-2">
-                                    <label class="form-label" for="name">Season<span class="text-danger">*</span>
+                                    <label class="form-label" for="name">Summer starts in<span
+                                            class="text-danger">*</span>
                                     </label>
                                     <select name="season" class="form-select" id="season"
                                         :value="{{ old('season') }}" required>
-                                        <option value="">Seelct season</option>
-                                        <option value="Spring">Spring</option>
-                                        <option value="Summer">Summer</option>
-                                        <option value="Autumn">Autumn</option>
-                                        <option value="Winter">Winter</option>
+                                        <option value="">Select Start Month</option>
+                                        <option value="January">January</option>
+                                        <option value="Febuary">Febuary</option>
+                                        <option value="March">March</option>
+                                        <option value="April">April</option>
+                                        <option value="May">May</option>
+                                        <option value="June">June</option>
+                                        <option value="July">July</option>
+                                        <option value="August">August</option>
+                                        <option value="September">September</option>
+                                        <option value="Octouber">Octouber</option>
+                                        <option value="November">November</option>
+                                        <option value="December">December</option>
                                     </select>
                                     @error('season')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="col-lg-6  col-md-6  col-sm-12 my-2">
-                                    <label class="form-label" for="name">Start Month<span
+                                    <label class="form-label" for="name">Falls Start Month<span
                                             class="text-danger">*</span>
                                     </label>
                                     <select name="start_month" class="form-select" id="start_month"
-                                        :value="{{ old('Start Month') }}" required>
+                                        :value="{{ old('Start Month') }}">
                                         <option value="">Seelct Start Month</option>
                                         <option value="January">January</option>
                                         <option value="Febuary">Febuary</option>

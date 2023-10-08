@@ -137,7 +137,7 @@
 
 
     <!-- feature-section -->
-    <section class="feature-section sec-pad">
+    {{-- <section class="feature-section sec-pad">
         <div class="pattern-layer" style="background-image: url({{ asset('website/assets/images/shape/shape-3.png') }});">
         </div>
         <div class="auto-container">
@@ -715,7 +715,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- feature-section end -->
 
 
@@ -739,12 +739,12 @@
             </div>
         </div>
         <div class="pattern-layer">
-            <div class="pattern-1"
-                style="background-image: url({{ asset('website/assets/images/shape/shape-4.png') }});"></div>
-            <div class="pattern-2"
-                style="background-image: url({{ asset('website/assets/images/shape/shape-5.png') }});"></div>
-            <div class="pattern-3"
-                style="background-image: url({{ asset('website/assets/images/shape/shape-6.png') }});"></div>
+            <div class="pattern-1" style="background-image: url({{ asset('website/assets/images/shape/shape-4.png') }});">
+            </div>
+            <div class="pattern-2" style="background-image: url({{ asset('website/assets/images/shape/shape-5.png') }});">
+            </div>
+            <div class="pattern-3" style="background-image: url({{ asset('website/assets/images/shape/shape-6.png') }});">
+            </div>
         </div>
         <div class="auto-container">
             <div class="row clearfix">
@@ -1540,40 +1540,6 @@
                             </div>
                         </div>
                     @endforeach
-
-
-                    <div class="col-lg-6 col-md-6 col-sm-12 place-block">
-                        <div class="place-block-one wow fadeInUp animated animated" data-wow-delay="00ms"
-                            data-wow-duration="1500ms">
-                            <div class="inner-box">
-                                <figure class="image-box"><img
-                                        src="{{ asset('website/assets/images/resource/place-4.jpg') }}" alt="">
-                                </figure>
-                                <div class="lower-content">
-                                    <div class="inner">
-                                        <h3><a href="index.html">New York City</a></h3>
-                                        <span>05 Listing</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 place-block">
-                        <div class="place-block-one wow fadeInUp animated animated" data-wow-delay="300ms"
-                            data-wow-duration="1500ms">
-                            <div class="inner-box">
-                                <figure class="image-box"><img
-                                        src="{{ asset('website/assets/images/resource/place-5.jpg') }}" alt="">
-                                </figure>
-                                <div class="lower-content">
-                                    <div class="inner">
-                                        <h3><a href="index.html">Brooklyn City</a></h3>
-                                        <span>02 Listing</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -1664,11 +1630,11 @@
 
 
     <!-- news-section -->
-    <section class="news-section sec-pad">
+    {{-- <section class="news-section sec-pad">
         <div class="auto-container">
             <div class="sec-title centred">
                 <span>News & Article</span>
-                <h2>Stay Update with Docpro</h2>
+                <h2>Students</h2>
             </div>
             <div class="row clearfix">
                 <div class="col-lg-4 col-md-6 col-sm-12 news-block">
@@ -1740,7 +1706,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- news-section end -->
 
 
@@ -1760,8 +1726,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-12 form-column">
                     <form action="contact.html" method="post" class="subscribe-form">
                         <div class="form-group">
-                            <input type="email" name="email" placeholder="Inout your email address"
-                                required="">
+                            <input type="email" name="email" placeholder="Inout your email address" required="">
                             <button type="submit" class="theme-btn-one">Subscribe Now</button>
                         </div>
                     </form>

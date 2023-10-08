@@ -5,9 +5,9 @@
      <div class="header-lower">
          <div class="auto-container">
              <div class="outer-box">
-                 <div class="logo-box">
-                     <figure class="logo"><a href="index.html"><img src="{{ asset('website/assets/images/logo.png') }}"
-                                 alt=""></a></figure>
+                 <div class="logo-box p-0">
+                     <figure class="logo"><a href="{{ route('home') }}"><img style="width:75px;"
+                                 src="{{ asset('website/assets/images/logo/logo.png') }}" alt=""></a></figure>
                  </div>
                  <div class="menu-area">
                      <!--Mobile Navigation Toggler-->
