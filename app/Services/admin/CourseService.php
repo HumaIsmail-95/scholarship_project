@@ -29,6 +29,7 @@ class CourseService
         $data = $request->validated();
         $courseData['created_by'] = Auth::user()->id;
         $courseData['name'] = $request->name;
+        $courseData['scholarship'] = $request->scholarship;
         $courseData['uni_id'] = $request->uni_id;
         $courseData['country_id'] = 'China';
         $courseData['city_id'] = $request->city_id;
@@ -68,6 +69,7 @@ class CourseService
         $data = $request->validated();
         $courseData['created_by'] = Auth::user()->id;
         $courseData['name'] = $request->name;
+        $courseData['scholarship'] = $request->scholarship;
         $courseData['uni_id'] = $request->uni_id;
         $courseData['country_id'] = 'China';
         $courseData['city_id'] = $request->city_id;

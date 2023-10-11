@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DisciplineController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\StripeSettingController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\StudyModelController;
@@ -82,6 +83,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     //about us
     Route::get('settings/about-us', [SettingController::class, 'aboutUs'])->name('settings.abouUs');
     Route::put('settings/about-us/{setting}', [SettingController::class, 'updateAbout'])->name('settings.aboutUs.update');
+    //banner
+    Route::get('banners', [BannerController::class, 'getBanner'])->name('banners');
+    Route::put('banners', [BannerController::class, 'update'])->name('banners.update');
 
     // stripe setting
     Route::get('stripe/setting', [StripeSettingController::class, 'index'])->name('stripe.setting.index');

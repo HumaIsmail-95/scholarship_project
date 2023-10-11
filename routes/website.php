@@ -15,6 +15,9 @@ Route::get('/programs', [FrontendController::class, 'programs'])->name('programs
 Route::get('/programs/{program}/program-details', [FrontendController::class, 'programDetails'])->name('programDetails');
 Route::get('courses/get-city', [CourseController::class, 'getCity'])->name('courses.getCity');
 Route::get('courses/get-university', [CourseController::class, 'getUniversity'])->name('courses.get-university');
+Route::get('/universities/{university}/university-details', [FrontendController::class, 'universityDetail'])->name('university-detail');
+Route::get('/about', [FrontendController::class, 'about'])->name('about');
+Route::get('/blogs', [FrontendController::class, 'blogs'])->name('blogs');
 
 Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

@@ -4,6 +4,7 @@
     <link href="{{ asset('admin/assets/node_modules/bootstrap-switch/bootstrap-switch.min.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/dist/css/pages/bootstrap-switch.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('admin/assets/node_modules/dropify/dist/css/dropify.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin/assets/node_modules/summernote/dist/summernote-bs4.css') }}">
 
 @endsection
 @section('content')
@@ -56,6 +57,26 @@
                                         @endforeach
                                     </select> --}}
                                     @error('country')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-6  col-md-6  col-sm-12 my-2">
+                                    <label class="form-label" for="name">Featured<span class="text-danger">*</span>
+                                    </label>
+                                    <select name="featured" class="form-select" id="featured"
+                                        :value="{{ old('featured') }}" required>
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+                                    </select>
+                                    @error('featured')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-12  col-md-12 col-sm-12">
+                                    <label class="form-label" for="duration">description
+                                    </label>
+                                    <textarea name="description" class="summernote" id="" cols="30" rows="2"></textarea>
+                                    @error('description')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -184,5 +205,28 @@
             });
         }
     </script>
+    <script src="{{ asset('admin/assets/node_modules/summernote/dist/summernote-bs4.min.js') }}"></script>
+    <script>
+        $(function() {
 
+            $('.summernote').summernote({
+                height: 350, // set editor height
+                minHeight: null, // set minimum height of editor
+                maxHeight: null, // set maximum height of editor
+                focus: false // set focus to editable area after initializing summernote
+            });
+
+            $('.inline-editor').summernote({
+                airMode: true
+            });
+
+        });
+
+        window.edit = function() {
+                $(".click2edit").summernote()
+            },
+            window.save = function() {
+                $(".click2edit").summernote('destroy');
+            }
+    </script>
 @endsection

@@ -1,3 +1,4 @@
+@extends('layouts.website')
 @section('title', 'About Us')
 @section('content')
     <!-- about-section -->

@@ -36,6 +36,8 @@ class UniversityService
         $uniData = [
             'name' => $data['name'],
             'country' => 'China',
+            'featured' => $data['featured'],
+            'description' => $data['description'],
             'created_by' => Auth::user()->id,
         ];
         $university = University::create($uniData);
@@ -96,6 +98,8 @@ class UniversityService
         $uniData = [
             'name' => $data['name'],
             'country' => 'China',
+            'featured' => $data['featured'],
+            'description' => $data['description'],
             'updated_by' => Auth::user()->id,
         ];
         $university->update($uniData);
@@ -138,7 +142,7 @@ class UniversityService
             FileUploadTrait::uploadGalleryImages($request->gallery,  'UniGallery', 'gallery', $university->id);
         }
         DB::commit();
-        $response = ['status' => true, 'message' => ' University updated successfully.', 'univer$university' => $university];
+        $response = ['status' => true, 'icon' => 'success', 'heading' => 'Success', 'message' => ' University updated successfully.', 'univer$university' => $university];
         return $response;
     }
     public static function destroy($id)

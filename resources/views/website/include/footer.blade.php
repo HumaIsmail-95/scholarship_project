@@ -1,14 +1,13 @@
   <!-- main-footer -->
   <footer class="main-footer">
-      <div class="footer-top"
-          style="background-image: url({{ asset('website/assets/images/background/footer-1.jpg') }});">
+      <div class="footer-top" style="background-image: url({{ $footer->image_url }});">
           <div class="auto-container">
               <div class="widget-section">
                   <div class="row clearfix">
                       <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
                           <div class="footer-widget logo-widget">
-                              <figure class="footer-logo"><a href="index.html"><img
-                                          src="{{ asset('website/assets/images/footer-logo.png') }}" alt=""></a>
+                              <figure class="footer-logo"><a href="index.html"><img src="{{ $logo->image_url }}"
+                                          alt=""></a>
                               </figure>
                               <div class="text">
                                   <p>Lorem ipsum dolor amet consetetur adi pisicing elit sed eiusm tempor in
@@ -48,20 +47,18 @@
                               <div class="post-inner">
                                   <div class="post">
                                       <figure class="post-thumb">
-                                          <img src="{{ asset('website/assets/images/resource/footer-post-1.jpg') }}"
-                                              alt="">
-                                          <a href="blog-details.html"><i class="fas fa-link"></i></a>
+                                          <img src="{{ $footer->image_url }}" alt="">
+                                          <a href="{{ route('blogs') }}"><i class="fas fa-link"></i></a>
                                       </figure>
-                                      <h5><a href="blog-details.html">The Added Value Social Worker</a></h5>
+                                      <h5><a href="{{ route('blogs') }}">The Added Value Social Worker</a></h5>
                                       <p>Mar 25, 2020</p>
                                   </div>
                                   <div class="post">
                                       <figure class="post-thumb">
-                                          <img src="{{ asset('website/assets/images/resource/footer-post-2.jpg') }}"
-                                              alt="">
-                                          <a href="blog-details.html"><i class="fas fa-link"></i></a>
+                                          <img src="{{ $footer->image_url }}" alt="">
+                                          <a href="{{ route('blogs') }}"><i class="fas fa-link"></i></a>
                                       </figure>
-                                      <h5><a href="blog-details.html">Ways to Increase Trust</a></h5>
+                                      <h5><a href="{{ route('blogs') }}">Ways to Increase Trust</a></h5>
                                       <p>Mar 24, 2020</p>
                                   </div>
                               </div>

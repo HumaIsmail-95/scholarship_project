@@ -23,6 +23,7 @@ class UniCourse extends Model
         'tuition_fee',
         'tuition_fee_type',
         'study_model_id',
+        'scholarship',
         'description', 'requirement_details', 'other_requirements',
         'language',
         'discipline_id',

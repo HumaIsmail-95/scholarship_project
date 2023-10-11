@@ -15,6 +15,7 @@ class MaxImages implements Rule
 
     public function passes($attribute, $value)
     {
+        // dd(is_array($value) && count($value) <= $this->max, $value, $this->max);
         return is_array($value) && count($value) <= $this->max;
     }
 

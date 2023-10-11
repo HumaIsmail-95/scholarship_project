@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
             StudyModelSeeder::class,
             SettingsSeeder::class,
             SubscriptionSeeder::class,
+            WebsitePageSeeder::class,
+            BannerSeeder::class,
         ]);
     }
 }

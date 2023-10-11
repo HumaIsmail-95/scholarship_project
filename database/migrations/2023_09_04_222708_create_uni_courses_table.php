@@ -24,6 +24,7 @@ class CreateUniCoursesTable extends Migration
             $table->string('folder_name')->nullable();
             $table->string('image_url')->nullable();
             $table->integer('degree_id')->nullable();
+            $table->boolean('scholarship')->default(0);
             $table->float('tuition_fee', 10, 2)->nullable()->comment('year=1,semster=2, month=3')->default(123.45);
             $table->string('tuition_fee_type')->nullable();
             $table->integer('study_model_id')->nullable();

@@ -12,6 +12,8 @@ class University extends Model
     protected $fillable = [
         'name',
         'country',
+        'description',
+        'featured',
         'created_by',
         'updated_by',
         'deleted_by',
@@ -24,7 +26,7 @@ class University extends Model
 
     public function courses()
     {
-        return $this->hasMany(Course::class,);
+        return $this->hasMany(UniCourse::class, 'uni_id',);
     }
     public function country()
     {

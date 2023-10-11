@@ -6,8 +6,8 @@
          <div class="auto-container">
              <div class="outer-box">
                  <div class="logo-box p-0">
-                     <figure class="logo"><a href="{{ route('home') }}"><img style="width:75px;"
-                                 src="{{ asset('website/assets/images/logo/logo.png') }}" alt=""></a></figure>
+                     <figure class="logo"><a href="{{ route('home') }}"><img style="width:100px;"
+                                 src="{{ $logo->image_url }}" alt=""></a></figure>
                  </div>
                  <div class="menu-area">
                      <!--Mobile Navigation Toggler-->
@@ -51,9 +51,9 @@
                                  </li>
                                  <li class=""><a href="{{ route('programs') }}">Programs</a>
                                  </li>
-                                 <li class=""><a href="index.html">About Us</a>
+                                 <li class=""><a href="{{ route('about') }}">About Us</a>
                                  </li>
-                                 <li class=""><a href="index.html">Blog</a>
+                                 <li class=""><a href="{{ route('blogs') }}">Blog</a>
                                  </li>
                              </ul>
                          </div>
@@ -73,8 +73,9 @@
          <div class="auto-container">
              <div class="outer-box">
                  <div class="logo-box">
-                     <figure class="logo"><a href="index.html"><img
-                                 src="{{ asset('website/assets/images/logo.png') }}" alt=""></a></figure>
+                     <figure class="logo"><a href="{{ route('home') }}"><img style="width:60px"
+                                 src="{{ $logo->image_url }}" alt=""></a>
+                     </figure>
                  </div>
                  <div class="menu-area">
                      <nav class="main-menu clearfix">

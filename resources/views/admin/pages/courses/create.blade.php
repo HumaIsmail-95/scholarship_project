@@ -207,6 +207,19 @@
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
+                                <div class="col-lg-6  col-md-6  col-sm-12 my-2">
+                                    <label class="form-label" for="name">Scholarship<span
+                                            class="text-danger">*</span>
+                                    </label>
+                                    <select name="scholarship" class="form-select" id="scholarship"
+                                        :value="{{ old('scholarship') }}" required>
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+                                    </select>
+                                    @error('scholarship')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
                                 <div class="col-lg-12  col-md-12 col-sm-12 my-2">
                                     <label for="">Description</label>
                                     <input type="hidden" id="description" name="description">

@@ -1,5 +1,5 @@
 @extends('layouts.website')
-@section('title', 'Our Services')
+@section('title', 'Our Blogs')
 @section('content')
 
     <!-- sidebar-page-container -->

@@ -3,7 +3,7 @@
 @section('content')
     <div class="program-page">
         <!-- Page Title -->
-        <section class="page-title style-two" style="background-image: url(assets/images/background/page-title.jpg);">
+        <section class="page-title style-two" style="background-image: url({{ $banner->image_url }});">
             <div class="auto-container">
                 <div class="content-box centred mr-0">
                     <div class="title">
@@ -113,11 +113,13 @@
                                                     <figure class="image"><img
                                                             src="{{ $program->university->images[0]->image_url }}"
                                                             alt=""></figure>
-                                                    <div class="feature-2">Featured</div>
+                                                    @if ($program->scholarship)
+                                                        <div class="feature-2">Scholarship</div>
+                                                    @endif
                                                 </div>
                                                 <div class="lower-content">
                                                     <div class="category"><i class="fas fa-tags"></i>
-                                                        <p>Electronics</p>
+                                                        <p>{{ $program->discipline->name }}</p>
                                                     </div>
                                                     <h4>
                                                         <a href="{{ route('programDetails', $program->id) }}">
@@ -149,20 +151,19 @@
                                                         </li>
                                                     </ul>
                                                     <div class="lower-box">
-                                                        <h5><span>Price:</span>${{ $program->tuition_fee }}
+                                                        <h5><span>Tuition Fee:</span>${{ $program->tuition_fee }}
                                                             <span></span>
                                                             (@if ($program->tuition_fee_type == 1)
                                                                 yearly
                                                             @elseif($program->tuition_fee_type == 2)
                                                                 per semster
                                                             @else
-                                                                permonth
+                                                                per month
                                                             @endif)
                                                         </h5>
-                                                        <ul class="react-box">
-                                                            {{-- <li><a href="index.html"><i class="icon-21"></i></a></li> --}}
+                                                        {{-- <ul class="react-box">
                                                             <li><a href="index.html"><i class="icon-22"></i></a></li>
-                                                        </ul>
+                                                        </ul> --}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -176,28 +177,32 @@
                                                 <div class="feature-block-one">
                                                     <div class="inner-box">
                                                         <div class="image-box">
-                                                            <figure class="image"><img
+                                                            <figure class="image"
+                                                                style="min-height:220px;max-height:220px"><img
                                                                     src="{{ $program->university->images[0]->image_url }}"
                                                                     alt="">
                                                             </figure>
-                                                            <div class="shape"></div>
-                                                            <div class="feature">Featured</div>
-                                                            <div class="icon">
-                                                                <div class="icon-shape"></div>
-                                                                <i class="icon-16"></i>
-                                                            </div>
+                                                            @if ($program->scholarship)
+                                                                <div class="shape"></div>
+                                                                <div class="feature">Scholarship</div>
+                                                                <div class="icon">
+                                                                    <div class="icon-shape"></div>
+                                                                    <i class="icon-16"></i>
+                                                                </div>
+                                                            @endif
+
                                                         </div>
                                                         <div class="lower-content">
                                                             <div class="author-box">
-                                                                <div class="inner">
-                                                                    <img src="assets/images/resource/author-1.png"
-                                                                        alt="">
-                                                                    <h6>Michael Bean<i class="icon-18"></i></h6>
-                                                                    <span>For sell</span>
+                                                                <div class="inner" style="padding:0px">
+                                                                    @if ($program->university->featured)
+                                                                        <h6>Featured <i class="icon-18"></i></h6>
+                                                                    @endif
+                                                                    <span>Apply Now</span>
                                                                 </div>
                                                             </div>
                                                             <div class="category"><i class="fas fa-tags"></i>
-                                                                <p>Featured</p>
+                                                                <p>{{ $program->discipline->name }}</p>
                                                             </div>
                                                             <h3><a href="{{ route('programDetails', $program->id) }}">
                                                                     @if (strlen($program->name) > 25)
@@ -229,7 +234,7 @@
                                                                 </li>
                                                             </ul>
                                                             <div class="lower-box">
-                                                                <h5><span>Price:</span>${{ $program->tuition_fee }}
+                                                                <h5><span>Tuition Fee:</span>${{ $program->tuition_fee }}
                                                                     <span></span>
                                                                 </h5>
                                                                 (@if ($program->tuition_fee_type == 1)
@@ -237,13 +242,13 @@
                                                                 @elseif($program->tuition_fee_type == 2)
                                                                     per semster
                                                                 @else
-                                                                    permonth
+                                                                    per month
                                                                 @endif)
                                                                 <ul class="react-box">
                                                                     {{-- <li><a href="index.html"><i class="icon-21"></i></a>
                                                                     </li> --}}
-                                                                    <li><a href="index.html"><i class="icon-22"></i></a>
-                                                                    </li>
+                                                                    {{-- <li><a href="index.html"><i class="icon-22"></i></a>
+                                                                    </li> --}}
                                                                 </ul>
                                                             </div>
                                                         </div>

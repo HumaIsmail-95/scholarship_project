@@ -18,6 +18,7 @@ use App\Models\StudentGallery;
 use App\Models\StudentTest;
 use App\Models\TestGallery;
 use App\Models\UniCourse;
+use App\Models\University;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Spatie\Permission\Models\Permission;
@@ -99,6 +100,16 @@ class FrontEndService
         try {
             $course = UniCourse::findorFail($id);
             return $course;
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $th;
+        }
+    }
+    public static function universityDetail($id)
+    {
+        try {
+            $response = University::findorFail($id);
+            return $response;
         } catch (\Throwable $th) {
             //throw $th;
             return $th;

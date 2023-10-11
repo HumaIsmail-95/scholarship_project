@@ -5,3 +5,7 @@
 .pagination.justify-content-center svg.w-5.h-5 {
     width: 20px !important;
 }
+
+.note-editor.note-frame.card {
+    z-index: 1;
+}

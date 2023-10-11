@@ -2,19 +2,12 @@
 @section('title', 'Programs Detail')
 @section('content')
     <div class="program-detail-page">
-
-
-
-
-
-
-
         @php
             $images = $programDetail->university->images;
             $i = 0;
             foreach ($images as $img) {
                 if ($img->type == 'logo') {
-                    $logo = $img->image_url;
+                    $programLogo = $img->image_url;
                 } elseif ($img->type == 'banner') {
                     $banner = $img->image_url;
                 } elseif ($img->type == 'UniGallery') {
@@ -23,6 +16,8 @@
                 }
             }
         @endphp
+
+
 
         <!-- Page Title -->
         <section class="page-title-2" style="background-image: url({{ $banner }});">
@@ -35,19 +30,19 @@
                 </div>
                 <div class="info-box clearfix">
                     <div class="left-column pull-left clearfix">
-                        <div class="image-box"><img src="{{ $logo }}" alt=""></div>
+                        <div class="image-box"><img src="{{ $programLogo }}" alt=""></div>
                         <h4>Field: {{ $programDetail->discipline->name }}<i class="icon-18"></i></h4>
                         <h4>Discipline: {{ $programDetail->degree->name }} </h4>
                         <span class="sell">{{ $programDetail->studyModel->name }}</span>
 
                         {{-- <ul class="rating clearfix">
-                            <li><i class="icon-17"></i></li>
-                            <li><i class="icon-17"></i></li>
-                            <li><i class="icon-17"></i></li>
-                            <li><i class="icon-17"></i></li>
-                            <li><i class="icon-17"></i></li>
-                            <li><a href="index.html">(32)</a></li>
-                        </ul> --}}
+                    <li><i class="icon-17"></i></li>
+                    <li><i class="icon-17"></i></li>
+                    <li><i class="icon-17"></i></li>
+                    <li><i class="icon-17"></i></li>
+                    <li><i class="icon-17"></i></li>
+                    <li><a href="index.html">(32)</a></li>
+                </ul> --}}
                         <h6><span></span>$ {{ $programDetail->tuition_fee }}
                             @if ($programDetail->tuition_fee_type == 1)
                                 Yearly
@@ -66,6 +61,11 @@
                 </div>
             </div>
         </section>
+
+
+
+
+
 
         <!-- End Page Title -->
         <!-- browse-add-details -->

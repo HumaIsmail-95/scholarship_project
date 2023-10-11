@@ -17,6 +17,9 @@ class CreateUniversityTable extends Migration
             $table->id();
             $table->string('name', 255);
             $table->string('country');
+            $table->boolean('featured')->default(0);
+            $table->longText('description')->nullable();
+
             $table->foreignId('created_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('deleted_by')->nullable()->constrained('users')->cascadeOnDelete();
