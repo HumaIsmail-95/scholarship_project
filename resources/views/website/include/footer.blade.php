@@ -4,42 +4,43 @@
           <div class="auto-container">
               <div class="widget-section">
                   <div class="row clearfix">
-                      <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                      <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
                           <div class="footer-widget logo-widget">
-                              <figure class="footer-logo"><a href="index.html"><img src="{{ $logo->image_url }}"
+                              <figure class="footer-logo"><a href="{{ route('home') }}"><img src="{{ $logo->image_url }}"
                                           alt=""></a>
                               </figure>
                               <div class="text">
-                                  <p>Lorem ipsum dolor amet consetetur adi pisicing elit sed eiusm tempor in
-                                      cididunt ut labore dolore magna aliqua enim ad minim venitam</p>
+                                  <p>{{ $footerData->introduction }}</p>
                               </div>
                               <ul class="social-links clearfix">
-                                  <li><a href="index.html"><i class="fab fa-facebook-f"></i></a></li>
-                                  <li><a href="index.html"><i class="fab fa-twitter"></i></a></li>
-                                  <li><a href="index.html"><i class="fab fa-instagram"></i></a></li>
-                                  <li><a href="index.html"><i class="fab fa-google-plus-g"></i></a></li>
-                                  <li><a href="index.html"><i class="fab fa-linkedin-in"></i></a></li>
+                                  <li><a href="{{ $footerData->facebook_link }}"><i class="fab fa-facebook-f"></i></a>
+                                  </li>
+                                  <li><a href="{{ $footerData->twitter_link }}"><i class="fab fa-twitter"></i></a></li>
+                                  {{-- <li><a href="index.html"><i class="fab fa-instagram"></i></a></li> --}}
+                                  {{-- <li><a href="index.html"><i class="fab fa-google-plus-g"></i></a></li> --}}
+                                  <li><a href="{{ $footerData->linkedin_link }}"><i class="fab fa-linkedin-in"></i></a>
+                                  </li>
                               </ul>
                           </div>
                       </div>
-                      <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                      <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
                           <div class="footer-widget links-widget ml-70">
                               <div class="widget-title">
                                   <h3>Services</h3>
                               </div>
                               <div class="widget-content">
                                   <ul class="links-list clearfix">
-                                      <li><a href="index.html">About Us</a></li>
-                                      <li><a href="index.html">Listing</a></li>
-                                      <li><a href="index.html">How It Works</a></li>
-                                      <li><a href="index.html">Our Services</a></li>
-                                      <li><a href="index.html">Our Blog</a></li>
-                                      <li><a href="index.html">Contact Us</a></li>
+                                      <li><a href="{{ route('about') }}">About Us</a></li>
+                                      <li><a href="{{ route('programs') }}">Programs</a></li>
+                                      <li><a href="{{ route('subscriptions') }}">Subscription</a></li>
+                                      <li><a href="{{ route('blogs') }}">Blog</a></li>
+                                      {{-- <li><a href="index.html">Our Blog</a></li> --}}
+                                      {{-- <li><a href="index.html">Contact Us</a></li> --}}
                                   </ul>
                               </div>
                           </div>
                       </div>
-                      <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                      {{-- <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
                           <div class="footer-widget post-widget">
                               <div class="widget-title">
                                   <h3>Top News</h3>
@@ -63,8 +64,8 @@
                                   </div>
                               </div>
                           </div>
-                      </div>
-                      <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                      </div> --}}
+                      <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
                           <div class="footer-widget contact-widget">
                               <div class="widget-title">
                                   <h3>Contacts</h3>
@@ -73,15 +74,15 @@
                                   <ul class="info-list clearfix">
                                       <li>
                                           <i class="fas fa-map-marker-alt"></i>
-                                          Flat 20, Reynolds Neck, North Helenaville, FV77 8WS
+                                          {{ $footerData->address }}
                                       </li>
                                       <li>
                                           <i class="fas fa-microphone"></i>
-                                          <a href="tel:23055873407">+2(305) 587-3407</a>
+                                          <a href="tel:23055873407">{{ $footerData->mobile_1 }}</a>
                                       </li>
                                       <li>
                                           <i class="fas fa-envelope"></i>
-                                          <a href="mailto:info@example.com">info@example.com</a>
+                                          <a href="mailto:info@example.com">{{ $footerData->mobile_2 }}</a>
                                       </li>
                                   </ul>
                               </div>
@@ -95,11 +96,12 @@
           <div class="auto-container">
               <div class="footer-inner clearfix">
                   <div class="copyright pull-left">
-                      <p><a href="index.html">Clasifico</a> &copy; 2020 All Right Reserved</p>
+                      <p><a href="{{ route('home') }}">{{ config('APP_NAME') }}</a> &copy;
+                          {{ $footerData->copy_right }}</p>
                   </div>
                   <ul class="footer-nav pull-right clearfix">
-                      <li><a href="index.html">Terms of Service</a></li>
-                      <li><a href="index.html">Privacy Policy</a></li>
+                      <li><a href="#">Terms of Service</a></li>
+                      <li><a href="#">Privacy Policy</a></li>
                   </ul>
               </div>
           </div>

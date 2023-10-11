@@ -87,6 +87,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::get('banners', [BannerController::class, 'getBanner'])->name('banners');
     Route::put('banners', [BannerController::class, 'update'])->name('banners.update');
 
+
     // stripe setting
     Route::get('stripe/setting', [StripeSettingController::class, 'index'])->name('stripe.setting.index');
     Route::put('stripe/setting', [StripeSettingController::class, 'update'])->name('stripe.setting.update');

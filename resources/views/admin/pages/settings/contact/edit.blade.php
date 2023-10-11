@@ -26,9 +26,9 @@
                         <h4 class="card-title">Edit Contact Us </h4>
                         <form action="{{ route('admin.settings.contact.update', $data->id) }}" method="POST"
                             id="privacy_form">
+                            @csrf
+                            @method('PUT')
                             <div class="row">
-                                @csrf
-                                @method('PUT')
                                 <label class="form-label" for="duration">contact us
                                 </label>
                                 <textarea name="contact_us" class="summernote" id="summernote">{{ $data->contact_us }}</textarea>
@@ -38,7 +38,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-6  col-md-6 col-sm-12">
-                                    <label class="form-label" for="duration">Mobile 1
+                                    <label class="form-label" for="duration">Mobile
                                     </label>
                                     <input type="text" class="form-control" id="mobile_1" name="mobile_1"
                                         placeholder="Enter a mobile_1" value="{{ $data->mobile_1 }}" required>
@@ -47,9 +47,9 @@
                                     @enderror
                                 </div>
                                 <div class="col-lg-6  col-md-6 col-sm-12">
-                                    <label class="form-label" for="duration">Mobile 1
+                                    <label class="form-label" for="duration">Email
                                     </label>
-                                    <input type="txt" class="form-control" id="mobile_2" name="mobile_2"
+                                    <input type="text" class="form-control" id="mobile_2" name="mobile_2"
                                         placeholder="Enter a mobile_2" value="{{ $data->mobile_2 }}" required>
                                     @error('mobile_2')
                                         <p class="text-danger">{{ $message }}</p>
@@ -60,6 +60,52 @@
                                     </label>
                                     <textarea name="address" class="form-control    " id="" cols="30" rows="2">{{ $data->address }}</textarea>
                                     @error('address')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6  col-md-6 col-sm-12">
+                                    <label class="form-label" for="duration">introduction
+                                    </label>
+                                    <textarea name="introduction" class="form-control    " id="" cols="30" rows="2">{{ $data->introduction }}</textarea>
+                                    @error('introduction')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-6  col-md-6 col-sm-12">
+                                    <label class="form-label" for="duration">Copy Right
+                                    </label>
+                                    <input type="text" class="form-control" id="copy_right" name="copy_right"
+                                        placeholder="Enter a copy_right" value="{{ $data->copy_right }}" required>
+                                    @error('copy_right')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-6  col-md-6 col-sm-12">
+                                    <label class="form-label" for="duration">Facebook Link
+                                    </label>
+                                    <input type="text" class="form-control" id="facebook_link" name="facebook_link"
+                                        placeholder="Enter a facebook_link" value="{{ $data->facebook_link }}" required>
+                                    @error('facebook_link')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-6  col-md-6 col-sm-12">
+                                    <label class="form-label" for="duration">Twitter Link
+                                    </label>
+                                    <input type="text" class="form-control" id="twitter_link" name="twitter_link"
+                                        placeholder="Enter a twitter_link" value="{{ $data->twitter_link }}" required>
+                                    @error('twitter_link')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-6  col-md-6 col-sm-12">
+                                    <label class="form-label" for="duration">LinkedIn Link
+                                    </label>
+                                    <input type="text" class="form-control" id="linkedin_link" name="linkedin_link"
+                                        placeholder="Enter a linkedin_link" value="{{ $data->linkedin_link }}" required>
+                                    @error('linkedin_link')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>

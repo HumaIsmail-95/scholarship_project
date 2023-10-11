@@ -13,13 +13,7 @@
                                 <h2>About Our Company</h2>
                             </div>
                             <div class="text">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius mod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi aliquip ex ea commodo consequat.</p>
-                                <h3>What We Do</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius mod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi aliquip ex ea commodo consequat.</p>
+                                <p>{!! $about->about_us !!}</p>
                             </div>
                         </div>
                     </div>

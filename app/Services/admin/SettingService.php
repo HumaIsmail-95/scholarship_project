@@ -33,7 +33,11 @@ class SettingService
             'contact_us' => $data['contact_us'],
             'mobile_1' => $data['mobile_1'],
             'mobile_2' => $data['mobile_2'],
-            'mobile_2' => $data['mobile_2'],
+            'introduction' => $data['introduction'],
+            'facebook_link' => $data['facebook_link'],
+            'twitter_link' => $data['twitter_link'],
+            'linkedin_link' => $data['linkedin_link'],
+            'copy_right' => $data['copy_right'],
         ];
         $response = $setting->update($contactData);
         DB::commit();

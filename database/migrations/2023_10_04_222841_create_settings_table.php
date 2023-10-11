@@ -19,8 +19,12 @@ class CreateSettingsTable extends Migration
             $table->longText('contact_us')->nullable();
             $table->longText('privacy_policy')->nullable();
             $table->longText('copy_right')->nullable();
+            $table->longText('introduction')->nullable()->comment('footer small intro one linner');
+            $table->string('facebook_link')->nullable();
+            $table->string('twitter_link')->nullable();
+            $table->string('linkedin_link')->nullable();
             $table->string('mobile_1')->nullable();
-            $table->string('mobile_2')->nullable();
+            $table->string('mobile_2')->nullable()->comment('mobile2 is email');
             $table->string('address')->nullable();
             $table->foreignId('created_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->cascadeOnDelete();

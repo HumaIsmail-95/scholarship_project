@@ -13,7 +13,8 @@ class Setting extends Model
         'about_us',
         'contact_us',
         'privacy_policy',
-        'copy_right',
+        'copy_right', 'introduction',
         'mobile_1', 'mobile_2', 'address',
+        'facebook_link', 'twitter_link', 'linkedin_link',
     ];
 }

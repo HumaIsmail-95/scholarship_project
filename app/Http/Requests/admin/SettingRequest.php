@@ -33,6 +33,10 @@ class SettingRequest extends FormRequest
             'mobile_1' => ['nullable'],
             'mobile_2' => ['nullable'],
             'address' => ['nullable'],
+            'introduction' => ['nullable'],
+            'facebook_link' => ['nullable'],
+            'twitter_link' => ['nullable'],
+            'linkedin_link' => ['nullable'],
 
         ];
     }

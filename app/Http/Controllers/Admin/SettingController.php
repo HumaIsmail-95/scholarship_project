@@ -38,7 +38,7 @@ class SettingController extends Controller
     public function contactUs()
     {
         try {
-            $data = Setting::select('id', 'contact_us', 'mobile_1', 'mobile_2', 'address')->first();
+            $data = Setting::select('id', 'contact_us', 'mobile_1', 'mobile_2', 'address', 'copy_right', 'introduction', 'facebook_link', 'twitter_link', 'linkedin_link')->first();
             // dd($data//);
             return view('admin.pages.settings.contact.edit', compact('data'));
             //code...

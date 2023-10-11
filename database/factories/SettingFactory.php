@@ -16,9 +16,11 @@ class SettingFactory extends Factory
         return [
             'about_us' => $this->faker->paragraph(),
             'contact_us' => $this->faker->lastName(),
+            'copy_right' => 'all copy rights re reserved by company',
+            'introduction' => 'this is mall introfuction baout the website',
             'privacy_policy' => $this->faker->phoneNumber(),
             'mobile_1' => $this->faker->phoneNumber(),
-            'mobile_2' => $this->faker->phoneNumber(),
+            'mobile_2' => $this->faker->email(),
             'address' =>  $this->faker->address(),
         ];
     }
