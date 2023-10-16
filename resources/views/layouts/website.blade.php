@@ -94,7 +94,26 @@
         </button>
     </div>
 
+    <script>
+        function showToaster(icon, heading, text) {
+            $.toast({
+                heading: heading,
+                text: text,
+                position: 'top-right',
+                loaderBg: '#ff6849',
+                icon: icon,
+                hideAfter: 3500,
+                stack: 6
+            });
+        }
+    </script>
+    @if (Session::has('message'))
+        {{-- {{ dd(Session::all()) }} --}}
 
+        <script>
+            showToaster('{{ Session::get('icon') }}', ' {{ Session::get('heading') }}', '{{ Session::get('message') }}');
+        </script>
+    @endif
     <!-- jequery plugins -->
     <script src="{{ asset('website/assets/js/jquery.js') }} "></script>
     <script src="{{ asset('website/assets/js/popper.min.js') }} "></script>

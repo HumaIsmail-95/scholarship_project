@@ -99,8 +99,10 @@
             <div class="sec-title">
                 <span>Categories</span>
                 <h2>Explore by Courses</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing sed do eiusmod tempor incididunt labore
-                    <br />dolore magna aliqua enim.
+                <p> University courses, also known as college courses or academic programs, are structured educational
+                    offerings provided by universities and colleges to help students gain knowledge and expertise in various
+                    fields of study. These courses are a fundamental component of higher education and are designed to
+                    provide students with a well-rounded education and specialized knowledge in their chosen disciplines.
                 </p>
             </div>
             <div class="inner-content clearfix">
@@ -714,8 +716,7 @@
 
     <!-- testimonial-section -->
     <section class="testimonial-section bg-color-1 sec-pad">
-        <figure class="image-layer"><img src="{{ asset('website/assets/images/resource/testimonial-image-1.png') }}"
-                alt="">
+        <figure class="image-layer"><img src="{{ asset('website/assets/images/tset.JPG') }}" alt="">
         </figure>
         <div class="anim-icon">
             <div class="icon anim-icon-1 rotate-me"
@@ -750,50 +751,45 @@
                         <div class="single-item-carousel owl-carousel owl-theme owl-dots-none nav-style-one">
                             <div class="testimonial-content">
                                 <div class="text">
-                                    <p>“ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. enim minim veniam quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip consequat aute ux irure
-                                        dolor in reprehen.”</p>
+                                    <p>“ Working with {{ env('APP_NAME') }} has been a fantastic experience. From the
+                                        moment I engaged their services, I was impressed by their professionalism, attention
+                                        to detail, and commitment to delivering high-quality results. They truly understand
+                                        the needs of their clients and go above and beyond to meet them..”</p>
                                 </div>
                                 <div class="author-box">
-                                    <figure class="author-thumb"><img
-                                            src="{{ asset('website/assets/images/resource/testimonial-1.png') }}"
+                                    <figure class="author-thumb"><img src="{{ asset('admin/images/users/test1.jpg') }}"
                                             alt="">
                                     </figure>
                                     <h3>Amelia Anna</h3>
-                                    <span class="designation">Senior Martketer</span>
+                                    <span class="designation">Student</span>
                                 </div>
                             </div>
                             <div class="testimonial-content">
                                 <div class="text">
-                                    <p>“ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. enim minim veniam quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip consequat aute ux irure
-                                        dolor in reprehen.”</p>
+                                    <p>“I am thrilled with my experience on this website. It has completely exceeded my
+                                        expectations. The user-friendly interface and seamless navigation make it a joy to
+                                        explore. The content is not only informative but also presented in an engaging and
+                                        visually appealing way.”</p>
                                 </div>
                                 <div class="author-box">
-                                    <figure class="author-thumb"><img
-                                            src="{{ asset('website/assets/images/resource/testimonial-1.png') }}"
+                                    <figure class="author-thumb"><img src="{{ asset('admin/images/users/test2.jpg') }}"
                                             alt="">
                                     </figure>
-                                    <h3>Amelia Anna</h3>
-                                    <span class="designation">Senior Martketer</span>
+                                    <h3>Allen Parish</h3>
+                                    <span class="designation">Student</span>
                                 </div>
                             </div>
                             <div class="testimonial-content">
                                 <div class="text">
-                                    <p>“ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. enim minim veniam quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip consequat aute ux irure
-                                        dolor in reprehen.”</p>
+                                    <p>“ I would highly recommend this website to anyone looking for a valuable and
+                                        enjoyable online experience. Keep up the great work!.”</p>
                                 </div>
                                 <div class="author-box">
-                                    <figure class="author-thumb"><img
-                                            src="{{ asset('website/assets/images/resource/testimonial-1.png') }}"
+                                    <figure class="author-thumb"><img src="{{ asset('admin/images/users/test3.jpg') }}"
                                             alt="">
                                     </figure>
-                                    <h3>Amelia Anna</h3>
-                                    <span class="designation">Senior Martketer</span>
+                                    <h3>Sarah Jane</h3>
+                                    <span class="designation">Student</span>
                                 </div>
                             </div>
                         </div>
@@ -811,8 +807,11 @@
             <div class="sec-title centred">
                 <span>Features</span>
                 <h2>Featured Universities</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing sed do eiusmod tempor incididunt labore
-                    <br />dolore magna aliqua enim.
+                <p>A university is an institution of higher learning that plays a pivotal role in the education and
+                    development of individuals. These institutions are known for their diverse academic programs and the
+                    pursuit of knowledge in various fields, such as science, arts, engineering, medicine, and social
+                    sciences. Universities serve as hubs of intellectual exploration, where students and scholars engage in
+                    research, critical thinking, and the exchange of ideas.
                 </p>
             </div>
             <div class="tabs-box">
@@ -1207,8 +1206,12 @@
                 <div class="sec-title centred">
                     <span>Top Places</span>
                     <h2>Most Popular Cities</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing sed do eiusmod tempor incididunt labore
-                        <br />dolore magna aliqua enim.
+                    <p>
+                        China is a vast and diverse country, home to numerous populous cities that showcase a rich tapestry
+                        of culture, history, and modernity. Among the most popular cities in China are Beijing, the nation's
+                        capital and a center of political and historical significance. Shanghai, on the other hand, is a
+                        bustling metropolis known for its futuristic skyline and global financial hub status. Guangzhou and
+                        Shenzhen in the south are known for their rapid development, thriving tech industries
                     </p>
                 </div>
                 <div class="row clearfix d-flex justify-content-center">

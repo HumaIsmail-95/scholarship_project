@@ -25,6 +25,8 @@ class CreateUsersTable extends Migration
             $table->string('image_url')->nullable();
             $table->string('image_folder')->nullable();
             $table->string('image_name')->nullable();
+            $table->boolean('subscription')->nullable()->default(false);
+            $table->integer('profile_percentage')->default(0);
             $table->foreignId('created_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('deleted_by')->nullable()->constrained('users')->cascadeOnDelete();

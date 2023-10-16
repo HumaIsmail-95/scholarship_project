@@ -96,6 +96,17 @@ class FrontendController extends Controller
         $footerData = Setting::select('introduction', 'copy_right', 'facebook_link', 'twitter_link', 'linkedin_link', 'address', 'mobile_1', 'mobile_2')->first();
         return view('website.pages.about_us', compact('logo', 'banner', 'disciplines', 'cities', 'footer', 'about', 'footerData'));
     }
+    public function privacy()
+    {
+        $privacy = Setting::select('privacy_policy')->first();
+        $disciplines = Discipline::all();
+        $cities = City::where('countryID', 'LIKE', 'CHN');
+        $logo = Banner::where('page_name', 'logo')->select('image_url')->first();
+        $banner = Banner::where('page_name', 'privacy')->select('image_url')->first();
+        $footer = Banner::where('page_name', 'footer')->select('image_url')->first();
+        $footerData = Setting::select('introduction', 'copy_right', 'facebook_link', 'twitter_link', 'linkedin_link', 'address', 'mobile_1', 'mobile_2')->first();
+        return view('website.pages.privacy', compact('logo', 'banner', 'disciplines', 'cities', 'footer', 'privacy', 'footerData'));
+    }
     public function blogs()
     {
         $disciplines = Discipline::all();

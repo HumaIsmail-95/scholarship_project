@@ -193,12 +193,32 @@
 
                                                         </div>
                                                         <div class="lower-content">
-                                                            <div class="author-box">
-                                                                <div class="inner" style="padding:0px">
+                                                            <div class="author-box" style="min-height: 65px;">
+                                                                <div class="inner" style="">
                                                                     @if ($program->university->featured)
                                                                         <h6>Featured <i class="icon-18"></i></h6>
                                                                     @endif
-                                                                    <span>Apply Now</span>
+                                                                    @if (Auth::user())
+                                                                        @if (Auth::user()->subscription)
+                                                                            @if (Auth::user()->profile_percentage > 100)
+                                                                                <a href="{{ route('myUniApp') }}"
+                                                                                    class=""><span>Apply
+                                                                                        Now</span></a>
+                                                                            @else
+                                                                                <a href="{{ route('reviewApplication', $program->id) }}"
+                                                                                    class=""><span>Apply
+                                                                                        Now</span></a>
+                                                                            @endif
+                                                                        @else
+                                                                            <a href="{{ route('subscriptions') }}"
+                                                                                class=""><span>Apply
+                                                                                    Now</span></a>
+                                                                        @endif
+                                                                    @else
+                                                                        <a href="{{ route('login') }}"
+                                                                            class=""><span>Apply Now</span></a>
+                                                                    @endif
+
                                                                 </div>
                                                             </div>
                                                             <div class="category"><i class="fas fa-tags"></i>

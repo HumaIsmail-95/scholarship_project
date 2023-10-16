@@ -44,13 +44,7 @@
                     <li><a href="index.html">(32)</a></li>
                 </ul> --}}
                         <h6><span></span>$ {{ $programDetail->tuition_fee }}
-                            @if ($programDetail->tuition_fee_type == 1)
-                                Yearly
-                            @elseif($programDetail->tuition_fee_type == 2)
-                                per Semester
-                            @elseif($programDetail->tuition_fee_type == 3)
-                                per Month
-                            @endif
+                            ({{ getTuitionFeeType($programDetail->tuition_fee_type) }})
                         </h6>
 
                     </div>
@@ -259,13 +253,8 @@
                                     <ul class="category-list">
                                         <li class="item-list">
                                             <h6><span></span>$ {{ $programDetail->tuition_fee }}
-                                                @if ($programDetail->tuition_fee_type == 1)
-                                                    Yearly
-                                                @elseif($programDetail->tuition_fee_type == 2)
-                                                    per Semester
-                                                @elseif($programDetail->tuition_fee_type == 3)
-                                                    per Month
-                                                @endif
+                                                {{ getTuitionFeeType($programDetail->tuition_fee_type) }}
+
                                             </h6>
                                         </li>
                                     </ul>

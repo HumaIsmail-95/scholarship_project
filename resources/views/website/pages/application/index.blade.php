@@ -23,7 +23,44 @@
                 </div>
             </div>
         </div>
+        @include('website.components.profile_completion')
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Applied Courses</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach ($applications as $application)
+                @php
+                    foreach ($application->course->university->images as $img) {
+                        if ($img->type == 'logo') {
+                            $logo = $img->image_url;
+                        }
+                    }
+
+                @endphp
+                <div class="col-lg-6 colmd-6 col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="{{ isset($logo) ? $logo : '' }}" style="width:100px;height:100px" alt="">
+                            <h4 class="card-title">{{ $application->course->name }}</h4>
+                            <p class="mb-0">{{ $application->course->university->name }}</p>
+                            <br />
+                            <br />
+                            <p class="">Applied on {{ $application->created_at }}</p>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+
+        </div>
     </div>
+
+
     <!-- ============================================================== -->
     <!-- End Container fluid  -->
     <!-- ============================================================== -->

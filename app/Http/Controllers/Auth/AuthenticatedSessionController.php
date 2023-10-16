@@ -29,14 +29,13 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request)
     {
         $request->authenticate();
-
         $request->session()->regenerate();
+        if (isset($request->page) && $request->page == 'subscription-packages') {
+            return redirect()->route('subscriptions');
+        }
         if (Auth::user()->type == 'student') {
-            // return redirect(RouteServiceProvider::WEBSITE);
             return redirect()->intended(RouteServiceProvider::WEBSITE);
-        } else {
-            // dd(Auth::user()->type);
-            // return redirect(RouteServiceProvider::HOME);
+        } elseif (Auth::user()->type == 'superAdmin') {
             return redirect()->intended(RouteServiceProvider::HOME);
         }
     }
@@ -50,6 +49,16 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request)
     {
         Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+    }
+    public function destroyWebsite(Request $request)
+    {
+        Auth::guard('website')->logout();
 
         $request->session()->invalidate();
 

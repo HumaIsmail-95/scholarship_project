@@ -1,12 +1,12 @@
 <?php
 
 use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Website\PaymentStripeController;
 use App\Http\Controllers\Website\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Website\FrontendController;
 use App\Http\Controllers\Website\MyApplicationsController;
-
-
+use App\Http\Controllers\Website\SubscriptionController;
 
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('/all-courses', [FrontendController::class, 'allCourses'])->name('allCourses'); //getting all disciplines
@@ -17,9 +17,10 @@ Route::get('courses/get-city', [CourseController::class, 'getCity'])->name('cour
 Route::get('courses/get-university', [CourseController::class, 'getUniversity'])->name('courses.get-university');
 Route::get('/universities/{university}/university-details', [FrontendController::class, 'universityDetail'])->name('university-detail');
 Route::get('/about', [FrontendController::class, 'about'])->name('about');
+Route::get('/privacy', [FrontendController::class, 'privacy'])->name('privacy');
 Route::get('/blogs', [FrontendController::class, 'blogs'])->name('blogs');
 
-Route::middleware(['auth', 'web'])->group(function () {
+Route::middleware(['auth', 'website'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/my-uni-app', [DashboardController::class, 'myUniApp'])->name('myUniApp');
@@ -29,4 +30,11 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::post('/store-documents/{user}', [DashboardController::class, 'storeDocuments'])->name('storeDocuments');
 
     Route::get('/my-applications', [MyApplicationsController::class, 'myApplications'])->name('myApplications');
+    Route::get('/review-my-application/{program}', [MyApplicationsController::class, 'reviewApplication'])->name('reviewApplication');
+    Route::get('/finalize-my-application/{program}', [MyApplicationsController::class, 'finalizeApplication'])->name('finalizeApplication');
+    Route::post('/finalize-my-application/{program}', [MyApplicationsController::class, 'submiteApplication'])->name('submiteApplication');
+    Route::get('/overviews', [MyApplicationsController::class, 'overviews'])->name('overviews');
+    //
+    Route::post('stripe', [PaymentStripeController::class, 'stripePost'])->name('stripePost');
+    // Route::get('/add-subscription', [SubscriptionController::class, 'addSubscription'])->name('addSubcription');
 });

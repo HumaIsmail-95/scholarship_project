@@ -347,9 +347,14 @@
                         <!-- text-->
                         <div class="dropdown-divider"></div>
                         <!-- text-->
-                        <a href="{{ route('logout') }}" class="dropdown-item"><i class="fa fa-power-off"></i>
-                            Logout</a>
-                        <!-- text-->
+                        @if (Auth::user()->type == 'Student')
+                            <a href="{{ route('website.logout') }}" class="dropdown-item"><i
+                                    class="fa fa-power-off"></i>
+                                Logout</a>
+                        @else
+                            <a href="{{ route('logout') }}" class="dropdown-item"><i class="fa fa-power-off"></i>
+                                Logout</a>
+                        @endif
                     </div>
                 </li>
                 <!-- ============================================================== -->

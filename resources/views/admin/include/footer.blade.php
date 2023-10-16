@@ -2,8 +2,11 @@
     <!-- footer -->
     <!-- ============================================================== -->
     <footer class="footer">
-        © 2021 Eliteadmin by themedesigner.in
-        <a href="https://www.wrappixel.com/">WrapPixel</a>
+        @php
+            $footer = \App\Models\Setting::select('copy_right')->first();
+        @endphp
+        {{ $footer->copy_right }}
+        <a href="{{ route('home') }}">{{ env('APP_NAME') }}</a>
     </footer>
     <!-- ============================================================== -->
     <!-- End footer -->

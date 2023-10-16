@@ -43,6 +43,11 @@
                         @csrf
                         <h3 class="text-center m-b-20">Sign In</h3>
                         <div class="form-group ">
+                            @php
+                                // $route = request()->segments();
+                                $route = Route::current()->parameter('page');
+                            @endphp
+                            <input type="hidden" name="page" value="{{ $route }}">
                             <div class="col-xs-12">
                                 <input class="form-control" type="email" :value="old('email')" required=""
                                     placeholder="Email" name='email'>

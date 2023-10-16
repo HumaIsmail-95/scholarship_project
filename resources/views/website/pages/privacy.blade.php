@@ -1,5 +1,5 @@
 @extends('layouts.website')
-@section('title', 'About Us')
+@section('title', 'Privacy Policy')
 @section('content')
     <!-- about-section -->
     <section class="about-section">
@@ -10,10 +10,10 @@
                         <div class="content-box">
                             <div class="sec-title">
                                 <span>About</span>
-                                <h2>About Our Company</h2>
+                                <h2>Privacy Policy</h2>
                             </div>
                             <div class="text">
-                                <p>{!! $about->about_us !!}</p>
+                                <p>{!! $privacy->privacy_policy !!}</p>
                             </div>
                         </div>
                     </div>

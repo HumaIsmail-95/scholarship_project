@@ -22,8 +22,12 @@
             <div class="sec-title centred">
                 {{-- <span>Features</span> --}}
                 <h2>All Courses</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing sed do eiusmod tempor incididunt labore <br />dolore
-                    magna aliqua enim.</p>
+                <p>
+                    University courses, also known as college courses or academic programs, are structured educational
+                    offerings provided by universities and colleges to help students gain knowledge and expertise in various
+                    fields of study. These courses are a fundamental component of higher education and are designed to
+                    provide students with a well-rounded education and specialized knowledge in their chosen disciplines.
+                </p>
             </div>
             <div class="row clearfix">
                 @foreach ($disciplines as $discipline)

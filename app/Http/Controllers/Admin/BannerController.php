@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Storage;
 
 class BannerController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:list-banner', ['only' => ['getBanner']]);
+        $this->middleware('permission:update-banner', ['only' => ['edit', 'update']]);
+    }
     public static function getBanner()
     {
 

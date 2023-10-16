@@ -27,9 +27,9 @@ class StudentTestRequest extends FormRequest
         return [
             'user_id' => 'required',
             'native_english' => 'nullable',
-            'ielts_score' => 'required',
-            'pearson_score' => 'required',
-            'toelf_score' => 'required',
+            'ielts_score' => 'required|integer',
+            'pearson_score' => 'required|integer',
+            'toelf_score' => 'required|integer',
             'pearson' => 'nullable|max:2048|mimes:pdf',
             'moi' => 'nullable|max:2048|mimes:pdf',
             'ielts' => 'nullable|max:2048|mimes:pdf',

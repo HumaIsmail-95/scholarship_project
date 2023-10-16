@@ -28,8 +28,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/sends', function () {
+    return view('website.pages.mails.application_sent');
 });
 
 

@@ -11,6 +11,17 @@ use Illuminate\Support\Facades\DB;
 
 class SettingController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:view-privacy-policy', ['only' => ['privacyPolicy']]);
+        $this->middleware('permission:edit-privacy-policy', ['only' => ['edit', 'updatePrivacy']]);
+
+        $this->middleware('permission:view-about-us', ['only' => ['edit', 'aboutUs']]);
+        $this->middleware('permission:edit-about-us', ['only' => ['edit', 'updateAbout']]);
+
+        $this->middleware('permission:view-contact-us', ['only' => ['edit', 'updateContact']]);
+        $this->middleware('permission:edit-contact-us', ['only' => ['edit', 'updateContact']]);
+    }
     public function privacyPolicy()
     {
         try {

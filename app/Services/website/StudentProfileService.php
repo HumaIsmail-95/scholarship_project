@@ -115,6 +115,12 @@ class StudentProfileService
                 StudentGallery::create($doc);
             endif;
         }
+        $personal = $user->personal;
+        $education = $user->education;
+        $test = $user->test;
+        $document = $user->document;
+        $percentage = ($personal + $education + $test + $document) * 25;
+        $user->update(['profile_percentage' => $percentage, 'personal' => 1]);
         DB::commit();
         $response = ['status' => true, 'icon' => 'success', 'heading' => 'Success', 'message' => 'User added successfully.', 'user' => $user];
 
@@ -194,6 +200,12 @@ class StudentProfileService
             ];
             StudentExperience::create($experienceData);
         }
+        $personal = $user->personal;
+        $education = $user->education;
+        $test = $user->test;
+        $document = $user->document;
+        $percentage = ($personal + $education + $test + $document) * 25;
+        $user->update(['profile_percentage' => $percentage, 'education' => 1]);
         DB::commit();
         $response = ['status' => true, 'icon' => 'success', 'heading' => 'Success', 'message' => 'User added successfully.', 'user' => $user];
 
@@ -339,6 +351,12 @@ class StudentProfileService
                 TestGallery::create($doc);
             endif;
         }
+        $personal = $user->personal;
+        $education = $user->education;
+        $test = $user->test;
+        $document = $user->document;
+        $percentage = ($personal + $education + $test + $document) * 25;
+        $user->update(['profile_percentage' => $percentage, 'test' => 1]);
         DB::commit();
         $response = ['status' => true, 'icon' => 'success', 'heading' => 'Success', 'message' => 'User added successfully.', 'user' => $user];
         return $response;
@@ -453,6 +471,12 @@ class StudentProfileService
                 DocumentGallery::create($doc);
             }
         }
+        $personal = $user->personal;
+        $education = $user->education;
+        $test = $user->test;
+        $document = $user->document;
+        $percentage = ($personal + $education + $test + $document) * 25;
+        $user->update(['profile_percentage' => $percentage + 25, 'document' => 1]);
         DB::commit();
         $response = ['status' => true, 'icon' => 'success', 'heading' => 'Success', 'message' => 'User added successfully.', 'user' => $user];
         return $response;

@@ -45,7 +45,24 @@
                                     </ul>
                                 </div>
                                 <div class="table-footer">
-                                    <a href="{{ Auth::user() ? route('dashboard') : route('login') }}">Register Now</a>
+                                    @if (Auth::user())
+                                        @if (Auth::user() && Auth::user()->subscription == 0)
+                                            {{-- <a
+                                       href="{{ Auth::user() ? route('addSubscription', $package->id) : route('login') }}">Register
+                                       Now</a> --}}
+                                            <a type="button" class=""
+                                                onclick="openPaymentModal({{ json_encode($package) }})">
+                                                Subscribe Now
+                                            </a>
+                                        @elseif (Auth::user()->subscription)
+                                            {{-- <a href="javascript:void()">Subscribed
+                                   </a> --}}
+                                        @endif
+                                    @else
+                                        <a href="{{ route('login', 'subscription-packages') }}">Register
+                                            Now</a>
+                                    @endif
+
                                 </div>
                             </div>
                         </div>
@@ -54,8 +71,150 @@
             </div>
         </div>
     </section>
-    <!-- pricing-section end -->
+    <div class="modal fade" id="packageModal" tabindex="-1" role="dialog" aria-labelledby="packageModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="packageModalLabel">Pay through Stripe</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form role="form" action="{{ route('stripePost') }}" method="post" class="require-validation"
+                        data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
+                        @csrf
+                        <input type="hidden" id="package_id" name="package_id" value="">
+                        <input type="hidden" id="price" name="price" value="">
+                        <input type="hidden" id="program_no" name="program_no" value="">
+
+                        <div class='form-group required'>
+                            <label class='control-label'>Name on Card</label> <input class='form-control' size='4'
+                                type='text' value="huma">
+                        </div>
+
+                        <div class='form-group card required'>
+                            <label class='control-label'>Card Number</label> <input autocomplete='off'
+                                class='form-control card-number' min='16' type='text' value="4242424242424242">
+                        </div>
+
+                        <div class="d-flex">
+                            <div class='col-md-4 form-group cvc required'>
+                                <label class='control-label'>CVC</label> <input autocomplete='off'
+                                    class='form-control card-cvc' placeholder='ex. 311' size='4' value="123"
+                                    type='text'>
+                            </div>
+                            <div class='col-md-4 form-group expiration required'>
+                                <label class='control-label'>Expiration Month</label> <input
+                                    class='form-control card-expiry-month' placeholder='MM' size='2' value="02"
+                                    type='text'>
+                            </div>
+                            <div class='col-md-4 form-group expiration required'>
+                                <label class='control-label'>Expiration Year</label> <input
+                                    class='form-control card-expiry-year' placeholder='YYYY' size='4' value="2025"
+                                    type='text'>
+                            </div>
+                        </div>
+
+                        <div class='col-md-12 error form-group hide' style="display:none">
+                            <div class='alert-danger alert'>Please correct the errors and try
+                                again.</div>
+                        </div>
+                        <div class="modal-footer">
+                            <a type="button" class="btn btn-dark" data-dismiss="modal">Close</a>
+                            <button type="submit" class="btn btn-priamry">Pay
+                                Now ( <span id="span_price"></span> )</button>
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 @endsection
 @section('scripts')
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+    <script type="text/javascript">
+        function openPaymentModal(package) {
+            console.log(' i m hereopenPaymentModal', package);
+            document.getElementById('price').value = package.price;
+            document.getElementById('package_id').value = package.id;
+
+            document.getElementById('program_no').value = package.program_no;
+            document.getElementById('span_price').innerHTML = package.price;
+            $("#packageModal").modal('show')
+        }
+        $(function() {
+
+            /*------------------------------------------
+            --------------------------------------------
+            Stripe Payment Code
+            --------------------------------------------
+            --------------------------------------------*/
+
+            var $form = $(".require-validation");
+
+            $('form.require-validation').bind('submit', function(e) {
+                var $form = $(".require-validation"),
+                    inputSelector = ['input[type=email]', 'input[type=password]',
+                        'input[type=text]', 'input[type=file]',
+                        'textarea'
+                    ].join(', '),
+                    $inputs = $form.find('.required').find(inputSelector),
+                    $errorMessage = $form.find('div.error'),
+                    valid = true;
+                $errorMessage.addClass('hide');
+
+                $('.has-error').removeClass('has-error');
+                $inputs.each(function(i, el) {
+                    var $input = $(el);
+                    if ($input.val() === '') {
+                        $input.parent().addClass('has-error');
+                        $errorMessage.removeClass('hide');
+                        e.preventDefault();
+                    }
+                });
+
+                if (!$form.data('cc-on-file')) {
+                    e.preventDefault();
+                    Stripe.setPublishableKey($form.data('stripe-publishable-key'));
+                    Stripe.createToken({
+                        number: $('.card-number').val(),
+                        cvc: $('.card-cvc').val(),
+                        exp_month: $('.card-expiry-month').val(),
+                        exp_year: $('.card-expiry-year').val()
+                    }, stripeResponseHandler);
+                }
+
+            });
+
+            /*------------------------------------------
+            --------------------------------------------
+            Stripe Response Handler
+            --------------------------------------------
+            --------------------------------------------*/
+            function stripeResponseHandler(status, response) {
+                if (response.error) {
+                    $('.error')
+                        .removeClass('hide')
+                        .find('.alert')
+                        .text(response.error.message);
+                } else {
+                    /* token contains id, last4, and card type */
+                    var token = response['id'];
+
+                    $form.find('input[type=text]').empty();
+                    $form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
+                    $form.get(0).submit();
+                }
+            }
+
+        });
+    </script>
 
 @endsection

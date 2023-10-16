@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class AddColumnToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('stripe_id')->nullable()->index();
-            $table->string('program_no')->nullable();
-            $table->string('pm_type')->nullable();
-            $table->string('pm_last_four', 4)->nullable();
-            $table->timestamp('trial_ends_at')->nullable();
+            //
+            $table->boolean('personal')->default(false)->after('profile_percentage');
+            $table->boolean('education')->default(false)->after('personal');
+            $table->boolean('test')->default(false)->after('education');
+            $table->boolean('document')->default(false)->after('test');
+
         });
     }
 
@@ -30,12 +31,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn([
-                'stripe_id',
-                'pm_type',
-                'pm_last_four',
-                'trial_ends_at',
-            ]);
+            $table->dropColumn(['personal','education','test','document']);
+            //
         });
     }
-};
+}

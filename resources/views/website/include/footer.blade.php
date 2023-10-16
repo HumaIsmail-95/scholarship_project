@@ -30,10 +30,11 @@
                               </div>
                               <div class="widget-content">
                                   <ul class="links-list clearfix">
+                                      <li><a href="{{ route('privacy') }}">Privacy Policy</a></li>
                                       <li><a href="{{ route('about') }}">About Us</a></li>
                                       <li><a href="{{ route('programs') }}">Programs</a></li>
                                       <li><a href="{{ route('subscriptions') }}">Subscription</a></li>
-                                      <li><a href="{{ route('blogs') }}">Blog</a></li>
+                                      <li><a href="{{ route('allCourses') }}">All Courses</a></li>
                                       {{-- <li><a href="index.html">Our Blog</a></li> --}}
                                       {{-- <li><a href="index.html">Contact Us</a></li> --}}
                                   </ul>
@@ -96,12 +97,12 @@
           <div class="auto-container">
               <div class="footer-inner clearfix">
                   <div class="copyright pull-left">
-                      <p><a href="{{ route('home') }}">{{ config('APP_NAME') }}</a> &copy;
+                      <p><a href="{{ route('home') }}">{{ env('APP_NAME') }}</a> &copy;
                           {{ $footerData->copy_right }}</p>
                   </div>
                   <ul class="footer-nav pull-right clearfix">
-                      <li><a href="#">Terms of Service</a></li>
-                      <li><a href="#">Privacy Policy</a></li>
+                      <li><a href="{{ route('about') }}">About Us</a></li>
+                      <li><a href="{{ route('privacy') }}">Privacy Policy</a></li>
                   </ul>
               </div>
           </div>

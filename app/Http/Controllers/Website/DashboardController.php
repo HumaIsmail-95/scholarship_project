@@ -21,7 +21,7 @@ class DashboardController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:website-dashboard', ['only' => ['index']]);
+        // $this->middleware('permission:website-dashboard', ['only' => ['index']]);
         $this->middleware('permission:my-uni-app', ['only' => ['myUniApp']]);
         $this->middleware('permission:personal-info', ['only' => ['personalInfo']]);
         $this->middleware('permission:professional-exp', ['only' => ['professionalExp']]);
@@ -70,7 +70,7 @@ class DashboardController extends Controller
             return $response;
         } catch (\Throwable $th) {
             //throw $th;
-            return $th;
+            return $th->getMessage();
         }
     }
     public function storeDocuments(DocumentGalleryRequest $request, User $user)

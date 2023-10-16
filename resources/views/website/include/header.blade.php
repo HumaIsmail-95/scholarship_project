@@ -60,9 +60,12 @@
                      </nav>
                  </div>
                  <div class="btn-box">
-                     {{-- <a href="browse-ads-details.html" class="theme-btn-one"><i class="icon-1"></i>Submit
-                         Ads</a> --}}
-                     <a href="{{ route('login') }}" class="theme-btn-one"><i class="icon-1"></i>Login</a>
+                     @if (Auth::user())
+                         <a href="{{ route('dashboard') }}" class="theme-btn-one">Hi
+                             {{ Auth::user()->name }}</a>
+                     @else
+                         <a href="{{ route('login') }}" class="theme-btn-one"><i class="icon-1"></i>Login</a>
+                     @endif
                  </div>
              </div>
          </div>
@@ -83,7 +86,12 @@
                      </nav>
                  </div>
                  <div class="btn-box">
-                     <a href="{{ route('login') }}" class="theme-btn-one"><i class="icon-1"></i>Login</a>
+                     @if (Auth::user())
+                         <a href="{{ route('dashboard') }}" class="theme-btn-one">Hi
+                             {{ Auth::user()->name }}</a>
+                     @else
+                         <a href="{{ route('login') }}" class="theme-btn-one"><i class="icon-1"></i>Login</a>
+                     @endif
                  </div>
              </div>
          </div>

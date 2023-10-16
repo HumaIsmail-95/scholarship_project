@@ -94,35 +94,47 @@
                          </ul>
                      </li>
                  @endcan
-                 {{-- stripe --}}
-                 <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
-                             class="ti-layout-grid2"></i><span class="hide-menu"> Settings</span></a>
-                     <ul aria-expanded="false" class="collapse">
-                         @can('view-stripe')
-                             <li><a href="{{ route('admin.stripe.setting.index') }}">Set Stripe Key</a></li>
-                         @endcan
-                         @can('view-privacy-policy')
-                             <li><a href="{{ route('admin.settings.privacy') }}">Set Privacy Policy</a></li>
-                         @endcan
-                         @can('view-about-us')
-                             <li><a href="{{ route('admin.settings.abouUs') }}">Set About Us</a></li>
-                         @endcan
-                         @can('view-contact-us')
-                             <li><a href="{{ route('admin.settings.contact') }}">Set Contact Us</a></li>
-                         @endcan
-                         {{-- change permission --}}
-                         @can('view-contact-us')
-                             <li><a href="#">Footer Details</a></li>
-                         @endcan
-                     </ul>
-                 </li>
+                 @can('list-setting')
+                     {{-- stripe --}}
+                     <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
+                                 class="ti-layout-grid2"></i><span class="hide-menu"> Settings</span></a>
+                         <ul aria-expanded="false" class="collapse">
+                             @can('view-stripe')
+                                 <li><a href="{{ route('admin.stripe.setting.index') }}">Set Stripe Key</a></li>
+                             @endcan
+                             @can('view-privacy-policy')
+                                 <li><a href="{{ route('admin.settings.privacy') }}">Set Privacy Policy</a></li>
+                             @endcan
+                             @can('view-about-us')
+                                 <li><a href="{{ route('admin.settings.abouUs') }}">Set About Us</a></li>
+                             @endcan
+                             @can('view-contact-us')
+                                 <li><a href="{{ route('admin.settings.contact') }}">Set Contact Us</a></li>
+                             @endcan
+                             {{-- change permission --}}
+                             @can('view-contact-us')
+                                 <li><a href="#">Footer Details</a></li>
+                             @endcan
+                         </ul>
+                     </li>
+                 @endcan
                  {{-- Banners --}}
-                 <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
-                             class="ti-layout-grid2"></i><span class="hide-menu"> Banners and logo</span></a>
-                     <ul aria-expanded="false" class="collapse">
-                         <li><a href="{{ route('admin.banners') }}">Set banners and logo</a></li>
-                     </ul>
-                 </li>
+                 @can('list-banner')
+                     <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
+                                 class="ti-layout-grid2"></i><span class="hide-menu"> Banners and logo</span></a>
+                         @can('update-banner')
+                             <ul aria-expanded="false" class="collapse">
+                                 <li><a href="{{ route('admin.banners') }}">Set banners and logo</a></li>
+                             </ul>
+                         @endcan
+                     </li>
+                 @endcan
+                 {{-- admin dashboard --}}
+                 @can('admin-dashboard')
+                     <li> <a class="waves-effect waves-dark" href="{{ route('admin.dashboard') }}"><i
+                                 class="icon-speedometer"></i><span class="hide-menu">Home</span></a>
+                     </li>
+                 @endcan
                  {{-- dashboard --}}
                  @can('website-dashboard')
                      <li> <a class="waves-effect waves-dark" href="{{ route('dashboard') }}"><i
@@ -136,12 +148,28 @@
                                  class="icon-speedometer"></i><span class="hide-menu">My Uni App</span></a>
                      </li>
                  @endcan
+
+                 {{-- My Subscriptions --}}
+                 {{-- @can('my-subscriptons') --}}
+                 {{-- <li> <a class="waves-effect waves-dark" href="{{ route('mySubscription') }}"><i
+                                 class="icon-speedometer"></i><span class="hide-menu">My Subscriptions</span></a>
+                     </li> --}}
+                 {{-- @endcan --}}
+
                  {{-- My Applicatoins --}}
                  {{-- @can('my-applications') --}}
                  <li> <a class="waves-effect waves-dark" href="{{ route('myApplications') }}"><i
                              class="icon-speedometer"></i><span class="hide-menu">My Applications</span></a>
                  </li>
                  {{-- @endcan --}}
+
+                 {{-- Over View --}}
+                 {{-- @can('my-applications') --}}
+                 <li> <a class="waves-effect waves-dark" href="{{ route('overviews') }}"><i
+                             class="icon-speedometer"></i><span class="hide-menu">Overviews</span></a>
+                 </li>
+                 {{-- @endcan --}}
+
              </ul>
          </nav>
          <!-- End Sidebar navigation -->

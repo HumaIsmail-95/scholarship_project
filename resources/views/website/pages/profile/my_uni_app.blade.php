@@ -37,95 +37,7 @@
         <!-- Info box -->
         <!-- ============================================================== -->
         <!-- .row -->
-        <div class="row">
-            <!-- Column -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row p-t-10 p-b-10">
-                            <!-- Column -->
-                            <div class="col p-r-0">
-                                <h1 class="font-light">Step 1</h1>
-                                <h6 class="text-muted">Personal Information</h6>
-                            </div>
-                            <!-- Column -->
-                            <div class="col text-end align-self-center">
-                                <div data-label="20%" class="css-bar m-b-0 css-bar-primary css-bar-20">
-                                    <i class=" fas fa-user-circle"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Column -->
-            <!-- Column -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row p-t-10 p-b-10">
-                            <!-- Column -->
-                            <div class="col p-r-0">
-                                <h1 class="font-light">Step 2</h1>
-                                <h6 class="text-muted">Education & Profession
-                                </h6>
-                            </div>
-                            <!-- Column -->
-                            <div class="col text-end align-self-center">
-                                <div data-label="30%" class="css-bar m-b-0 css-bar-danger css-bar-20">
-                                    <i class=" fas fa-book"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Column -->
-            <!-- Column -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row p-t-10 p-b-10">
-                            <!-- Column -->
-                            <div class="col p-r-0">
-                                <h1 class="font-light">Step 3</h1>
-                                <h6 class="text-muted">Language & Tests
-                                </h6>
-                            </div>
-                            <!-- Column -->
-                            <div class="col text-end align-self-center">
-                                <div data-label="40%" class="css-bar m-b-0 css-bar-warning css-bar-40">
-                                    <i class="fas fa-language"></i>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Column -->
-            <!-- Column -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row p-t-10 p-b-10">
-                            <!-- Column -->
-                            <div class="col p-r-0">
-                                <h1 class="font-light">Step 4</h1>
-                                <h6 class="text-muted">Documents</h6>
-                            </div>
-                            <!-- Column -->
-                            <div class="col text-end align-self-center">
-                                <div data-label="60%" class="css-bar m-b-0 css-bar-info css-bar-60">
-                                    <i class=" fas fa-paperclip"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Column -->
-        </div>
+        @include('website.components.profile_completion')
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -141,16 +53,16 @@
                                         <span class="hidden-xs-down">
                                             Personal and Travel Information</span> </a> </li>
                                 <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#professional_exp"
-                                        role="tab"><span class="hidden-sm-up"><i class=" fas fa-book"></i></span> <span
-                                            class="hidden-xs-down">
+                                        role="tab"><span class="hidden-sm-up"><i class=" fas fa-book"></i></span>
+                                        <span class="hidden-xs-down">
                                             Education and Professional Experience</span></a> </li>
                                 <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#language_test"
                                         role="tab"><span class="hidden-sm-up"><i class="fas fa-language"></i>></span>
                                         <span class="hidden-xs-down">
                                             Language and Test</span></a> </li>
                                 <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#documents"
-                                        role="tab"><span class="hidden-sm-up"><i
-                                                class=" fas fa-paperclip"></i></span> <span class="hidden-xs-down">
+                                        role="tab"><span class="hidden-sm-up"><i class=" fas fa-paperclip"></i></span>
+                                        <span class="hidden-xs-down">
                                             Documents</span></a> </li>
                             </ul>
                             <!-- Tab panes -->
