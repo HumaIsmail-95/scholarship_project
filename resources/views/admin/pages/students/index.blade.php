@@ -40,9 +40,8 @@
                                     <th>mobile</th>
                                     <th>gender</th>
                                     <th>d o b</th>
-                                    <th>Type</th>
                                     <th>Nationality</th>
-                                    <th>Actions</th>
+                                    {{-- <th>Actions</th> --}}
                                 </tr>
                             </thead>
                             <tbody id="table_id">
@@ -50,21 +49,20 @@
                                     <tr id='row_{{ $student->id }}' class="tr-class-1">
                                         <td id="td-id-1" class="td-class-1"> {{ $key += 1 }} </td>
                                         <td id="td-id-1" class="td-class-1"> {{ $student->name }} </td>
-                                        <td id="td-id-1" class="td-class-1"> {{ $student->name }} </td>
-                                        <td id="td-id-1" class="td-class-1"> {{ $student->name }} </td>
-                                        <td id="td-id-1" class="td-class-1"> {{ $student->name }} </td>
-                                        <td id="td-id-1" class="td-class-1"> {{ $student->name }} </td>
-                                        <td id="td-id-1" class="td-class-1"> {{ $student->name }} </td>
-                                        <td id="td-id-1" class="td-class-1"> {{ $student->name }} </td>
-                                        <td>
-                                            <div class="btn-group">
-                                                @can('edit-student')
+                                        <td id="td-id-1" class="td-class-1"> {{ $student->email }} </td>
+                                        <td id="td-id-1" class="td-class-1"> {{ $student->mobile }} </td>
+                                        <td id="td-id-1" class="td-class-1"> {{ $student->gender }} </td>
+                                        <td id="td-id-1" class="td-class-1"> {{ $student->d_o_b }} </td>
+                                        <td id="td-id-1" class="td-class-1"> {{ $student->nationality }} </td>
+                                        {{-- <td> --}}
+                                        {{-- <div class="btn-group"> --}}
+                                        {{-- @can('edit-student')
                                                     <a class="btn btn-dark"
                                                         href="{{ route('admin.students.edit', $student->id) }}">
                                                         <i class=" fas fa-pencil-alt"></i>
                                                         Edit</a>
-                                                @endcan
-                                                <button type="button"
+                                                @endcan --}}
+                                        {{-- <button type="button"
                                                     class="btn btn-dark dropdown-toggle text-white dropdown-toggle-split"
                                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <span class="sr-only">Toggle Dropdown</span>
@@ -80,10 +78,10 @@
                                                             href="{{ route('admin.students.show', $student->id) }}">
                                                             <i class="fas fa-eye"></i> View</a>
                                                     @endcan
-                                                </div>
+                                                </div> --}}
 
-                                            </div>
-                                        </td>
+                                        {{-- </div> --}}
+                                        {{-- </td> --}}
                                     </tr>
                                 @empty
                                     <tr>

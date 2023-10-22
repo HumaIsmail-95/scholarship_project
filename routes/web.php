@@ -100,6 +100,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     // stripe setting
     Route::get('stripe/setting', [StripeSettingController::class, 'index'])->name('stripe.setting.index');
     Route::put('stripe/setting', [StripeSettingController::class, 'update'])->name('stripe.setting.update');
+    // subscription Testnig
+
+    Route::get('subscription/testing', [StripeSettingController::class, 'testingEdit'])->name('subscription.testing');
+    Route::put('subscription/testing/update', [StripeSettingController::class, 'testingUpdate'])->name('subscription.testing.update');
 });
 require __DIR__ . '/auth.php';
 require __DIR__ . '/website.php';

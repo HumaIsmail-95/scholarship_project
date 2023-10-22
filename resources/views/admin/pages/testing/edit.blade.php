@@ -1,0 +1,148 @@
+@extends('layouts.admin')
+@section('title', 'Edit Subscription Testing')
+@section('links')
+@endsection
+@section('content')
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <div class="col-md-5 align-self-center">
+                <h4 class="text-themecolor">Edit Subscription Testing</h4>
+            </div>
+            <div class="col-md-7 align-self-center text-end">
+                <div class="d-flex justify-content-end align-items-center">
+                    <ol class="breadcrumb justify-content-end">
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Edit Subscription Testing</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        {{-- image --}}
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="{{ route('admin.subscription.testing.update') }}" method="post"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <div class="row">
+                                <div class="col-lg-6  col-md-6  col-sm-12 my-2">
+                                    <label class="form-label" for="name">Subscription<span class="text-danger">*</span>
+                                    </label>
+                                    <select name="subscription" class="form-select" id="subscription" required>
+                                        <option value="0" {{ $subscription == 0 ? 'selected' : '' }}>No</option>
+                                        <option value="1" {{ $subscription == 1 ? 'selected' : '' }}>Yes</option>
+                                    </select>
+                                    @error('subscription')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-6  col-md-6 col-sm-12">
+                                    <label class="form-label" for="duration">Program No <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="number" class="form-control" id="program_no" name="program_no"
+                                        placeholder="Enter a program no.." value="{{ $program_no }}" required>
+                                    @error('program_no')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="col-12 text-right mt-2">
+                                    <button type="submit" class="btn btn-info waves-effect waves-light text-white">Edit
+                                        Subscription Testing</button>
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+@endsection
+@section('scripts')
+    <script src="{{ asset('admin/assets/node_modules/dropify/dist/js/dropify.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            // Basic
+            $('.dropify').dropify();
+
+            // Translated
+            $('.dropify-fr').dropify({
+                messages: {
+                    default: 'Glissez-déposez un fichier ici ou cliquez',
+                    replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+                    remove: 'Supprimer',
+                    error: 'Désolé, le fichier trop volumineux'
+                }
+            });
+
+            // Used events
+            var drEvent = $('#input-file-events').dropify();
+
+            drEvent.on('dropify.beforeClear', function(event, element) {
+                return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+            });
+
+            drEvent.on('dropify.afterClear', function(event, element) {
+                alert('File deleted');
+            });
+
+            drEvent.on('dropify.errors', function(event, element) {
+                console.log('Has Errors');
+            });
+
+            var drDestroy = $('#input-file-to-destroy').dropify();
+            drDestroy = drDestroy.data('dropify')
+            $('#toggleDropify').on('click', function(e) {
+                e.preventDefault();
+                if (drDestroy.isDropified()) {
+                    drDestroy.destroy();
+                } else {
+                    drDestroy.init();
+                }
+            })
+        });
+    </script>
+    <script>
+        function showToaster(icon, heading, text) {
+            $.toast({
+                heading: heading,
+                text: text,
+                position: 'top-right',
+                loaderBg: '#ff6849',
+                icon: icon,
+                hideAfter: 3500,
+                stack: 6
+            });
+        }
+    </script>
+    <script src="{{ asset('admin/assets/node_modules/summernote/dist/summernote-bs4.min.js') }}"></script>
+    <script>
+        $(function() {
+
+            $('.summernote').summernote({
+                height: 350, // set editor height
+                minHeight: null, // set minimum height of editor
+                maxHeight: null, // set maximum height of editor
+                focus: false // set focus to editable area after initializing summernote
+            });
+
+            $('.inline-editor').summernote({
+                airMode: true
+            });
+
+        });
+
+        window.edit = function() {
+                $(".click2edit").summernote()
+            },
+            window.save = function() {
+                $(".click2edit").summernote('destroy');
+            }
+    </script>
+@endsection

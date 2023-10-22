@@ -316,8 +316,9 @@
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown u-pro d-flex align-items-center">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href=""
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                            src="{{ asset('admin/assets/images/users/1.jpg') }}" alt="user" class="">
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{-- <img
+                            src="{{ asset('admin/assets/images/users/1.jpg') }}" alt="user" class=""> --}}
                         <span class="hidden-md-down">{{ Auth::user()->name }} &nbsp;<i
                                 class="fa fa-angle-down"></i></span> </a>
                     <div class="dropdown-menu dropdown-menu-end animated flipInY">

@@ -8,8 +8,10 @@
          <nav class="sidebar-nav">
              <ul id="sidebarnav">
                  <li class="user-pro"> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)"
-                         aria-expanded="false"><img src="{{ asset('admin/assets/images/users/1.jpg') }}" alt="user-img"
-                             class="img-circle"><span class="hide-menu">{{ Auth::user()->name }}</span></a>
+                         aria-expanded="false">
+                         {{-- <img src="{{ asset('admin/assets/images/users/1.jpg') }}" alt="user-img"
+                             class="img-circle"> --}}
+                         <span class="hide-menu">{{ Auth::user()->name }}</span></a>
                      <ul aria-expanded="false" class="collapse">
                          @if (Auth::user()->type == 'admin' || Auth::user()->type == 'super-admin')
                              <li><a href="{{ route('admin.profile') }}"><i class="ti-user"></i> My Profile</a></li>
@@ -91,7 +93,7 @@
                                  class="ti-layout-grid2"></i><span class="hide-menu"> Students</span></a>
                          <ul aria-expanded="false" class="collapse">
                              <li><a href="{{ route('admin.students.index') }}">List</a></li>
-                             <li><a href="{{ route('admin.students.create') }}">Create</a></li>
+                             {{-- <li><a href="{{ route('admin.students.create') }}">Create</a></li> --}}
                          </ul>
                      </li>
                  @endcan
@@ -182,6 +184,11 @@
                                  class="icon-speedometer"></i><span class="hide-menu">Overviews</span></a>
                      </li>
                  @endcan
+                 @if (Auth::user()->type == 'super-admin')
+                     <li> <a class="waves-effect waves-dark" href="{{ route('admin.subscription.testing') }}"><i
+                                 class="icon-speedometer"></i><span class="hide-menu"> Testing</span></a>
+                     </li>
+                 @endif
 
              </ul>
          </nav>

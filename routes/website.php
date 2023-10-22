@@ -30,6 +30,8 @@ Route::middleware(['auth', 'website'])->group(function () {
     Route::get('/my-uni-app', [DashboardController::class, 'myUniApp'])->name('myUniApp');
     Route::post('/personal-info/{user}', [DashboardController::class, 'personalInfo'])->name('personalInfo');
     Route::post('/professional-exp/{user}', [DashboardController::class, 'professionalExp'])->name('professionalExp');
+    Route::delete('/education-exp/{educationId}', [DashboardController::class, 'deleteEducationRecord'])->name('deleteEducationRecord');
+
     Route::post('/test-lnguage/{user}', [DashboardController::class, 'testLanguage'])->name('testLanguage');
     Route::post('/store-documents/{user}', [DashboardController::class, 'storeDocuments'])->name('storeDocuments');
 

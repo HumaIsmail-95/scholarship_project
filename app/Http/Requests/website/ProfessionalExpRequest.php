@@ -25,6 +25,14 @@ class ProfessionalExpRequest extends FormRequest
     public function rules(Request $request)
     {
 
+        if ($request->isMethod('put')) {
+            $rules['certificate.*'] = ['file', 'nullable', 'max:2048', 'mimes:pdf'];
+            $rules['transcript.*'] = ['file', 'nullable', 'max:2048', 'mimes:pdf'];
+        } else {
+            $rules['certificate.*'] = ['file', 'required', 'max:2048', 'mimes:pdf'];
+            $rules['transcript.*'] = ['file', 'required', 'max:2048', 'mimes:pdf'];
+        }
+
         if ($request->experience_check == 'on') {
             $rules['joining.*'] = ['nullable'];
             $rules['ending.*'] = ['nullable'];
@@ -45,8 +53,7 @@ class ProfessionalExpRequest extends FormRequest
         $rules['program_name.*'] = ['required'];
         $rules['institute_name.*'] = ['required'];
         $rules['grade.*'] = ['required'];
-        $rules['certificate.*'] = ['file', 'required', 'max:2048', 'mimes:pdf'];
-        $rules['transcript.*'] = ['file', 'required', 'max:2048', 'mimes:pdf'];
+
         return $rules;
     }
 }

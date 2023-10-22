@@ -284,6 +284,7 @@
                         <div id="grade_${addRow}_text" class="text-danger"></div>
                     </div>
                     <div class="col-lg-12 col-md-12  col-sm-12">
+                        <input type="hidden" name="education_id[]" value="-1">
                         {{-- <h4 class="card-title">Attach Document</h4> --}}
                         <label for="document" class="form-label">Transcript</label>
                         <input type="file" id="transcript_${addRow}" name="transcript[]"
@@ -350,8 +351,34 @@
             })
         });
         $("body").on("click", "#DeleteRow", function() {
+            var row = $(this).closest("#row");
+            var educationIdInput = row.find(
+                'input[name="education_id[]"]'); // Use "education_id[]" to match the name
 
-            $(this).parents("#row").remove();
+            // Get the value of the input field
+            var educationId = educationIdInput.val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "/education-exp/" + educationId, // the endpoint
+                type: "DELETE", // http method
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    var successAlert = $("#success-alert");
+                    showToaster('success', 'Success', data.message);
+                    $(this).parents("#row").remove();
+
+                },
+                error: function(error) {
+                    var errorMessage = error.statusText;
+                    console.log('error validation', error);
+                    showToaster('error', 'Error', errorMessage);
+
+                },
+            });
         })
 
         let addRowExp = 0

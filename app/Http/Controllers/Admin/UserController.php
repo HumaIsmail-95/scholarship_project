@@ -143,7 +143,7 @@ class UserController extends Controller
             'email' => ['required', 'email', Rule::unique('users')->ignore($id)],
             'password' => 'required',
             'new_password' => 'required|string|min:8',
-        ]);;
+        ]);
         if (!Hash::check($request->password, $user->password)) {
             return redirect()->back()->withErrors(['password' => 'The current password is incorrect.']);
         }

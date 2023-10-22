@@ -133,73 +133,108 @@ class StudentProfileService
         DB::beginTransaction();
         $data = $request->validated(EducationRequest::class);
 
-        $studentEducation = StudentEducation::where('user_id', $user->id)->with('educationGalleries')->get();
-        if ($studentEducation != null) {
-            foreach ($studentEducation as $edu) {
-                $edu->delete();
+        //        $studentEducation = StudentEducation::where('user_id', $user->id)->with('educationGalleries')->get();
+        foreach ($data['start'] as $index => $responseName) {
+            if ($request['education_id'][$index] != -1) {
+                $edu = StudentEducation::with(['educationGalleries' => function ($query) {
+                    $query->where('type', 'transcript');
+                }])->where('id', $request['education_id'][$index])->first();
+                if ($edu) {
+                    $educationData = [
+                        'user_id' => $user->id,
+                        'start' => $data['start'][$index],
+                        'end' => $data['end'][$index],
+                        'program_name' => $data['program_name'][$index],
+                        'institute_name' => $data['institute_name'][$index],
+                        'grade' => $data['grade'][$index],
+                        'created_by' => $user->id,
+                    ];
+                    $edu->update($educationData);
+                    if (isset($data['transcript'][$index])) :
+                        $fileTranscript = $data['transcript'][$index];
+                        $image_name = FileUploadTrait::fileUpload($fileTranscript, 'student_transcripts');
+                        $doc['image_name'] =  $image_name;
+                        $doc['education_id'] =  $edu->id;
+                        $doc['image_url'] = url('/storage/student_transcripts/' . $image_name);
+                        $gal = EducationGallery::findorFail($edu['educationGalleries']['id']);
+                        $gal->update($doc);
+                    endif;
+                    $eduCerti = StudentEducation::with(['educationGalleries' => function ($query) {
+                        $query->where('type', 'certificate');
+                    }])->where('id', $request['education_id'][$index])->get();
+                    if (isset($data['certificate'][$index])) :
+                        $filecertificate = $data['certificate'][$index];
+                        $image_name = FileUploadTrait::fileUpload($filecertificate, 'student_certificates');
+                        $doc['image_name'] =  $image_name;
+                        $doc['education_id'] =  $edu->id;
+                        $doc['image_url'] = url('/storage/student_certificates/' . $image_name);
+                        $gal = EducationGallery::findorFail($eduCerti->educationGalleries->id);
+                        $gal->update($doc);
+                    endif;
+                    # code...
+                }
+            } elseif ($request['education_id'][$index] == -1 || $request['education_id'][$index] == null) {
+                $educationData = [
+                    'user_id' => $user->id,
+                    'start' => $data['start'][$index],
+                    'end' => $data['end'][$index],
+                    'program_name' => $data['program_name'][$index],
+                    'institute_name' => $data['institute_name'][$index],
+                    'grade' => $data['grade'][$index],
+                    'created_by' => $user->id,
+                ];
+                $education = StudentEducation::create($educationData);
+                if (isset($data['transcript'][$index])) :
+                    $fileTranscript = $data['transcript'][$index];
+
+                    $image_name = FileUploadTrait::fileUpload($fileTranscript, 'student_transcripts');
+                    $doc['type'] = 'transcript';
+                    $doc['folder_name'] = 'student_transcripts';
+                    $doc['image_name'] =  $image_name;
+                    $doc['education_id'] =  $education->id;
+                    $doc['image_url'] = url('/storage/student_transcripts/' . $image_name);
+                    EducationGallery::create($doc);
+                endif;
+                if (isset($data['certificate'][$index])) :
+                    // $deleteCertificate = 'public/student_certificates/' . $image_name;
+                    // if (Storage::exists($deleteCertificate)) {
+                    //     Storage::delete($deleteCertificate);
+                    // }
+                    $fileCertificate = $data['certificate'][$index];
+                    $image_name = FileUploadTrait::fileUpload($fileCertificate, 'student_certificates');
+
+                    $doc['type'] = 'certificate';
+                    $doc['folder_name'] = 'student_certificates';
+                    $doc['image_name'] =  $image_name;
+                    $doc['education_id'] =  $education->id;
+                    $doc['image_url'] = url('/storage/student_certificates/' . $image_name);
+                    EducationGallery::create($doc);
+                endif;
             }
         }
-        foreach ($data['start'] as $index => $responseName) {
-            $educationData = [
-                'user_id' => $user->id,
-                'start' => $data['start'][$index],
-                'end' => $data['end'][$index],
-                'program_name' => $data['program_name'][$index],
-                'institute_name' => $data['institute_name'][$index],
-                'grade' => $data['grade'][$index],
-                'created_by' => $user->id,
-            ];
-            $education = StudentEducation::create($educationData);
-            if (isset($data['transcript'][$index])) :
-                $fileTranscript = $data['transcript'][$index];
 
-                $image_name = FileUploadTrait::fileUpload($fileTranscript, 'student_transcripts');
-                // $deleteTranscript = 'public/student_transcripts/' . $image_name;
-                // if (Storage::exists($deleteTranscript)) {
-                //     Storage::delete($deleteTranscript);
-                // }
-                $doc['type'] = 'transcript';
-                $doc['folder_name'] = 'student_transcripts';
-                $doc['image_name'] =  $image_name;
-                $doc['education_id'] =  $education->id;
-                $doc['image_url'] = url('/storage/student_transcripts/' . $image_name);
-                EducationGallery::create($doc);
-            endif;
-            if (isset($data['certificate'][$index])) :
-                // $deleteCertificate = 'public/student_certificates/' . $image_name;
-                // if (Storage::exists($deleteCertificate)) {
-                //     Storage::delete($deleteCertificate);
-                // }
-                $fileCertificate = $data['certificate'][$index];
-                $image_name = FileUploadTrait::fileUpload($fileCertificate, 'student_certificates');
-
-                $doc['type'] = 'certificate';
-                $doc['folder_name'] = 'student_certificates';
-                $doc['image_name'] =  $image_name;
-                $doc['education_id'] =  $education->id;
-                $doc['image_url'] = url('/storage/student_certificates/' . $image_name);
-                EducationGallery::create($doc);
-            endif;
-        }
         $studentExperience = StudentExperience::where('user_id', $user->id)->get();
         if ($studentExperience != null) {
             foreach ($studentExperience as $expp) {
                 $expp->delete();
             }
         }
-        foreach ($data['joining'] as $index => $responseName) {
-            $experienceData = [
-                'user_id' => $user->id,
-                'joining' => $data['joining'][$index],
-                'ending' => $data['ending'][$index],
-                'employer_name' => $data['employer_name'][$index],
-                'location' => $data['location'][$index],
-                'title' => $data['title'][$index],
-                'duties' => $data['duties'][$index],
-                'created_by' => $user->id,
-            ];
-            StudentExperience::create($experienceData);
+        if ($request['experience_check'] != 'on') {
+            foreach ($data['joining'] as $index => $responseName) {
+                $experienceData = [
+                    'user_id' => $user->id,
+                    'joining' => $data['joining'][$index],
+                    'ending' => $data['ending'][$index],
+                    'employer_name' => $data['employer_name'][$index],
+                    'location' => $data['location'][$index],
+                    'title' => $data['title'][$index],
+                    'duties' => $data['duties'][$index],
+                    'created_by' => $user->id,
+                ];
+                StudentExperience::create($experienceData);
+            }
         }
+
         $personal = $user->personal;
         $education = 1;
         $test = $user->test;
@@ -220,7 +255,7 @@ class StudentProfileService
         if (!empty($studentTest)) {
             $testData = [
                 'user_id' => $user->id,
-                'native_english' => isset($data['native_english']) ? 1 : 0,
+                'native_english' => $data['native_english'] == 'on' ? 1 : 0,
                 'ielts_score' => $data['ielts_score'],
                 'pearson_score' => $data['pearson_score'],
                 'toelf_score' => $data['toelf_score'],
@@ -306,7 +341,7 @@ class StudentProfileService
         } else {
             $testData = [
                 'user_id' => $user->id,
-                'native_english' => isset($data['native_english']) ? $data['native_english'] : 0,
+                'native_english' => $data['native_english'] == 'on' ? 1 : 0,
                 'ielts_score' => $data['ielts_score'],
                 'pearson_score' => $data['pearson_score'],
                 'toelf_score' => $data['toelf_score'],

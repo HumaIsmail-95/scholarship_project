@@ -20,6 +20,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
@@ -120,5 +121,17 @@ class DashboardController extends Controller
         $data['password'] = Hash::make($request->new_password);
         $user->update($data);
         return redirect()->back()->with(['status' => true, 'icon' => 'success', 'heading' => 'Success', 'message' => 'profile updated successfully']);
+    }
+    public function deleteEducationRecord($id)
+    {
+        $edu = StudentEducation::findorFail($id);
+        $edu->educationGalleries;
+        foreach ($edu->educationGalleries as $key => $fileToDelete) {
+            if (Storage::exists($fileToDelete)) {
+                Storage::delete($fileToDelete);
+            }
+        }
+        $edu->delete();
+        return redirect()->back()->with(['status' => true, 'icon' => 'success', 'heading' => 'Success', 'message' => 'Education deleted successfully']);
     }
 }

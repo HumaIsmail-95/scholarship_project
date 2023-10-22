@@ -57,6 +57,7 @@
                             <div id="grade_0_text" class="text-danger"></div>
                         </div>
                         <div class="col-lg-12 col-md-12  col-sm-12">
+                            <input type="hidden" name="education_id[]" value="{{ $edu->id }}">
                             {{-- <h4 class="card-title">Attach Document</h4> --}}
                             @php
                                 foreach ($edu->educationGalleries as $gal) {
@@ -69,9 +70,12 @@
                                 }
                             @endphp
                             <label for="document" class="form-label">Transcript</label>
-                            <input type="file" id="transcript_0" name="transcript[]" class="dropify"
-                                value="{{ isset($transcript->image_url) ? $transcript->image_url : '' }}"
-                                data-default-file="{{ isset($transcript->image_url) ? $transcript->image_url : '' }}" />
+                            <input type="file" id="transcript_0" name="transcript[]" class="dropify" />
+                            <div style="display: none">
+                                <input type="file"
+                                    value="{{ isset($transcript->image_url) ? $transcript->image_url : '' }}"
+                                    name="edit_trasnscript[]">
+                            </div>
                             <a href="{{ isset($transcript->image_url) ? $transcript->image_url : '' }}"
                                 download="newfilename">{{ isset($transcript->image_url) ? $transcript->image_name : '' }}</a>
 
@@ -83,10 +87,12 @@
                         <div class="col-lg-12 col-md-12  col-sm-12">
                             {{-- <h4 class="card-title">Attach Document</h4> --}}
                             <label for="document" class="form-label">Certificate</label>
-                            <input type="file" id="certificate_0" name="certificate[]" class="dropify"
-                                value="{{ isset($certificate->image_url) ? $certificate->image_url : '' }}"
-                                data-default-file="{{ isset($certificate->image_url) ? $certificate->image_url : '' }}"
-                                download />
+                            <input type="file" id="certificate_0" name="certificate[]" class="dropify" download />
+                            <div style="display: none">
+                                <input type="file"
+                                    value="{{ isset($certificate->image_url) ? $certificate->image_url : '' }}"
+                                    name="edit_certificate[]">
+                            </div>
                             <a href="{{ isset($certificate->image_url) ? $certificate->image_url : '' }}"
                                 download="newfilename">{{ isset($certificate->image_url) ? $certificate->image_name : '' }}</a>
 
@@ -118,8 +124,8 @@
             <div class=" m-1 py-2">
                 <div class="row">
                     <div class="col-12  ">
-
                         <input type="checkbox" name="experience_check" id="experience_check"
+                            {{ $professionalData['experience']->isEmpty() ? 'checked' : '' }}
                             onclick="experienceForm()">
                         <label class="form-label" for="name">
                             I don’t have any professional experience

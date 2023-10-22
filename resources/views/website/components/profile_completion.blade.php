@@ -15,8 +15,15 @@
                     <!-- Column -->
                     <div class="col text-end align-self-center">
                         <div data-label="20%" class="css-bar m-b-0 css-bar-primary css-bar-20">
+                            @php
+                                $edu = Auth::user()->education;
+                                $pro = Auth::user()->personal;
+                                $test = Auth::user()->test;
+                                $doc = Auth::user()->document;
+                                $percent = ($edu + $pro + $test + $doc) * 25;
+                            @endphp
                             <p class="mb-0 {{ Auth::user()->profile_percentage == 100 ? 'text-success' : 'text-danger' }}"
-                                style="font-size:40px">{{ Auth::user()->profile_percentage }}%</p>
+                                style="font-size:40px">{{ $percent }}%</p>
                         </div>
                     </div>
                 </div>

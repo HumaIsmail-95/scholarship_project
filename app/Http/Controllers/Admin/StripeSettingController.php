@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 
 class StripeSettingController extends Controller
@@ -73,5 +75,26 @@ class StripeSettingController extends Controller
                 'message' => $th->getMessage()
             ]);
         }
+    }
+    public function testingEdit()
+    {
+        $subscription = Auth::user()->subscription;
+        $program_no = Auth::user()->program_no;
+        return view('admin.pages.testing.edit', compact('subscription', 'program_no'));
+    }
+    public function testingUpdate(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $user = User::findorFail($user_id);
+        $request->validate([
+            'subscription' => 'required',
+            'program_no' => 'required|integer',
+        ]);
+        $data = [
+            'subscription' => $request->subscription,
+            'program_no' => $request->program_no,
+        ];
+        $user->update($data);
+        return redirect()->back()->with(['status' => true, 'icon' => 'success', 'heading' => 'Success', 'message' => 'testing data updated']);
     }
 }
