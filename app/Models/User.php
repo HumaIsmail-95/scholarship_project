@@ -30,6 +30,9 @@ class User extends Authenticatable
         'email_verified_at',
         'google_id',
         'subscription', 'profile_percentage',
+        'personal', 'education',
+        'test', 'document',
+
         'stripe_id',
         'program_no',
         'pm_type',

@@ -308,7 +308,7 @@
                     $("#table_id").append(string);
                     $('#addUserModal').modal('hide');
 
-
+                    location.reload()
 
 
 
@@ -435,14 +435,9 @@
                     $("#button-delete").text("Yes");
                     $('.alert-success').html(data.success).fadeIn('slow');
                     document.getElementById("row_" + $("#deleteID").val()).remove();
-                    swal({
-                        title: "",
-                        text: data.message,
-                        icon: "success",
-                    });
                     showToaster('success', 'Success', data.message);
-
                     $('#deleteModal').modal('hide');
+                    location.reload();
                 },
                 error: function(error) {
                     $("#button-delete").prop("disabled", false);

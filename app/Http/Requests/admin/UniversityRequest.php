@@ -30,11 +30,11 @@ class UniversityRequest extends FormRequest
             'name' => ['required', 'max:100'],
             'country' => ['required'],
             'featured' => ['required'],
-            'description' => ['nullable'],
-            'logo' => ['nullable', 'image', 'max:2048', 'mimes:jpg,bmp,png'],
-            'banner' => ['nullable', 'image', 'max:2048', 'mimes:jpg,bmp,png'],
-            'gallery' => ['nullable', 'max:2048', new MaxImages(3)],
-            'gallery.*' => ['image', 'mimes:jpeg,png,jpg', 'max:4072'],
+            'description' => ['required'],
+            'logo' => ['required', 'image', 'max:2048', 'mimes:jpg,bmp,png'],
+            'banner' => ['required', 'image', 'max:2048', 'mimes:jpg,bmp,png'],
+            'gallery' => ['required', 'max:2048', new MaxImages(3)],
+            'gallery.*' => ['required', 'image', 'mimes:jpeg,png,jpg', 'max:4072'],
         ];
     }
 }

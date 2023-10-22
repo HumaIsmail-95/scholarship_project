@@ -128,8 +128,7 @@
                                     <div id="discipline_id_text" class="text-danger errors"></div>
                                 </div>
                                 <div class="col-md-12 mb-2">
-                                    <label class="form-label" for="name">Description<span
-                                            class="text-danger">*</span>
+                                    <label class="form-label" for="name">Description
                                     </label>
                                     <textarea name="description" class="form-control" id="description" cols="10" rows="4"
                                         :value="old('description')"></textarea>
@@ -188,9 +187,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Edit Degree</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal"
-                        aria-hidden="true"><span>&times;</span>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+
                 </div>
                 <div class="modal-body">
                     <form class="form-valide" id="edit-degree-form" method="post" enctype="multipart/form-data">
@@ -220,8 +218,7 @@
                                     <div id="edit_discipline_id_text" class="text-danger errors"></div>
                                 </div>
                                 <div class="col-md-12 mb-2">
-                                    <label class="form-label" for="name">Description<span
-                                            class="text-danger">*</span>
+                                    <label class="form-label" for="name">Description
                                     </label>
                                     <textarea name="description" class="form-control" id="edit_description" cols="10" rows="4"
                                         :value="old('description')"></textarea>
@@ -281,8 +278,7 @@
                                             name="discipline" placeholder="Enter a name.." readonly>
                                     </div>
                                     <div class="col-md-12 mb-2">
-                                        <label class="form-label" for="name">Description<span
-                                                class="text-danger">*</span>
+                                        <label class="form-label" for="name">Description
                                         </label>
                                         <textarea name="description" class="form-control" id="view_description" cols="10" rows="4" readonly></textarea>
                                     </div>

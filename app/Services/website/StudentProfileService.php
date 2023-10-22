@@ -115,12 +115,12 @@ class StudentProfileService
                 StudentGallery::create($doc);
             endif;
         }
-        $personal = $user->personal;
+        $personal = 1;
         $education = $user->education;
         $test = $user->test;
         $document = $user->document;
         $percentage = ($personal + $education + $test + $document) * 25;
-        $user->update(['profile_percentage' => $percentage, 'personal' => 1]);
+        $res = $user->update(['profile_percentage' => $percentage, 'personal' => 1]);
         DB::commit();
         $response = ['status' => true, 'icon' => 'success', 'heading' => 'Success', 'message' => 'User added successfully.', 'user' => $user];
 
@@ -201,7 +201,7 @@ class StudentProfileService
             StudentExperience::create($experienceData);
         }
         $personal = $user->personal;
-        $education = $user->education;
+        $education = 1;
         $test = $user->test;
         $document = $user->document;
         $percentage = ($personal + $education + $test + $document) * 25;
@@ -353,7 +353,7 @@ class StudentProfileService
         }
         $personal = $user->personal;
         $education = $user->education;
-        $test = $user->test;
+        $test = 1;
         $document = $user->document;
         $percentage = ($personal + $education + $test + $document) * 25;
         $user->update(['profile_percentage' => $percentage, 'test' => 1]);
@@ -474,7 +474,7 @@ class StudentProfileService
         $personal = $user->personal;
         $education = $user->education;
         $test = $user->test;
-        $document = $user->document;
+        $document = 1;
         $percentage = ($personal + $education + $test + $document) * 25;
         $user->update(['profile_percentage' => $percentage + 25, 'document' => 1]);
         DB::commit();

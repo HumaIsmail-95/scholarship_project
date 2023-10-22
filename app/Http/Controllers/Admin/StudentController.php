@@ -19,4 +19,12 @@ class StudentController extends Controller
             //throw $th;
         }
     }
+    public function create(){
+        try {
+            //code...
+        } catch (\Throwable $th) {
+            
+            //throw $th;
+        }
+    }
 }

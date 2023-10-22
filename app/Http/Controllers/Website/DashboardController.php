@@ -9,13 +9,17 @@ use App\Http\Requests\website\StudentRequest;
 use App\Http\Requests\website\StudentTestRequest;
 use App\Models\DocumentGallery;
 use App\Models\Student;
+use App\Models\StudentApplication;
 use App\Models\StudentEducation;
 use App\Models\StudentExperience;
+use App\Models\StudentSubscription;
 use App\Models\StudentTest;
 use App\Models\User;
 use App\Services\website\StudentProfileService;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
 {
@@ -30,7 +34,10 @@ class DashboardController extends Controller
     }
     public function index()
     {
-        return view('website.pages.dashboard.index');
+        $user_id = Auth::user()->id;
+        $applications = StudentApplication::where('user_id', $user_id)->get();
+        $currentSubscription = StudentSubscription::with('package')->where('user_id', $user_id)->orderby('id', 'DESC')->first();
+        return view('website.pages.dashboard.index', compact('applications', 'currentSubscription'));
     }
     public function myUniApp()
     {
@@ -82,5 +89,36 @@ class DashboardController extends Controller
             //throw $th;
             return $th;
         }
+    }
+    public function profile()
+    {
+        try {
+            return view('website.pages.profile.edit');
+            //code...
+        } catch (\Throwable $th) {
+            return $th;
+            //throw $th;
+        }
+    }
+    public function updateProfile(Request $request, $id)
+    {
+        $user = User::findorFail($id);
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => ['required', 'email', Rule::unique('users')->ignore($id)],
+            'password' => 'required',
+            'new_password' => 'required|string|min:8',
+        ]);;
+        if (!Hash::check($request->password, $user->password)) {
+            return redirect()->back()->withErrors(['password' => 'The current password is incorrect.']);
+        }
+        if ($request->new_password != $request->password_confirmation) {
+            return redirect()->back()->withErrors(['new_password' => 'The confimr password doesnot match']);
+        }
+        $data['email'] = $request->email;
+        $data['name'] = $request->name;
+        $data['password'] = Hash::make($request->new_password);
+        $user->update($data);
+        return redirect()->back()->with(['status' => true, 'icon' => 'success', 'heading' => 'Success', 'message' => 'profile updated successfully']);
     }
 }

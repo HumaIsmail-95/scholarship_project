@@ -99,7 +99,7 @@
                             @method('PUT')
                             <div class="row">
                                 <div class="col-lg-12 col-md-12  col-sm-12">
-                                    <h4 class="card-title">Logo</h4>
+                                    {{-- <h4 class="card-title">Logo</h4> --}}
                                     <input type="hidden" name="type" value="home">
                                     <label for="Logo" class="form-label">Home Slider (3)</label>
                                     <input type="file" id="image" name="image[]" class="dropify"

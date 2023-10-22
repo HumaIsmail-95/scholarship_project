@@ -49,7 +49,24 @@
 
                     </div>
                     <div class="right-column pull-right clearfix">
-                        <button type="button" class="theme-btn-one">Apply now</button>
+                        @if (Auth::user())
+                            @if (Auth::user()->subscription)
+                                @if (Auth::user()->profile_percentage < 100)
+                                    <a href="{{ route('myUniApp') }}" class="theme-btn-one"><span>Apply
+                                            Now</span></a>
+                                @else
+                                    <a href="{{ route('reviewApplication', $programDetail->id) }}"
+                                        class="theme-btn-one"><span>Apply
+                                            Now</span></a>
+                                @endif
+                            @else
+                                <a href="{{ route('subscriptions') }}" class="theme-btn-one"><span>Apply
+                                        Now</span></a>
+                            @endif
+                        @else
+                            <a href="{{ route('login') }}" class="theme-btn-one"><span>Apply Now</span></a>
+                        @endif
+                        {{-- <button type="button" class="theme-btn-one">Apply now</button> --}}
 
                     </div>
                 </div>
@@ -241,8 +258,25 @@
                                         <p>Falls starts in {{ $programDetail->start_month }}</p>
                                     @endif
                                     <p class="my-2">Applications open all year</p>
-                                    <button type="button" class="theme-btn-one mt-2">Apply now</button>
-
+                                    {{-- <button type="button" class="theme-btn-one mt-2">Apply now</button> --}}
+                                    @if (Auth::user())
+                                        @if (Auth::user()->subscription)
+                                            @if (Auth::user()->profile_percentage < 100)
+                                                <a href="{{ route('myUniApp') }}" class="theme-btn-one mt-2"><span>Apply
+                                                        Now</span></a>
+                                            @else
+                                                <a href="{{ route('reviewApplication', $programDetail->id) }}"
+                                                    class="theme-btn-one mt-2"><span>Apply
+                                                        Now</span></a>
+                                            @endif
+                                        @else
+                                            <a href="{{ route('subscriptions') }}" class="theme-btn-one mt-2"><span>Apply
+                                                    Now</span></a>
+                                        @endif
+                                    @else
+                                        <a href="{{ route('login') }}" class="theme-btn-one mt-2"><span>Apply
+                                                Now</span></a>
+                                    @endif
                                 </div>
                             </div>
                             <div class="sidebar-category sidebar-widget">

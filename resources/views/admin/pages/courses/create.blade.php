@@ -59,7 +59,7 @@
                                         placeholder="Enter a country.." value="China" readonly>
                                     {{-- <select name="country_id" class="form-select" id=""
                                         :value="{{ old('country_id') }}" required>
-                                        <option value="">Seelct Country</option>
+                                        <option value="">Select Country</option>
                                         @foreach ($countries as $country)
                                             <option value="{{ $country->id }}">{{ $country->name }}</option>
                                         @endforeach
@@ -72,7 +72,7 @@
                                     <label class="form-label" for="name">City <span class="text-danger">*</span>
                                     </label>
                                     <select class="js-data-example-ajax form-select" id='city_id' name='city_id' required>
-                                        <option value="">Seelct Country</option>
+                                        <option value="">Select Country</option>
 
                                     </select>
 
@@ -95,7 +95,7 @@
                                     </label>
                                     <select name="degree_id" class="form-select" id="degree_id"
                                         :value="{{ old('degree_id') }}" required>
-                                        <option value="">Seelct degree</option>
+                                        <option value="">Select degree</option>
                                         @foreach ($degrees as $degree)
                                             <option value="{{ $degree->id }}">{{ $degree->name }}</option>
                                         @endforeach
@@ -121,7 +121,7 @@
                                     </label>
                                     <select name="tuition_fee_type" class="form-select" id="tuition_fee_type"
                                         :value="{{ old('tuition_fee_type') }}" required>
-                                        <option value="">Seelct Type</option>
+                                        <option value="">Select Type</option>
                                         <option value="1">Per Year</option>
                                         <option value="2">Per Semester</option>
                                         <option value="3">Per Month</option>
@@ -136,7 +136,7 @@
                                     </label>
                                     <select name="study_model_id" class="form-select" id="study_model_id"
                                         :value="{{ old('study_model_id') }}" required>
-                                        <option value="">Seelct Country</option>
+                                        <option value="">Select study model</option>
                                         @foreach ($studyModels as $studyModel)
                                             <option value="{{ $studyModel->id }}">{{ $studyModel->name }}</option>
                                         @endforeach
@@ -150,7 +150,7 @@
                                     </label>
                                     <select name="discipline_id" class="form-select" id="discipline_id"
                                         :value="{{ old('discipline_id') }}" required>
-                                        <option value="">Seelct Country</option>
+                                        <option value="">Select discipline</option>
                                         @foreach ($disciplines as $discipline)
                                             <option value="{{ $discipline->id }}">{{ $discipline->name }}</option>
                                         @endforeach
@@ -189,7 +189,7 @@
                                     </label>
                                     <select name="start_month" class="form-select" id="start_month"
                                         :value="{{ old('Start Month') }}">
-                                        <option value="">Seelct Start Month</option>
+                                        <option value="">Select Start Month</option>
                                         <option value="January">January</option>
                                         <option value="Febuary">Febuary</option>
                                         <option value="March">March</option>
@@ -265,7 +265,7 @@
                                     <label class="form-label" for="name">Minimun Score Level <span
                                             class="text-danger">*</span>
                                     </label>
-                                    <input type="number" class="form-control" id="min_score_level"
+                                    <input type="text" class="form-control" id="min_score_level"
                                         name="min_score_level[]" placeholder="Enter a min score level"
                                         :value="{{ old('min_score_level') }}" required>
                                     @error('min_score_level')
@@ -451,7 +451,7 @@
                                     <label class="form-label" for="name">Minimun Score Level <span
                                             class="text-danger">*</span>
                                     </label>
-                                    <input type="number" class="form-control" id="min_score_level_${addRow}"
+                                    <input type="text" class="form-control" id="min_score_level_${addRow}"
                                         name="min_score_level[]" placeholder="Enter a min score level.."
                                         :value="{{ old('min_score_level') }}" required>
                                     @error('min_score_level')

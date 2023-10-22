@@ -200,7 +200,7 @@
                                                                     @endif
                                                                     @if (Auth::user())
                                                                         @if (Auth::user()->subscription)
-                                                                            @if (Auth::user()->profile_percentage > 100)
+                                                                            @if (Auth::user()->profile_percentage < 100)
                                                                                 <a href="{{ route('myUniApp') }}"
                                                                                     class=""><span>Apply
                                                                                         Now</span></a>

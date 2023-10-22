@@ -19,6 +19,10 @@ class AuthenticatedSessionController extends Controller
     {
         return view('auth.login');
     }
+    public function createStudent()
+    {
+        return view('auth.student_login');
+    }
 
     /**
      * Handle an incoming authentication request.
@@ -30,14 +34,16 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
         $request->session()->regenerate();
+        return redirect()->intended(RouteServiceProvider::HOME);
+    }
+    public function storeStudent(LoginRequest $request)
+    {
+        $request->authenticate();
+        $request->session()->regenerate();
         if (isset($request->page) && $request->page == 'subscription-packages') {
             return redirect()->route('subscriptions');
         }
-        if (Auth::user()->type == 'student') {
-            return redirect()->intended(RouteServiceProvider::WEBSITE);
-        } elseif (Auth::user()->type == 'superAdmin') {
-            return redirect()->intended(RouteServiceProvider::HOME);
-        }
+        return redirect()->intended(RouteServiceProvider::WEBSITE);
     }
 
     /**

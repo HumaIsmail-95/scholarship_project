@@ -15,4 +15,8 @@ class StudentSubscription extends Model
         'program_no',
         'active',
     ];
+    public function package()
+    {
+        return $this->belongsTo(SubscriptionPackage::class, 'package_id', 'id');
+    }
 }

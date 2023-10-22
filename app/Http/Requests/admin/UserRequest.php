@@ -38,7 +38,7 @@ class UserRequest extends FormRequest
             'name' => ['required', 'max:255'],
             'email' => ['required', Rule::unique('users')->ignore($route_id)],
             'type' => ['required'],
-            // 'password' => ['nullable', 'confirmed'],
+            'password' => ['required', 'confirmed'],
 
         ];
 

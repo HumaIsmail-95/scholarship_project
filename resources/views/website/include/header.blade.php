@@ -40,10 +40,10 @@
                                          </li>
                                      </ul> --}}
                                  </li>
-                                 <li class="dropdown"><a href="#">Courses</a>
+                                 <li class="dropdown"><a href="{{ route('allCourses') }}">Courses</a>
                                      <ul>
                                          @foreach ($disciplines as $discipline)
-                                             <li><a href="#">{{ $discipline->name }}</a></li>
+                                             <li><a href="{{ route('allCourses') }}">{{ $discipline->name }}</a></li>
                                          @endforeach
                                      </ul>
                                  </li>

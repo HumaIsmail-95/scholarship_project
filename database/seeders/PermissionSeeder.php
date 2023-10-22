@@ -96,6 +96,11 @@ class PermissionSeeder extends Seeder
         $permission = Permission::create(['name' => 'edit-contact-us', 'display_name' => 'Edit Contact Us', 'module_name' => 'Contact Us']);
         //admin Dashboard
         $permission = Permission::create(['name' => 'admin-dashboard', 'display_name' => 'Admin Dashboard', 'module_name' => 'Admin Dashbaord']);
+        // blogs
+        $permission = Permission::create(['name' => 'list-blog', 'display_name' => 'list Blog', 'module_name' => 'Blog']);
+        $permission = Permission::create(['name' => 'create-blog', 'display_name' => 'Create Blog', 'module_name' => 'Blog']);
+        $permission = Permission::create(['name' => 'update-blog', 'display_name' => 'Edit Blog', 'module_name' => 'Blog']);
+        $permission = Permission::create(['name' => 'delete-blog', 'display_name' => 'Delete Blog', 'module_name' => 'Blog']);
 
 
         //website Dashboard

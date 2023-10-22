@@ -7,14 +7,16 @@
         <!-- Logo -->
         <!-- ============================================================== -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="{{ route('home') }}">
                 <!-- Logo icon --><b>
+                    @php
+                        $logo = \App\Models\Banner::where('page_name', 'logo')->first();
+                    @endphp
                     <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                     <!-- Dark Logo icon -->
-                    <img src="{{ asset('admin/assets/images/logo-icon.png') }}" alt="homepage" class="dark-logo" />
+                    <img src="{{ $logo->image_url }}" alt="logo" class="dark-logo" style="    width: 50px;" />
                     <!-- Light Logo icon -->
-                    <img src="{{ asset('admin/assets/images/logo-light-icon.png') }}" alt="homepage"
-                        class="light-logo" />
+                    <img src="{{ $logo->image_url }}" alt="logo" class="light-logo" style="    width: 50px;" />
                 </b>
                 <!--End Logo icon -->
                 <span class="hidden-xs"><span class="font-bold">{{ env('APP_NAME') }}
@@ -39,9 +41,9 @@
                 <!-- Search -->
                 <!-- ============================================================== -->
                 <li class="nav-item d-flex align-items-center">
-                    <form class="app-search d-none d-md-block d-lg-block">
+                    {{-- <form class="app-search d-none d-md-block d-lg-block">
                         <input type="text" class="form-control" placeholder="Search & enter">
-                    </form>
+                    </form> --}}
                 </li>
             </ul>
             <!-- ============================================================== -->
@@ -51,7 +53,7 @@
                 <!-- ============================================================== -->
                 <!-- Comment -->
                 <!-- ============================================================== -->
-                <li class="nav-item dropdown d-flex align-items-center">
+                {{-- <li class="nav-item dropdown d-flex align-items-center">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false"> <i class="ti-email"></i>
                         <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
@@ -106,14 +108,8 @@
                             </li>
                         </ul>
                     </div>
-                </li>
-                <!-- ============================================================== -->
-                <!-- End Comment -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Messages -->
-                <!-- ============================================================== -->
-                <li class="nav-item dropdown d-flex align-items-center">
+                </li> --}}
+                {{-- <li class="nav-item dropdown d-flex align-items-center">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="icon-note"></i>
                         <div class="notify"> <span class="heartbit"></span> <span class="point"></span>
@@ -176,14 +172,8 @@
                             </li>
                         </ul>
                     </div>
-                </li>
-                <!-- ============================================================== -->
-                <!-- End Messages -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- mega menu -->
-                <!-- ============================================================== -->
-                <li class="nav-item dropdown mega-dropdown d-flex align-items-center"> <a
+                </li> --}}
+                {{-- <li class="nav-item dropdown mega-dropdown d-flex align-items-center"> <a
                         class="nav-link dropdown-toggle waves-effect waves-dark" href=""
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
                             class="ti-layout-width-default"></i></a>
@@ -317,7 +307,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
                 <!-- ============================================================== -->
                 <!-- End mega menu -->
                 <!-- ============================================================== -->
@@ -332,18 +322,13 @@
                                 class="fa fa-angle-down"></i></span> </a>
                     <div class="dropdown-menu dropdown-menu-end animated flipInY">
                         <!-- text-->
-                        <a href="javascript:void(0)" class="dropdown-item"><i class="ti-user"></i> My
-                            Profile</a>
-                        <!-- text-->
-                        <a href="javascript:void(0)" class="dropdown-item"><i class="ti-wallet"></i> My
-                            Balance</a>
-                        <!-- text-->
-                        <a href="javascript:void(0)" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
-                        <!-- text-->
-                        <div class="dropdown-divider"></div>
-                        <!-- text-->
-                        <a href="javascript:void(0)" class="dropdown-item"><i class="ti-settings"></i>
-                            Account Setting</a>
+                        @if (Auth::user()->type == 'admin' || Auth::user()->type == 'super-admin')
+                            <a href="{{ route('admin.profile') }}" class="dropdown-item"><i class="ti-user"></i> My
+                                Profile</a>
+                        @else
+                            <a href="{{ route('profile') }}" class="dropdown-item"><i class="ti-user"></i> My
+                                Profile</a>
+                        @endif
                         <!-- text-->
                         <div class="dropdown-divider"></div>
                         <!-- text-->

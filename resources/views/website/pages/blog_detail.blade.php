@@ -1,63 +1,54 @@
 @extends('layouts.website')
-@section('title', 'Our Blogs')
+@section('title', 'Blog Detail')
 @section('content')
     <!-- Page Title -->
     <section class="page-title style-two" style="background-image: {{ $banner->image_url }});">
         <div class="auto-container">
             <div class="content-box centred mr-0">
                 <div class="title">
-                    <h1>Blogs</h1>
+                    <h1>Blog Detail</h1>
                 </div>
                 <ul class="bread-crumb clearfix">
                     <li><a href="{{ route('home') }}">Home</a></li>
-                    <li>Blogs</li>
+                    <li>Blog Detail</li>
                 </ul>
             </div>
         </div>
     </section>
-    <!-- End Page Title -->
     <!-- sidebar-page-container -->
     <section class="sidebar-page-container">
         <div class="auto-container">
             <div class="row clearfix">
                 <div class="col-lg-8 col-md-12 col-sm-12 content-side">
-                    <div class="blog-standard-content">
-                        @forelse ($blogs as $blog)
-                            <div class="news-block-one">
-                                <div class="inner-box">
-                                    <figure class="image-box">
-                                        <img src="{{ $blog->image_url }}" alt="">
-                                        <a href="blog-details.html"><i class="fas fa-link"></i></a>
-                                    </figure>
-                                    <div class="lower-content p-4">
-                                        {{-- <figure class="admin-thumb"><img src="assets/images/news/admin-1.png"
-                                                alt="">
-                                        </figure> --}}
-                                        <span class="category">{{ $blog->sub_heading }}</span>
-                                        <h2><a href="{{ route('blogDetail', $blog->id) }}">{{ $blog->heading }}</a></h2>
-                                        <p>
-                                            @if (strlen($blog->description) > 300)
-                                                @php
-                                                    $detail = substr($blog->description, 0, 300);
-                                                @endphp
-                                                {!! $detail !!}...
-                                            @else
-                                                {!! $blog->description !!}
-                                            @endif
-                                        </p>
-                                        <span class="post-info">By <a href="blog-details.html"></a>{{ $blog->user->name }} -
-                                            {{ $blog->created_at }}</span>
+                    <div class="blog-details-content">
+                        <div class="news-block-one">
+                            <div class="inner-box">
+                                <figure class="image-box">
+                                    <img src="{{ $blog->image_url }}" alt="">
+                                </figure>
+                                <div class="lower-content">
+                                    {{-- <figure class="admin-thumb"><img src="assets/images/news/admin-1.png" alt="">
+                                    </figure> --}}
+                                    <span class="category">{{ $blog->sub_heaind }}</span>
+                                    <h2>{{ $blog->heading }}</h2>
+                                    <span class="post-info">By <a href="Javascript:;">{{ $blog->user->name }}</a> -
+                                        {{ $blog->created_at }}</span>
+                                    <div class="text">
+                                        {!! $blog->description !!}
                                     </div>
+                                    {{-- 
+                                    <div class="post-share-option clearfix">
+                                        <div class="text pull-left">
+                                            <h3>We Are Social On:</h3>
+                                        </div>
+                                        <ul class="social-links pull-right clearfix">
+                                            <li><a href="blog-details.html"><i class="fab fa-facebook-f"></i></a></li>
+                                            <li><a href="blog-details.html"><i class="fab fa-google-plus-g"></i></a></li>
+                                            <li><a href="blog-details.html"><i class="fab fa-twitter"></i></a></li>
+                                        </ul>
+                                    </div> --}}
                                 </div>
                             </div>
-                        @empty
-                            <p>No Blogs Yet.</p>
-                        @endforelse
-
-                        <div class="pagination-wrapper centred">
-                            <ul class="pagination clearfix">
-                                {{ $blogs->links() }}
-                            </ul>
                         </div>
                     </div>
                 </div>

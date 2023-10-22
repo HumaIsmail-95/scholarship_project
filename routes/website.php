@@ -19,9 +19,13 @@ Route::get('/universities/{university}/university-details', [FrontendController:
 Route::get('/about', [FrontendController::class, 'about'])->name('about');
 Route::get('/privacy', [FrontendController::class, 'privacy'])->name('privacy');
 Route::get('/blogs', [FrontendController::class, 'blogs'])->name('blogs');
+Route::get('/blogs/{blog}', [FrontendController::class, 'blogDetail'])->name('blogDetail');
 
 Route::middleware(['auth', 'website'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
+    Route::put('/update-profile/{id}', [DashboardController::class, 'updateProfile'])->name('updateProfile');
 
     Route::get('/my-uni-app', [DashboardController::class, 'myUniApp'])->name('myUniApp');
     Route::post('/personal-info/{user}', [DashboardController::class, 'personalInfo'])->name('personalInfo');

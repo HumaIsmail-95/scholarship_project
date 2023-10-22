@@ -8,12 +8,14 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\StripeSettingController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\StudyModelController;
 use App\Http\Controllers\Admin\SubscriptionController;
 use App\Http\Controllers\Admin\UniversityController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Models\SubscriptionPackage;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +37,11 @@ Route::get('/sends', function () {
 
 // 'role:admin', 'role:superAdmin',
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
+    //profile
+    Route::get('profile', [UserController::class, 'profile'])->name('profile');
+    Route::put('profile/{id}', [UserController::class, 'profileUpdate'])->name('profileUpdate');
+
+    // dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     // role
     Route::resource('roles', RoleController::class);
@@ -71,6 +78,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::resource('subscription-packages', SubscriptionController::class);
     //student
     Route::resource('students', StudentController::class);
+    //blog
+    Route::resource('blogs', BlogController::class);
 
 
     // settings

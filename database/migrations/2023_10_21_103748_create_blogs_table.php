@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCourseRequirementsTable extends Migration
+class CreateBlogsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,21 @@ class CreateCourseRequirementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_requirements', function (Blueprint $table) {
+        Schema::create('blogs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('course_id')->constrained('uni_courses')->cascadeOnDelete();
-            $table->string('test_name')->nullable()->default('IELTS');
-            $table->float('min_score', 8, 1)->nullable()->default(7.0);
-            $table->string('min_score_level')->nullable()->default('B2');
-
+            $table->string('heading', 100);
+            $table->string('sub_heading', 100);
+            $table->string('image_url');
+            $table->string('image_folder');
+            $table->string('image_name');
+            $table->longText('description')->nullable();
             $table->foreignId('created_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('deleted_by')->nullable()->constrained('users')->cascadeOnDelete();
-            $table->timestamps();
+            $table->boolean('status')->default(false);
             $table->softDeletes();
+
+            $table->timestamps();
         });
     }
 
@@ -35,6 +38,6 @@ class CreateCourseRequirementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('course_requirements');
+        Schema::dropIfExists('blogs');
     }
 }

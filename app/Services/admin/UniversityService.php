@@ -74,7 +74,7 @@ class UniversityService
     {
         // return $response;
     }
-    public static function setImage(University $university)
+    public static function  setImage(University $university)
     {
         $key = 0;
         foreach ($university->images as  $image) {

@@ -196,7 +196,7 @@
                                             class="text-danger">*</span>
                                     </label>
                                     <input type="text" class="name form-control" id="edit_display_name"
-                                        name="edit_display_name" placeholder="Enter a display  name.."
+                                        name="display_name" placeholder="Enter a display  name.."
                                         :value="old('edit_display_name')">
                                     <div id="edit_display_name_text" class="text-danger errors"></div>
                                 </div>
@@ -205,7 +205,7 @@
                                             class="text-danger">*</span>
                                     </label>
                                     <input type="text" class="name form-control" id="edit_module_name"
-                                        name="edit_module_name" placeholder="Enter a display  name.."
+                                        name="  module_name" placeholder="Enter a display  name.."
                                         :value="old('edit_module_name')">
                                     <div id="edit_module_name_text" class="text-danger errors"></div>
                                 </div>

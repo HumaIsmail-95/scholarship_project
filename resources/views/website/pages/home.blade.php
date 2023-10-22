@@ -1224,7 +1224,7 @@
                                     </figure>
                                     <div class="lower-content">
                                         <div class="inner">
-                                            <h3><a href="index.html">{{ $city['name'] }}</a></h3>
+                                            <h3><a href="javascript:;">{{ $city['name'] }}</a></h3>
                                             <span>{{ $city['count'] }} Listing</span>
                                         </div>
                                     </div>
@@ -1268,7 +1268,8 @@
                                     </ul>
                                 </div>
                                 <div class="table-footer">
-                                    <a href="{{ Auth::user() ? route('dashboard') : route('login') }}">Register Now</a>
+                                    <a href="{{ Auth::user() ? route('dashboard') : route('login') }}">Register
+                                        Now</a>
                                 </div>
                             </div>
                         </div>

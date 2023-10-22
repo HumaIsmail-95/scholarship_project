@@ -11,11 +11,12 @@
                          aria-expanded="false"><img src="{{ asset('admin/assets/images/users/1.jpg') }}" alt="user-img"
                              class="img-circle"><span class="hide-menu">{{ Auth::user()->name }}</span></a>
                      <ul aria-expanded="false" class="collapse">
-                         <li><a href="javascript:void(0)"><i class="ti-user"></i> My Profile</a></li>
-                         <li><a href="javascript:void(0)"><i class="ti-wallet"></i> My Balance</a></li>
-                         <li><a href="javascript:void(0)"><i class="ti-email"></i> Inbox</a></li>
-                         <li><a href="javascript:void(0)"><i class="ti-settings"></i> Account Setting</a></li>
-                         <li><a href="javascript:void(0)"><i class="fa fa-power-off"></i> Logout</a></li>
+                         @if (Auth::user()->type == 'admin' || Auth::user()->type == 'super-admin')
+                             <li><a href="{{ route('admin.profile') }}"><i class="ti-user"></i> My Profile</a></li>
+                         @else
+                             <li><a href="{{ route('profile') }}"><i class="ti-user"></i> My Profile</a></li>
+                         @endif
+                         <li><a href="{{ route('logout') }}"><i class="fa fa-power-off"></i> Logout</a></li>
                      </ul>
                  </li>
                  {{-- <li class="nav-small-cap">--- PERSONAL</li> --}}
@@ -118,6 +119,18 @@
                          </ul>
                      </li>
                  @endcan
+                 {{-- Bogs --}}
+                 @can('list-Blogs')
+                     <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
+                                 class="ti-layout-grid2"></i><span class="hide-menu"> Blogs</span></a>
+                         <ul aria-expanded="false" class="collapse">
+                             <li><a href="{{ route('admin.blogs.index') }}">List</a></li>
+                             @can('create-Blogs')
+                                 <li><a href="{{ route('admin.blogs.create') }}">Create</a></li>
+                             @endcan
+                         </ul>
+                     </li>
+                 @endcan
                  {{-- Banners --}}
                  @can('list-banner')
                      <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
@@ -157,18 +170,18 @@
                  {{-- @endcan --}}
 
                  {{-- My Applicatoins --}}
-                 {{-- @can('my-applications') --}}
-                 <li> <a class="waves-effect waves-dark" href="{{ route('myApplications') }}"><i
-                             class="icon-speedometer"></i><span class="hide-menu">My Applications</span></a>
-                 </li>
-                 {{-- @endcan --}}
+                 @can('my-applications')
+                     <li> <a class="waves-effect waves-dark" href="{{ route('myApplications') }}"><i
+                                 class="icon-speedometer"></i><span class="hide-menu">My Applications</span></a>
+                     </li>
+                 @endcan
 
                  {{-- Over View --}}
-                 {{-- @can('my-applications') --}}
-                 <li> <a class="waves-effect waves-dark" href="{{ route('overviews') }}"><i
-                             class="icon-speedometer"></i><span class="hide-menu">Overviews</span></a>
-                 </li>
-                 {{-- @endcan --}}
+                 @can('my-applications')
+                     <li> <a class="waves-effect waves-dark" href="{{ route('overviews') }}"><i
+                                 class="icon-speedometer"></i><span class="hide-menu">Overviews</span></a>
+                     </li>
+                 @endcan
 
              </ul>
          </nav>

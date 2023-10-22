@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="col-lg-12  col-md-12 col-sm-12">
                                     <label class="form-label" for="duration">description
-                                    </label>
+                                    </label><span class="text-danger">*</span>
                                     <textarea name="description" class="summernote" id="" cols="30" rows="2"></textarea>
                                     @error('description')
                                         <p class="text-danger">{{ $message }}</p>
@@ -83,6 +83,7 @@
                                 <div class="col-lg-6 col-md-6  col-sm-12">
                                     <h4 class="card-title">Logo</h4>
                                     <label for="Logo" class="form-label">Set logo for this University</label>
+                                    <span class="text-danger">*</span>
                                     <input type="file" id="logo" name="logo" class="dropify"
                                         :value="{{ old('logo') }}" />
                                     @error('logo')
@@ -92,6 +93,7 @@
                                 <div class="col-lg-6 col-md-6  col-sm-12">
                                     <h4 class="card-title">Banner</h4>
                                     <label for="banner" class="form-label">Set Banner for this University</label>
+                                    <span class="text-danger">*</span>
                                     <input type="file" id="banner" name="banner" class="dropify"
                                         :value="{{ old('banner') }}" />
                                     @error('banner')
@@ -101,6 +103,7 @@
                                 <div class="col-lg-6 col-md-6  col-sm-12">
                                     <h4 class="card-title">Gallery images (multiple images) (3) </h4>
                                     <label for="gallery" class="form-label">Set gallery for this University</label>
+                                    <span class="text-danger">*</span>
                                     <input type="file" id="gallery" name="gallery[]" class="dropify" multiple
                                         :value="{{ old('gallery') }}" />
                                     @error('gallery')

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
+use App\Models\Blog;
 use App\Models\City;
 use App\Models\Discipline;
 use App\Models\Setting;
@@ -115,6 +116,23 @@ class FrontendController extends Controller
         $banner = Banner::where('page_name', 'blogs')->select('image_url')->first();
         $footer = Banner::where('page_name', 'footer')->select('image_url')->first();
         $footerData = Setting::select('introduction', 'copy_right', 'facebook_link', 'twitter_link', 'linkedin_link', 'address', 'mobile_1', 'mobile_2')->first();
-        return view('website.pages.blog', compact('logo', 'banner', 'disciplines', 'cities', 'footer', 'footerData'));
+
+        $recentBlogs = Blog::take(4)->get();
+        $blogs = Blog::paginate(10);
+
+        return view('website.pages.blog', compact('logo', 'banner', 'disciplines', 'cities', 'footer', 'footerData', 'recentBlogs', 'blogs'));
+    }
+    public function blogDetail(Blog $blog)
+    {
+        $disciplines = Discipline::all();
+        $cities = City::where('countryID', 'LIKE', 'CHN');
+        $logo = Banner::where('page_name', 'logo')->select('image_url')->first();
+        $banner = Banner::where('page_name', 'blogs')->select('image_url')->first();
+        $footer = Banner::where('page_name', 'footer')->select('image_url')->first();
+        $footerData = Setting::select('introduction', 'copy_right', 'facebook_link', 'twitter_link', 'linkedin_link', 'address', 'mobile_1', 'mobile_2')->first();
+
+        $recentBlogs = Blog::take(4)->get();
+
+        return view('website.pages.blog_detail', compact('logo', 'banner', 'disciplines', 'cities', 'footer', 'footerData', 'recentBlogs', 'blog'));
     }
 }

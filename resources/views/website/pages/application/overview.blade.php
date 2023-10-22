@@ -41,7 +41,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="table_id">
-                                    @foreach ($applications as $application)
+                                    @forelse ($applications as $application)
                                         <tr id='' class="tr-class-1">
                                             <td id="td-id-1" class="td-class-1"> {{ Auth::user()->name }} </td>
                                             <td id="td-id-1" class="td-class-1"> {{ $application->course->name }} </td>
@@ -50,7 +50,11 @@
                                             <td id="td-id-1" class="td-class-1"> {{ $application->created_at }} </td>
                                             <td id="td-id-1" class="td-class-1"> {{ $application->intake }} </td>
                                         </tr>
-                                    @endforeach
+                                    @empty
+                                        <tr>
+                                            <td colspan="5">No Application Found</td>
+                                        </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>

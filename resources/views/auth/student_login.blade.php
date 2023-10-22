@@ -39,7 +39,7 @@
             <div class="login-box card">
                 <div class="card-body">
                     <form class="form-horizontal form-material" method="POST" id="loginform"
-                        action="{{ route('admin.login') }}">
+                        action="{{ route('login') }}">
                         @csrf
                         <h3 class="text-center m-b-20">Sign In</h3>
                         <div class="form-group ">

@@ -10,6 +10,8 @@ use App\Http\Requests\admin\UserRoleRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\admin\UserService;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -122,5 +124,36 @@ class UserController extends Controller
             //throw $th;
             return $th;
         }
+    }
+    public function profile()
+    {
+        try {
+            return view('admin.pages.profile.edit');
+            //code...
+        } catch (\Throwable $th) {
+            return $th;
+            //throw $th;
+        }
+    }
+    public function profileUpdate(Request $request, $id)
+    {
+        $user = User::findorFail($id);
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => ['required', 'email', Rule::unique('users')->ignore($id)],
+            'password' => 'required',
+            'new_password' => 'required|string|min:8',
+        ]);;
+        if (!Hash::check($request->password, $user->password)) {
+            return redirect()->back()->withErrors(['password' => 'The current password is incorrect.']);
+        }
+        if ($request->new_password != $request->password_confirmation) {
+            return redirect()->back()->withErrors(['new_password' => 'The confimr password doesnot match']);
+        }
+        $data['email'] = $request->email;
+        $data['name'] = $request->name;
+        $data['password'] = Hash::make($request->new_password);
+        $user->update($data);
+        return redirect()->back()->with(['status' => true, 'icon' => 'success', 'heading' => 'Success', 'message' => 'profile updated successfully']);
     }
 }
