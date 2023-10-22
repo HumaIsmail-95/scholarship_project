@@ -88,10 +88,10 @@
         <button class="scroll-top scroll-to-target" data-target="html">
             <span class="far fa-long-arrow-up"></span>
         </button>
-        <button id="toggle-chatbot" class="message-btn">
+        {{-- <button id="toggle-chatbot" class="message-btn">
             <span class="far fa-robot"></span>
 
-        </button>
+        </button> --}}
     </div>
 
     <script>

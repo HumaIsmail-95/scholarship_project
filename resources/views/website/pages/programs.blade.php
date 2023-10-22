@@ -51,8 +51,8 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <select class="wide" name="discipline_id" id="discipline_id">
+                                                <option value="">Select Course</option>
                                                 @foreach ($disciplines as $discipline)
-                                                    <option value="">Select Course</option>
                                                     <option value="{{ $discipline->id }}">{{ $discipline->name }}</option>
                                                 @endforeach
                                             </select>
