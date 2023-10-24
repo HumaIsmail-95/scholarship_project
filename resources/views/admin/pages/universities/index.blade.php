@@ -77,7 +77,28 @@
         </div>
 
     </div>
+    <div class="modal fade" id="deleteModal" tabindex="-1" user="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" user="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <input type="hidden" value="-1" id="deleteID">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Delete University
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
 
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this University?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="button-delete" class="btn btn-danger waves-effect waves-light text-white"
+                        onclick="deleteUniversity()">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('scripts')
     <script src="{{ asset('admin/assets/node_modules/bootstrap-switch/bootstrap-switch.min.js') }}"></script>
@@ -113,6 +134,41 @@
                 icon: icon,
                 hideAfter: 3500,
                 stack: 6
+            });
+        }
+
+        function openDeleteDialog(id) {
+            $("#deleteID").val(id);
+            $("#deleteModal").modal('show');
+        }
+
+        function deleteUniversity() {
+            $("#button-delete").text('Loading...');
+            console.log($("#deleteID").val());
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                url: "/admin/universities/" + $("#deleteID").val(), // the endpoint
+                type: "DELETE", // http method
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    $("#button-delete").prop("disabled", false);
+                    $("#button-delete").text("Yes");
+                    $('.alert-success').html(data.success).fadeIn('slow');
+                    document.getElementById("row_" + $("#deleteID").val()).remove();
+
+                    showToaster('success', 'Success', data.message);
+                    location.reload();
+                    $('#deleteModal').modal('hide');
+                },
+                error: function(error) {
+                    $("#button-delete").prop("disabled", false);
+                    $("#button-delete").text("Yes");
+                    showToaster('error', 'Error', error);
+
+                },
             });
         }
     </script>
