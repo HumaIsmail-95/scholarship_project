@@ -28,32 +28,32 @@
                  </li> --}}
                  @can('list-role')
                      <li> <a class="waves-effect waves-dark" href="{{ route('admin.roles.index') }}"><i
-                                 class="icon-speedometer"></i><span class="hide-menu">Roles</span></a>
+                                 class=" fas fa-users"></i><span class="hide-menu">Roles</span></a>
                      </li>
                  @endcan
                  @can('list-permission')
                      <li> <a class="waves-effect waves-dark" href="{{ route('admin.permissions.index') }}"><i
-                                 class="icon-speedometer"></i><span class="hide-menu">Permissions</span></a>
+                                 class=" fas fa-key"></i><span class="hide-menu">Permissions</span></a>
                      </li>
                  @endcan
                  @can('list-user')
                      <li> <a class="waves-effect waves-dark" href="{{ route('admin.users.index') }}"><i
-                                 class="icon-speedometer"></i><span class="hide-menu">Users</span></a>
+                                 class="fas fa-user-plus"></i><span class="hide-menu">Users</span></a>
                      </li>
                  @endcan
                  @can('list-degree')
                      <li> <a class="waves-effect waves-dark" href="{{ route('admin.degrees.index') }}"><i
-                                 class="icon-speedometer"></i><span class="hide-menu">Degrees</span></a>
+                                 class=" fas fa-newspaper"></i><span class="hide-menu">Degrees</span></a>
                      </li>
                  @endcan
                  @can('list-discipline')
                      <li> <a class="waves-effect waves-dark" href="{{ route('admin.disciplines.index') }}"><i
-                                 class="icon-speedometer"></i><span class="hide-menu">Disciplines</span></a>
+                                 class=" fas fa-address-book"></i><span class="hide-menu">Disciplines</span></a>
                      </li>
                  @endcan
                  @can('list-study-model')
                      <li> <a class="waves-effect waves-dark" href="{{ route('admin.study-models.index') }}"><i
-                                 class="icon-speedometer"></i><span class="hide-menu">Study Models</span></a>
+                                 class=" fas fa-graduation-cap"></i><span class="hide-menu">Study Models</span></a>
                      </li>
                  @endcan
                  {{-- @can('list-users')
@@ -63,7 +63,7 @@
                  @endcan --}}
                  @can('list-university')
                      <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
-                                 class="ti-layout-grid2"></i><span class="hide-menu">Univeristies</span></a>
+                                 class=" fas fa-building"></i><span class="hide-menu">Univeristies</span></a>
                          <ul aria-expanded="false" class="collapse">
                              <li><a href="{{ route('admin.universities.index') }}">List</a></li>
                              <li><a href="{{ route('admin.universities.create') }}">Create</a></li>
@@ -72,7 +72,7 @@
                  @endcan
                  @can('list-course')
                      <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
-                                 class="ti-layout-grid2"></i><span class="hide-menu">Courses</span></a>
+                                 class=" fas fa-book"></i><span class="hide-menu">Courses</span></a>
                          <ul aria-expanded="false" class="collapse">
                              <li><a href="{{ route('admin.courses.index') }}">List</a></li>
                              <li><a href="{{ route('admin.courses.create') }}">Create</a></li>
@@ -81,7 +81,7 @@
                  @endcan
                  @can('list-subscription')
                      <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
-                                 class="ti-layout-grid2"></i><span class="hide-menu"> Packages</span></a>
+                                 class=" fas fa-star"></i><span class="hide-menu"> Packages</span></a>
                          <ul aria-expanded="false" class="collapse">
                              <li><a href="{{ route('admin.subscription-packages.index') }}">List</a></li>
                              <li><a href="{{ route('admin.subscription-packages.create') }}">Create</a></li>
@@ -90,7 +90,7 @@
                  @endcan
                  @can('list-students')
                      <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
-                                 class="ti-layout-grid2"></i><span class="hide-menu"> Students</span></a>
+                                 class=" fas fa-graduation-cap"></i><span class="hide-menu"> Students</span></a>
                          <ul aria-expanded="false" class="collapse">
                              <li><a href="{{ route('admin.students.index') }}">List</a></li>
                              {{-- <li><a href="{{ route('admin.students.create') }}">Create</a></li> --}}
@@ -100,7 +100,7 @@
                  @can('list-setting')
                      {{-- stripe --}}
                      <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
-                                 class="ti-layout-grid2"></i><span class="hide-menu"> Settings</span></a>
+                                 class=" far fa-sun"></i><span class="hide-menu"> Settings</span></a>
                          <ul aria-expanded="false" class="collapse">
                              @can('view-stripe')
                                  <li><a href="{{ route('admin.stripe.setting.index') }}">Set Stripe Key</a></li>
@@ -124,7 +124,7 @@
                  {{-- Bogs --}}
                  @can('list-Blogs')
                      <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
-                                 class="ti-layout-grid2"></i><span class="hide-menu"> Blogs</span></a>
+                                 class=" fab fa-blogger"></i><span class="hide-menu"> Blogs</span></a>
                          <ul aria-expanded="false" class="collapse">
                              <li><a href="{{ route('admin.blogs.index') }}">List</a></li>
                              @can('create-Blogs')
@@ -136,7 +136,7 @@
                  {{-- Banners --}}
                  @can('list-banner')
                      <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
-                                 class="ti-layout-grid2"></i><span class="hide-menu"> Banners and logo</span></a>
+                                 class=" fas fa-images"></i><span class="hide-menu"> Banners and logo</span></a>
                          @can('update-banner')
                              <ul aria-expanded="false" class="collapse">
                                  <li><a href="{{ route('admin.banners') }}">Set banners and logo</a></li>
@@ -153,14 +153,14 @@
                  {{-- dashboard --}}
                  @can('website-dashboard')
                      <li> <a class="waves-effect waves-dark" href="{{ route('dashboard') }}"><i
-                                 class="icon-speedometer"></i><span class="hide-menu">Home</span></a>
+                                 class=" fas fa-home"></i><span class="hide-menu">Home</span></a>
                      </li>
                  @endcan
 
                  {{-- my uni app --}}
                  @can('my-uni-app')
                      <li> <a class="waves-effect waves-dark" href="{{ route('myUniApp') }}"><i
-                                 class="icon-speedometer"></i><span class="hide-menu">My Uni App</span></a>
+                                 class="fab fa-medapps"></i><span class="hide-menu">My Uni App</span></a>
                      </li>
                  @endcan
 
@@ -174,14 +174,14 @@
                  {{-- My Applicatoins --}}
                  @can('my-applications')
                      <li> <a class="waves-effect waves-dark" href="{{ route('myApplications') }}"><i
-                                 class="icon-speedometer"></i><span class="hide-menu">My Applications</span></a>
+                                 class=" fas fa-user-md"></i><span class="hide-menu">My Applications</span></a>
                      </li>
                  @endcan
 
                  {{-- Over View --}}
                  @can('my-applications')
                      <li> <a class="waves-effect waves-dark" href="{{ route('overviews') }}"><i
-                                 class="icon-speedometer"></i><span class="hide-menu">Overviews</span></a>
+                                 class=" fas fa-clipboard-list"></i><span class="hide-menu">Overviews</span></a>
                      </li>
                  @endcan
                  @if (Auth::user()->type == 'super-admin')

@@ -7,7 +7,7 @@
         <!-- Logo -->
         <!-- ============================================================== -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="{{ route('home') }}">
+            <a class="navbar-brand" href="{{ route('dashboard') }}">
                 <!-- Logo icon --><b>
                     @php
                         $logo = \App\Models\Banner::where('page_name', 'logo')->first();
