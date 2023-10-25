@@ -93,8 +93,8 @@
                                     <p>{{ $student->address }}</p>
                                 </div>
                                 @php
-                                    $id_card;
-                                    $travel_proof;
+                                    $id_card = null;
+                                    $travel_proof = null;
                                     foreach ($student->studentGalleries as $img) {
                                         if ($img->type == 'id_card') {
                                             $id_card = $img;
@@ -144,8 +144,8 @@
                                         <p>{{ $edu->institute_name }}</p>
                                     </div>
                                     @php
-                                        $transcript;
-                                        $certificate;
+                                        $transcript = null;
+                                        $certificate = null;
                                         foreach ($edu->educationGalleries as $eduImg) {
                                             if ($eduImg->type == 'transcript') {
                                                 $transcript = $eduImg;
@@ -209,10 +209,10 @@
             </div>
         </div>
         @php
-            $ielts;
-            $toelf;
-            $pearson;
-            $moi;
+            $ielts = null;
+            $toelf = null;
+            $pearson = null;
+            $moi = null;
             foreach ($testLanguage->testGalleries as $testImg) {
                 if ($testImg->type == 'ielts') {
                     $ielts = $testImg;
