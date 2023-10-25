@@ -52,9 +52,9 @@
                         <div>
                             @php
                                 $tuitionFee = 'Yearly';
-                                if ($$programDetail->tuition_fee_type == 2) {
+                                if ($programDetail->tuition_fee_type == 2) {
                                     $tuitionFee = 'per Semester';
-                                } elseif ($$programDetail->tuition_fee_type == 3) {
+                                } elseif ($programDetail->tuition_fee_type == 3) {
                                     $tuitionFee = 'per Month';
                                 }
                             @endphp
