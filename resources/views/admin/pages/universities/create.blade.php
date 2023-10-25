@@ -111,7 +111,8 @@
                                     @enderror
                                 </div>
                                 <div class="col-12 text-right mt-2">
-                                    <button type="submit" class="btn btn-info waves-effect waves-light text-white">Add
+                                    <button type="submit" id="btn_submit"
+                                        class="btn btn-info waves-effect waves-light text-white" onclick="onSubmit()">Add
                                         University</button>
                                 </div>
                             </div>
@@ -231,5 +232,10 @@
             window.save = function() {
                 $(".click2edit").summernote('destroy');
             }
+
+        function onSubmit() {
+            $("#btn_submit").prop("disabled", false);
+            $("#btn_submit").text("Loading");
+        }
     </script>
 @endsection

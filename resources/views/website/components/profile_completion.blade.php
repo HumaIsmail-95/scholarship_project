@@ -22,7 +22,7 @@
                                 $doc = Auth::user()->document;
                                 $percent = ($edu + $pro + $test + $doc) * 25;
                             @endphp
-                            <p class="mb-0 {{ Auth::user()->profile_percentage == 100 ? 'text-success' : 'text-danger' }}"
+                            <p class="mb-0 {{ $percent == 100 ? 'text-success' : 'text-danger' }}"
                                 style="font-size:40px">{{ $percent }}%</p>
                         </div>
                     </div>

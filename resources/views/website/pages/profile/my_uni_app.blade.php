@@ -370,7 +370,7 @@
                     var successAlert = $("#success-alert");
                     showToaster('success', 'Success', data.message);
                     $(this).parents("#row").remove();
-
+                    // location.reload()
                 },
                 error: function(error) {
                     var errorMessage = error.statusText;
@@ -576,6 +576,7 @@
                     $("#personal-button-save").text("Save & Continue");
                     var successAlert = $("#success-alert");
                     showToaster('success', 'Success', data.message);
+                    // location.reload()
 
                 },
                 error: function(error) {
@@ -624,6 +625,7 @@
                     $("#personal-button-save").text("Save & Continue");
                     var successAlert = $("#success-alert");
                     showToaster('success', 'Success', data.message);
+                    // location.reload()
 
                 },
                 error: function(error) {
@@ -672,6 +674,7 @@
                     $("#personal-button-save").text("Save & Continue");
                     var successAlert = $("#success-alert");
                     showToaster('success', 'Success', data.message);
+                    // location.reload()
 
                 },
                 error: function(error) {
@@ -720,6 +723,7 @@
                     $("#personal-button-save").text("Save & Continue");
                     var successAlert = $("#success-alert");
                     showToaster('success', 'Success', data.message);
+                    // location.reload()
 
                 },
                 error: function(error) {

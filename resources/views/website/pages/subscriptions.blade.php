@@ -123,11 +123,13 @@
                         </div>
                         <div class="modal-footer">
                             <a type="button" class="btn btn-dark" data-dismiss="modal">Close</a>
-                            <button type="submit" class="btn btn-priamry">Pay
+                            <button type="submit" id="btn_submit" class="btn btn-success">Pay
                                 Now ( <span id="span_price"></span> )</button>
                         </div>
-
-
+                        <div class="alert  error text-danger ">
+                        </div>
+                        <div class="alert  success text-success ">
+                        </div>
                     </form>
 
                 </div>
@@ -141,11 +143,12 @@
 
     <script type="text/javascript">
         function openPaymentModal(package) {
-            console.log(' i m hereopenPaymentModal', package);
+            console.log(' i m hereopenPaymentModal123123123', package);
             document.getElementById('price').value = package.price;
             document.getElementById('package_id').value = package.id;
 
             document.getElementById('program_no').value = package.program_no;
+            console.log('package', package.price);
             document.getElementById('span_price').innerHTML = package.price;
             $("#packageModal").modal('show')
         }
@@ -160,6 +163,8 @@
             var $form = $(".require-validation");
 
             $('form.require-validation').bind('submit', function(e) {
+                $("#btn_submit").prop("disabled", true);
+                $("#btn_submit").text("Loading");
                 var $form = $(".require-validation"),
                     inputSelector = ['input[type=email]', 'input[type=password]',
                         'input[type=text]', 'input[type=file]',
@@ -199,13 +204,22 @@
             --------------------------------------------
             --------------------------------------------*/
             function stripeResponseHandler(status, response) {
+
+                console.log('status', status, response);
                 if (response.error) {
+                    $("#btn_submit").prop("disabled", false);
+                    $("#btn_submit").text('Pay Now');
                     $('.error')
                         .removeClass('hide')
                         .find('.alert')
                         .text(response.error.message);
+                    $('.error').text(response.error.message)
+
                 } else {
                     /* token contains id, last4, and card type */
+                    $('.error').text('')
+                    $("#btn_submit").text('Payed');
+                    $('.success').text('Payed successfully')
                     var token = response['id'];
 
                     $form.find('input[type=text]').empty();

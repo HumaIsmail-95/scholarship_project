@@ -198,25 +198,36 @@
                                                                     @if ($program->university->featured)
                                                                         <h6>Featured <i class="icon-18"></i></h6>
                                                                     @endif
+                                                                    @php
+                                                                        $user = Auth::user();
+                                                                        $applied = App\Models\StudentApplication::where('user_id', $user->id)
+                                                                            ->where('course_id', $program->id)
+                                                                            ->count();
+                                                                    @endphp
                                                                     @if (Auth::user())
-                                                                        @if (Auth::user()->subscription)
-                                                                            @if (Auth::user()->profile_percentage < 100)
-                                                                                <a href="{{ route('myUniApp') }}"
-                                                                                    class=""><span>Apply
-                                                                                        Now</span></a>
+
+                                                                        @if ($applied > 0)
+                                                                            <button><span>Applied
+                                                                                </span></button>
+                                                                        @else
+                                                                            @if ($user->subscription)
+                                                                                @if ($user->profile_percentage < 100)
+                                                                                    <a href="{{ route('myUniApp') }}"><span>Apply
+                                                                                            Now</span></a>
+                                                                                @else
+                                                                                    <a
+                                                                                        href="{{ route('reviewApplication', $program->id) }}"><span>Apply
+                                                                                            Now</span></a>
+                                                                                @endif
                                                                             @else
-                                                                                <a href="{{ route('reviewApplication', $program->id) }}"
-                                                                                    class=""><span>Apply
+                                                                                <a href="{{ route('subscriptions') }}"><span>Apply
                                                                                         Now</span></a>
                                                                             @endif
-                                                                        @else
-                                                                            <a href="{{ route('subscriptions') }}"
-                                                                                class=""><span>Apply
-                                                                                    Now</span></a>
                                                                         @endif
                                                                     @else
                                                                         <a href="{{ route('login') }}"
-                                                                            class=""><span>Apply Now</span></a>
+                                                                            class="theme-btn-one"><span>Apply
+                                                                                Now</span></a>
                                                                     @endif
 
                                                                 </div>

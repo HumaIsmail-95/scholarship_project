@@ -49,19 +49,31 @@
 
                     </div>
                     <div class="right-column pull-right clearfix">
+                        @php
+                            $user = Auth::user();
+                            $applied = App\Models\StudentApplication::where('user_id', $user->id)
+                                ->where('course_id', $programDetail->id)
+                                ->count();
+                        @endphp
                         @if (Auth::user())
-                            @if (Auth::user()->subscription)
-                                @if (Auth::user()->profile_percentage < 100)
-                                    <a href="{{ route('myUniApp') }}" class="theme-btn-one"><span>Apply
-                                            Now</span></a>
+
+                            @if ($applied > 0)
+                                <button class="theme-btn-one"><span>Applied
+                                    </span></button>
+                            @else
+                                @if ($user->subscription)
+                                    @if ($user->profile_percentage < 100)
+                                        <a href="{{ route('myUniApp') }}" class="theme-btn-one"><span>Apply
+                                                Now</span></a>
+                                    @else
+                                        <a href="{{ route('reviewApplication', $programDetail->id) }}"
+                                            class="theme-btn-one"><span>Apply
+                                                Now</span></a>
+                                    @endif
                                 @else
-                                    <a href="{{ route('reviewApplication', $programDetail->id) }}"
-                                        class="theme-btn-one"><span>Apply
+                                    <a href="{{ route('subscriptions') }}" class="theme-btn-one"><span>Apply
                                             Now</span></a>
                                 @endif
-                            @else
-                                <a href="{{ route('subscriptions') }}" class="theme-btn-one"><span>Apply
-                                        Now</span></a>
                             @endif
                         @else
                             <a href="{{ route('login') }}" class="theme-btn-one"><span>Apply Now</span></a>
@@ -260,18 +272,25 @@
                                     <p class="my-2">Applications open all year</p>
                                     {{-- <button type="button" class="theme-btn-one mt-2">Apply now</button> --}}
                                     @if (Auth::user())
-                                        @if (Auth::user()->subscription)
-                                            @if (Auth::user()->profile_percentage < 100)
-                                                <a href="{{ route('myUniApp') }}" class="theme-btn-one mt-2"><span>Apply
-                                                        Now</span></a>
+                                        @if ($applied > 0)
+                                            <button class="theme-btn-one"><span>Applied
+                                                </span></button>
+                                        @else
+                                            @if (Auth::user()->subscription)
+                                                @if (Auth::user()->profile_percentage < 100)
+                                                    <a href="{{ route('myUniApp') }}"
+                                                        class="theme-btn-one mt-2"><span>Apply
+                                                            Now</span></a>
+                                                @else
+                                                    <a href="{{ route('reviewApplication', $programDetail->id) }}"
+                                                        class="theme-btn-one mt-2"><span>Apply
+                                                            Now</span></a>
+                                                @endif
                                             @else
-                                                <a href="{{ route('reviewApplication', $programDetail->id) }}"
+                                                <a href="{{ route('subscriptions') }}"
                                                     class="theme-btn-one mt-2"><span>Apply
                                                         Now</span></a>
                                             @endif
-                                        @else
-                                            <a href="{{ route('subscriptions') }}" class="theme-btn-one mt-2"><span>Apply
-                                                    Now</span></a>
                                         @endif
                                     @else
                                         <a href="{{ route('login') }}" class="theme-btn-one mt-2"><span>Apply

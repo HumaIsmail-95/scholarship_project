@@ -19,7 +19,7 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        $disciplines = Discipline::withCount('courses')->take(8)->get();
+        $disciplines = Discipline::withCount('courses')->take(8)->where('status', 1)->get();
         $cities = City::where('countryID', 'LIKE', 'CHN')->get();
         $packages = SubscriptionPackage::where('status', 1)->get();
         $popular = FrontEndService::getPopular();
@@ -29,12 +29,13 @@ class FrontendController extends Controller
             $query->where('type', 'logo')->select('id', 'image_url', 'uni_id');
         }])->withCount('courses')->get();
         $footer = Banner::where('page_name', 'footer')->select('image_url')->first();
+        $allDisciplines = Discipline::withCount('courses')->where('status', 1)->get();
         $footerData = Setting::select('introduction', 'copy_right', 'facebook_link', 'twitter_link', 'linkedin_link', 'address', 'mobile_1', 'mobile_2')->first();
-        return view('website.pages.home', compact('disciplines', 'cities', 'packages', 'popular', 'logo', 'banners', 'featuredUnis', 'footer', 'footerData'));
+        return view('website.pages.home', compact('allDisciplines', 'disciplines', 'cities', 'packages', 'popular', 'logo', 'banners', 'featuredUnis', 'footer', 'footerData'));
     }
     public function allCourses()
     {
-        $disciplines = Discipline::withCount('courses')->get();
+        $disciplines = Discipline::withCount('courses')->where('status', 1)->get();
         $cities = City::where('countryID', 'LIKE', 'CHN');
         $logo = Banner::where('page_name', 'logo')->select('image_url')->first();
         $banner = Banner::where('page_name', 'all_courses')->select('image_url')->first();
@@ -44,7 +45,7 @@ class FrontendController extends Controller
     }
     public function subscriptions()
     {
-        $disciplines = Discipline::all();
+        $disciplines = Discipline::where('status', 1)->get();
         $cities = City::where('countryID', 'LIKE', 'CHN');
         $packages = SubscriptionPackage::where('status', 1)->get();
         $logo = Banner::where('page_name', 'logo')->select('image_url')->first();
@@ -55,7 +56,7 @@ class FrontendController extends Controller
     }
     public function programs(Request $request)
     {
-        $disciplines = Discipline::all();
+        $disciplines = Discipline::where('status', 1)->get();
         $cities = City::where('countryID', 'LIKE', 'CHN');
         $programs = FrontEndService::getPrograms($request);
         $logo = Banner::where('page_name', 'logo')->select('image_url')->first();
@@ -66,7 +67,7 @@ class FrontendController extends Controller
     }
     public function programDetails($id)
     {
-        $disciplines = Discipline::all();
+        $disciplines = Discipline::where('status', 1)->get();
         $cities = City::where('countryID', 'LIKE', 'CHN');
         $programDetail = FrontEndService::getProgramDetail($id);
         $logo = Banner::where('page_name', 'logo')->select('image_url')->first();
@@ -77,7 +78,7 @@ class FrontendController extends Controller
     }
     public function universityDetail($id)
     {
-        $disciplines = Discipline::all();
+        $disciplines = Discipline::where('status', 1)->get();
         $cities = City::where('countryID', 'LIKE', 'CHN');
         $universityDetail = FrontEndService::universityDetail($id);
         $logo = Banner::where('page_name', 'logo')->select('image_url')->first();
@@ -89,7 +90,7 @@ class FrontendController extends Controller
     public function about()
     {
         $about = Setting::select('about_us')->first();
-        $disciplines = Discipline::all();
+        $disciplines = Discipline::where('status', 1)->get();
         $cities = City::where('countryID', 'LIKE', 'CHN');
         $logo = Banner::where('page_name', 'logo')->select('image_url')->first();
         $banner = Banner::where('page_name', 'about')->select('image_url')->first();
@@ -100,7 +101,7 @@ class FrontendController extends Controller
     public function privacy()
     {
         $privacy = Setting::select('privacy_policy')->first();
-        $disciplines = Discipline::all();
+        $disciplines = Discipline::where('status', 1)->get();
         $cities = City::where('countryID', 'LIKE', 'CHN');
         $logo = Banner::where('page_name', 'logo')->select('image_url')->first();
         $banner = Banner::where('page_name', 'privacy')->select('image_url')->first();
@@ -110,7 +111,7 @@ class FrontendController extends Controller
     }
     public function blogs()
     {
-        $disciplines = Discipline::all();
+        $disciplines = Discipline::where('status', 1)->get();
         $cities = City::where('countryID', 'LIKE', 'CHN');
         $logo = Banner::where('page_name', 'logo')->select('image_url')->first();
         $banner = Banner::where('page_name', 'blogs')->select('image_url')->first();
@@ -124,7 +125,7 @@ class FrontendController extends Controller
     }
     public function blogDetail(Blog $blog)
     {
-        $disciplines = Discipline::all();
+        $disciplines = Discipline::where('status', 1)->get();
         $cities = City::where('countryID', 'LIKE', 'CHN');
         $logo = Banner::where('page_name', 'logo')->select('image_url')->first();
         $banner = Banner::where('page_name', 'blogs')->select('image_url')->first();

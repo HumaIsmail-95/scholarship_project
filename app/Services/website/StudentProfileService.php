@@ -64,11 +64,13 @@ class StudentProfileService
             if ($request->hasFile('id_document')) :
 
                 $file = StudentGallery::where('user_id', $user->id)->where('type', 'id_card')->first();
-                $fileToDelete = 'public/student_galleries/' . $file['image_name'];
-                if (Storage::exists($fileToDelete)) {
-                    Storage::delete($fileToDelete);
+                if (!empty($file)) {
+                    $fileToDelete = 'public/student_galleries/' . $file['image_name'];
+                    if (Storage::exists($fileToDelete)) {
+                        Storage::delete($fileToDelete);
+                    }
+                    $file->delete();
                 }
-                $file->delete();
 
                 $image_name = FileUploadTrait::fileUpload($request->id_document, 'student_galleries');
                 $doc['type'] = 'id_card';
@@ -81,11 +83,13 @@ class StudentProfileService
             if ($request->hasFile('travel_document')) :
 
                 $file = StudentGallery::where('user_id', $user->id)->where('type', 'travel_proof')->first();
-                $fileToDelete = 'public/student_galleries/' . $file->image_name;
-                if (Storage::exists($fileToDelete)) {
-                    Storage::delete($fileToDelete);
+                if (!empty($file)) {
+                    $fileToDelete = 'public/student_galleries/' . $file['image_name'];
+                    if (Storage::exists($fileToDelete)) {
+                        Storage::delete($fileToDelete);
+                    }
+                    $file->delete();
                 }
-                $file->delete();
                 $image_name = FileUploadTrait::fileUpload($request->travel_document, 'student_galleries');
                 $doc['type'] = 'travel_proof';
                 $doc['folder_name'] = 'student_galleries';
@@ -132,7 +136,6 @@ class StudentProfileService
 
         DB::beginTransaction();
         $data = $request->validated(EducationRequest::class);
-
         //        $studentEducation = StudentEducation::where('user_id', $user->id)->with('educationGalleries')->get();
         foreach ($data['start'] as $index => $responseName) {
             if ($request['education_id'][$index] != -1) {
@@ -211,6 +214,7 @@ class StudentProfileService
                     EducationGallery::create($doc);
                 endif;
             }
+            # code...
         }
 
         $studentExperience = StudentExperience::where('user_id', $user->id)->get();
@@ -401,110 +405,90 @@ class StudentProfileService
         DB::beginTransaction();
         $data = $request->validated();
         $docuemntData = DocumentGallery::where('user_id', $user->id)->get();
-        if ($docuemntData->isNotEmpty()) {
-            foreach ($docuemntData as $data) {
-                if ($request->hasFile('resume')) :
-                    $fileToDelete = 'public/document_gallery/' . $data->image_name;
-                    if (Storage::exists($fileToDelete)) {
-                        Storage::delete($fileToDelete);
-                    }
-                    $data->delete();
-                endif;
-                if ($request->hasFile('exp_letter')) :
-                    $fileToDelete = 'public/document_gallery/' . $data->image_name;
-                    if (Storage::exists($fileToDelete)) {
-                        Storage::delete($fileToDelete);
-                    }
-                    $data->delete();
-                endif;
-                if ($request->hasFile('other')) :
-                    $fileToDelete = 'public/document_gallery/' . $data->image_name;
-                    if (Storage::exists($fileToDelete)) {
-                        Storage::delete($fileToDelete);
-                    }
-                    $data->delete();
-                endif;
-                if ($request->hasFile('recomendation')) :
-                    $fileToDelete = 'public/document_gallery/' . $data->image_name;
-                    if (Storage::exists($fileToDelete)) {
-                        Storage::delete($fileToDelete);
-                    }
-                    $data->delete();
-                endif;
+        if ($request->hasFile('resume')) {
+            if ($docuemntData->isNotEmpty()) {
+                foreach ($docuemntData as $data) {
+                    if ($data->type == 'resume') :
+                        $fileToDelete = 'public/document_gallery/' . $data->image_name;
+                        if (Storage::exists($fileToDelete)) {
+                            Storage::delete($fileToDelete);
+                        }
+                        $doc = DocumentGallery::findorFail($data->id);
+                        $doc->delete();
+                    endif;
+                }
             }
-            if ($request->hasFile('resume')) {
-                $image_name = FileUploadTrait::fileUpload($request->exp_letter, 'document_gallery');
-                $doc['type'] = 'resume';
-                $doc['folder_name'] = 'document_gallery';
-                $doc['image_name'] =  $image_name;
-                $doc['user_id'] =  $user->id;
-                $doc['image_url'] = url('/storage/document_gallery/' . $image_name);
-                DocumentGallery::create($doc);
+            $image_name = FileUploadTrait::fileUpload($request->exp_letter, 'document_gallery');
+            $doc['type'] = 'resume';
+            $doc['folder_name'] = 'document_gallery';
+            $doc['image_name'] =  $image_name;
+            $doc['user_id'] =  $user->id;
+            $doc['image_url'] = url('/storage/document_gallery/' . $image_name);
+            DocumentGallery::create($doc);
+        }
+        if ($request->hasFile('exp_letter')) {
+            if ($docuemntData->isNotEmpty()) {
+                foreach ($docuemntData as $data) {
+                    if ($data->type == 'exp_letter') :
+                        $fileToDelete = 'public/document_gallery/' . $data->image_name;
+                        if (Storage::exists($fileToDelete)) {
+                            Storage::delete($fileToDelete);
+                        }
+                        $doc = DocumentGallery::findorFail($data->id);
+                        $doc->delete();
+                    endif;
+                }
             }
-            if ($request->hasFile('exp_letter')) {
-                $image_name = FileUploadTrait::fileUpload($request->exp_letter, 'document_gallery');
-                $doc['type'] = 'exp_letter';
-                $doc['folder_name'] = 'document_gallery';
-                $doc['image_name'] =  $image_name;
-                $doc['user_id'] =  $user->id;
-                $doc['image_url'] = url('/storage/document_gallery/' . $image_name);
-                DocumentGallery::create($doc);
+
+            $image_name = FileUploadTrait::fileUpload($request->exp_letter, 'document_gallery');
+            $doc['type'] = 'exp_letter';
+            $doc['folder_name'] = 'document_gallery';
+            $doc['image_name'] =  $image_name;
+            $doc['user_id'] =  $user->id;
+            $doc['image_url'] = url('/storage/document_gallery/' . $image_name);
+            DocumentGallery::create($doc);
+        }
+        if ($request->hasFile('other')) {
+            if ($docuemntData->isNotEmpty()) {
+                foreach ($docuemntData as $data) {
+                    if ($data->type == 'other') :
+                        $fileToDelete = 'public/document_gallery/' . $data->image_name;
+                        if (Storage::exists($fileToDelete)) {
+                            Storage::delete($fileToDelete);
+                        }
+                        $doc = DocumentGallery::findorFail($data->id);
+                        $doc->delete();
+                    endif;
+                }
             }
-            if ($request->hasFile('other')) {
-                $image_name = FileUploadTrait::fileUpload($request->other, 'document_gallery');
-                $doc['type'] = 'other';
-                $doc['folder_name'] = 'document_gallery';
-                $doc['image_name'] =  $image_name;
-                $doc['user_id'] =  $user->id;
-                $doc['image_url'] = url('/storage/document_gallery/' . $image_name);
-                DocumentGallery::create($doc);
+            $image_name = FileUploadTrait::fileUpload($request->other, 'document_gallery');
+            $doc['type'] = 'other';
+            $doc['folder_name'] = 'document_gallery';
+            $doc['image_name'] =  $image_name;
+            $doc['user_id'] =  $user->id;
+            $doc['image_url'] = url('/storage/document_gallery/' . $image_name);
+            DocumentGallery::create($doc);
+        }
+        if ($request->hasFile('recomendation')) {
+            if ($docuemntData->isNotEmpty()) {
+                foreach ($docuemntData as $data) {
+                    if ($data->type == 'recomendation') :
+                        $fileToDelete = 'public/document_gallery/' . $data->image_name;
+                        if (Storage::exists($fileToDelete)) {
+                            Storage::delete($fileToDelete);
+                        }
+                        $doc = DocumentGallery::findorFail($data->id);
+                        $doc->delete();
+                    endif;
+                }
             }
-            if ($request->hasFile('recomendation')) {
-                $image_name = FileUploadTrait::fileUpload($request->recomendation, 'document_gallery');
-                $doc['type'] = 'recomendation';
-                $doc['folder_name'] = 'document_gallery';
-                $doc['image_name'] =  $image_name;
-                $doc['user_id'] =  $user->id;
-                $doc['image_url'] = url('/storage/document_gallery/' . $image_name);
-                DocumentGallery::create($doc);
-            }
-        } else {
-            if ($request->hasFile('resume')) {
-                $image_name = FileUploadTrait::fileUpload($request->resume, 'document_gallery');
-                $doc['type'] = 'resume';
-                $doc['folder_name'] = 'document_gallery';
-                $doc['image_name'] =  $image_name;
-                $doc['user_id'] =  $user->id;
-                $doc['image_url'] = url('/storage/document_gallery/' . $image_name);
-                DocumentGallery::create($doc);
-            }
-            if ($request->hasFile('exp_letter')) {
-                $image_name = FileUploadTrait::fileUpload($request->exp_letter, 'document_gallery');
-                $doc['type'] = 'exp_letter';
-                $doc['folder_name'] = 'document_gallery';
-                $doc['image_name'] =  $image_name;
-                $doc['user_id'] =  $user->id;
-                $doc['image_url'] = url('/storage/document_gallery/' . $image_name);
-                DocumentGallery::create($doc);
-            }
-            if ($request->hasFile('other')) {
-                $image_name = FileUploadTrait::fileUpload($request->other, 'document_gallery');
-                $doc['type'] = 'other';
-                $doc['folder_name'] = 'document_gallery';
-                $doc['image_name'] =  $image_name;
-                $doc['user_id'] =  $user->id;
-                $doc['image_url'] = url('/storage/document_gallery/' . $image_name);
-                DocumentGallery::create($doc);
-            }
-            if ($request->hasFile('recomendation')) {
-                $image_name = FileUploadTrait::fileUpload($request->recomendation, 'document_gallery');
-                $doc['type'] = 'recomendation';
-                $doc['folder_name'] = 'document_gallery';
-                $doc['image_name'] =  $image_name;
-                $doc['user_id'] =  $user->id;
-                $doc['image_url'] = url('/storage/document_gallery/' . $image_name);
-                DocumentGallery::create($doc);
-            }
+            $image_name = FileUploadTrait::fileUpload($request->recomendation, 'document_gallery');
+            $doc['type'] = 'recomendation';
+            $doc['folder_name'] = 'document_gallery';
+            $doc['image_name'] =  $image_name;
+            $doc['user_id'] =  $user->id;
+            $doc['image_url'] = url('/storage/document_gallery/' . $image_name);
+            DocumentGallery::create($doc);
         }
         $personal = $user->personal;
         $education = $user->education;

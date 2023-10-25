@@ -25,7 +25,8 @@
                 </div>
             </div>
         </div>
-        <form action="{{ route('submiteApplication', $program->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('submiteApplication', $program->id) }}" id="myForm" method="POST"
+            enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-12">
@@ -33,7 +34,7 @@
                         <div class="col-12">
                             <div class="form-check">
                                 <label>
-                                    <input type="radio" name="intake" value="{{ date('Y') . ' Summer' }}">
+                                    <input type="radio" name="intake" value="{{ date('Y') . ' Summer' }}" checked>
                                     Summer {{ date('Y') }}
                                 </label>
                                 <label>
@@ -88,7 +89,7 @@
                                     <label for="">Applying for Visa from your country?</label>
                                     <div class="form-check">
                                         <label>
-                                            <input type="radio" name="visa" value="1">
+                                            <input type="radio" name="visa" value="1" checked>
                                             Yes
                                         </label>
                                         <label>
@@ -122,7 +123,8 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-info waves-effect waves-light text-white">Submit
+                    <button type="submit" id="btn_submit" onclick="onSubmit()"
+                        class="btn btn-info waves-effect waves-light text-white">Submit
                         Application</button>
                 </div>
             </div>
@@ -177,6 +179,13 @@
         });
     </script>
     <script>
+        function onSubmit() {
+            $("#btn_submit").prop("disabled", true);
+            $("#btn_submit").text("Loading");
+            const form = document.getElementById('myForm');
+            form.submit();
+        }
+
         function showToaster(icon, heading, text) {
             $.toast({
                 heading: heading,

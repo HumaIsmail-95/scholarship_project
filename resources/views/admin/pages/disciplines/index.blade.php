@@ -116,7 +116,7 @@
                                     <div id="name_text" class="text-danger errors"></div>
                                 </div>
                                 <div class="col-md-12 mb-2">
-                                    <label class="form-label" for="name">Description<span class="text-danger">*</span>
+                                    <label class="form-label" for="name">Description
                                     </label>
                                     <textarea name="description" class="form-control" id="description" cols="10" rows="4"
                                         :value="old('description')"></textarea>
@@ -195,8 +195,7 @@
                                     <div id="edit_name_text" class="text-danger"></div>
                                 </div>
                                 <div class="col-md-12 mb-2">
-                                    <label class="form-label" for="name">Description<span
-                                            class="text-danger">*</span>
+                                    <label class="form-label" for="name">Description
                                     </label>
                                     <textarea name="description" class="form-control" id="edit_description" cols="10" rows="4"
                                         :value="old('description')"></textarea>
@@ -513,13 +512,8 @@
                     $("#button-delete").text("Yes");
                     $('.alert-success').html(data.success).fadeIn('slow');
                     document.getElementById("row_" + $("#deleteID").val()).remove();
-                    swal({
-                        title: "",
-                        text: data.message,
-                        icon: "success",
-                    });
                     showToaster('success', 'Success', data.message);
-
+                    // location.reload();
                     $('#deleteModal').modal('hide');
                 },
                 error: function(error) {

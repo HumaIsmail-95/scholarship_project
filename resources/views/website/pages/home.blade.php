@@ -45,8 +45,8 @@
                                     <div class="form-group">
                                         <i class="icon-4"></i>
                                         <select class="wide" name="discipline_id" id="discipline_id">
-                                            @foreach ($disciplines as $discipline)
-                                                <option value="">Select Course</option>
+                                            <option value="">Select Course</option>
+                                            @foreach ($allDisciplines as $discipline)
                                                 <option value="{{ $discipline->id }}">{{ $discipline->name }}</option>
                                             @endforeach
                                         </select>
@@ -94,7 +94,7 @@
 
 
     <!-- category-section -->
-    <section class="category-section centred sec-pad">
+    <section class="category-section centred sec-pad" style="z-index:-1">
         <div class="auto-container">
             <div class="sec-title">
                 <span>Categories</span>

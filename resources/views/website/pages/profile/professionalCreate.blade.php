@@ -64,6 +64,7 @@
                 </div>
                 <div class="col-lg-12 col-md-12  col-sm-12">
                     {{-- <h4 class="card-title">Attach Document</h4> --}}
+                    <input type="hidden" name="education_id[]" value="-1">
                     <label for="document" class="form-label">Certificate</label>
                     <input type="file" id="certificate_0" name="certificate[]" class="dropify" value=""
                         required />

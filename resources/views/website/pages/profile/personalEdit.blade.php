@@ -241,7 +241,7 @@
                 <h4 class="card-title">Attach Document</h4>
                 <label for="Logo" class="form-label">Proof of Travel Document*
                 </label>
-                <input type="file" id="travel_document" name="travel_document" class="dropify" value="" />
+                <input type="file" id="travel_document" name="travel_document" class="dropify" />
                 @foreach ($student->studentGalleries as $gallery)
                     @if ($gallery->type == 'travel_proof')
                         <p class="mb-0 mt-2">Selected File</p>
