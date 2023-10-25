@@ -15,8 +15,8 @@
                         <li class="breadcrumb-item active">Package</li>
                     </ol>
                     @can('list-subscription')
-                        <a type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white"><i
-                                href="{{ route('admin.subscription-packages.index') }}" class="fa fa-list"></i>
+                        <a type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white"
+                            href="{{ route('admin.subscription-packages.index') }}"><i class="fa fa-list"></i>
                             Package List</a>
                     @endcan
                 </div>
