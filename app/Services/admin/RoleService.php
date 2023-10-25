@@ -74,6 +74,7 @@ class RoleService
         $role->revokePermissionTo($permission);
 
         DB::commit();
+        Session::flash('status', true);
         Session::flash('icon', 'success');
         Session::flash('heading', 'Success');
         Session::flash('message', 'Permission revoked succesfully');

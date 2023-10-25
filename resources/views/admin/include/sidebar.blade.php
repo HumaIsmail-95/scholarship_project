@@ -122,7 +122,7 @@
                      </li>
                  @endcan
                  {{-- Bogs --}}
-                 @can('list-Blogs')
+                 @can('list-blog')
                      <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
                                  class=" fab fa-blogger"></i><span class="hide-menu"> Blogs</span></a>
                          <ul aria-expanded="false" class="collapse">

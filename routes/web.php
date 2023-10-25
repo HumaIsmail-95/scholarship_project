@@ -47,7 +47,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::resource('roles', RoleController::class);
     Route::get('role-permission/{role}', [RoleController::class, 'rolePermissions'])->name('role.permissions');
     Route::post('role-permission/{role}', [RoleController::class, 'attachPermissions'])->name('role.permissions');
-    Route::delete('role-permission/{role}/{permission}', [RoleController::class, 'revokePermission'])->name('role.revoke.permission');
+    Route::get('role-permissions/{role}/{permission}', [RoleController::class, 'revokePermission'])->name('role.revoke.permission');
     // permision
     Route::resource('permissions', PermissionController::class);
     Route::get('permission/{permission}', [PermissionController::class, 'permissionRoles'])->name('permission.roles');
