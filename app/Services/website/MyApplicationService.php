@@ -77,7 +77,7 @@ class MyApplicationService
             'course' => $course->name,
             'companyName' => env('APP_NAME'),
         ];
-        Mail::to('jabberjay582@gmail.com')->send(new SendMail($mailData));
+        Mail::to($user->email)->send(new SendMail($mailData));
         DB::commit();
         $response = ['status' => true, 'icon' => 'success', 'heading' => 'Success', 'message' => 'Application sent successfully.'];
         return $response;
