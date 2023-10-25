@@ -50,9 +50,18 @@
                             <h6 class="text-dark">{{ $program->duration }} Semester</h6>
                         </div>
                         <div>
+                            @php
+                                $tuitionFee = 'Yearly';
+                                if ($$programDetail->tuition_fee_type == 2) {
+                                    $tuitionFee = 'per Semester';
+                                } elseif ($$programDetail->tuition_fee_type == 3) {
+                                    $tuitionFee = 'per Month';
+                                }
+                            @endphp
+
                             <h6 class="text-primary">Tuition Fee:</h6>
-                            <h6 class="text-dark">{{ $program->tuition_fee }}
-                                ({{ getTuitionFeeType($program->tuition_fee_type) }})
+                            <h6 class="text-dark"><span></span>$ {{ $programDetail->tuition_fee }}
+                                ({{ $tuitionFee }})
                             </h6>
                         </div>
                     </div>
