@@ -172,14 +172,14 @@
                  {{-- @endcan --}}
 
                  {{-- My Applicatoins --}}
-                 @can('my-applications')
+                 @can('my-appications')
                      <li> <a class="waves-effect waves-dark" href="{{ route('myApplications') }}"><i
                                  class=" fas fa-user-md"></i><span class="hide-menu">My Applications</span></a>
                      </li>
                  @endcan
 
                  {{-- Over View --}}
-                 @can('my-applications')
+                 @can('my-appications')
                      <li> <a class="waves-effect waves-dark" href="{{ route('overviews') }}"><i
                                  class=" fas fa-clipboard-list"></i><span class="hide-menu">Overviews</span></a>
                      </li>
