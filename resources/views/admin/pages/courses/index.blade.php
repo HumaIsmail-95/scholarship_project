@@ -61,11 +61,11 @@
                                                             href="javascript:openDeleteDialog({{ $course->id }})"> <i
                                                                 class="fas fa-trash"></i> Delete</a>
                                                     @endcan
-                                                    @can('view-course')
+                                                    {{-- @can('view-course')
                                                         <a class="dropdown-item"
                                                             href="{{ route('admin.courses.show', $course->id) }}"> <i
                                                                 class="fas fa-eye"></i> View</a>
-                                                    @endcan
+                                                    @endcan --}}
                                                 </div>
 
                                             </div>
