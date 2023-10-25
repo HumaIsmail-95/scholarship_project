@@ -313,10 +313,18 @@
                                 <div class="widget-content">
                                     <ul class="category-list">
                                         <li class="item-list">
+                                            @php
+                                                $tuitionFee = 'Yearly';
+                                                if ($programDetail->tuition_fee_type == 2) {
+                                                    $tuitionFee = 'per Semester';
+                                                } elseif ($programDetail->tuition_fee_type == 3) {
+                                                    $tuitionFee = 'per Month';
+                                                }
+                                            @endphp
                                             <h6><span></span>$ {{ $programDetail->tuition_fee }}
-                                                {{ getTuitionFeeType($programDetail->tuition_fee_type) }}
-
+                                                ({{ $tuitionFee }})
                                             </h6>
+
                                         </li>
                                     </ul>
                                 </div>
