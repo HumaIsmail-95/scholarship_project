@@ -77,7 +77,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-lg-6  col-md-6  col-sm-12 my-2">
-                                    <label class="form-label" for="name">Description<span class="text-danger">*</span>
+                                    <label class="form-label" for="name">Description
                                     </label>
                                     <textarea class="form-control" name="description" placeholder="description" id="description" cols="30"
                                         rows="5"></textarea>
