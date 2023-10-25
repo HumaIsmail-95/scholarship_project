@@ -423,7 +423,7 @@
                         icon: "success",
                     });
                     showToaster('success', 'Success', data.message);
-
+                    location.reload()
                     $('#deleteModal').modal('hide');
                 },
                 error: function(error) {
