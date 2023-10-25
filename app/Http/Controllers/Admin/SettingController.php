@@ -36,7 +36,7 @@ class SettingController extends Controller
     public function updatePrivacy(Setting $setting, SettingRequest $request)
     {
         try {
-            $res = Setting::updatePolicy($setting, $request);
+            $res = SettingService::updatePolicy($setting, $request);
             return $res;
         } catch (\Throwable $th) {
             return redirect()->back()->with([
