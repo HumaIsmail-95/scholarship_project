@@ -272,10 +272,10 @@
             </div>
         </div>
         @php
-            $resume;
-            $exp_letter;
-            $other;
-            $recomendation;
+            $resume = null;
+            $exp_letter = null;
+            $other = null;
+            $recomendation = null;
             foreach ($documents as $doc) {
                 if ($doc->type == 'resume') {
                     $resume = $doc;
