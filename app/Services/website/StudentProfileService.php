@@ -422,7 +422,7 @@ class StudentProfileService
                     endif;
                 }
             }
-            $image_name = FileUploadTrait::fileUpload($request->exp_letter, 'document_gallery');
+            $image_name = FileUploadTrait::fileUpload($request->resume, 'document_gallery');
             $doc['type'] = 'resume';
             $doc['folder_name'] = 'document_gallery';
             $doc['image_name'] =  $image_name;
