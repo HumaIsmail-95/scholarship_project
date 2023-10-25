@@ -417,13 +417,8 @@
                     $("#button-delete").text("Yes");
                     $('.alert-success').html(data.success).fadeIn('slow');
                     document.getElementById("row_" + $("#deleteID").val()).remove();
-                    swal({
-                        title: "",
-                        text: data.message,
-                        icon: "success",
-                    });
+                    
                     showToaster('success', 'Success', data.message);
-                    location.reload()
                     $('#deleteModal').modal('hide');
                 },
                 error: function(error) {
