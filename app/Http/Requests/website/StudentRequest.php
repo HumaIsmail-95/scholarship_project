@@ -30,28 +30,27 @@ class StudentRequest extends FormRequest
         $user_id = auth()->user()->id;
         $trav = Student::with(['studentGalleries' => function ($travel) {
             $travel->where('type', 'travel_proof');
-        }])->where('user_id', $user_id)->first();
+        }])->where('user_id', $user_id)->get();
 
         $id_card = Student::with(['studentGalleries' => function ($card) {
             $card->where('type', 'id_card');
-        }])->where('user_id', $user_id)->first();
+        }])->where('user_id', $user_id)->get();
         // $user_id = $request->route('user');
         // if (empty($user_id) && $request->isMethod('put')) :
         // endif;
-
         if ($request->travel_history == 0) {
             $rules['traveled_to'] = ['nullable'];
             $rules['travel_document'] = ['nullable'];
         } else {
 
-            if ($trav->studentGalleries->isNotEmpty()) {
+            if ($trav->isNotEmpty()) {
                 $rules['travel_document'] = ['nullable', 'max:2048', 'mimes:pdf'];
             } else {
                 $rules['travel_document'] = ['required', 'max:2048', 'mimes:pdf'];
             }
             $rules['traveled_to'] = ['required'];
         }
-        if ($id_card->studentGalleries->isNotEmpty()) {
+        if ($id_card->isNotEmpty()) {
             $rules['id_document'] = ['nullable', 'max:2048', 'mimes:pdf'];
         } else {
             $rules['id_document'] = ['required', 'max:2048', 'mimes:pdf'];

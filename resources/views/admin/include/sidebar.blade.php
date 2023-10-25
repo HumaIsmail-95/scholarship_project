@@ -116,7 +116,7 @@
                              @endcan
                              {{-- change permission --}}
                              @can('view-contact-us')
-                                 <li><a href="#">Footer Details</a></li>
+                                 {{-- <li><a href="#">Footer Details</a></li> --}}
                              @endcan
                          </ul>
                      </li>

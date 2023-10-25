@@ -58,7 +58,7 @@ class SettingService
 
         return redirect()->back()->with([
             'status' => true, 'icon' => 'success', 'heading' => 'Success',
-            'message' => 'Privacy Policy updated successfully', 'data' => $response,
+            'message' => 'About us updated successfully', 'data' => $response,
         ]);
     }
 }

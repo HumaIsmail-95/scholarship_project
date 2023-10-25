@@ -86,7 +86,7 @@
                                     <label class="form-label" for="duration">Facebook Link
                                     </label>
                                     <input type="text" class="form-control" id="facebook_link" name="facebook_link"
-                                        placeholder="Enter a facebook_link" value="{{ $data->facebook_link }}" required>
+                                        placeholder="Enter a facebook_link" value="{{ $data->facebook_link }}">
                                     @error('facebook_link')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -95,7 +95,7 @@
                                     <label class="form-label" for="duration">Twitter Link
                                     </label>
                                     <input type="text" class="form-control" id="twitter_link" name="twitter_link"
-                                        placeholder="Enter a twitter_link" value="{{ $data->twitter_link }}" required>
+                                        placeholder="Enter a twitter_link" value="{{ $data->twitter_link }}">
                                     @error('twitter_link')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -104,7 +104,7 @@
                                     <label class="form-label" for="duration">LinkedIn Link
                                     </label>
                                     <input type="text" class="form-control" id="linkedin_link" name="linkedin_link"
-                                        placeholder="Enter a linkedin_link" value="{{ $data->linkedin_link }}" required>
+                                        placeholder="Enter a linkedin_link" value="{{ $data->linkedin_link }}">
                                     @error('linkedin_link')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
