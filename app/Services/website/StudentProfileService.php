@@ -266,17 +266,18 @@ class StudentProfileService
                 'created_by' => $user->id,
             ];
             $studentTest->update($testData);
+
             if ($request->hasFile('ielts')) :
                 foreach ($studentTest->testGalleries as $test) {
                     if ($test->type == 'ielts') {
-                        $file = $test;
+                        $fileToDelete = 'public/test_gallery/' . $test->image_name;
+                        if (Storage::exists($fileToDelete)) {
+                            Storage::delete($fileToDelete);
+                            $test->delete();
+                        }
                     }
                 }
-                $fileToDelete = 'public/test_gallery/' . $file->image_name;
-                if (Storage::exists($fileToDelete)) {
-                    Storage::delete($fileToDelete);
-                }
-                $file->delete();
+
                 $image_name = FileUploadTrait::fileUpload($request->ielts, 'test_gallery');
                 $doc['type'] = 'ielts';
                 $doc['folder_name'] = 'test_gallery';
@@ -289,13 +290,14 @@ class StudentProfileService
                 foreach ($studentTest->testGalleries as $test) {
                     if ($test->type == 'toelf') {
                         $file = $test;
+                        $fileToDelete = 'public/test_gallery/' . $file->image_name;
+                        if (Storage::exists($fileToDelete)) {
+                            Storage::delete($fileToDelete);
+                            $file->delete();
+                        }
                     }
                 }
-                $fileToDelete = 'public/test_gallery/' . $file->image_name;
-                if (Storage::exists($fileToDelete)) {
-                    Storage::delete($fileToDelete);
-                }
-                $file->delete();
+
                 $image_name = FileUploadTrait::fileUpload($request->toelf, 'test_gallery');
                 $doc['type'] = 'toelf';
                 $doc['folder_name'] = 'test_gallery';
@@ -308,13 +310,14 @@ class StudentProfileService
                 foreach ($studentTest->testGalleries as $test) {
                     if ($test->type == 'pearson') {
                         $file = $test;
+                        $fileToDelete = 'public/test_gallery/' . $file->image_name;
+                        if (Storage::exists($fileToDelete)) {
+                            Storage::delete($fileToDelete);
+                            $file->delete();
+                        }
                     }
                 }
-                $fileToDelete = 'public/test_gallery/' . $file->image_name;
-                if (Storage::exists($fileToDelete)) {
-                    Storage::delete($fileToDelete);
-                }
-                $file->delete();
+
                 $image_name = FileUploadTrait::fileUpload($request->pearson, 'test_gallery');
                 $doc['type'] = 'pearson';
                 $doc['folder_name'] = 'test_gallery';
@@ -327,13 +330,14 @@ class StudentProfileService
                 foreach ($studentTest->testGalleries as $test) {
                     if ($test->type == 'moi') {
                         $file = $test;
+                        $fileToDelete = 'public/test_gallery/' . $file->image_name;
+                        if (Storage::exists($fileToDelete)) {
+                            Storage::delete($fileToDelete);
+                            $file->delete();
+                        }
                     }
                 }
-                $fileToDelete = 'public/test_gallery/' . $file->image_name;
-                if (Storage::exists($fileToDelete)) {
-                    Storage::delete($fileToDelete);
-                }
-                $file->delete();
+
                 $image_name = FileUploadTrait::fileUpload($request->moi, 'test_gallery');
                 $doc['type'] = 'moi';
                 $doc['folder_name'] = 'test_gallery';

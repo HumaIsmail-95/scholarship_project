@@ -98,7 +98,7 @@
                                         @endif
                                         <div class="row">
                                             <div class="col-12 text-right mt-2">
-                                                <button type="submit"
+                                                <button type="submit" id="professional-button-save"
                                                     class="btn btn-info waves-effect waves-light text-white">Save &
                                                     Continue</button>
                                             </div>
@@ -119,7 +119,7 @@
                                         @endif
                                         <div class="row">
                                             <div class="col-12 text-right mt-2">
-                                                <button type="submit"
+                                                <button type="submit" id="test-button-save"
                                                     class="btn btn-info waves-effect waves-light text-white">Save &
                                                     Continue</button>
                                             </div>
@@ -140,7 +140,7 @@
                                         @endif
                                         <div class="row">
                                             <div class="col-12 text-right mt-2">
-                                                <button type="submit"
+                                                <button type="submit" id="doc-button-save"
                                                     class="btn btn-info waves-effect waves-light text-white">Save &
                                                     Continue</button>
                                             </div>
@@ -598,7 +598,7 @@
 
             var form = $('#professional-exp-form')[0];
             console.log('form ', form);
-            $("#personal-button-save").text('Loading...');
+            $("#professional-button-save").text('Loading...');
             var userID = document.getElementById('user_id').value;
 
             const myFormData = new FormData(form);
@@ -615,14 +615,14 @@
                 beforeSend: function() {
                     $(form)
                     $('.backend-error-text').text('')
-                    $("#personal-button-save").prop("disabled", true);
+                    $("#professional-button-save").prop("disabled", true);
 
                 },
                 success: function(data) {
 
                     console.log('data', data);
-                    $("#personal-button-save").prop("disabled", false);
-                    $("#personal-button-save").text("Save & Continue");
+                    $("#professional-button-save").prop("disabled", false);
+                    $("#professional-button-save").text("Save & Continue");
                     var successAlert = $("#success-alert");
                     showToaster('success', 'Success', data.message);
                     // location.reload()
@@ -630,8 +630,8 @@
                 },
                 error: function(error) {
                     $(form)
-                    $("#personal-button-save").prop("disabled", false);
-                    $("#personal-button-save").text("Save & Continue");
+                    $("#professional-button-save").prop("disabled", false);
+                    $("#professional-button-save").text("Save & Continue");
                     var errorMessage = error.statusText;
                     console.log('error validation', error);
                     if (error.status == 422) {
@@ -647,7 +647,8 @@
 
             var form = $('#test-language-form')[0];
             console.log('form ', form);
-            $("#personal-button-save").text('Loading...');
+            $("#test-button-save").text('Loading...');
+            $("#test-button-save").prop("disabled", true);
             var userID = document.getElementById('user_id').value;
             console.log('userid', userID);
             const myFormData = new FormData(form);
@@ -664,14 +665,14 @@
                 beforeSend: function() {
                     $(form)
                     $('.backend-error-text').text('')
-                    $("#personal-button-save").prop("disabled", true);
+                    $("#test-button-save").prop("disabled", true);
 
                 },
                 success: function(data) {
 
                     console.log('data', data);
-                    $("#personal-button-save").prop("disabled", false);
-                    $("#personal-button-save").text("Save & Continue");
+                    $("#test-button-save").prop("disabled", false);
+                    $("#test-button-save").text("Save & Continue");
                     var successAlert = $("#success-alert");
                     showToaster('success', 'Success', data.message);
                     // location.reload()
@@ -679,8 +680,8 @@
                 },
                 error: function(error) {
                     $(form)
-                    $("#personal-button-save").prop("disabled", false);
-                    $("#personal-button-save").text("Save & Continue");
+                    $("#test-button-save").prop("disabled", false);
+                    $("#test-button-save").text("Save & Continue");
                     var errorMessage = error.statusText;
                     console.log('error validation', error);
                     if (error.status == 422) {
@@ -696,7 +697,8 @@
 
             var form = $('#document-form')[0];
             console.log('form ', form);
-            $("#personal-button-save").text('Loading...');
+            $("#doc-button-save").text('Loading...');
+            $("#doc-button-save").prop("disabled", true);
             var userID = document.getElementById('user_id').value;
             console.log('userid', userID);
             const myFormData = new FormData(form);
@@ -713,14 +715,14 @@
                 beforeSend: function() {
                     $(form)
                     $('.backend-error-text').text('')
-                    $("#personal-button-save").prop("disabled", true);
+                    $("#doc-button-save").prop("disabled", true);
 
                 },
                 success: function(data) {
 
                     console.log('data', data);
-                    $("#personal-button-save").prop("disabled", false);
-                    $("#personal-button-save").text("Save & Continue");
+                    $("#doc-button-save").prop("disabled", false);
+                    $("#doc-button-save").text("Save & Continue");
                     var successAlert = $("#success-alert");
                     showToaster('success', 'Success', data.message);
                     // location.reload()
@@ -728,8 +730,8 @@
                 },
                 error: function(error) {
                     $(form)
-                    $("#personal-button-save").prop("disabled", false);
-                    $("#personal-button-save").text("Save & Continue");
+                    $("#doc-button-save").prop("disabled", false);
+                    $("#doc-button-save").text("Save & Continue");
                     var errorMessage = error.statusText;
                     console.log('error validation', error);
                     if (error.status == 422) {
