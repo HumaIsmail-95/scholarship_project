@@ -139,8 +139,7 @@ class FrontendController extends Controller
         $logo = Banner::where('page_name', 'logo')->select('image_url')->first();
         $banner = Banner::where('page_name', 'blogs')->select('image_url')->first();
         $footer = Banner::where('page_name', 'footer')->select('image_url')->first();
-        $footerData = Setting::select('introduction', 'degrees', 'copy_right', 'facebook_link', 'twitter_link', 'linkedin_link', 'address', 'mobile_1', 'mobile_2')->first();
-
+        $footerData = Setting::select('introduction',  'copy_right', 'facebook_link', 'twitter_link', 'linkedin_link', 'address', 'mobile_1', 'mobile_2')->first();
         $recentBlogs = Blog::take(4)->get();
         $blogs = Blog::paginate(10);
 
