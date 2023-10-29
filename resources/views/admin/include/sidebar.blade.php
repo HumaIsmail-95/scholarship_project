@@ -41,6 +41,12 @@
                                  class="fas fa-user-plus"></i><span class="hide-menu">Users</span></a>
                      </li>
                  @endcan
+                 {{-- cities --}}
+                 @can('list-city')
+                     <li> <a class="waves-effect waves-dark" href="{{ route('admin.cities.index') }}"><i
+                                 class="icon-speedometer"></i><span class="hide-menu">Cities</span></a>
+                     </li>
+                 @endcan
                  @can('list-degree')
                      <li> <a class="waves-effect waves-dark" href="{{ route('admin.degrees.index') }}"><i
                                  class=" fas fa-newspaper"></i><span class="hide-menu">Degrees</span></a>
@@ -150,40 +156,43 @@
                                  class="icon-speedometer"></i><span class="hide-menu">Home</span></a>
                      </li>
                  @endcan
-                 {{-- dashboard --}}
-                 @can('website-dashboard')
-                     <li> <a class="waves-effect waves-dark" href="{{ route('dashboard') }}"><i
-                                 class=" fas fa-home"></i><span class="hide-menu">Home</span></a>
-                     </li>
-                 @endcan
 
-                 {{-- my uni app --}}
-                 @can('my-uni-app')
-                     <li> <a class="waves-effect waves-dark" href="{{ route('myUniApp') }}"><i
-                                 class="fab fa-medapps"></i><span class="hide-menu">My Uni App</span></a>
-                     </li>
-                 @endcan
+                 @if (Auth::user()->type == 'student')
+                     {{-- dashboard --}}
+                     @can('website-dashboard')
+                         <li> <a class="waves-effect waves-dark" href="{{ route('dashboard') }}"><i
+                                     class=" fas fa-home"></i><span class="hide-menu">Student Dashboard</span></a>
+                         </li>
+                     @endcan
 
-                 {{-- My Subscriptions --}}
-                 {{-- @can('my-subscriptons') --}}
-                 {{-- <li> <a class="waves-effect waves-dark" href="{{ route('mySubscription') }}"><i
+                     {{-- my uni app --}}
+                     @can('my-uni-app')
+                         <li> <a class="waves-effect waves-dark" href="{{ route('myUniApp') }}"><i
+                                     class="fab fa-medapps"></i><span class="hide-menu">My Uni App</span></a>
+                         </li>
+                     @endcan
+
+                     {{-- My Subscriptions --}}
+                     {{-- @can('my-subscriptons') --}}
+                     {{-- <li> <a class="waves-effect waves-dark" href="{{ route('mySubscription') }}"><i
                                  class="icon-speedometer"></i><span class="hide-menu">My Subscriptions</span></a>
                      </li> --}}
-                 {{-- @endcan --}}
+                     {{-- @endcan --}}
 
-                 {{-- My Applicatoins --}}
-                 @can('my-appications')
-                     <li> <a class="waves-effect waves-dark" href="{{ route('myApplications') }}"><i
-                                 class=" fas fa-user-md"></i><span class="hide-menu">My Applications</span></a>
-                     </li>
-                 @endcan
+                     {{-- My Applicatoins --}}
+                     @can('my-appications')
+                         <li> <a class="waves-effect waves-dark" href="{{ route('myApplications') }}"><i
+                                     class=" fas fa-user-md"></i><span class="hide-menu">My Applications</span></a>
+                         </li>
+                     @endcan
 
-                 {{-- Over View --}}
-                 @can('my-appications')
-                     <li> <a class="waves-effect waves-dark" href="{{ route('overviews') }}"><i
-                                 class=" fas fa-clipboard-list"></i><span class="hide-menu">Overviews</span></a>
-                     </li>
-                 @endcan
+                     {{-- Over View --}}
+                     @can('my-appications')
+                         <li> <a class="waves-effect waves-dark" href="{{ route('overviews') }}"><i
+                                     class=" fas fa-clipboard-list"></i><span class="hide-menu">Overviews</span></a>
+                         </li>
+                     @endcan
+                 @endif
                  @if (Auth::user()->type == 'super-admin')
                      <li> <a class="waves-effect waves-dark" href="{{ route('admin.subscription.testing') }}"><i
                                  class="icon-speedometer"></i><span class="hide-menu"> Testing</span></a>

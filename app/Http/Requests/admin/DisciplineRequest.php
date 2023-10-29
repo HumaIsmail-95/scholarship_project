@@ -26,6 +26,7 @@ class DisciplineRequest extends FormRequest
         return [
             'name' => ['required'],
             'description' => ['nullable'],
+            'image' => 'nullable|max:2048|mimes:jpg,png,jpeg',
             'status' => ['nullable'],
 
         ];

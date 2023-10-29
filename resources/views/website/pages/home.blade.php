@@ -2,7 +2,7 @@
 @section('title', 'Home')
 @section('content')
     <!-- banner-section -->
-    <section class="banner-section centred py-0">
+    <section class="banner-section centred py-0" style="z-index:1">
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 @foreach ($banners as $key => $banner)
@@ -46,7 +46,7 @@
                                         <i class="icon-4"></i>
                                         <select class="wide" name="discipline_id" id="discipline_id">
                                             <option value="">Select Course</option>
-                                            @foreach ($allDisciplines as $discipline)
+                                            @foreach ($disciplines as $key => $discipline)
                                                 <option value="{{ $discipline->id }}">{{ $discipline->name }}</option>
                                             @endforeach
                                         </select>
@@ -94,7 +94,7 @@
 
 
     <!-- category-section -->
-    <section class="category-section centred sec-pad" style="z-index:-1">
+    <section class="category-section centred sec-pad" style="">
         <div class="auto-container">
             <div class="sec-title">
                 <span>Categories</span>
@@ -106,23 +106,28 @@
                 </p>
             </div>
             <div class="inner-content clearfix">
-                @foreach ($disciplines as $discipline)
-                    <div class="category-block-one wow fadeInDown animated animated" data-wow-delay="00ms"
-                        data-wow-duration="1500ms">
-                        <div class="inner-box">
-                            <div class="icon-box">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-bookmarks" viewBox="0 0 16 16">
-                                    <path
-                                        d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1H4z" />
-                                    <path
-                                        d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z" />
-                                </svg>
+                @foreach ($disciplines as $key => $discipline)
+                    @if ($key < 10)
+                        <div class="category-block-one wow fadeInDown animated animated" data-wow-delay="00ms"
+                            data-wow-duration="1500ms">
+                            <div class="inner-box">
+                                <div class="icon-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16">
+                                        <path
+                                            d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1H4z" />
+                                        <path
+                                            d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z" />
+                                    </svg>
+                                </div>
+                                <a href="{{ route('programs', ['discipline_id' => $discipline->id]) }}">
+                                    <h5>{{ $discipline->name }}
+                                    </h5>
+                                </a>
+                                <span>{{ $discipline->courses_count }}</span>
                             </div>
-                            <h5>{{ $discipline->name }}</h5>
-                            <span>{{ $discipline->courses_count }}</span>
                         </div>
-                    </div>
+                    @endif
                 @endforeach
             </div>
             <div class="more-btn"><a href="{{ route('allCourses') }}" class="theme-btn-one">All Courses</a></div>
@@ -802,36 +807,97 @@
 
 
     <!-- feature-style-two -->
-    <section class="feature-style-two">
-        <div class="auto-container">
-            <div class="sec-title centred">
-                <span>Features</span>
-                <h2>Featured Universities</h2>
-                <p>A university is an institution of higher learning that plays a pivotal role in the education and
-                    development of individuals. These institutions are known for their diverse academic programs and the
-                    pursuit of knowledge in various fields, such as science, arts, engineering, medicine, and social
-                    sciences. Universities serve as hubs of intellectual exploration, where students and scholars engage in
-                    research, critical thinking, and the exchange of ideas.
-                </p>
-            </div>
-            <div class="tabs-box">
-                <div class="tab-btn-box centred">
-                    {{-- <ul class="tab-btns tab-buttons clearfix">
+    @if ($featuredUnis->isNotEmpty())
+        <section class="feature-style-two">
+            <div class="auto-container">
+                <div class="sec-title centred">
+                    <span>Features</span>
+                    <h2>Featured Universities</h2>
+                    <p>A university is an institution of higher learning that plays a pivotal role in the education and
+                        development of individuals. These institutions are known for their diverse academic programs and the
+                        pursuit of knowledge in various fields, such as science, arts, engineering, medicine, and social
+                        sciences. Universities serve as hubs of intellectual exploration, where students and scholars engage
+                        in
+                        research, critical thinking, and the exchange of ideas.
+                    </p>
+                </div>
+                <div class="tabs-box">
+                    <div class="tab-btn-box centred">
+                        {{-- <ul class="tab-btns tab-buttons clearfix">
                         <li class="tab-btn active-btn" data-tab="#tab-1">Recent Listing</li>
                         <li class="tab-btn" data-tab="#tab-2">Popular Listing</li>
                     </ul> --}}
-                </div>
-                <div class="tabs-content">
-                    <div class="tab active-tab" id="tab-1">
-                        <div class="row clearfix">
-                            @foreach ($featuredUnis as $uni)
+                    </div>
+                    <div class="tabs-content">
+                        <div class="tab active-tab" id="tab-1">
+                            <div class="row clearfix">
+                                @foreach ($featuredUnis as $uni)
+                                    <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
+                                        <div class="feature-block-one wow fadeInUp animated animated"
+                                            data-wow-delay="600ms" data-wow-duration="1500ms">
+                                            <div class="inner-box">
+                                                <div class="image-box">
+                                                    <figure class="image" style="height:220px"><img
+                                                            src="{{ $uni->images[0]->image_url }}" alt="">
+                                                    </figure>
+                                                    <div class="shape"></div>
+                                                    <div class="feature">Featured</div>
+                                                    <div class="icon">
+                                                        <div class="icon-shape"></div>
+                                                        <i class="icon-16"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="lower-content">
+                                                    {{-- <div class="category"><i class="fas fa-tags"></i>
+                                                    <p>Electronics</p>
+                                                </div> --}}
+                                                    <h3><a href="{{ route('university-detail', $uni->id) }}">
+                                                            @if (strlen($uni->name) > 70)
+                                                                {{ substr($uni->name, 0, 70) }}...
+                                                            @else
+                                                                {{ $uni->name }}
+                                                            @endif
+                                                        </a></h3>
+                                                    {{-- <ul class="rating clearfix">
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><a href="index.html">(32)</a></li>
+                                                </ul> --}}
+                                                    @php
+                                                        $des = substr($uni->description, 0, 30);
+                                                    @endphp
+                                                    <div class="info clearfix" style="min-height: 52px;">
+                                                        {!! $des !!}...
+                                                    </div>
+                                                    <div class="lower-box">
+                                                        <h5><span><i class="far fa-clock"></i>
+                                                                Courses:</span>{{ $uni->courses_count }}
+                                                        </h5>
+                                                        <ul class="react-box">
+                                                            <li><i class="fas fa-map-marker-alt"></i> {{ $uni->country }}
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="tab" id="tab-2">
+                            <div class="row clearfix">
                                 <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
-                                    <div class="feature-block-one wow fadeInUp animated animated" data-wow-delay="600ms"
-                                        data-wow-duration="1500ms">
+                                    <div class="feature-block-one">
                                         <div class="inner-box">
                                             <div class="image-box">
-                                                <figure class="image" style="height:220px"><img
-                                                        src="{{ $uni->images[0]->image_url }}" alt=""></figure>
+                                                <figure class="image"><img
+                                                        src="{{ asset('website/assets/images/resource/feature-1.jpg') }}"
+                                                        alt="">
+                                                </figure>
                                                 <div class="shape"></div>
                                                 <div class="feature">Featured</div>
                                                 <div class="icon">
@@ -840,348 +906,292 @@
                                                 </div>
                                             </div>
                                             <div class="lower-content">
-                                                {{-- <div class="category"><i class="fas fa-tags"></i>
+                                                <div class="author-box">
+                                                    <div class="inner">
+                                                        <img src="{{ asset('website/assets/images/resource/author-1.png') }}'"
+                                                            alt="">
+                                                        <h6>Michael Bean<i class="icon-18"></i></h6>
+                                                        <span>For sell</span>
+                                                    </div>
+                                                </div>
+                                                <div class="category"><i class="fas fa-tags"></i>
                                                     <p>Electronics</p>
-                                                </div> --}}
-                                                <h3><a href="{{ route('university-detail', $uni->id) }}">
-                                                        @if (strlen($uni->name) > 70)
-                                                            {{ substr($uni->name, 0, 70) }}...
-                                                        @else
-                                                            {{ $uni->name }}
-                                                        @endif
-                                                    </a></h3>
-                                                {{-- <ul class="rating clearfix">
+                                                </div>
+                                                <h3><a href="browse-ads-details.html">Villa on Grand Avenue</a></h3>
+                                                <ul class="rating clearfix">
                                                     <li><i class="icon-17"></i></li>
                                                     <li><i class="icon-17"></i></li>
                                                     <li><i class="icon-17"></i></li>
                                                     <li><i class="icon-17"></i></li>
                                                     <li><i class="icon-17"></i></li>
                                                     <li><a href="index.html">(32)</a></li>
-                                                </ul> --}}
-                                                @php
-                                                    $des = substr($uni->description, 0, 30);
-                                                @endphp
-                                                <div class="info clearfix" style="min-height: 52px;">
-                                                    {!! $des !!}...
-                                                </div>
+                                                </ul>
+                                                <ul class="info clearfix">
+                                                    <li><i class="far fa-clock"></i>1 months ago</li>
+                                                    <li><i class="fas fa-map-marker-alt"></i>G87P, Birmingham, UK</li>
+                                                </ul>
                                                 <div class="lower-box">
-                                                    <h5><span><i class="far fa-clock"></i>
-                                                            Courses:</span>{{ $uni->courses_count }}
-                                                    </h5>
+                                                    <h5><span>Start From:</span>$3,000.00</h5>
                                                     <ul class="react-box">
-                                                        <li><i class="fas fa-map-marker-alt"></i> {{ $uni->country }}</li>
+                                                        <li><a href="index.html"><i class="icon-21"></i></a></li>
+                                                        <li><a href="index.html"><i class="icon-22"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="tab" id="tab-2">
-                        <div class="row clearfix">
-                            <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
-                                <div class="feature-block-one">
-                                    <div class="inner-box">
-                                        <div class="image-box">
-                                            <figure class="image"><img
-                                                    src="{{ asset('website/assets/images/resource/feature-1.jpg') }}"
-                                                    alt="">
-                                            </figure>
-                                            <div class="shape"></div>
-                                            <div class="feature">Featured</div>
-                                            <div class="icon">
-                                                <div class="icon-shape"></div>
-                                                <i class="icon-16"></i>
-                                            </div>
-                                        </div>
-                                        <div class="lower-content">
-                                            <div class="author-box">
-                                                <div class="inner">
-                                                    <img src="{{ asset('website/assets/images/resource/author-1.png') }}'"
+                                <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
+                                    <div class="feature-block-one">
+                                        <div class="inner-box">
+                                            <div class="image-box">
+                                                <figure class="image"><img
+                                                        src="{{ asset('website/assets/images/resource/feature-2.jpg') }}"
                                                         alt="">
-                                                    <h6>Michael Bean<i class="icon-18"></i></h6>
-                                                    <span>For sell</span>
+                                                </figure>
+                                                <div class="shape"></div>
+                                                <div class="feature">Featured</div>
+                                                <div class="icon">
+                                                    <div class="icon-shape"></div>
+                                                    <i class="icon-16"></i>
                                                 </div>
                                             </div>
-                                            <div class="category"><i class="fas fa-tags"></i>
-                                                <p>Electronics</p>
-                                            </div>
-                                            <h3><a href="browse-ads-details.html">Villa on Grand Avenue</a></h3>
-                                            <ul class="rating clearfix">
-                                                <li><i class="icon-17"></i></li>
-                                                <li><i class="icon-17"></i></li>
-                                                <li><i class="icon-17"></i></li>
-                                                <li><i class="icon-17"></i></li>
-                                                <li><i class="icon-17"></i></li>
-                                                <li><a href="index.html">(32)</a></li>
-                                            </ul>
-                                            <ul class="info clearfix">
-                                                <li><i class="far fa-clock"></i>1 months ago</li>
-                                                <li><i class="fas fa-map-marker-alt"></i>G87P, Birmingham, UK</li>
-                                            </ul>
-                                            <div class="lower-box">
-                                                <h5><span>Start From:</span>$3,000.00</h5>
-                                                <ul class="react-box">
-                                                    <li><a href="index.html"><i class="icon-21"></i></a></li>
-                                                    <li><a href="index.html"><i class="icon-22"></i></a></li>
+                                            <div class="lower-content">
+                                                <div class="author-box">
+                                                    <div class="inner">
+                                                        <img src="{{ asset('website/assets/images/resource/author-2.png') }}'"
+                                                            alt="">
+                                                        <h6>Michael Bean<i class="icon-18"></i></h6>
+                                                        <span>For sell</span>
+                                                    </div>
+                                                </div>
+                                                <div class="category"><i class="fas fa-tags"></i>
+                                                    <p>Electronics</p>
+                                                </div>
+                                                <h3><a href="browse-ads-details.html">Villa on Grand Avenue</a></h3>
+                                                <ul class="rating clearfix">
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><a href="index.html">(25)</a></li>
                                                 </ul>
+                                                <ul class="info clearfix">
+                                                    <li><i class="far fa-clock"></i>2 months ago</li>
+                                                    <li><i class="fas fa-map-marker-alt"></i>G87P, Birmingham, UK</li>
+                                                </ul>
+                                                <div class="lower-box">
+                                                    <h5><span>Start From:</span>$2,000.00</h5>
+                                                    <ul class="react-box">
+                                                        <li><a href="index.html"><i class="icon-21"></i></a></li>
+                                                        <li><a href="index.html"><i class="icon-22"></i></a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
-                                <div class="feature-block-one">
-                                    <div class="inner-box">
-                                        <div class="image-box">
-                                            <figure class="image"><img
-                                                    src="{{ asset('website/assets/images/resource/feature-2.jpg') }}"
-                                                    alt="">
-                                            </figure>
-                                            <div class="shape"></div>
-                                            <div class="feature">Featured</div>
-                                            <div class="icon">
-                                                <div class="icon-shape"></div>
-                                                <i class="icon-16"></i>
-                                            </div>
-                                        </div>
-                                        <div class="lower-content">
-                                            <div class="author-box">
-                                                <div class="inner">
-                                                    <img src="{{ asset('website/assets/images/resource/author-2.png') }}'"
+                                <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
+                                    <div class="feature-block-one">
+                                        <div class="inner-box">
+                                            <div class="image-box">
+                                                <figure class="image"><img
+                                                        src="{{ asset('website/assets/images/resource/feature-3.jpg') }}"
                                                         alt="">
-                                                    <h6>Michael Bean<i class="icon-18"></i></h6>
-                                                    <span>For sell</span>
+                                                </figure>
+                                                <div class="shape"></div>
+                                                <div class="feature">Featured</div>
+                                                <div class="icon">
+                                                    <div class="icon-shape"></div>
+                                                    <i class="icon-16"></i>
                                                 </div>
                                             </div>
-                                            <div class="category"><i class="fas fa-tags"></i>
-                                                <p>Electronics</p>
-                                            </div>
-                                            <h3><a href="browse-ads-details.html">Villa on Grand Avenue</a></h3>
-                                            <ul class="rating clearfix">
-                                                <li><i class="icon-17"></i></li>
-                                                <li><i class="icon-17"></i></li>
-                                                <li><i class="icon-17"></i></li>
-                                                <li><i class="icon-17"></i></li>
-                                                <li><i class="icon-17"></i></li>
-                                                <li><a href="index.html">(25)</a></li>
-                                            </ul>
-                                            <ul class="info clearfix">
-                                                <li><i class="far fa-clock"></i>2 months ago</li>
-                                                <li><i class="fas fa-map-marker-alt"></i>G87P, Birmingham, UK</li>
-                                            </ul>
-                                            <div class="lower-box">
-                                                <h5><span>Start From:</span>$2,000.00</h5>
-                                                <ul class="react-box">
-                                                    <li><a href="index.html"><i class="icon-21"></i></a></li>
-                                                    <li><a href="index.html"><i class="icon-22"></i></a></li>
+                                            <div class="lower-content">
+                                                <div class="author-box">
+                                                    <div class="inner">
+                                                        <img src="{{ asset('website/assets/images/resource/author-3.png') }}"
+                                                            alt="">
+                                                        <h6>Michael Bean<i class="icon-18"></i></h6>
+                                                        <span>For sell</span>
+                                                    </div>
+                                                </div>
+                                                <div class="category"><i class="fas fa-tags"></i>
+                                                    <p>Electronics</p>
+                                                </div>
+                                                <h3><a href="browse-ads-details.html">Villa on Grand Avenue</a></h3>
+                                                <ul class="rating clearfix">
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><a href="index.html">(40)</a></li>
                                                 </ul>
+                                                <ul class="info clearfix">
+                                                    <li><i class="far fa-clock"></i>3 months ago</li>
+                                                    <li><i class="fas fa-map-marker-alt"></i>G87P, Birmingham, UK</li>
+                                                </ul>
+                                                <div class="lower-box">
+                                                    <h5><span>Start From:</span>$3,500.00</h5>
+                                                    <ul class="react-box">
+                                                        <li><a href="index.html"><i class="icon-21"></i></a></li>
+                                                        <li><a href="index.html"><i class="icon-22"></i></a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
-                                <div class="feature-block-one">
-                                    <div class="inner-box">
-                                        <div class="image-box">
-                                            <figure class="image"><img
-                                                    src="{{ asset('website/assets/images/resource/feature-3.jpg') }}"
-                                                    alt="">
-                                            </figure>
-                                            <div class="shape"></div>
-                                            <div class="feature">Featured</div>
-                                            <div class="icon">
-                                                <div class="icon-shape"></div>
-                                                <i class="icon-16"></i>
-                                            </div>
-                                        </div>
-                                        <div class="lower-content">
-                                            <div class="author-box">
-                                                <div class="inner">
-                                                    <img src="{{ asset('website/assets/images/resource/author-3.png') }}"
+                                <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
+                                    <div class="feature-block-one">
+                                        <div class="inner-box">
+                                            <div class="image-box">
+                                                <figure class="image"><img
+                                                        src="{{ asset('website/assets/images/resource/feature-4.jpg') }}"
                                                         alt="">
-                                                    <h6>Michael Bean<i class="icon-18"></i></h6>
-                                                    <span>For sell</span>
+                                                </figure>
+                                                <div class="shape"></div>
+                                                <div class="feature">Featured</div>
+                                                <div class="icon">
+                                                    <div class="icon-shape"></div>
+                                                    <i class="icon-16"></i>
                                                 </div>
                                             </div>
-                                            <div class="category"><i class="fas fa-tags"></i>
-                                                <p>Electronics</p>
-                                            </div>
-                                            <h3><a href="browse-ads-details.html">Villa on Grand Avenue</a></h3>
-                                            <ul class="rating clearfix">
-                                                <li><i class="icon-17"></i></li>
-                                                <li><i class="icon-17"></i></li>
-                                                <li><i class="icon-17"></i></li>
-                                                <li><i class="icon-17"></i></li>
-                                                <li><i class="icon-17"></i></li>
-                                                <li><a href="index.html">(40)</a></li>
-                                            </ul>
-                                            <ul class="info clearfix">
-                                                <li><i class="far fa-clock"></i>3 months ago</li>
-                                                <li><i class="fas fa-map-marker-alt"></i>G87P, Birmingham, UK</li>
-                                            </ul>
-                                            <div class="lower-box">
-                                                <h5><span>Start From:</span>$3,500.00</h5>
-                                                <ul class="react-box">
-                                                    <li><a href="index.html"><i class="icon-21"></i></a></li>
-                                                    <li><a href="index.html"><i class="icon-22"></i></a></li>
+                                            <div class="lower-content">
+                                                <div class="author-box">
+                                                    <div class="inner">
+                                                        <img src="{{ asset('website/assets/images/resource/author-4.png') }}"
+                                                            alt="">
+                                                        <h6>Michael Bean<i class="icon-18"></i></h6>
+                                                        <span>For sell</span>
+                                                    </div>
+                                                </div>
+                                                <div class="category"><i class="fas fa-tags"></i>
+                                                    <p>Electronics</p>
+                                                </div>
+                                                <h3><a href="browse-ads-details.html">Villa on Grand Avenue</a></h3>
+                                                <ul class="rating clearfix">
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><a href="index.html">(28)</a></li>
                                                 </ul>
+                                                <ul class="info clearfix">
+                                                    <li><i class="far fa-clock"></i>4 months ago</li>
+                                                    <li><i class="fas fa-map-marker-alt"></i>G87P, Birmingham, UK</li>
+                                                </ul>
+                                                <div class="lower-box">
+                                                    <h5><span>Start From:</span>$3,000.00</h5>
+                                                    <ul class="react-box">
+                                                        <li><a href="index.html"><i class="icon-21"></i></a></li>
+                                                        <li><a href="index.html"><i class="icon-22"></i></a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
-                                <div class="feature-block-one">
-                                    <div class="inner-box">
-                                        <div class="image-box">
-                                            <figure class="image"><img
-                                                    src="{{ asset('website/assets/images/resource/feature-4.jpg') }}"
-                                                    alt="">
-                                            </figure>
-                                            <div class="shape"></div>
-                                            <div class="feature">Featured</div>
-                                            <div class="icon">
-                                                <div class="icon-shape"></div>
-                                                <i class="icon-16"></i>
-                                            </div>
-                                        </div>
-                                        <div class="lower-content">
-                                            <div class="author-box">
-                                                <div class="inner">
-                                                    <img src="{{ asset('website/assets/images/resource/author-4.png') }}"
+                                <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
+                                    <div class="feature-block-one">
+                                        <div class="inner-box">
+                                            <div class="image-box">
+                                                <figure class="image"><img
+                                                        src="{{ asset('website/assets/images/resource/feature-5.jpg') }}"
                                                         alt="">
-                                                    <h6>Michael Bean<i class="icon-18"></i></h6>
-                                                    <span>For sell</span>
+                                                </figure>
+                                                <div class="shape"></div>
+                                                <div class="feature">Featured</div>
+                                                <div class="icon">
+                                                    <div class="icon-shape"></div>
+                                                    <i class="icon-16"></i>
                                                 </div>
                                             </div>
-                                            <div class="category"><i class="fas fa-tags"></i>
-                                                <p>Electronics</p>
-                                            </div>
-                                            <h3><a href="browse-ads-details.html">Villa on Grand Avenue</a></h3>
-                                            <ul class="rating clearfix">
-                                                <li><i class="icon-17"></i></li>
-                                                <li><i class="icon-17"></i></li>
-                                                <li><i class="icon-17"></i></li>
-                                                <li><i class="icon-17"></i></li>
-                                                <li><i class="icon-17"></i></li>
-                                                <li><a href="index.html">(28)</a></li>
-                                            </ul>
-                                            <ul class="info clearfix">
-                                                <li><i class="far fa-clock"></i>4 months ago</li>
-                                                <li><i class="fas fa-map-marker-alt"></i>G87P, Birmingham, UK</li>
-                                            </ul>
-                                            <div class="lower-box">
-                                                <h5><span>Start From:</span>$3,000.00</h5>
-                                                <ul class="react-box">
-                                                    <li><a href="index.html"><i class="icon-21"></i></a></li>
-                                                    <li><a href="index.html"><i class="icon-22"></i></a></li>
+                                            <div class="lower-content">
+                                                <div class="author-box">
+                                                    <div class="inner">
+                                                        <img src="{{ asset('website/assets/images/resource/author-5.png') }}"
+                                                            alt="">
+                                                        <h6>Michael Bean<i class="icon-18"></i></h6>
+                                                        <span>For sell</span>
+                                                    </div>
+                                                </div>
+                                                <div class="category"><i class="fas fa-tags"></i>
+                                                    <p>Electronics</p>
+                                                </div>
+                                                <h3><a href="browse-ads-details.html">Villa on Grand Avenue</a></h3>
+                                                <ul class="rating clearfix">
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><a href="index.html">(15)</a></li>
                                                 </ul>
+                                                <ul class="info clearfix">
+                                                    <li><i class="far fa-clock"></i>5 months ago</li>
+                                                    <li><i class="fas fa-map-marker-alt"></i>G87P, Birmingham, UK</li>
+                                                </ul>
+                                                <div class="lower-box">
+                                                    <h5><span>Start From:</span>$1,800.00</h5>
+                                                    <ul class="react-box">
+                                                        <li><a href="index.html"><i class="icon-21"></i></a></li>
+                                                        <li><a href="index.html"><i class="icon-22"></i></a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
-                                <div class="feature-block-one">
-                                    <div class="inner-box">
-                                        <div class="image-box">
-                                            <figure class="image"><img
-                                                    src="{{ asset('website/assets/images/resource/feature-5.jpg') }}"
-                                                    alt="">
-                                            </figure>
-                                            <div class="shape"></div>
-                                            <div class="feature">Featured</div>
-                                            <div class="icon">
-                                                <div class="icon-shape"></div>
-                                                <i class="icon-16"></i>
-                                            </div>
-                                        </div>
-                                        <div class="lower-content">
-                                            <div class="author-box">
-                                                <div class="inner">
-                                                    <img src="{{ asset('website/assets/images/resource/author-5.png') }}"
+                                <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
+                                    <div class="feature-block-one">
+                                        <div class="inner-box">
+                                            <div class="image-box">
+                                                <figure class="image"><img
+                                                        src="{{ asset('website/assets/images/resource/feature-6.jpg') }}"
                                                         alt="">
-                                                    <h6>Michael Bean<i class="icon-18"></i></h6>
-                                                    <span>For sell</span>
+                                                </figure>
+                                                <div class="shape"></div>
+                                                <div class="feature">Featured</div>
+                                                <div class="icon">
+                                                    <div class="icon-shape"></div>
+                                                    <i class="icon-16"></i>
                                                 </div>
                                             </div>
-                                            <div class="category"><i class="fas fa-tags"></i>
-                                                <p>Electronics</p>
-                                            </div>
-                                            <h3><a href="browse-ads-details.html">Villa on Grand Avenue</a></h3>
-                                            <ul class="rating clearfix">
-                                                <li><i class="icon-17"></i></li>
-                                                <li><i class="icon-17"></i></li>
-                                                <li><i class="icon-17"></i></li>
-                                                <li><i class="icon-17"></i></li>
-                                                <li><i class="icon-17"></i></li>
-                                                <li><a href="index.html">(15)</a></li>
-                                            </ul>
-                                            <ul class="info clearfix">
-                                                <li><i class="far fa-clock"></i>5 months ago</li>
-                                                <li><i class="fas fa-map-marker-alt"></i>G87P, Birmingham, UK</li>
-                                            </ul>
-                                            <div class="lower-box">
-                                                <h5><span>Start From:</span>$1,800.00</h5>
-                                                <ul class="react-box">
-                                                    <li><a href="index.html"><i class="icon-21"></i></a></li>
-                                                    <li><a href="index.html"><i class="icon-22"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
-                                <div class="feature-block-one">
-                                    <div class="inner-box">
-                                        <div class="image-box">
-                                            <figure class="image"><img
-                                                    src="{{ asset('website/assets/images/resource/feature-6.jpg') }}"
-                                                    alt="">
-                                            </figure>
-                                            <div class="shape"></div>
-                                            <div class="feature">Featured</div>
-                                            <div class="icon">
-                                                <div class="icon-shape"></div>
-                                                <i class="icon-16"></i>
-                                            </div>
-                                        </div>
-                                        <div class="lower-content">
-                                            <div class="author-box">
-                                                <div class="inner">
-                                                    <img src="{{ asset('website/assets/images/resource/author-6.png') }}"
-                                                        alt="">
-                                                    <h6>Michael Bean<i class="icon-18"></i></h6>
-                                                    <span>For sell</span>
+                                            <div class="lower-content">
+                                                <div class="author-box">
+                                                    <div class="inner">
+                                                        <img src="{{ asset('website/assets/images/resource/author-6.png') }}"
+                                                            alt="">
+                                                        <h6>Michael Bean<i class="icon-18"></i></h6>
+                                                        <span>For sell</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="category"><i class="fas fa-tags"></i>
-                                                <p>Electronics</p>
-                                            </div>
-                                            <h3><a href="browse-ads-details.html">Villa on Grand Avenue</a></h3>
-                                            <ul class="rating clearfix">
-                                                <li><i class="icon-17"></i></li>
-                                                <li><i class="icon-17"></i></li>
-                                                <li><i class="icon-17"></i></li>
-                                                <li><i class="icon-17"></i></li>
-                                                <li><i class="icon-17"></i></li>
-                                                <li><a href="index.html">(32)</a></li>
-                                            </ul>
-                                            <ul class="info clearfix">
-                                                <li><i class="far fa-clock"></i>6 months ago</li>
-                                                <li><i class="fas fa-map-marker-alt"></i>G87P, Birmingham, UK</li>
-                                            </ul>
-                                            <div class="lower-box">
-                                                <h5><span>Start From:</span>$3,200.00</h5>
-                                                <ul class="react-box">
-                                                    <li><a href="index.html"><i class="icon-21"></i></a></li>
-                                                    <li><a href="index.html"><i class="icon-22"></i></a></li>
+                                                <div class="category"><i class="fas fa-tags"></i>
+                                                    <p>Electronics</p>
+                                                </div>
+                                                <h3><a href="browse-ads-details.html">Villa on Grand Avenue</a></h3>
+                                                <ul class="rating clearfix">
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><a href="index.html">(32)</a></li>
                                                 </ul>
+                                                <ul class="info clearfix">
+                                                    <li><i class="far fa-clock"></i>6 months ago</li>
+                                                    <li><i class="fas fa-map-marker-alt"></i>G87P, Birmingham, UK</li>
+                                                </ul>
+                                                <div class="lower-box">
+                                                    <h5><span>Start From:</span>$3,200.00</h5>
+                                                    <ul class="react-box">
+                                                        <li><a href="index.html"><i class="icon-21"></i></a></li>
+                                                        <li><a href="index.html"><i class="icon-22"></i></a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1191,8 +1201,405 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
+
+    @if ($nonFeaturedUnis->isNotEmpty())
+        <section class="feature-style-two">
+            <div class="auto-container">
+                <div class="sec-title centred">
+                    <span>Other</span>
+                    <h2>Other Universities</h2>
+                    <p>A university is an institution of higher learning that plays a pivotal role in the education and
+                        development of individuals. These institutions are known for their diverse academic programs and the
+                        pursuit of knowledge in various fields, such as science, arts, engineering, medicine, and social
+                        sciences. Universities serve as hubs of intellectual exploration, where students and scholars engage
+                        in
+                        research, critical thinking, and the exchange of ideas.
+                    </p>
+                </div>
+                <div class="tabs-box">
+                    <div class="tab-btn-box centred">
+                        {{-- <ul class="tab-btns tab-buttons clearfix">
+                        <li class="tab-btn active-btn" data-tab="#tab-1">Recent Listing</li>
+                        <li class="tab-btn" data-tab="#tab-2">Popular Listing</li>
+                    </ul> --}}
+                    </div>
+                    <div class="tabs-content">
+                        <div class="tab active-tab" id="tab-1">
+                            <div class="row clearfix">
+                                @foreach ($nonFeaturedUnis as $non)
+                                    <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
+                                        <div class="feature-block-one wow fadeInUp animated animated"
+                                            data-wow-delay="600ms" data-wow-duration="1500ms">
+                                            <div class="inner-box">
+                                                <div class="image-box">
+                                                    <figure class="image" style="height:220px"><img
+                                                            src="{{ $non->images[0]->image_url }}" alt="">
+                                                    </figure>
+                                                    <div class="shape"></div>
+                                                    <div class="feature">Featured</div>
+                                                    <div class="icon">
+                                                        <div class="icon-shape"></div>
+                                                        <i class="icon-16"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="lower-content">
+                                                    {{-- <div class="category"><i class="fas fa-tags"></i>
+                                                    <p>Electronics</p>
+                                                </div> --}}
+                                                    <h3><a href="{{ route('university-detail', $non->id) }}">
+                                                            @if (strlen($non->name) > 70)
+                                                                {{ substr($non->name, 0, 70) }}...
+                                                            @else
+                                                                {{ $non->name }}
+                                                            @endif
+                                                        </a></h3>
+                                                    {{-- <ul class="rating clearfix">
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><a href="index.html">(32)</a></li>
+                                                </ul> --}}
+                                                    @php
+                                                        $des = substr($non->description, 0, 30);
+                                                    @endphp
+                                                    <div class="info clearfix" style="min-height: 52px;">
+                                                        {!! $des !!}...
+                                                    </div>
+                                                    <div class="lower-box">
+                                                        <h5><span><i class="far fa-clock"></i>
+                                                                Courses:</span>{{ $non->courses_count }}
+                                                        </h5>
+                                                        <ul class="react-box">
+                                                            <li><i class="fas fa-map-marker-alt"></i> {{ $non->country }}
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="tab" id="tab-2">
+                            <div class="row clearfix">
+                                <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
+                                    <div class="feature-block-one">
+                                        <div class="inner-box">
+                                            <div class="image-box">
+                                                <figure class="image"><img
+                                                        src="{{ asset('website/assets/images/resource/feature-1.jpg') }}"
+                                                        alt="">
+                                                </figure>
+                                                <div class="shape"></div>
+                                                <div class="feature">Featured</div>
+                                                <div class="icon">
+                                                    <div class="icon-shape"></div>
+                                                    <i class="icon-16"></i>
+                                                </div>
+                                            </div>
+                                            <div class="lower-content">
+                                                <div class="author-box">
+                                                    <div class="inner">
+                                                        <img src="{{ asset('website/assets/images/resource/author-1.png') }}'"
+                                                            alt="">
+                                                        <h6>Michael Bean<i class="icon-18"></i></h6>
+                                                        <span>For sell</span>
+                                                    </div>
+                                                </div>
+                                                <div class="category"><i class="fas fa-tags"></i>
+                                                    <p>Electronics</p>
+                                                </div>
+                                                <h3><a href="browse-ads-details.html">Villa on Grand Avenue</a></h3>
+                                                <ul class="rating clearfix">
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><a href="index.html">(32)</a></li>
+                                                </ul>
+                                                <ul class="info clearfix">
+                                                    <li><i class="far fa-clock"></i>1 months ago</li>
+                                                    <li><i class="fas fa-map-marker-alt"></i>G87P, Birmingham, UK</li>
+                                                </ul>
+                                                <div class="lower-box">
+                                                    <h5><span>Start From:</span>$3,000.00</h5>
+                                                    <ul class="react-box">
+                                                        <li><a href="index.html"><i class="icon-21"></i></a></li>
+                                                        <li><a href="index.html"><i class="icon-22"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
+                                    <div class="feature-block-one">
+                                        <div class="inner-box">
+                                            <div class="image-box">
+                                                <figure class="image"><img
+                                                        src="{{ asset('website/assets/images/resource/feature-2.jpg') }}"
+                                                        alt="">
+                                                </figure>
+                                                <div class="shape"></div>
+                                                <div class="feature">Featured</div>
+                                                <div class="icon">
+                                                    <div class="icon-shape"></div>
+                                                    <i class="icon-16"></i>
+                                                </div>
+                                            </div>
+                                            <div class="lower-content">
+                                                <div class="author-box">
+                                                    <div class="inner">
+                                                        <img src="{{ asset('website/assets/images/resource/author-2.png') }}'"
+                                                            alt="">
+                                                        <h6>Michael Bean<i class="icon-18"></i></h6>
+                                                        <span>For sell</span>
+                                                    </div>
+                                                </div>
+                                                <div class="category"><i class="fas fa-tags"></i>
+                                                    <p>Electronics</p>
+                                                </div>
+                                                <h3><a href="browse-ads-details.html">Villa on Grand Avenue</a></h3>
+                                                <ul class="rating clearfix">
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><a href="index.html">(25)</a></li>
+                                                </ul>
+                                                <ul class="info clearfix">
+                                                    <li><i class="far fa-clock"></i>2 months ago</li>
+                                                    <li><i class="fas fa-map-marker-alt"></i>G87P, Birmingham, UK</li>
+                                                </ul>
+                                                <div class="lower-box">
+                                                    <h5><span>Start From:</span>$2,000.00</h5>
+                                                    <ul class="react-box">
+                                                        <li><a href="index.html"><i class="icon-21"></i></a></li>
+                                                        <li><a href="index.html"><i class="icon-22"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
+                                    <div class="feature-block-one">
+                                        <div class="inner-box">
+                                            <div class="image-box">
+                                                <figure class="image"><img
+                                                        src="{{ asset('website/assets/images/resource/feature-3.jpg') }}"
+                                                        alt="">
+                                                </figure>
+                                                <div class="shape"></div>
+                                                <div class="feature">Featured</div>
+                                                <div class="icon">
+                                                    <div class="icon-shape"></div>
+                                                    <i class="icon-16"></i>
+                                                </div>
+                                            </div>
+                                            <div class="lower-content">
+                                                <div class="author-box">
+                                                    <div class="inner">
+                                                        <img src="{{ asset('website/assets/images/resource/author-3.png') }}"
+                                                            alt="">
+                                                        <h6>Michael Bean<i class="icon-18"></i></h6>
+                                                        <span>For sell</span>
+                                                    </div>
+                                                </div>
+                                                <div class="category"><i class="fas fa-tags"></i>
+                                                    <p>Electronics</p>
+                                                </div>
+                                                <h3><a href="browse-ads-details.html">Villa on Grand Avenue</a></h3>
+                                                <ul class="rating clearfix">
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><a href="index.html">(40)</a></li>
+                                                </ul>
+                                                <ul class="info clearfix">
+                                                    <li><i class="far fa-clock"></i>3 months ago</li>
+                                                    <li><i class="fas fa-map-marker-alt"></i>G87P, Birmingham, UK</li>
+                                                </ul>
+                                                <div class="lower-box">
+                                                    <h5><span>Start From:</span>$3,500.00</h5>
+                                                    <ul class="react-box">
+                                                        <li><a href="index.html"><i class="icon-21"></i></a></li>
+                                                        <li><a href="index.html"><i class="icon-22"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
+                                    <div class="feature-block-one">
+                                        <div class="inner-box">
+                                            <div class="image-box">
+                                                <figure class="image"><img
+                                                        src="{{ asset('website/assets/images/resource/feature-4.jpg') }}"
+                                                        alt="">
+                                                </figure>
+                                                <div class="shape"></div>
+                                                <div class="feature">Featured</div>
+                                                <div class="icon">
+                                                    <div class="icon-shape"></div>
+                                                    <i class="icon-16"></i>
+                                                </div>
+                                            </div>
+                                            <div class="lower-content">
+                                                <div class="author-box">
+                                                    <div class="inner">
+                                                        <img src="{{ asset('website/assets/images/resource/author-4.png') }}"
+                                                            alt="">
+                                                        <h6>Michael Bean<i class="icon-18"></i></h6>
+                                                        <span>For sell</span>
+                                                    </div>
+                                                </div>
+                                                <div class="category"><i class="fas fa-tags"></i>
+                                                    <p>Electronics</p>
+                                                </div>
+                                                <h3><a href="browse-ads-details.html">Villa on Grand Avenue</a></h3>
+                                                <ul class="rating clearfix">
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><a href="index.html">(28)</a></li>
+                                                </ul>
+                                                <ul class="info clearfix">
+                                                    <li><i class="far fa-clock"></i>4 months ago</li>
+                                                    <li><i class="fas fa-map-marker-alt"></i>G87P, Birmingham, UK</li>
+                                                </ul>
+                                                <div class="lower-box">
+                                                    <h5><span>Start From:</span>$3,000.00</h5>
+                                                    <ul class="react-box">
+                                                        <li><a href="index.html"><i class="icon-21"></i></a></li>
+                                                        <li><a href="index.html"><i class="icon-22"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
+                                    <div class="feature-block-one">
+                                        <div class="inner-box">
+                                            <div class="image-box">
+                                                <figure class="image"><img
+                                                        src="{{ asset('website/assets/images/resource/feature-5.jpg') }}"
+                                                        alt="">
+                                                </figure>
+                                                <div class="shape"></div>
+                                                <div class="feature">Featured</div>
+                                                <div class="icon">
+                                                    <div class="icon-shape"></div>
+                                                    <i class="icon-16"></i>
+                                                </div>
+                                            </div>
+                                            <div class="lower-content">
+                                                <div class="author-box">
+                                                    <div class="inner">
+                                                        <img src="{{ asset('website/assets/images/resource/author-5.png') }}"
+                                                            alt="">
+                                                        <h6>Michael Bean<i class="icon-18"></i></h6>
+                                                        <span>For sell</span>
+                                                    </div>
+                                                </div>
+                                                <div class="category"><i class="fas fa-tags"></i>
+                                                    <p>Electronics</p>
+                                                </div>
+                                                <h3><a href="browse-ads-details.html">Villa on Grand Avenue</a></h3>
+                                                <ul class="rating clearfix">
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><a href="index.html">(15)</a></li>
+                                                </ul>
+                                                <ul class="info clearfix">
+                                                    <li><i class="far fa-clock"></i>5 months ago</li>
+                                                    <li><i class="fas fa-map-marker-alt"></i>G87P, Birmingham, UK</li>
+                                                </ul>
+                                                <div class="lower-box">
+                                                    <h5><span>Start From:</span>$1,800.00</h5>
+                                                    <ul class="react-box">
+                                                        <li><a href="index.html"><i class="icon-21"></i></a></li>
+                                                        <li><a href="index.html"><i class="icon-22"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
+                                    <div class="feature-block-one">
+                                        <div class="inner-box">
+                                            <div class="image-box">
+                                                <figure class="image"><img
+                                                        src="{{ asset('website/assets/images/resource/feature-6.jpg') }}"
+                                                        alt="">
+                                                </figure>
+                                                <div class="shape"></div>
+                                                <div class="feature">Featured</div>
+                                                <div class="icon">
+                                                    <div class="icon-shape"></div>
+                                                    <i class="icon-16"></i>
+                                                </div>
+                                            </div>
+                                            <div class="lower-content">
+                                                <div class="author-box">
+                                                    <div class="inner">
+                                                        <img src="{{ asset('website/assets/images/resource/author-6.png') }}"
+                                                            alt="">
+                                                        <h6>Michael Bean<i class="icon-18"></i></h6>
+                                                        <span>For sell</span>
+                                                    </div>
+                                                </div>
+                                                <div class="category"><i class="fas fa-tags"></i>
+                                                    <p>Electronics</p>
+                                                </div>
+                                                <h3><a href="browse-ads-details.html">Villa on Grand Avenue</a></h3>
+                                                <ul class="rating clearfix">
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><i class="icon-17"></i></li>
+                                                    <li><a href="index.html">(32)</a></li>
+                                                </ul>
+                                                <ul class="info clearfix">
+                                                    <li><i class="far fa-clock"></i>6 months ago</li>
+                                                    <li><i class="fas fa-map-marker-alt"></i>G87P, Birmingham, UK</li>
+                                                </ul>
+                                                <div class="lower-box">
+                                                    <h5><span>Start From:</span>$3,200.00</h5>
+                                                    <ul class="react-box">
+                                                        <li><a href="index.html"><i class="icon-21"></i></a></li>
+                                                        <li><a href="index.html"><i class="icon-22"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
     <!-- feature-style-two end -->
 
 
@@ -1404,7 +1811,7 @@
 
 
     <!-- subscribe-section -->
-    <section class="subscribe-section">
+    {{-- <section class="subscribe-section">
         <div class="pattern-layer"
             style="background-image: url({{ asset('website/assets/images/shape/shape-9.png') }});"></div>
         <div class="auto-container">
@@ -1426,7 +1833,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- subscribe-section end -->
 @endsection
 @section('scripts')

@@ -25,7 +25,6 @@ class UserRequest extends FormRequest
      */
     public function rules(Request $request)
     {
-        // dd($request->all());
         $route_id = $request->route('user');
 
 

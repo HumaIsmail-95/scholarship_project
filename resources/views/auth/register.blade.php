@@ -103,7 +103,8 @@
                                         <input type="checkbox" class="form-check-input" id="term_n_condition"
                                             name="term_n_condition" onclick="enableSubmitBtn()">
                                         <label class="form-check-label" for="customCheck1">I agree to the <a
-                                                href="#">Term of Service</a> and <a href="#">Privacy
+                                                href="{{ route('about') }}">Term of Service</a> and <a
+                                                href="{{ route('privacy') }}">Privacy
                                                 Policy</a></label>
                                         @error('term_n_condition')
                                             <span class="text-danger" role="alert">

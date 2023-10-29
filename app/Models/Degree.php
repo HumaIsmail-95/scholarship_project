@@ -14,6 +14,9 @@ class Degree extends Model
         'status',
         'discipline_id',
         'description',
+        'image_name',
+        'image_folder',
+        'image_url',
         'created_by',
         'updated_by',
         'deleted_by',
@@ -22,5 +25,9 @@ class Degree extends Model
     public function discipline()
     {
         return $this->belongsTo(Discipline::class);
+    }
+    public function courses()
+    {
+        return $this->hasMany(UniCourse::class);
     }
 }

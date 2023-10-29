@@ -3,9 +3,8 @@
 namespace App\Http\Requests\admin;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Request;
 
-class DegreeRequest extends FormRequest
+class CityRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,14 +21,9 @@ class DegreeRequest extends FormRequest
      *
      * @return array
      */
-    public function rules(Request $request)
+    public function rules()
     {
-        // dd($request->all());
         return [
-            'name' => ['required'],
-            'description' => ['nullable'],
-            'discipline_id' => ['required', 'integer'],
-            'status' => ['nullable',],
             'image' => 'nullable|max:2048|mimes:jpg,png,jpeg',
         ];
     }

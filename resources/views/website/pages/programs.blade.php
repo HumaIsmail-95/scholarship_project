@@ -59,6 +59,21 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="sidebar-category sidebar-widget">
+                                    <div class="widget-title">
+                                        <h3>Degree</h3>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <select class="wide" name="degree_id" id="degree_id">
+                                                <option value="">Select degree</option>
+                                                @foreach ($degrees as $degree)
+                                                    <option value="{{ $degree->id }}">{{ $degree->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="price-filter sidebar-widget">
                                     <div class="widget-title">
                                         <h3>Pricing range</h3>
@@ -71,7 +86,7 @@
                                             <div class="col-lg-6 col-md-12 col-sm-12 form-group">
                                                 <input type="text" name="max_price" placeholder="Max">
                                             </div>
-                                            <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 form-group mt-3">
                                                 <button type="submit" class="theme-btn-one">Apply filter</button>
                                             </div>
                                         </div>
@@ -194,9 +209,11 @@
                                                         </div>
                                                         <div class="lower-content">
                                                             <div class="author-box" style="min-height: 65px;">
-                                                                <div class="inner" style="">
+                                                                <div class="inner " style="padding:0px">
                                                                     @if ($program->university->featured)
                                                                         <h6>Featured <i class="icon-18"></i></h6>
+                                                                    @else
+                                                                        <h6>{{ $program->degree->name }}</h6>
                                                                     @endif
                                                                     @php
                                                                         $user = Auth::user();

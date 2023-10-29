@@ -44,6 +44,7 @@ class CourseRequest extends FormRequest
             'test_name.*' => ['required'],
             'min_score.*' => ['required'],
             'min_score_level.*' => ['required'],
+            'image' => 'nullable|max:2048|mimes:jpg,png,jpeg',
         ];
     }
 }

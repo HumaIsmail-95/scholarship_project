@@ -41,7 +41,7 @@
                                     <th>gender</th>
                                     <th>d o b</th>
                                     <th>Nationality</th>
-                                    {{-- <th>Actions</th> --}}
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="table_id">
@@ -54,6 +54,7 @@
                                         <td id="td-id-1" class="td-class-1"> {{ $student->gender }} </td>
                                         <td id="td-id-1" class="td-class-1"> {{ $student->d_o_b }} </td>
                                         <td id="td-id-1" class="td-class-1"> {{ $student->nationality }} </td>
+                                        <td id="td-id-1" class="td-class-1"> <a href="{{route('admin.student.profile',$student->id)}}">Student Profile</a> </td>
                                         {{-- <td> --}}
                                         {{-- <div class="btn-group"> --}}
                                         {{-- @can('edit-student')

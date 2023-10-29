@@ -39,7 +39,10 @@ class UserService
         $data = $request->validated();
         $data['created_by'] = Auth::user()->id;
         $user = User::create($data);
-        $user->syncRoles($request->roles);
+        // $user->syncRoles($request->roles);
+        foreach ($request->roles as $role) {
+            $user->assignRole($role);
+        }
 
         DB::commit();
         $response = ['status' => true, 'message' => 'User added successfully.', 'user' => $user];

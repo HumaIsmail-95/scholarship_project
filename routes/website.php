@@ -10,6 +10,7 @@ use App\Http\Controllers\Website\SubscriptionController;
 
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('/all-courses', [FrontendController::class, 'allCourses'])->name('allCourses'); //getting all disciplines
+Route::get('/all-degrees', [FrontendController::class, 'allDegrees'])->name('allDegrees'); //getting all disciplines
 Route::get('/subscription-packages', [FrontendController::class, 'subscriptions'])->name('subscriptions');
 Route::get('/programs', [FrontendController::class, 'programs'])->name('programs');
 Route::get('/programs/{program}/program-details', [FrontendController::class, 'programDetails'])->name('programDetails');

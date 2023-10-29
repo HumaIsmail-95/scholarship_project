@@ -71,6 +71,7 @@ class FrontEndService
         $uni_id = $request->uni_id;
         $city_id = $request->city_id;
         $discipline_id = $request->discipline_id;
+        $degree_id = $request->degree_id;
         $minPrice = $request->min_price;
         $maxPrice = $request->max_price;
         $courses = new UniCourse();
@@ -82,6 +83,9 @@ class FrontEndService
         }
         if ($discipline_id) {
             $courses = $courses->where('discipline_id', $discipline_id);
+        }
+        if ($degree_id) {
+            $courses = $courses->where('degree_id', $degree_id);
         }
         if ($minPrice) {
             $courses = $courses->where('tuition_fee', '>=', $minPrice);

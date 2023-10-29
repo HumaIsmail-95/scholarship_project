@@ -1,5 +1,5 @@
 @extends('layouts.website')
-@section('title', 'All Courses')
+@section('title', 'All Degrees')
 @section('content')
     <script>
         function replaceImage(element, type) {
@@ -17,7 +17,7 @@
         <div class="auto-container">
             <div class="content-box centred mr-0">
                 <div class="title">
-                    <h1>All Courses</h1>
+                    <h1>All Degrees</h1>
                 </div>
                 <ul class="bread-crumb clearfix">
                     <li><a href="{{ route('home') }}">Home</a></li>
@@ -32,36 +32,35 @@
         <div class="auto-container">
             <div class="sec-title centred">
                 {{-- <span>Features</span> --}}
-                <h2>All Courses</h2>
+                <h2>All Degrees</h2>
                 <p>
-                    University courses, also known as college courses or academic programs, are structured educational
+                    University degrees, also known as college degrees or academic programs, are structured educational
                     offerings provided by universities and colleges to help students gain knowledge and expertise in various
-                    fields of study. These courses are a fundamental component of higher education and are designed to
-                    provide students with a well-rounded education and specialized knowledge in their chosen disciplines.
+                    fields of study. These degrees are a fundamental component of higher education and are designed to
+                    provide students with a well-rounded education and specialized knowledge in their chosen degrees.
                 </p>
             </div>
             <div class="row clearfix">
-                @foreach ($disciplines as $discipline)
+                @foreach ($degrees as $degree)
                     <div class="col-lg-3 col-md-6 col-sm-12 category-block">
                         <div class="category-block-two wow fadeInDown animated animated" data-wow-delay="00ms"
                             data-wow-duration="1500ms">
                             <div class="inner-box">
                                 <figure class="image-box"
                                     style="height: 250px;display:flex !important;justify-item:center !important">
-                                    <img src="{{ $discipline->image_url }}"
-                                        onerror="replaceImage({{ $discipline }},'discipline')"
-                                        id="disciplineImage_{{ $discipline->id }}" alt="">
+                                    <img src="{{ $degree->image_url }}" onerror="replaceImage({{ $degree }},'degree')"
+                                        id="degreeImage_{{ $degree->id }}" alt="">
                                 </figure>
                                 <div class="lower-content">
-                                    <span>{{ $discipline->courses_count }}</span>
+                                    <span>{{ $degree->degrees_count }}</span>
                                     <div class="icon-box"><i class="icon-6"></i></div>
                                     <h4><a
-                                            href="{{ route('programs', ['discipline_id' => $discipline->id]) }}">{{ $discipline->name }}</a>
+                                            href="{{ route('programs', ['degree_id' => $degree->id]) }}">{{ $degree->name }}</a>
                                     </h4>
                                     <p class="text-muted" style="  min-height:120px;  max-height: 120;">
-                                        @if (strlen($discipline->description) > 200)
-                                            {{ substr($discipline->description, 0, 200) }}...
-                                            @else{{ $discipline->description }}
+                                        @if (strlen($degree->description) > 200)
+                                            {{ substr($degree->description, 0, 200) }}...
+                                            @else{{ $degree->description }}
                                         @endif
                                     </p>
                                 </div>

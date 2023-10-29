@@ -43,7 +43,18 @@
                                  <li class="dropdown"><a href="{{ route('allCourses') }}">Courses</a>
                                      <ul>
                                          @foreach ($disciplines as $discipline)
-                                             <li><a href="{{ route('allCourses') }}">{{ $discipline->name }}</a></li>
+                                             <li><a
+                                                     href="{{ route('programs', ['discipline_id' => $discipline->id]) }}">{{ $discipline->name }}</a>
+                                             </li>
+                                         @endforeach
+                                     </ul>
+                                 </li>
+                                 <li class="dropdown"><a href="{{ route('allDegrees') }}">Degrees</a>
+                                     <ul>
+                                         @foreach ($degrees as $degree)
+                                             <li><a
+                                                     href="{{ route('programs', ['degree_id' => $degree->id]) }}">{{ $degree->name }}</a>
+                                             </li>
                                          @endforeach
                                      </ul>
                                  </li>

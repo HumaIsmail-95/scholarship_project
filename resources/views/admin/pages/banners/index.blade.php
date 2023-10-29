@@ -37,6 +37,17 @@
         }
 
     @endphp
+    <script>
+        function replaceImage(element, type) {
+            imageElement = document.getElementById(type + 'Image_' + element.id)
+            console.log(element);
+            if (element.image_url == "" || element.image_url ==
+                "http://127.0.0.1:8000/public/website/assets/images/banner/b-1.jpg") {
+                imageElement.src = "{{ asset('admin/images/placeholder.jpg') }}";
+
+            }
+        }
+    </script>
     <div class="container-fluid">
         <div class="row page-titles">
             <div class="col-md-5 align-self-center">
@@ -72,7 +83,9 @@
                                     @enderror
                                     @if (isset($logo[0]->image_url))
                                         <label for="Logo" class="form-label">Selected image</label>
-                                        <img src="{{ $logo[0]->image_url }}" width="150" height="150" alt="">
+                                        <img src="{{ $logo[0]->image_url }}"
+                                            onerror="replaceImage({{ $logo[0] }},'logo')"
+                                            id="logoImage_{{ $logo[0]->id }}" width="150" height="150" alt="">
                                     @endif
                                 </div>
                                 <div class="col-12 text-right mt-2">
@@ -110,7 +123,10 @@
                                     @if (isset($logo[0]->image_url))
                                         <label for="Logo" class="form-label">Selected image</label>
                                         @foreach ($home as $item)
-                                            <img src="{{ $item->image_url }}" width="150" height="150" alt="">
+                                            <img src="{{ $item->image_url }}"
+                                                onerror="replaceImage({{ $item }},'home')"
+                                                id="homeImage_{{ $item->id }}" width="150" height="150"
+                                                alt="">
                                         @endforeach
                                     @endif
                                 </div>
@@ -148,7 +164,9 @@
                                     @enderror
                                     @if (isset($all_courses[0]->image_url))
                                         <label for="Logo" class="form-label">Selected image</label>
-                                        <img src="{{ $all_courses[0]->image_url }}" width="150" height="150"
+                                        <img src="{{ $all_courses[0]->image_url }}"
+                                            onerror="replaceImage({{ $all_courses[0] }},'course')"
+                                            id="courseImage_{{ $all_courses[0]->id }}" width="150" height="150"
                                             alt="">
                                     @endif
                                 </div>
@@ -186,7 +204,9 @@
                                     @enderror
                                     @if (isset($privacy[0]->image_url))
                                         <label for="Logo" class="form-label">Selected image</label>
-                                        <img src="{{ $privacy[0]->image_url }}" width="150" height="150"
+                                        <img src="{{ $privacy[0]->image_url }}"
+                                            onerror="replaceImage({{ $privacy[0] }},'privacy')"
+                                            id="privacyImage_{{ $privacy[0]->id }}" width="150" height="150"
                                             alt="">
                                     @endif
                                 </div>
@@ -224,7 +244,9 @@
                                     @enderror
                                     @if (isset($about[0]->image_url))
                                         <label for="Logo" class="form-label">Selected image</label>
-                                        <img src="{{ $about[0]->image_url }}" width="150" height="150"
+                                        <img src="{{ $about[0]->image_url }}"
+                                            onerror="replaceImage({{ $about[0] }},'about')"
+                                            id="aboutImage_{{ $about[0]->id }}" width="150" height="150"
                                             alt="">
                                     @endif
                                 </div>
@@ -262,7 +284,9 @@
                                     @enderror
                                     @if (isset($programs[0]->image_url))
                                         <label for="Logo" class="form-label">Selected image</label>
-                                        <img src="{{ $programs[0]->image_url }}" width="150" height="150"
+                                        <img src="{{ $programs[0]->image_url }}"
+                                            onerror="replaceImage({{ $programs[0] }},'programs')"
+                                            id="programsImage_{{ $programs[0]->id }}" width="150" height="150"
                                             alt="">
                                     @endif
                                 </div>
@@ -300,7 +324,9 @@
                                     @enderror
                                     @if (isset($blogs[0]->image_url))
                                         <label for="Logo" class="form-label">Selected image</label>
-                                        <img src="{{ $blogs[0]->image_url }}" width="150" height="150"
+                                        <img src="{{ $blogs[0]->image_url }}"
+                                            onerror="replaceImage({{ $blogs[0] }},'blogs')"
+                                            id="blogsImage_{{ $blogs[0]->id }}" width="150" height="150"
                                             alt="">
                                     @endif
                                 </div>
@@ -338,8 +364,10 @@
                                     @enderror
                                     @if (isset($universities[0]->image_url))
                                         <label for="Logo" class="form-label">Selected image</label>
-                                        <img src="{{ $universities[0]->image_url }}" width="150" height="150"
-                                            alt="">
+                                        <img src="{{ $universities[0]->image_url }}"
+                                            onerror="replaceImage({{ $universities[0] }},'universities')"
+                                            id="universitiesImage_{{ $universities[0]->id }}" width="150"
+                                            height="150" alt="">
                                     @endif
                                 </div>
                                 <div class="col-12 text-right mt-2">
@@ -376,7 +404,9 @@
                                     @enderror
                                     @if (isset($footer[0]->image_url))
                                         <label for="Logo" class="form-label">Selected image</label>
-                                        <img src="{{ $footer[0]->image_url }}" width="150" height="150"
+                                        <img src="{{ $footer[0]->image_url }}"
+                                            onerror="replaceImage({{ $footer[0] }},'footer')"
+                                            id="footerImage_{{ $footer[0]->id }}" width="150" height="150"
                                             alt="">
                                     @endif
                                 </div>

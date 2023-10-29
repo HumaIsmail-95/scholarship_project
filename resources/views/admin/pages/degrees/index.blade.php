@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 @section('title', 'Degrees')
 @section('links')
+    <link rel="stylesheet" href="{{ asset('admin/assets/node_modules/dropify/dist/css/dropify.min.css') }}">
     <link href="{{ asset('admin/assets/node_modules/bootstrap-switch/bootstrap-switch.min.css') }}" rel="stylesheet">
 
     <link href="{{ asset('admin/dist/css/pages/bootstrap-switch.css') }}" rel="stylesheet">
@@ -103,7 +104,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <form class="floating-labels" id="degree-form" method="post" action="javascript:;"
-                    onsubmit="submitDegree()">
+                    onsubmit="submitDegree()" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-validation">
@@ -133,6 +134,14 @@
                                     <textarea name="description" class="form-control" id="description" cols="10" rows="4"
                                         :value="old('description')"></textarea>
                                     <div id="description_text" class="text-danger errors"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-12  col-sm-12 my-2">
+                                    <label for="Logo" class="form-label">Set image</label>
+                                    <input type="file" id="image" name="image" class="dropify"
+                                        value="{{ old('image') }}" />
+                                    @error('image')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <div class="col-md-12 mb-2">
                                     <div class="bt-switch">
@@ -224,6 +233,16 @@
                                         :value="old('description')"></textarea>
                                     <div id="edit_description_text" class="text-danger errors"></div>
                                 </div>
+                                <div class="col-lg-12 col-md-12  col-sm-12 my-2">
+                                    <label for="Logo" class="form-label">Set image</label>
+                                    <input type="file" id="edit_image" name="image" class="dropify"
+                                        value="{{ old('image') }}" />
+                                    @error('image')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                    <img src="" id="image_edit" alt="" width="150" height="150"
+                                        srcset="">
+                                </div>
                                 <div class="col-md-12 mb-2">
                                     <div class="m-b-30">
                                         <label class="form-label" for="name">Status
@@ -283,6 +302,11 @@
                                         <textarea name="description" class="form-control" id="view_description" cols="10" rows="4" readonly></textarea>
                                     </div>
                                     <div class="col-md-12 mb-2">
+                                        <img src="" id="image_view" alt="" width="150"
+                                            height="150" srcset="">
+
+                                    </div>
+                                    <div class="col-md-12 mb-2">
                                         <label class="form-label" for="name">Status
                                         </label>
                                         <input type="text" class="name form-control" id="view_status"
@@ -304,7 +328,50 @@
     </div>
 @endsection
 @section('scripts')
+    <script src="{{ asset('admin/assets/node_modules/dropify/dist/js/dropify.min.js') }}"></script>
     <script src="{{ asset('admin/assets/node_modules/bootstrap-switch/bootstrap-switch.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            // Basic
+            $('.dropify').dropify();
+
+            // Translated
+            $('.dropify-fr').dropify({
+                messages: {
+                    default: 'Glissez-déposez un fichier ici ou cliquez',
+                    replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+                    remove: 'Supprimer',
+                    error: 'Désolé, le fichier trop volumineux'
+                }
+            });
+
+            // Used events
+            var drEvent = $('#input-file-events').dropify();
+
+            drEvent.on('dropify.beforeClear', function(event, element) {
+                return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+            });
+
+            drEvent.on('dropify.afterClear', function(event, element) {
+                alert('File deleted');
+            });
+
+            drEvent.on('dropify.errors', function(event, element) {
+                console.log('Has Errors');
+            });
+
+            var drDestroy = $('#input-file-to-destroy').dropify();
+            drDestroy = drDestroy.data('dropify')
+            $('#toggleDropify').on('click', function(e) {
+                e.preventDefault();
+                if (drDestroy.isDropified()) {
+                    drDestroy.destroy();
+                } else {
+                    drDestroy.init();
+                }
+            })
+        });
+    </script>
     <script type="text/javascript">
         $(".bt-switch input[type='checkbox'], .bt-switch input[type='radio']").bootstrapSwitch();
         var radioswitch = function() {
@@ -524,6 +591,12 @@
             document.getElementById('edit_discipline_id').value = degree.discipline_id;
             document.getElementById('edit_description').value = degree.description;
             document.getElementById('edit_status').checked = degree.status == 1 ? true : false;
+            document.getElementById('image_edit').src = degree.image_url;
+            var imageElement = document.getElementById("image_edit");
+
+            imageElement.onerror = function() {
+                imageElement.src = "{{ asset('admin/images/placeholder.jpg') }}";
+            };
             console.log('degree', degree, document.getElementById('edit_status').checked);
             $("#editModalDegree").modal('show')
         }
@@ -533,7 +606,13 @@
             document.getElementById('view_discipline').value = degree.discipline.name;
             document.getElementById('view_description').value = degree.description;
             document.getElementById('view_status').value = degree.status == 1 ? 'Active' : 'Inactive';
+            document.getElementById('image_view').src = degree.image_url;
+            var imageElement = document.getElementById("image_view");
 
+            imageElement.onerror = function() {
+                // Set a placeholder image if the original image is not found
+                imageElement.src = "{{ asset('admin/images/placeholder.jpg') }}";
+            };
             $("#viewModalDegree").modal('show')
         }
 

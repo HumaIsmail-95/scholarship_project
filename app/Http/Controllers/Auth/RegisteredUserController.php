@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Spatie\Permission\Models\Role;
 
 class RegisteredUserController extends Controller
 {
@@ -49,7 +50,8 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
-
+        $studentRole = Role::where('name', 'student')->first();
+        $user->assignRole($studentRole);
         Auth::login($user);
         if ($user->type == 'student') {
             return redirect(RouteServiceProvider::WEBSITE);

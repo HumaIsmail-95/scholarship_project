@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\StripeSettingController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\StudyModelController;
@@ -69,6 +70,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::resource('study-models', StudyModelController::class);
     //universities
     Route::resource('universities', UniversityController::class);
+    //cities
+    Route::get('cities', [CityController::class, 'index'])->name('cities.index');
+    Route::put('cities/{city}', [CityController::class, 'update'])->name('cities.update');
+
     //courses
     Route::resource('courses', CourseController::class)->except(['show']);
     Route::get('courses/show/{course_id}', [CourseController::class, 'showCourse'])->name('courses.show');
@@ -78,6 +83,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::resource('subscription-packages', SubscriptionController::class);
     //student
     Route::resource('students', StudentController::class);
+    Route::get('student/{id}', [StudentController::class, 'getProfile'])->name('student.profile');
+
     //blog
     Route::resource('blogs', BlogController::class);
 
