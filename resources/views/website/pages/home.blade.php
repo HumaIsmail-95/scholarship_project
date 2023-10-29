@@ -1,6 +1,17 @@
 @extends('layouts.website')
 @section('title', 'Home')
 @section('content')
+    <script>
+        function replaceImage(element, id) {
+            imageElement = document.getElementById('cityImage_' + id)
+            console.log('element', element);
+            if (element == "" ||
+                element == "http://127.0.0.1:8000/public/website/assets/images/banner/b-1.jpg") {
+                console.log(element);
+                imageElement.src = "{{ asset('admin/images/placeholder.jpg') }}";
+            }
+        }
+    </script>
     <!-- banner-section -->
     <section class="banner-section centred py-0" style="z-index:1">
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -1627,11 +1638,19 @@
                             <div class="place-block-one wow fadeInDown animated animated" data-wow-delay="00ms"
                                 data-wow-duration="1500ms">
                                 <div class="inner-box">
-                                    <figure class="image-box"><img src="{{ $city['image'] }}" alt="">
+                                    @php
+                                        $imgage = $city['image'];
+                                        $city_id = $city['id'];
+                                    @endphp
+                                    <figure class="image-box"><img src="{{ $city['image'] }}"
+                                            onerror="replaceImage('{{ $imgage }}','{{ $city_id }}')"
+                                            id="cityImage_{{ $city['id'] }}" alt="">
                                     </figure>
                                     <div class="lower-content">
                                         <div class="inner">
-                                            <h3><a href="javascript:;">{{ $city['name'] }}</a></h3>
+                                            <h3><a
+                                                    href="{{ route('programs', ['city_id' => $city['id']]) }}">{{ $city['name'] }}</a>
+                                            </h3>
                                             <span>{{ $city['count'] }} Listing</span>
                                         </div>
                                     </div>

@@ -15,7 +15,7 @@ class CityService
     public static function getCities()
     {
 
-        $cities = City::orderBy('id', 'DESC')->paginate(20);
+        $cities = City::paginate(20);
         return $cities;
     }
 

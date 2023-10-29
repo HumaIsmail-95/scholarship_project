@@ -9,6 +9,7 @@ use App\Http\Requests\website\EducationRequest;
 use App\Http\Requests\website\ProfessionalExpRequest;
 use App\Http\Requests\website\StudentRequest;
 use App\Http\Requests\website\StudentTestRequest;
+use App\Models\City;
 use App\Models\DocumentGallery;
 use App\Models\EducationGallery;
 use App\Models\Student;
@@ -35,34 +36,44 @@ class FrontEndService
     public  static function getPopular()
     {
         $count = UniCourse::where('city_id', 8)->count();
+        $city = City::findorfail(8);
         $response['Beijing'] = [
             'name' => 'Beijing',
             'count' => $count,
-            'image' => asset('website/assets/images/cities/Beijing.jpg'),
+            'id' => 8,
+            'image' => $city->image_url ? $city->image_url : 'http://127.0.0.1:8000/public/website/assets/images/banner/b-1.jpg',
         ];
         $count = UniCourse::where('city_id', 87)->count();
+        $city = City::findorfail(87);
         $response['Shanghai'] = [
             'name' => 'Shanghai',
             'count' => $count,
-            'image' => asset('website/assets/images/cities/Shanghai.jpg'),
+            'id' => 87,
+            'image' => $city->image_url ? $city->image_url : 'http://127.0.0.1:8000/public/website/assets/images/banner/b-1.jpg',
         ];
         $count = UniCourse::where('city_id', 90)->count();
+        $city = City::findorfail(90);
         $response['Tianjin'] = [
             'name' => 'Tianjin',
             'count' => $count,
-            'image' => asset('website/assets/images/cities/Tianjin.jpg'),
+            'id' => 90,
+            'image' => $city->image_url ? $city->image_url : 'http://127.0.0.1:8000/public/website/assets/images/banner/b-1.jpg',
         ];
         $count = UniCourse::where('city_id', 65)->count();
+        $city = City::findorfail(65);
         $response['Shenzhen'] = [
             'name' => 'Shenzhen',
+            'id' => 65,
             'count' => $count,
-            'image' => asset('website/assets/images/cities/Shenzhen.jpg'),
+            'image' => $city->image_url ? $city->image_url : 'http://127.0.0.1:8000/public/website/assets/images/banner/b-1.jpg',
         ];
         $count = UniCourse::where('city_id', 23)->count();
+        $city = City::findorfail(23);
         $response['Guangzhou'] = [
             'name' => 'Guangzhou',
+            'id' => 23,
             'count' => $count,
-            'image' => asset('website/assets/images/cities/Guangzhou.jpg'),
+            'image' => $city->image_url ? $city->image_url : 'http://127.0.0.1:8000/public/website/assets/images/banner/b-1.jpg',
         ];
         return $response;
     }

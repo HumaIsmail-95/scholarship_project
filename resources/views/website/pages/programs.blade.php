@@ -209,20 +209,23 @@
                                                         </div>
                                                         <div class="lower-content">
                                                             <div class="author-box" style="min-height: 65px;">
-                                                                <div class="inner " style="padding:0px">
+                                                                <div class="inner "
+                                                                    style="padding:0px;display: flex;
+                                                                justify-content: space-between;">
                                                                     @if ($program->university->featured)
                                                                         <h6>Featured <i class="icon-18"></i></h6>
                                                                     @else
                                                                         <h6>{{ $program->degree->name }}</h6>
                                                                     @endif
-                                                                    @php
-                                                                        $user = Auth::user();
-                                                                        $applied = App\Models\StudentApplication::where('user_id', $user->id)
-                                                                            ->where('course_id', $program->id)
-                                                                            ->count();
-                                                                    @endphp
-                                                                    @if (Auth::user())
 
+                                                                    @if (Auth::user())
+                                                                        @php
+                                                                            $applied = null;
+                                                                            $user = Auth::user()->id;
+                                                                            $applied = App\Models\StudentApplication::where('user_id', $user)
+                                                                                ->where('course_id', $program->id)
+                                                                                ->count();
+                                                                        @endphp
                                                                         @if ($applied > 0)
                                                                             <button><span>Applied
                                                                                 </span></button>
