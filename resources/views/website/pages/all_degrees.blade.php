@@ -2,10 +2,10 @@
 @section('title', 'All Degrees')
 @section('content')
     <script>
-        function replaceImage(element, type) {
-            imageElement = document.getElementById(type + 'Image_' + element.id)
+        function replaceImage(element, type, id) {
             console.log(element);
-            if (element.image_url == "" || element.image_url ==
+            imageElement = document.getElementById(type + 'Image_' + id)
+            if (element == "" || element ==
                 "http://127.0.0.1:8000/public/website/assets/images/banner/b-1.jpg") {
                 imageElement.src = "{{ asset('admin/images/placeholder.jpg') }}";
 
@@ -46,9 +46,14 @@
                         <div class="category-block-two wow fadeInDown animated animated" data-wow-delay="00ms"
                             data-wow-duration="1500ms">
                             <div class="inner-box">
+                                @php
+                                    $image = $degree->image_url;
+                                    $id = $degree->id;
+                                @endphp
                                 <figure class="image-box"
                                     style="height: 250px;display:flex !important;justify-item:center !important">
-                                    <img src="{{ $degree->image_url }}" onerror="replaceImage({{ $degree }},'degree')"
+                                    <img src="{{ $degree->image_url }}"
+                                        onerror="replaceImage('{{ $image }}','degree','{{ $id }}')"
                                         id="degreeImage_{{ $degree->id }}" alt="">
                                 </figure>
                                 <div class="lower-content">

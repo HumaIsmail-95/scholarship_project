@@ -2,10 +2,10 @@
 @section('title', 'All Courses')
 @section('content')
     <script>
-        function replaceImage(element, type) {
-            imageElement = document.getElementById(type + 'Image_' + element.id)
-            console.log(element);
-            if (element.image_url == "" || element.image_url ==
+        function replaceImage(element, type, id) {
+            console.log(' i m here');
+            imageElement = document.getElementById(type + 'Image_' + id)
+            if (element == "" || element ==
                 "http://127.0.0.1:8000/public/website/assets/images/banner/b-1.jpg") {
                 imageElement.src = "{{ asset('admin/images/placeholder.jpg') }}";
 
@@ -48,8 +48,12 @@
                             <div class="inner-box">
                                 <figure class="image-box"
                                     style="height: 250px;display:flex !important;justify-item:center !important">
+                                    @php
+                                        $image = $discipline->image_url;
+                                        $id = $discipline->id;
+                                    @endphp
                                     <img src="{{ $discipline->image_url }}"
-                                        onerror="replaceImage({{ $discipline }},'discipline')"
+                                        onerror="replaceImage('{{ $image }}','discipline', '{{ $id }}')"
                                         id="disciplineImage_{{ $discipline->id }}" alt="">
                                 </figure>
                                 <div class="lower-content">

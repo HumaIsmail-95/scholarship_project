@@ -18,7 +18,7 @@
             <div class="carousel-inner">
                 @foreach ($banners as $key => $banner)
                     <div class="carousel-item @if ($key == 0) active @endif">
-                        <img class="d-block w-100" src="{{ $banner->image_url }}" alt="Second slide">
+                        <img class="d-block w-100" src="{{ $banner ? $banner->image_url : '' }}" alt="Second slide">
                     </div>
                 @endforeach
             </div>
