@@ -221,8 +221,8 @@
                                                                     @if (Auth::user())
                                                                         @php
                                                                             $applied = null;
-                                                                            $user = Auth::user()->id;
-                                                                            $applied = App\Models\StudentApplication::where('user_id', $user)
+                                                                            $user = Auth::user();
+                                                                            $applied = App\Models\StudentApplication::where('user_id', $user->id)
                                                                                 ->where('course_id', $program->id)
                                                                                 ->count();
                                                                         @endphp

@@ -57,14 +57,14 @@
 
                     </div>
                     <div class="right-column pull-right clearfix">
-                        @php
-                            $user = Auth::user();
-                            $applied = App\Models\StudentApplication::where('user_id', $user->id)
-                                ->where('course_id', $programDetail->id)
-                                ->count();
-                        @endphp
-                        @if (Auth::user())
 
+                        @if (Auth::user())
+                            @php
+                                $user = Auth::user();
+                                $applied = App\Models\StudentApplication::where('user_id', $user->id)
+                                    ->where('course_id', $programDetail->id)
+                                    ->count();
+                            @endphp
                             @if ($applied > 0)
                                 <button class="theme-btn-one"><span>Applied
                                     </span></button>

@@ -1642,7 +1642,7 @@
                                         $imgage = $city['image'];
                                         $city_id = $city['id'];
                                     @endphp
-                                    <figure class="image-box"><img src="{{ $city['image'] }}"
+                                    <figure class="image-box" style="height: 285px;"><img src="{{ $city['image'] }}"
                                             onerror="replaceImage('{{ $imgage }}','{{ $city_id }}')"
                                             id="cityImage_{{ $city['id'] }}" alt="">
                                     </figure>
@@ -1666,7 +1666,7 @@
 
 
     <!-- pricing-section -->
-    <section class="pricing-section sec-pad">
+    {{-- <section class="pricing-section sec-pad">
         <div class="auto-container">
             <div class="sec-title centred">
                 <span>Pricing Table</span>
@@ -1703,7 +1703,7 @@
                 @endforeach
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- pricing-section end -->
 
 

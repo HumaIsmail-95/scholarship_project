@@ -1,11 +1,16 @@
-<div class="row">
+<div class="row profile-completion">
+    <style>
+        .profile-completion .card-body {
+            height: 155px;
+        }
+    </style>
     <div class="col-lg-3 col-md-12 col-sm-12">
         <div class="card">
             <div class="card-body">
                 <div class="row p-t-10 p-b-10">
                     <!-- Column -->
+                    <h3 class="font-light">Profile Set</h3>
                     <div class="col p-r-0">
-                        <h3 class="font-light">Profile Set</h3>
                         @if (Auth::user()->profile_percentage < 100)
                             <h6 class="mb-0">Set Your Profile</h6>
                         @else
@@ -37,14 +42,18 @@
                     <div class="card-body">
                         <div class="row p-t-10 p-b-10">
                             <!-- Column -->
+                            <h3 class="font-light">
+                                @if (Auth::user()->personal)
+                                    <i class="fas fa-check-circle text-success"></i>
+                                @else
+                                    <i class=" fas fa-times-circle text-danger"></i>
+                                @endif
+                                Step 1
+                            </h3>
+
                             <div class="col p-r-0">
-                                <h3 class="font-light">Step 1</h3>
                                 <h6 class="text-muted">
-                                    @if (Auth::user()->personal)
-                                        <i class="fas fa-check-circle text-success"></i>
-                                    @else
-                                        <i class=" fas fa-times-circle text-danger"></i>
-                                    @endif
+
                                     Personal Info
                                 </h6>
                             </div>
@@ -64,14 +73,18 @@
                     <div class="card-body">
                         <div class="row p-t-10 p-b-10">
                             <!-- Column -->
+                            <h3 class="font-light">
+                                @if (Auth::user()->education)
+                                    <i class="fas fa-check-circle text-success"></i>
+                                @else
+                                    <i class=" fas fa-times-circle text-danger"></i>
+                                @endif
+                                Step 2
+                            </h3>
+
                             <div class="col p-r-0">
-                                <h3 class="font-light">Step 2</h3>
                                 <h6 class="text-muted">
-                                    @if (Auth::user()->education)
-                                        <i class="fas fa-check-circle text-success"></i>
-                                    @else
-                                        <i class=" fas fa-times-circle text-danger"></i>
-                                    @endif
+
                                     Education
                                 </h6>
                             </div>
@@ -91,14 +104,11 @@
                     <div class="card-body">
                         <div class="row p-t-10 p-b-10">
                             <!-- Column -->
+                            <h3 class="font-light">Step 3</h3>
+
                             <div class="col p-r-0">
-                                <h3 class="font-light">Step 3</h3>
                                 <h6 class="text-muted">
-                                    @if (Auth::user()->test)
-                                        <i class="fas fa-check-circle text-success"></i>
-                                    @else
-                                        <i class=" fas fa-times-circle text-danger"></i>
-                                    @endif
+
                                     Tests & Lang.
                                 </h6>
                             </div>
@@ -119,15 +129,15 @@
                     <div class="card-body">
                         <div class="row p-t-10 p-b-10">
                             <!-- Column -->
+                            <h3 class="font-light">Step 4</h3>
+                            @if (Auth::user()->document)
+                                <i class="fas fa-check-circle text-success"></i>
+                            @else
+                                <i class=" fas fa-times-circle text-danger"></i>
+                            @endif
                             <div class="col p-r-0">
-                                <h3 class="font-light">Step 4</h3>
 
                                 <h6 class="text-muted">
-                                    @if (Auth::user()->document)
-                                        <i class="fas fa-check-circle text-success"></i>
-                                    @else
-                                        <i class=" fas fa-times-circle text-danger"></i>
-                                    @endif
                                     Documents
                                 </h6>
                             </div>
