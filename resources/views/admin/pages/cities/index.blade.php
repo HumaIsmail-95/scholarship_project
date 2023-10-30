@@ -5,13 +5,13 @@
 @endsection
 @section('content')
     <script>
-        function replaceImage(city) {
-            imageElement = document.getElementById('cityImage_' + city.id)
-            if (city.image_url === "") {
+        function replaceImage(image, id) {
+            imageElement = document.getElementById('cityImage_' + id)
+            if (image === "") {
                 imageElement.src = "{{ asset('admin/images/placeholder.jpg') }}";
 
             } else {
-                imageElement.src = city.image_url
+                imageElement.src = image
             }
         }
     </script>
@@ -51,7 +51,7 @@
                                             <td id="td-id-1" class="td-class-1"> {{ $city->cityName }} </td>
                                             <td id="td-id-1" class="td-class-1">
                                                 <img src="" src="{{ $city->image_url }}"
-                                                    onerror="replaceImage({{ $city }})"
+                                                    onerror="replaceImage('{{ $city->image_url }}','{{ $city->id }}')"
                                                     id="cityImage_{{ $city->id }}" width="150" height="150"
                                                     alt="" srcset="">
 
