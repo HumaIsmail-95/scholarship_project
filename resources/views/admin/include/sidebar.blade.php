@@ -103,6 +103,11 @@
                          </ul>
                      </li>
                  @endcan
+                 @can('list-applications')
+                     <li> <a class="waves-effect waves-dark" href="{{ route('admin.applications.index') }}"><i
+                                 class=" fas fa-graduation-cap"></i><span class="hide-menu">Applications</span></a>
+                     </li>
+                 @endcan
                  @can('list-setting')
                      {{-- stripe --}}
                      <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i

@@ -14,7 +14,7 @@ class AddColumnToStudentApplicationsTable extends Migration
     public function up()
     {
         Schema::table('student_applications', function (Blueprint $table) {
-            $table->boolean('status')->default(true)->after('course_id');
+            $table->integer('status')->default(0)->comment('0=pending, 1=approved, 2=blocked, 3=closed')->after('course_id');
             //
         });
     }

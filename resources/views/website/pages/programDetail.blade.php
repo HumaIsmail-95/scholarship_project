@@ -63,6 +63,7 @@
                                 $user = Auth::user();
                                 $applied = App\Models\StudentApplication::where('user_id', $user->id)
                                     ->where('course_id', $programDetail->id)
+                                    ->where('status', '!=', 3)
                                     ->count();
                             @endphp
                             @if ($applied > 0)

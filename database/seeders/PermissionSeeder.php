@@ -104,6 +104,9 @@ class PermissionSeeder extends Seeder
         // cities
         $permission = Permission::create(['name' => 'list-city', 'display_name' => 'list City', 'module_name' => 'City']);
         $permission = Permission::create(['name' => 'update-city', 'display_name' => 'Edit City', 'module_name' => 'City']);
+        //applications
+        $permission = Permission::create(['name' => 'list-application', 'display_name' => 'list Application', 'module_name' => 'Application']);
+        $permission = Permission::create(['name' => 'update-application', 'display_name' => 'Edit Application', 'module_name' => 'Application']);
 
         //website Dashboard
         $permission = Permission::create(['name' => 'website-dashboard', 'display_name' => 'Website Dashboard', 'module_name' => 'Website Dashbaord']);

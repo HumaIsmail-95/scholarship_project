@@ -17,6 +17,7 @@ class StudentApplication extends Model
         'occupation',
         'visa',
         'notes',
+        'status',
         'image_url',
         'image_folder',
         'image_name',
@@ -27,5 +28,9 @@ class StudentApplication extends Model
     public function course()
     {
         return $this->BelongsTo(UniCourse::class,  'course_id');
+    }
+    public function student()
+    {
+        return $this->BelongsTo(User::class,  'user_id');
     }
 }

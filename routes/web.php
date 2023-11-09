@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ApplicationController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DegreeController;
@@ -70,6 +71,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::resource('study-models', StudyModelController::class);
     //universities
     Route::resource('universities', UniversityController::class);
+    //aplications
+    Route::get('applications', [ApplicationController::class, 'index'])->name('applications.index');
+    Route::put('applications/{application}', [ApplicationController::class, 'update'])->name('applications.update');
     //cities
     Route::get('cities', [CityController::class, 'index'])->name('cities.index');
     Route::put('cities/{city}', [CityController::class, 'update'])->name('cities.update');

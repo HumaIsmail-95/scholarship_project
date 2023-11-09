@@ -53,6 +53,7 @@ class MyApplicationService
         $program_no = Auth::user()->program_no;
         $data['user_id'] = $user_id;
         $data['course_id'] = $id;
+        $data['status'] = 0;
         if ($request->hasFile('doc')) :
             $image_name = FileUploadTrait::fileUpload($request->doc, 'application_purpose');
             $data['image_folder'] = 'application_purpose';
