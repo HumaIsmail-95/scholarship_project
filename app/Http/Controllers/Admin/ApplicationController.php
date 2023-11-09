@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\ApplicationRequest;
 use App\Models\StudentApplication;
+use App\Services\website\MyApplicationService;
 use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
@@ -28,6 +29,24 @@ class ApplicationController extends Controller
             $application->update($data);
             $response = ['status' => true, 'icon' => 'success', 'heading' => 'Success', 'message' => ' Application status updated successfully.'];
             return $response;
+        } catch (\Throwable $th) {
+            return $th;
+            //throw $th;
+        }
+    }
+    public function review($id)
+    {
+        try {
+            $application = StudentApplication::findorFail($id);
+            $program = MyApplicationService::getProgram($application->course_id);
+            $user_id = $application->user_id;
+            $student = MyApplicationService::getStudent($user_id);
+            $education = MyApplicationService::getEducation($user_id);
+            $experience = MyApplicationService::getExperience($user_id);
+            $documents = MyApplicationService::getDocuments($user_id);
+            $testLanguage = MyApplicationService::getTestLanguage($user_id);
+            return view('admin.pages.applications.review', compact('program', 'student', 'education', 'experience', 'documents', 'testLanguage'));
+            //code...
         } catch (\Throwable $th) {
             return $th;
             //throw $th;

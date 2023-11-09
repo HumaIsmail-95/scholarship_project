@@ -25,6 +25,7 @@ class ApplicationRequest extends FormRequest
     {
         return [
             'status' => 'required|integer',
+            'comment' => 'nullable|max:256',
         ];
     }
 }

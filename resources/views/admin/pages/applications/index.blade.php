@@ -81,6 +81,12 @@
                                                                 class=" fas fa-pencil-alt"></i>
                                                             Edit</button>
                                                     @endcan
+                                                    @can('view-application')
+                                                        <a class="btn btn-dark "
+                                                            href="{{ route('admin.applications.view', $application->id) }}">
+                                                            <i class=" fas fa-eye"></i>
+                                                        </a>
+                                                    @endcan
 
                                                 </div>
                                             </td>
@@ -129,7 +135,12 @@
                                     </select>
                                     <div id="edit_status_text" class="text-danger errors"></div>
                                 </div>
-
+                                <div class="col-md-12 mb-2">
+                                    <label class="form-label" for="name">Comment <span class="text-danger">*</span>
+                                    </label>
+                                    <textarea class="form-control" name="comment" id="edit_comment" cols="30" rows="10"></textarea>
+                                    <div id="edit_comment_text" class="text-danger errors"></div>
+                                </div>
                             </div>
                         </div>
                 </div>
@@ -227,6 +238,7 @@
         function openEditModal(application) {
 
             document.getElementById('application_id').value = application.id;
+            document.getElementById('edit_comment').value = application.comment;
             $("#editModalApplication").modal('show')
         }
 

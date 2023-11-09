@@ -46,20 +46,26 @@
                 <div class="col-lg-6 colmd-6 col-sm-12">
                     <div class="card">
                         <div class="card-body">
-                            <img src="{{ isset($logo) ? $logo : '' }}" style="width:100px;height:100px" alt="">
-                            <h4 class="card-title">{{ $application->course->name }}</h4>
-                            <p class="mb-0">{{ $application->course->university->name }}</p>
-                            <p class="mb-0">
-                                @if ($application->status == 0)
-                                    <span class="badge bg-info text-dark">Pending</span>
-                                @elseif($application->status == 1)
-                                    <span class="badge bg-success text-dark">Approved</span>
-                                @elseif($application->status == 2)
-                                    <span class="badge bg-danger text-dark">Blocked</span>
-                                @elseif($application->status == 3)
-                                    <span class="badge bg-warning text-dark">Closed</span>
-                                @endif
-                            </p>
+                            <div class="d-flex">
+                                <img src="{{ isset($logo) ? $logo : '' }}" style="width:100px;height:100px" alt="">
+                                <div>
+                                    <h4 class="card-title px-2">Course{{ $application->course->name }}</h4>
+                                    <p class="mb-0 px-2">University: {{ $application->course->university->name }}</p>
+                                    <p class="mb-0 px-2">
+                                        @if ($application->status == 0)
+                                            <span class="badge bg-info text-dark">Pending</span>
+                                        @elseif($application->status == 1)
+                                            <span class="badge bg-success text-dark">Approved</span>
+                                        @elseif($application->status == 2)
+                                            <span class="badge bg-danger text-dark">Blocked</span>
+                                        @elseif($application->status == 3)
+                                            <span class="badge bg-warning text-dark">Closed</span>
+                                        @endif
+                                    </p>
+                                </div>
+                            </div>
+
+                            <p>{{ $application->comment }}</p>
                             <br />
                             <br />
                             <p class="">Applied on {{ $application->created_at }}</p>

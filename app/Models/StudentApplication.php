@@ -18,6 +18,7 @@ class StudentApplication extends Model
         'visa',
         'notes',
         'status',
+        'comment',
         'image_url',
         'image_folder',
         'image_name',

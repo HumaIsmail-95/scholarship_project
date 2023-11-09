@@ -74,6 +74,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     //aplications
     Route::get('applications', [ApplicationController::class, 'index'])->name('applications.index');
     Route::put('applications/{application}', [ApplicationController::class, 'update'])->name('applications.update');
+    Route::get('applications/{course_id}', [ApplicationController::class, 'review'])->name('applications.view');
     //cities
     Route::get('cities', [CityController::class, 'index'])->name('cities.index');
     Route::put('cities/{city}', [CityController::class, 'update'])->name('cities.update');

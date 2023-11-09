@@ -107,6 +107,7 @@ class PermissionSeeder extends Seeder
         //applications
         $permission = Permission::create(['name' => 'list-application', 'display_name' => 'list Application', 'module_name' => 'Application']);
         $permission = Permission::create(['name' => 'update-application', 'display_name' => 'Edit Application', 'module_name' => 'Application']);
+        $permission = Permission::create(['name' => 'view-application', 'display_name' => 'View Application', 'module_name' => 'Application']);
 
         //website Dashboard
         $permission = Permission::create(['name' => 'website-dashboard', 'display_name' => 'Website Dashboard', 'module_name' => 'Website Dashbaord']);
