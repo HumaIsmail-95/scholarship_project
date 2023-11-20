@@ -77,12 +77,12 @@
                                             name="remember">
                                         <label class="form-check-label" for="customCheck1">Remember me</label>
                                     </div>
-                                    @if (Route::has('password.request'))
-                                        <div class="ms-auto">
-                                            <a href="{{ route('password.request') }}" id="to-recover"
-                                                class="text-muted"><i class="fas fa-lock m-r-5"></i> Forgot pwd?</a>
-                                        </div>
-                                    @endif
+                                    {{-- @if (Route::has('password.request')) --}}
+                                    <div class="ms-auto">
+                                        <a href="{{ route('password.request') }}" id="to-recover" class="text-muted"><i
+                                                class="fas fa-lock m-r-5"></i> Forgot pwd?</a>
+                                    </div>
+                                    {{-- @endif --}}
                                 </div>
                             </div>
                         </div>
@@ -112,7 +112,10 @@
                             </div>
                         </div>
                     </form>
-                    <form class="form-horizontal" id="recoverform" action="index.html">
+                    <form class="form-horizontal" id="recoverform" method="POST"
+                        action="{{ route('password.email') }}">
+                        @csrf
+                        @method('POST')
                         <div class="form-group ">
                             <div class="col-xs-12">
                                 <h3>Recover Password</h3>
@@ -121,7 +124,13 @@
                         </div>
                         <div class="form-group ">
                             <div class="col-xs-12">
-                                <input class="form-control" type="text" required="" placeholder="Email">
+                                <input class="form-control" type="email" name="reset_email" id='reset_email'
+                                    required="" placeholder="Email">
+                                @error('reset_email')
+                                    <span class="text-danger" role="alert">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-group text-center m-t-20">
